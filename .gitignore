@@ -36,3 +36,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#Art Assets
+[Aa]rt/
+LevelUpGameJam2019/Assets/Art.meta
