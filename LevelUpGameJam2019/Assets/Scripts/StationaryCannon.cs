@@ -10,11 +10,16 @@ public class StationaryCannon : MonoBehaviour
 
     [Header("Projectile Stuff")]
     [SerializeField] private GameObject projectilePrefab;
+
+    [Tooltip("If more than one, iterates through each point.")]
     [SerializeField] private Transform[] projectileSpawnPoints;
     private int projectileSpawnPointIndex = 0;
 
     [Header("Turret Target Tracking")]
-    public Transform objectToTrack;
+    [SerializeField]
+    private Transform objectToTrack;
+    [SerializeField]
+    private Transform turretTransform;//pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
     [SerializeField] private int minPitch = 15;
     [SerializeField] private int maxPitch = 75;
 
@@ -23,7 +28,7 @@ public class StationaryCannon : MonoBehaviour
     [SerializeField] private float secondsBetweenShots = 3f;
 
     private Transform baseTransform;//swivel on Y //
-    private Transform turretTransform;//pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
+    private Animator anim;
 
     private float nextShootTime = 0;
 
@@ -41,24 +46,21 @@ public class StationaryCannon : MonoBehaviour
     void Start()
     {
         baseTransform = this.transform;
-        turretTransform = baseTransform.GetChild(0).transform as Transform;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        HandleTargetTracking();
+
         if(Input.GetButtonDown("Fire1"))
         {
-            if (objectToTrack)
-            {
-                HandleTargetTracking();
-                HandleShooting();
-
-            }
+            
+            HandleShooting();
             
         }
-        
         
     }
 
@@ -94,37 +96,17 @@ public class StationaryCannon : MonoBehaviour
 
     private void HandleShooting()
     {
-        RaycastHit raycastHitInfo;
-        
-        //check line of sight
-        if (Physics.Raycast(turretTransform.position, turretTransform.forward, out raycastHitInfo, 1000, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+
+        //Debug.Log("HIT PLAYER! ZAP ZAP ZAP!!!!");
+        //check shoot delay
+        if (Time.time > nextShootTime)
         {
-            //can I see the target?
-            if (raycastHitInfo.collider.gameObject.transform == objectToTrack)
-            {
-                //Debug.Log("HIT PLAYER! ZAP ZAP ZAP!!!!");
-                //check shoot delay
-                if (Time.time > nextShootTime)
-                {
-                    //Debug.Log("Time To ZAPPPPPPPPPPPPPPPP!");
-                    FireProjectile();
-                    nextShootTime = Time.time + secondsBetweenShots;
+            //Debug.Log("Time To ZAPPPPPPPPPPPPPPPP!");
+            FireProjectile();
+            nextShootTime = Time.time + secondsBetweenShots;
 
-                }
-
-            }
-
-            else
-            {
-                //Debug.Log("Did not hit player.... hit: " + raycastHitInfo.collider.name, this.gameObject);
-            }
         }
-        else
-        {
-            //Debug.Log("HIT NOTHING!", this.gameObject);
-        }
-        
-       
+
     }
 
     private void HandleTargetTracking()
