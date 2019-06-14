@@ -13,6 +13,9 @@ public class StationaryCannon : MonoBehaviour
 
     [Tooltip("If more than one, iterates through each point.")]
     [SerializeField] private Transform[] projectileSpawnPoints;
+
+    [SerializeField]
+    private float projectileForce = 5.0f;
     private int projectileSpawnPointIndex = 0;
 
     [Header("Turret Target Tracking")]
@@ -80,11 +83,14 @@ public class StationaryCannon : MonoBehaviour
                 projectileSpawnPointIndex = 0;
             }
 
-            //create new object
-            var newProjectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity);
+            //create new object and cache references
+            var newProjectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity) as GameObject;
+            var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
 
-            //point at target
-            newProjectile.transform.LookAt(objectToTrack);
+            attachedRB.AddForce(turretTransform.forward * projectileForce, ForceMode.Impulse);
+
+            //adjust orientation
+            //newProjectile.transform.LookAt(objectToTrack);
         }
 
         else

@@ -37,13 +37,12 @@ public class MouseTracker : MonoBehaviour
     void Update()
     {
         //get inputs
-        var verticalInput = Input.GetAxis("Vertical");
-        var horizontalInput = Input.GetAxis("Horizontal");
+        var moveVector = Vector3.zero;
+        moveVector.x = Input.GetAxis("Horizontal") * horizontalSpeed;
+        moveVector.y = Input.GetAxis("Vertical") * verticalSpeed;
 
-        //move tracker
-        myTransform.Translate(0, verticalInput * verticalSpeed * Time.deltaTime, 0);
+        myTransform.position += moveVector * Time.deltaTime;
 
-        myTransform.Translate(horizontalInput * horizontalSpeed * Time.deltaTime, 0, 0);
 
         //keep in bounds
     }
