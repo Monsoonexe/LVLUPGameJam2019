@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewOrder", menuName = "ScriptableObjects/New Order")]
+[CreateAssetMenu(fileName = "PizzaOrder_", menuName = "ScriptableObjects/New Order")]
 public class Order : ScriptableObject
 {
     public bool pepperoni;
@@ -8,4 +8,6 @@ public class Order : ScriptableObject
     public bool cheese;
     public bool sausage;
     public bool anchovies;
+
+    public int randomWeight = 1;
 }
