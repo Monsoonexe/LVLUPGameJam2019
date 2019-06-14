@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider))]
 public class Customer : MonoBehaviour
 {
+
+    private static CustomerManager customerManager;
+
     [SerializeField]
     private Order customerOrder;
 
@@ -15,6 +19,11 @@ public class Customer : MonoBehaviour
     void Start()
     {
         GatherReferences();
+
+        if (!customerOrder)
+        {
+            customerOrder = customerManager.GetNewOrder();
+        }
     }
 
     // Update is called once per frame
@@ -26,6 +35,12 @@ public class Customer : MonoBehaviour
     private void GatherReferences()
     {
         animator = GetComponent<Animator>() as Animator;
+
+        //get static reference
+        if (!customerManager)
+        {
+            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+        }
     }
 
     private void OnTriggerEnter(Collider col)
@@ -48,11 +63,6 @@ public class Customer : MonoBehaviour
             }
         }
         
-
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
 
     }
 
