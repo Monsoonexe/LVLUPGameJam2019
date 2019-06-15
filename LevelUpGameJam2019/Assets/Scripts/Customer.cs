@@ -14,7 +14,23 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private Order customerOrder;
 
+    [Header("---Colliders---")]
+    [SerializeField]
+    private Collider pizzaHitBox;
+
+    [SerializeField]
+    private Collider customerHitBox;
+
+    [Header("---Audio---")]
+    [SerializeField]
+    private SoundList hitWithPizzaSounds;
+    [SerializeField]
+    private SoundList badOrderSounds;
+
+
+    //member component references
     private Animator animator;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,7 +52,9 @@ public class Customer : MonoBehaviour
 
     private void GatherReferences()
     {
+        //get member references
         animator = GetComponent<Animator>() as Animator;
+        audioSource = GetComponent<AudioSource>() as AudioSource;
 
         //get static reference
         if (!customerManager)
@@ -54,29 +72,45 @@ public class Customer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //what did we get hit by?
-        if(collision.gameObject.CompareTag("PizzaProjectile")){
+        if(collision.gameObject.CompareTag("PizzaProjectile"))
+        {
             var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
-            //compare ingredients
-            var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
+            if (collision.collider == pizzaHitBox)
+            { //compare ingredients
+                var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
-            //animator.SetBool() //tell animator results of pizza
+                //animator.SetBool() //tell animator results of pizza
 
-            if(pizzaMatches)
+                if (pizzaMatches)
+                {
+                    //do happy things
+                    CustomerSatisfied();
+                }
+
+                else
+                {
+                    //do bad things
+                    RejectPizza();
+                }
+
+            }
+            else if(collision.collider == customerHitBox)
             {
-                //do happy things
-                CustomerSatisfied();
-                scoreManager.OnCustomerSatisfied();
+                PlayRandomSound(hitWithPizzaSounds);
             }
 
-            else
-            {
-                //do bad things
-                RejectPizza();
-                scoreManager.OnIncorrectOrder();
-            }
         }
         
+    }
+
+    private void PlayRandomSound(SoundList soundClipList)
+    {
+        if (soundClipList.soundClipList.Length > 0)
+        {
+            audioSource.clip = soundClipList.GetRandomSound();
+            audioSource.Play();
+        }
     }
 
     private static bool ComparePizzaToOrder(Order customerOrder, OrderStruct pizzaIngredients)
@@ -117,11 +151,15 @@ public class Customer : MonoBehaviour
         return ingredientsAllMatch;
     }
 
-    private void CustomerSatisfied(){
+    private void CustomerSatisfied()
+    {
+        scoreManager.OnCustomerSatisfied();
 
     }
 
-    private void RejectPizza(){
-
+    private void RejectPizza()
+    {
+        PlayRandomSound(badOrderSounds);
+        scoreManager.OnIncorrectOrder();
     }
 }
