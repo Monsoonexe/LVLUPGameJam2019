@@ -53,9 +53,20 @@ public class ScoreManager : MonoBehaviour
         ++shotsFired;
     }
 
+    public void OnCustomerSatisfied()
+    {
+        ++customersSatisfied;
+    }
+
     public void AddScore(int amount)
     {
        playerScore += amount;
     }
+
+    public void OnIncorrectOrder()
+    {
+        ++wrongOrders;
+    }
+
 
 }

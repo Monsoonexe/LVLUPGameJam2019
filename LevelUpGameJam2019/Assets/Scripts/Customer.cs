@@ -9,6 +9,7 @@ public class Customer : MonoBehaviour
 {
 
     private static CustomerManager customerManager;
+    private static ScoreManager scoreManager;
 
     [SerializeField]
     private Order customerOrder;
@@ -16,7 +17,7 @@ public class Customer : MonoBehaviour
     private Animator animator;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GatherReferences();
 
@@ -24,6 +25,7 @@ public class Customer : MonoBehaviour
         {
             customerOrder = customerManager.GetNewOrder();
         }
+
     }
 
     // Update is called once per frame
@@ -40,6 +42,11 @@ public class Customer : MonoBehaviour
         if (!customerManager)
         {
             customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+        }
+
+        if (!scoreManager)
+        {
+            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
     }
 
@@ -59,12 +66,14 @@ public class Customer : MonoBehaviour
             {
                 //do happy things
                 CustomerSatisfied();
+                scoreManager.OnCustomerSatisfied();
             }
 
             else
             {
                 //do bad things
                 RejectPizza();
+                scoreManager.OnIncorrectOrder();
             }
         }
         
