@@ -140,7 +140,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 503ee4b62b7bd5b4f9824ddc4f672a48, type: 2}
+  - {fileID: 2100000, guid: 6138a1dd75d03a2459e86e9f434899e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,7 +164,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -2304508562620316840, guid: eee4c9f1a1798c746abf20516097688c, type: 3}
+  m_Mesh: {fileID: -2304508562620316840, guid: 0da7c60294be39540ba524b58f7815aa, type: 3}
   m_Bones:
   - {fileID: 4606475561035149656}
   - {fileID: 4606475560868040225}
@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 4606475560762513387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4606475560936930129}
   - {fileID: 4606475561669103910}
@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatiness: 0.1
+  lifeTime: 20
   flyingSound: {fileID: 8300000, guid: 249981457aecf6d40b74b9cf05f303c8, type: 3}
   splatSound: {fileID: 8300000, guid: cfdfec7a5e30c284aa4d4683cdf4e4ff, type: 3}
 --- !u!1 &4606475560868040224
@@ -5354,7 +5355,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 199776314692a3f43a7f6bb0814f6197, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
