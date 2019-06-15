@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MouseTracker : MonoBehaviour
 {
-    [SerializeField]
-    private float heightBounds;
-    [SerializeField]
-    private float widthBounds;
 
     [SerializeField]
     private float verticalSpeed = 1.0f;
