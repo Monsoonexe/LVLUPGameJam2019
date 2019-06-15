@@ -8,6 +8,9 @@ public class PizzaProjectile : MonoBehaviour
     [SerializeField]
     private float floatiness = 1.0f;
 
+    [SerializeField]
+    private float lifeTime = 20.0f;
+
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip flyingSound;
@@ -26,6 +29,11 @@ public class PizzaProjectile : MonoBehaviour
     void Awake()
     {
         GatherReferences();
+    }
+
+    private void Start()
+    {
+        Destroy(this.gameObject, lifeTime);
     }
 
     // Update is called once per frame
