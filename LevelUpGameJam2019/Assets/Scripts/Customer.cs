@@ -24,8 +24,12 @@ public class Customer : MonoBehaviour
     [Header("---Audio---")]
     [SerializeField]
     private SoundList hitWithPizzaSounds;
+
     [SerializeField]
     private SoundList badOrderSounds;
+
+    [SerializeField]
+    private SoundList customerSatisfiedSounds;
 
 
     //member component references
@@ -76,7 +80,7 @@ public class Customer : MonoBehaviour
         {
             var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
-            if (collision.collider == pizzaHitBox)
+            if (collision.collider == pizzaHitBox)//pizza box was hit
             { //compare ingredients
                 var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
@@ -95,7 +99,7 @@ public class Customer : MonoBehaviour
                 }
 
             }
-            else if(collision.collider == customerHitBox)
+            else if(collision.collider == customerHitBox)//customer hit with pizza
             {
                 PlayRandomSound(hitWithPizzaSounds);
             }
@@ -153,6 +157,7 @@ public class Customer : MonoBehaviour
 
     private void CustomerSatisfied()
     {
+        PlayRandomSound(customerSatisfiedSounds);
         scoreManager.OnCustomerSatisfied();
 
     }
