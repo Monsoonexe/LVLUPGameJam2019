@@ -44,10 +44,10 @@ public class Customer : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         //what did we get hit by?
-        if(collision.CompareTag("PizzaProjectile")){
+        if(collision.gameObject.CompareTag("PizzaProjectile")){
             var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
             //compare ingredients
