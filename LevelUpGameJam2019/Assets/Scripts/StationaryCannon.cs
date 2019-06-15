@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [SelectionBase]
 [RequireComponent(typeof(AudioSource))]
@@ -63,7 +64,8 @@ public class StationaryCannon : MonoBehaviour
     private float nextShootTime = 0;
 
     //object pooling stuff
-    private readonly GameObject[] projectilePool = new GameObject[10];
+    private readonly List<GameObject> projectilePool = new List<GameObject>();
+    private const int maxProjectilesInScene = 30;
 
     private void Awake()
     {
@@ -101,6 +103,46 @@ public class StationaryCannon : MonoBehaviour
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
     }
 
+    private GameObject GetNewProjectile()
+    {
+        //first try to use an expired projectile
+        foreach(var projectile in projectilePool)
+        {
+            if (!projectile.activeSelf)//this projectile has expired and can be reused
+            {
+                projectile.SetActive(true);
+
+                return projectile;
+            }
+        }
+        //no expired projectile, create a new one if there is space
+        if (projectilePool.Count < maxProjectilesInScene)
+        {
+            var newProjectile = Instantiate(projectilePrefab);
+
+            projectilePool.Add(newProjectile);
+
+            return newProjectile;
+        }
+
+        else//create a new object not controlled by pool
+        {
+            Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed", this.gameObject);
+            return Instantiate(projectilePrefab); 
+        }
+    }
+
+    private Vector3 GetProjectileSpawnPoint()
+    {
+        //loop index
+        if (++projectileSpawnPointIndex >= projectileSpawnPoints.Length)
+        {
+            projectileSpawnPointIndex = 0;
+        }
+
+        return projectileSpawnPoints[projectileSpawnPointIndex].position;
+    }
+
     private void FireProjectile()
     {
         //pew pew
@@ -109,17 +151,11 @@ public class StationaryCannon : MonoBehaviour
             //Debug.Log("Firing a Projectile from Spawn Point No: " + projectileSpawnPointIndex + " / " + projectileSpawnPoints.Length, this.gameObject );
             scoreManager.OnShotFired();//increment counter
 
+            //Get projectile from pool
+            var newProjectile = GetNewProjectile() as GameObject;
+
             //pick a point to spawn at
-            var spawnPoint = projectileSpawnPoints[projectileSpawnPointIndex].position;
-
-            //loop index
-            if (++projectileSpawnPointIndex >= projectileSpawnPoints.Length)
-            {
-                projectileSpawnPointIndex = 0;
-            }
-
-            //create new object and cache references
-            var newProjectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity) as GameObject;
+            newProjectile.transform.position = GetProjectileSpawnPoint();
 
             //handle physics of projectile
             var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
@@ -128,6 +164,7 @@ public class StationaryCannon : MonoBehaviour
 
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
+
             if(orderBuilder) pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
             pizzaProjectile.OnProjectileFired();
 

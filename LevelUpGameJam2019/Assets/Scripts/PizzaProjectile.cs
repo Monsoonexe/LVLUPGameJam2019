@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
@@ -33,19 +34,29 @@ public class PizzaProjectile : MonoBehaviour
 
     private void Start()
     {
-        Destroy(this.gameObject, lifeTime);
+
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(ExpireAfterTime());
+    }
     // Update is called once per frame
     void Update()
     {
         
     }
 
-
     private void FixedUpdate()
     {
         myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);
+    }
+
+    private IEnumerator ExpireAfterTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+
+        this.gameObject.SetActive(false);//expire
     }
 
     private void GatherReferences()
