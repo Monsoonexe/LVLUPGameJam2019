@@ -3,11 +3,8 @@ public struct OrderStruct
 {
     public IngredientsENUM[] ingredients;
 
-    public int randomWeight;
-
-    public OrderStruct(IngredientsENUM[] ingredients, int randomWeight){
+    public OrderStruct(IngredientsENUM[] ingredients){
         this.ingredients = ingredients;
 
-        this.randomWeight = randomWeight;
     }
 }

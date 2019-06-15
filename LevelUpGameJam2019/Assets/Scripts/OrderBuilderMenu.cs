@@ -11,7 +11,7 @@ public class OrderBuilderMenu : MonoBehaviour
     //ingredients that are on pizza
     [SerializeField]
     private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
-    
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +22,18 @@ public class OrderBuilderMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Get Ingredients and clear list.
+    /// </summary>
+    /// <returns></returns>
+    public IngredientsENUM[] GetIngredients()
+    {
+        var ingredients = selectedIngredients.ToArray();
+        selectedIngredients.Clear();//clear list after cannon shot
+
+        return ingredients;
     }
     
     public void AddAnchovies()

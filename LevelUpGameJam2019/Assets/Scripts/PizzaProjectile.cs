@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
@@ -35,6 +33,25 @@ public class PizzaProjectile : MonoBehaviour
 
     public OrderStruct GetIngredientsOnPizza(){
         return ingredientsOnThisPizza;
+    }
+
+    /// <summary>
+    /// Base.
+    /// </summary>
+    /// <param name="order"></param>
+    public void GiveOrderIngredients(OrderStruct order)
+    {
+        ingredientsOnThisPizza = order;
+    }
+
+    public void GiveOrderIngredients(IngredientsENUM[] order)
+    {
+        GiveOrderIngredients(new OrderStruct(order));
+    }
+
+    public void GiveOrderIngredients(System.Collections.Generic.List<IngredientsENUM> order)
+    {
+        GiveOrderIngredients(new OrderStruct(order.ToArray()));
     }
 
 }
