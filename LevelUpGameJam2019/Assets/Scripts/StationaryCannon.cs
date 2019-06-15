@@ -10,9 +10,15 @@ public class StationaryCannon : MonoBehaviour
 
     [Header("Projectile Stuff")]
     [SerializeField] private GameObject projectilePrefab;
-
+    
     [Tooltip("If more than one, iterates through each point.")]
     [SerializeField] private Transform[] projectileSpawnPoints;
+
+    /// <summary>
+    /// Ask this guy what to put on the pizza when it's fired.
+    /// </summary>
+    [SerializeField]
+    private OrderBuilderMenu orderBuilder;
 
     [SerializeField]
     private float projectileForce = 5.0f;
@@ -85,12 +91,15 @@ public class StationaryCannon : MonoBehaviour
 
             //create new object and cache references
             var newProjectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity) as GameObject;
+
+            //handle physics of projectile
             var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
 
             attachedRB.AddForce(turretTransform.forward * projectileForce, ForceMode.Impulse);
 
-            //adjust orientation
-            //newProjectile.transform.LookAt(objectToTrack);
+            //give proper order
+            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
+            pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
         }
 
         else
