@@ -63,29 +63,43 @@ public class Customer : MonoBehaviour
             }
         }
         
-
     }
 
     private static bool ComparePizzaToOrder(Order customerOrder, OrderStruct pizzaIngredients)
     {
         var ingredientsAllMatch = true;
-        if(customerOrder.pepperoni != pizzaIngredients.pepperoni){
+        
+        //quick exit
+        if(customerOrder.ingredients.Length != pizzaIngredients.ingredients.Length)
+        {
             ingredientsAllMatch = false;
         }
-        else if(customerOrder.anchovies != pizzaIngredients.anchovies){
-            
-            ingredientsAllMatch = false;
+
+        else
+        {
+            //verify each ingredient customer wanted
+            foreach(var custIngredient in customerOrder.ingredients)
+            {
+                var ingredientOnPizza = false;
+
+                //is indeed on pizza
+                foreach (var pizzaIngredi in pizzaIngredients.ingredients)
+                {
+
+                    if(custIngredient == pizzaIngredi)
+                    {
+                        ingredientOnPizza = true;
+                    }
+                }
+
+                if (!ingredientOnPizza)
+                {
+                    ingredientsAllMatch = false;
+                    break;
+                }
+            }
         }
-        else if(customerOrder.cheese != pizzaIngredients.cheese){
-            
-            ingredientsAllMatch = false;
-        }
-        else if(customerOrder.sausage != pizzaIngredients.sausage){
-            ingredientsAllMatch = false;
-        }
-        else if(customerOrder.sauce != pizzaIngredients.sauce){
-            ingredientsAllMatch = false;
-        }
+
         return ingredientsAllMatch;
     }
 
