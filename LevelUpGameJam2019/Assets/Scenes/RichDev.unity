@@ -432,6 +432,16 @@ PrefabInstance:
       propertyPath: orderBuilder
       value: 
       objectReference: {fileID: 2055851350}
+    - target: {fileID: 260745760515553462, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002040636171306165, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
 --- !u!114 &2055851350 stripped
@@ -457,6 +467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IngredientCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932099, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1583690294410932103, guid: 48d262b804a2c974d82be509e94cb241,
         type: 3}
