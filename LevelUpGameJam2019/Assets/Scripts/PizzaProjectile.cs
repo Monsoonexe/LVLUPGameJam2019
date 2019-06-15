@@ -6,12 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PizzaProjectile : MonoBehaviour
 {
+    private const int lifeTime = 8;
+
     [SerializeField]
     private float floatiness = 1.0f;
-
-    [SerializeField]
-    private float lifeTime = 20.0f;
-
+    
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip flyingSound;
