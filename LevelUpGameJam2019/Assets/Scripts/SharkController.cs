@@ -25,10 +25,7 @@ public class SharkController : MonoBehaviour
     [Header("---Colliders---")]
     [SerializeField]
     private Collider sphereOfInfluenceCollider;
-
-    [SerializeField]
-    private Collider sharkOutOfWaterCollider;
-
+    
     [SerializeField]
     private Collider mouthCollider;
 
@@ -48,10 +45,7 @@ public class SharkController : MonoBehaviour
     /// This is the thing I want to eat.
     /// </summary>
     private Transform attackTarget;
-
-    //shark state
-    private bool sharkIsAttacking = false;
-
+    
     //member component references
     private Transform myTransform;
     private Rigidbody myRigidbody;
@@ -72,11 +66,7 @@ public class SharkController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //when shark reaches peak, angle nose down towards water
-        if (sharkIsAttacking)
-        {
-            myTransform.LookAt(attackTarget);
-        }
+       
     }
 
     private void FixedUpdate()
@@ -175,7 +165,6 @@ public class SharkController : MonoBehaviour
         myRigidbody.velocity = Vector3.zero;
 
         sphereOfInfluenceCollider.enabled = true;//stop using this collider for now.
-        sharkOutOfWaterCollider.enabled = false;//turn on this collider so we know when shark is in water
 
         //reset rotations
         Vector3 defaultRotations = new Vector3(0, myTransform.localEulerAngles.y, 0);
@@ -213,7 +202,6 @@ public class SharkController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         sphereOfInfluenceCollider.enabled = false;//stop using this collider for now.
-        sharkOutOfWaterCollider.enabled = true;//turn on this collider so we know when shark is in water
 
     }
     

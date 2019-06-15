@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1993991816221798359}
   - component: {fileID: 3533558722056595866}
   - component: {fileID: 6834865703912529726}
-  - component: {fileID: 7919382548990030260}
   - component: {fileID: 6703279528351945076}
   m_Layer: 0
   m_Name: Shark Attack Controller
@@ -53,7 +52,6 @@ MonoBehaviour:
   anchovieCoolDown: 15
   sharkJumpForce: 15
   sphereOfInfluenceCollider: {fileID: 3533558722056595866}
-  sharkOutOfWaterCollider: {fileID: 7919382548990030260}
   mouthCollider: {fileID: 6834865703912529726}
   sharkJumpSound: {fileID: 0}
   sharkEatPizzaSound: {fileID: 0}
@@ -100,20 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 1}
---- !u!136 &7919382548990030260
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154778368929503622}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 4
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.94, z: -0.75}
 --- !u!82 &6703279528351945076
 AudioSource:
   m_ObjectHideFlags: 0
