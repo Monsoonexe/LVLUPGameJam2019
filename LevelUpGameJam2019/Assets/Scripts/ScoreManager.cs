@@ -68,5 +68,9 @@ public class ScoreManager : MonoBehaviour
         ++wrongOrders;
     }
 
+    public void OnSharkAtePizza()
+    {
+        ++sharksFed;
+    }
 
 }
