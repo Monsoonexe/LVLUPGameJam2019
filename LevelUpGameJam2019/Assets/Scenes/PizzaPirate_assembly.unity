@@ -624,13 +624,13 @@ MonoBehaviour:
   projectileSpawnPoints:
   - {fileID: 398076898}
   orderBuilder: {fileID: 0}
-  projectileForce: 25
+  projectileForce: 35
   objectToTrack: {fileID: 2090357552}
   turretTransform: {fileID: 713789169}
   minPitch: 15
   maxPitch: 75
-  swivelSpeed: 3
-  secondsBetweenShots: 3
+  swivelSpeed: 5
+  secondsBetweenShots: 0.1
   cannonFireSound: {fileID: 8300000, guid: 13305355e09f3714a995dcdc69ad9088, type: 3}
 --- !u!82 &713789174
 AudioSource:
@@ -5457,7 +5457,7 @@ PrefabInstance:
     - target: {fileID: 5131007531325458583, guid: 982b839aae2fcb846ba5e6fe9401a353,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 982b839aae2fcb846ba5e6fe9401a353, type: 3}

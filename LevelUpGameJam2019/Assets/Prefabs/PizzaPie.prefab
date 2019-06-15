@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9749265ad084d4940bfc49bd02323141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatiness: 1
+  floatiness: 0.1
   flyingSound: {fileID: 8300000, guid: 249981457aecf6d40b74b9cf05f303c8, type: 3}
   splatSound: {fileID: 8300000, guid: cfdfec7a5e30c284aa4d4683cdf4e4ff, type: 3}
 --- !u!1 &4606475560868040224
