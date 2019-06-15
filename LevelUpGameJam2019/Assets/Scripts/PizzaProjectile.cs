@@ -2,22 +2,27 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(AudioSource))]
 public class PizzaProjectile : MonoBehaviour
 {
     [SerializeField]
     private float floatiness = 1.0f;
+
+    [Header("---Audio---")]
+    [SerializeField]
+    private AudioClip flyingSound;
 
     private OrderStruct ingredientsOnThisPizza;
 
     //components
     private Rigidbody myRigidbody;
     private Transform myTransform;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
-        myTransform = this.transform;
+        GatherReferences();
     }
 
     // Update is called once per frame
@@ -26,13 +31,29 @@ public class PizzaProjectile : MonoBehaviour
         
     }
 
+
     private void FixedUpdate()
     {
         myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);
     }
 
-    public OrderStruct GetIngredientsOnPizza(){
+    private void GatherReferences()
+    {
+        myTransform = this.transform;
+        myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
+        audioSource = GetComponent<AudioSource>() as AudioSource;
+
+    }
+
+    public OrderStruct GetIngredientsOnPizza()
+    {
         return ingredientsOnThisPizza;
+    }
+
+    public void OnProjectileFired()
+    {
+        audioSource.clip = flyingSound;
+        audioSource.Play();
     }
 
     /// <summary>

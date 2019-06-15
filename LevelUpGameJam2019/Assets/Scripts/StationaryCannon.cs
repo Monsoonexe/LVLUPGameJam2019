@@ -109,6 +109,7 @@ public class StationaryCannon : MonoBehaviour
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
             pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
+            pizzaProjectile.OnProjectileFired();
 
             //play cannon fire sound
             audioSource.clip = cannonFireSound;
