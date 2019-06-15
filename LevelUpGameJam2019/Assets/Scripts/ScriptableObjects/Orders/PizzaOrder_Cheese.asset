@@ -10,11 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bccfd11b2e4f4824e8f55cbdb90b8608, type: 3}
-  m_Name: PizzaOrder_Anch
+  m_Name: PizzaOrder_Cheese
   m_EditorClassIdentifier: 
-  pepperoni: 0
-  sauce: 0
-  cheese: 0
-  sausage: 0
-  anchovies: 1
+  ingredients: 
   randomWeight: 1
