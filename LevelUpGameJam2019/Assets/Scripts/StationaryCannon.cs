@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [SelectionBase]
+[RequireComponent(typeof(AudioSource))]
 public class StationaryCannon : MonoBehaviour
 {
     /// <summary>
@@ -36,6 +37,11 @@ public class StationaryCannon : MonoBehaviour
 
     [SerializeField] private float secondsBetweenShots = 3f;
 
+    [Header("---Audio---")]
+    [SerializeField]
+    private AudioClip cannonFireSound;
+
+    private AudioSource audioSource;
     private Transform baseTransform;//swivel on Y //
     private Animator anim;
 
@@ -45,17 +51,13 @@ public class StationaryCannon : MonoBehaviour
 
     private void Awake()
     {
-        //if (!target)
-        //{
-        //    target = GameObject.FindGameObjectWithTag("Player").transform as Transform;
-        //}
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        baseTransform = this.transform;
-        
+        GatherReferences();
     }
 
     // Update is called once per frame
@@ -71,6 +73,13 @@ public class StationaryCannon : MonoBehaviour
             
         }
         
+    }
+
+    private void GatherReferences()
+    {
+
+        baseTransform = this.transform;
+        audioSource = GetComponent<AudioSource>() as AudioSource;
     }
 
     private void FireProjectile()
@@ -100,6 +109,10 @@ public class StationaryCannon : MonoBehaviour
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
             pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
+
+            //play cannon fire sound
+            audioSource.clip = cannonFireSound;
+            audioSource.Play();
         }
 
         else
