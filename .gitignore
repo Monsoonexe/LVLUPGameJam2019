@@ -5,6 +5,8 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 Assets/[Aa]rt/
+Assets/PolygonCity
+Assets/PolygonPirates
 
 # Visual Studio cache directory
 .vs/
