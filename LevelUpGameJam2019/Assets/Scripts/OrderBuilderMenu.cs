@@ -69,27 +69,27 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("No Ingredient for this key.");
+            AddSauce();
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("No Ingredient for this key.");
+            AddCheese();
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Debug.Log("No Ingredient for this key.");
+            AddPepperoni();
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            Debug.Log("No Ingredient for this key.");
+            AddSausage();
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            Debug.Log("No Ingredient for this key.");
+            AddAnchovies();
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha6))
