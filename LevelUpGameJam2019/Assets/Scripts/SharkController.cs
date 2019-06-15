@@ -22,6 +22,13 @@ public class SharkController : MonoBehaviour
     [SerializeField]
     private int sharkJumpForce = 15;
 
+    [Header("---Colliders---")]
+    [SerializeField]
+    private Collider sphereOfInfluenceCollider;
+
+    [SerializeField]
+    private Collider mouthCollider;
+
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip sharkJumpSound;
@@ -145,6 +152,13 @@ public class SharkController : MonoBehaviour
             }
             //check if pizza had anchovies
         }
+
+        else if (collision.gameObject.CompareTag("Water"))//if shark lands back in water
+        {
+            myRigidbody.useGravity = false;
+
+            //lower shark so he isn't floating on top of the water
+        }
     }
 
 
@@ -177,6 +191,7 @@ public class SharkController : MonoBehaviour
     {
         myTransform.LookAt(attackTarget);
         myRigidbody.AddForce(myTransform.forward * sharkJumpForce, ForceMode.Impulse);
+        myRigidbody.useGravity = true;//turn on gravity
 
         //set cooldown
         nextSharkAttackTime = Time.time + secondsBetweenSharkAttacks;
