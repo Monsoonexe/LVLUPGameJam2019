@@ -43,22 +43,27 @@ public class Customer : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider col)
+
+    private void OnCollisionEnter(Collider collision)
     {
         //what did we get hit by?
-        if(col.CompareTag("PizzaProjectile")){
-            var pizzaProjectile = col.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+        if(collision.CompareTag("PizzaProjectile")){
+            var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
             //compare ingredients
             var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
             //animator.SetBool() //tell animator results of pizza
 
-            if(pizzaMatches){//do happy things
+            if(pizzaMatches)
+            {
+                //do happy things
                 CustomerSatisfied();
             }
 
-            else{//do bad things
+            else
+            {
+                //do bad things
                 RejectPizza();
             }
         }
