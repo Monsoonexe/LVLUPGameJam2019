@@ -15,6 +15,25 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int shotsFired;
 
+    [SerializeField]
+    private int customersSatisfied;
+
+    [SerializeField]
+    private int customersHit;
+
+    [SerializeField]
+    private int customersMissed;
+
+    [SerializeField]
+    private int wrongOrders;
+
+    [SerializeField]
+    private int sharksFed;
+
+    [Header("---UI Elements---")]
+    [SerializeField]
+    private TextMeshProUGUI scoreTMPro;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -27,6 +46,16 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnShotFired()
+    {
+        ++shotsFired;
+    }
+
+    public void AddScore(int amount)
+    {
+       playerScore += amount;
     }
 
 }

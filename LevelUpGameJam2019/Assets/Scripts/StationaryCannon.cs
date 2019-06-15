@@ -7,13 +7,18 @@ public class StationaryCannon : MonoBehaviour
     /// <summary>
     /// Stop adjusting rotation if target within this angle.
     /// </summary>
-    private static readonly float optimalAngle = .05f;
+    private const float optimalAngle = .05f;
+
+    //outside monobehaviors
+    private static ScoreManager scoreManager;
 
     [Header("Projectile Stuff")]
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField]
+    private GameObject projectilePrefab;
     
     [Tooltip("If more than one, iterates through each point.")]
-    [SerializeField] private Transform[] projectileSpawnPoints;
+    [SerializeField]
+    private Transform[] projectileSpawnPoints;
 
     /// <summary>
     /// Ask this guy what to put on the pizza when it's fired.
@@ -23,24 +28,34 @@ public class StationaryCannon : MonoBehaviour
 
     [SerializeField]
     private float projectileForce = 5.0f;
+
     private int projectileSpawnPointIndex = 0;
 
     [Header("Turret Target Tracking")]
+
     [SerializeField]
     private Transform objectToTrack;
+
     [SerializeField]
     private Transform turretTransform;//pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
-    [SerializeField] private int minPitch = 15;
-    [SerializeField] private int maxPitch = 75;
 
-    [SerializeField] private float swivelSpeed = 3f;
+    [SerializeField]
+    private int minPitch = 15;
 
-    [SerializeField] private float secondsBetweenShots = 3f;
+    [SerializeField]
+    private int maxPitch = 75;
+
+    [SerializeField]
+    private float swivelSpeed = 3f;
+
+    [SerializeField]
+    private float secondsBetweenShots = 3f;
 
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip cannonFireSound;
 
+    //GO components
     private AudioSource audioSource;
     private Transform baseTransform;//swivel on Y //
     private Animator anim;
@@ -48,6 +63,7 @@ public class StationaryCannon : MonoBehaviour
     private float nextShootTime = 0;
 
     //object pooling stuff
+    private readonly GameObject[] projectilePool = new GameObject[10];
 
     private void Awake()
     {
@@ -58,6 +74,7 @@ public class StationaryCannon : MonoBehaviour
     void Start()
     {
         GatherReferences();
+
     }
 
     // Update is called once per frame
@@ -80,6 +97,8 @@ public class StationaryCannon : MonoBehaviour
 
         baseTransform = this.transform;
         audioSource = GetComponent<AudioSource>() as AudioSource;
+
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
     }
 
     private void FireProjectile()
@@ -88,6 +107,7 @@ public class StationaryCannon : MonoBehaviour
         if (projectilePrefab)
         {
             //Debug.Log("Firing a Projectile from Spawn Point No: " + projectileSpawnPointIndex + " / " + projectileSpawnPoints.Length, this.gameObject );
+            scoreManager.OnShotFired();//increment counter
 
             //pick a point to spawn at
             var spawnPoint = projectileSpawnPoints[projectileSpawnPointIndex].position;
@@ -176,6 +196,5 @@ public class StationaryCannon : MonoBehaviour
 
         turretTransform.localEulerAngles = new Vector3(localRot, 0, 0);
         
-
     }
 }
