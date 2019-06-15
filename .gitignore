@@ -4,7 +4,6 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-Assets/[Aa]rt/
 
 # Visual Studio cache directory
 .vs/
@@ -25,6 +24,11 @@ ExportedObj/
 *.pdb
 *.opendb
 *.VC.db
+*.zip
+
+#Maya
+*.ma
+*.mtl
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -37,9 +41,14 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-#Art Assets
-[Aa]rt/
-LevelUpGameJam2019/Assets/Art.meta
-
+#TMPro
 TextMesh Pro/
 TextMesh Pro.meta
+
+#Art Assets
+LevelUpGameJam2019/Assets/Art/**/*.prefab
+LevelUpGameJam2019/Assets/Art/**/*.fbx
+LevelUpGameJam2019/Assets/Art/**/*.png
+LevelUpGameJam2019/Assets/Art/**/*.tga
+LevelUpGameJam2019/Assets/Art/**/*.mb
+
