@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac02c95b0a23849a31fa7e14dfbe48, type: 3}
   m_Name: HitSounds_Female1
   m_EditorClassIdentifier: 
-  hitSounds: []
+  soundClipList:
+  - {fileID: 8300000, guid: af9ec262294299f43bd2e20c6b159671, type: 3}
+  - {fileID: 8300000, guid: 944918e08075de343b9e7a9b78d90de2, type: 3}
+  - {fileID: 8300000, guid: 12d38eab79e2d7a4e8a00256364eb6e2, type: 3}

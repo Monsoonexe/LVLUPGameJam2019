@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac02c95b0a23849a31fa7e14dfbe48, type: 3}
   m_Name: RejectOrderSounds_Female1
   m_EditorClassIdentifier: 
-  soundClipList: []
+  soundClipList:
+  - {fileID: 8300000, guid: a6953d47289146048a98f295126c5cd8, type: 3}

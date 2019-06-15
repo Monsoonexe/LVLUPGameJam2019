@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac02c95b0a23849a31fa7e14dfbe48, type: 3}
   m_Name: RejectOrderSounds_Male1
   m_EditorClassIdentifier: 
-  soundClipList: []
+  soundClipList:
+  - {fileID: 8300000, guid: 8c7590ccd021448468443d7972ddc846, type: 3}
