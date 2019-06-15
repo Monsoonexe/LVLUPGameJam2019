@@ -40,6 +40,11 @@ public class PizzaProjectile : MonoBehaviour
     {
         StartCoroutine(ExpireAfterTime());
     }
+
+    private void OnDisable()
+    {
+        myRigidbody.velocity = Vector3.zero;
+    }
     // Update is called once per frame
     void Update()
     {
