@@ -1907,6 +1907,7 @@ GameObject:
   - component: {fileID: 2055851348}
   - component: {fileID: 2055851347}
   - component: {fileID: 2055851346}
+  - component: {fileID: 2055851350}
   m_Layer: 5
   m_Name: IngredientCanvas
   m_TagString: Untagged
@@ -1999,6 +2000,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2055851350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055851345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288c5f7ed63ea408d957bad19827c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientLoaderAnimator: {fileID: 0}
+  selectedIngredients: 
 --- !u!1 &2074355575
 GameObject:
   m_ObjectHideFlags: 0
