@@ -11,17 +11,18 @@ public class OrderBuilderMenu : MonoBehaviour
     //ingredients that are on pizza
     [SerializeField]
     private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
-        
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GetKeyBoardInput();
+
     }
 
     /// <summary>
@@ -35,7 +36,7 @@ public class OrderBuilderMenu : MonoBehaviour
 
         return ingredients;
     }
-    
+
     public void AddAnchovies()
     {
         selectedIngredients.Add(IngredientsENUM.Anchovies);
@@ -59,6 +60,64 @@ public class OrderBuilderMenu : MonoBehaviour
     public void AddSausage()
     {
         selectedIngredients.Add(IngredientsENUM.Sausage);
+    }
+
+    /// <summary>
+    /// If Player has a keyboard, can use 1-0
+    /// </summary>
+    private void GetKeyBoardInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Debug.Log("No Ingredient for this key.");
+        }
+
+
     }
 }
 
