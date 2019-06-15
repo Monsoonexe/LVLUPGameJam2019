@@ -27,6 +27,9 @@ public class SharkController : MonoBehaviour
     private Collider sphereOfInfluenceCollider;
 
     [SerializeField]
+    private Collider sharkOutOfWaterCollider;
+
+    [SerializeField]
     private Collider mouthCollider;
 
     [Header("---Audio---")]
@@ -103,9 +106,12 @@ public class SharkController : MonoBehaviour
             }
 
         }
-        else
+
+        else if (other.gameObject.CompareTag("Water"))//if shark lands back in water
         {
-            //I'm a shark, but even I won't touch whatever this was.  I'm only a pizza shark.
+            OnSharkBackInWater();
+
+            //lower shark so he isn't floating on top of the water
         }
     }
 
@@ -116,6 +122,13 @@ public class SharkController : MonoBehaviour
             attackTarget = null;
 
             //point nose towards water
+        }
+
+        else if (other.gameObject.CompareTag("Water"))//if shark lands back in water
+        {
+            myRigidbody.useGravity = true;
+
+            //lower shark so he isn't floating on top of the water
         }
     }
 
@@ -132,6 +145,8 @@ public class SharkController : MonoBehaviour
             collision.gameObject.SetActive(false);//chomp pizza
 
             scoreManager.OnSharkAtePizza();//tally
+
+            Debug.Log("CHOMP!");
 
             //play sound, if one is set
             if (sharkEatPizzaSound)
@@ -152,15 +167,22 @@ public class SharkController : MonoBehaviour
             }
             //check if pizza had anchovies
         }
-
-        else if (collision.gameObject.CompareTag("Water"))//if shark lands back in water
-        {
-            myRigidbody.useGravity = false;
-
-            //lower shark so he isn't floating on top of the water
-        }
     }
+    
+    private void OnSharkBackInWater()
+    {
+        myRigidbody.useGravity = false;
+        myRigidbody.velocity = Vector3.zero;
 
+        sphereOfInfluenceCollider.enabled = true;//stop using this collider for now.
+        sharkOutOfWaterCollider.enabled = false;//turn on this collider so we know when shark is in water
+
+        //reset rotations
+        Vector3 defaultRotations = new Vector3(0, myTransform.localEulerAngles.y, 0);
+        myTransform.localEulerAngles = defaultRotations;
+
+        //resume patrol
+    }
 
     private void OnSharkAteAnchovies()
     {
@@ -187,11 +209,21 @@ public class SharkController : MonoBehaviour
         }
     }
 
+    private IEnumerator EnableColliders()
+    {
+        yield return new WaitForSeconds(1.0f);
+        sphereOfInfluenceCollider.enabled = false;//stop using this collider for now.
+        sharkOutOfWaterCollider.enabled = true;//turn on this collider so we know when shark is in water
+
+    }
+    
     private void StartSharkAttack()
     {
         myTransform.LookAt(attackTarget);
         myRigidbody.AddForce(myTransform.forward * sharkJumpForce, ForceMode.Impulse);
         myRigidbody.useGravity = true;//turn on gravity
+
+        StartCoroutine(EnableColliders());
 
         //set cooldown
         nextSharkAttackTime = Time.time + secondsBetweenSharkAttacks;
