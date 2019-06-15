@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerOrder: {fileID: 0}
+  pizzaHitBox: {fileID: 0}
+  customerHitBox: {fileID: 0}
+  hitWithPizzaSounds: {fileID: 11400000, guid: 478ca8b92ed190043955c60e06c8eac0, type: 2}
 --- !u!136 &4396875095428384438
 CapsuleCollider:
   m_ObjectHideFlags: 0
