@@ -25,6 +25,11 @@ public class OrderBuilderMenu : MonoBehaviour
 
     }
 
+    public void OnOrderFired()
+    {
+        selectedIngredients.Clear();
+    }
+
     /// <summary>
     /// Get Ingredients and clear list.
     /// </summary>
@@ -63,7 +68,7 @@ public class OrderBuilderMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// If Player has a keyboard, can use 1-0
+    /// If Player has a keyboard, can use 1-0 to add ingredients.
     /// </summary>
     private void GetKeyBoardInput()
     {
@@ -116,7 +121,6 @@ public class OrderBuilderMenu : MonoBehaviour
         {
             Debug.Log("No Ingredient for this key.");
         }
-
 
     }
 }

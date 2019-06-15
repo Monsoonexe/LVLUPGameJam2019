@@ -165,7 +165,16 @@ public class StationaryCannon : MonoBehaviour
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
-            if(orderBuilder) pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
+            if (orderBuilder)
+            {
+                pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
+                orderBuilder.OnOrderFired();
+            }
+            else
+            {
+                Debug.Log("No orders given to Cannon. Blank pizza.", this);
+            }
+
             pizzaProjectile.OnProjectileFired();
 
             //play cannon fire sound
