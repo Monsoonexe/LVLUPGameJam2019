@@ -12,6 +12,9 @@ public class PizzaProjectile : MonoBehaviour
     [SerializeField]
     private AudioClip flyingSound;
 
+    [SerializeField]
+    private AudioClip splatSound;
+
     private OrderStruct ingredientsOnThisPizza;
 
     //components

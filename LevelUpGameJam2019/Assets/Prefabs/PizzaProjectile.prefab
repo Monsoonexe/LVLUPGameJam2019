@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatiness: 0.1
-  flyingSound: {fileID: 8300000, guid: b42c75f9474685a429dc68da4090ae04, type: 3}
+  flyingSound: {fileID: 8300000, guid: 249981457aecf6d40b74b9cf05f303c8, type: 3}
+  splatSound: {fileID: 8300000, guid: 7adb956f1ade30f45b33356ecc5b3777, type: 3}
 --- !u!136 &1889466335176007595
 CapsuleCollider:
   m_ObjectHideFlags: 0
