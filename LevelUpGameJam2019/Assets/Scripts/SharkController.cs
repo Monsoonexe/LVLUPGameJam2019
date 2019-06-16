@@ -119,7 +119,7 @@ public class SharkController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PizzaProjectile"))//noms detected
         {
-            Debug.Log("Pizza Detected.");
+            //Debug.Log("Pizza Detected.");
             if (Time.time > nextSharkAttackTime && sharkControllerState == SharkControllerState.patrolling)//it's time to shark!
             {
                 attackTarget = other.transform;
@@ -230,7 +230,7 @@ public class SharkController : MonoBehaviour
     
     private void OnSharkBackInWater()
     {
-        Debug.Log("Back in water....");
+        //Debug.Log("Back in water....");
 
         myRigidbody.useGravity = false;
         myRigidbody.velocity = Vector3.zero;
