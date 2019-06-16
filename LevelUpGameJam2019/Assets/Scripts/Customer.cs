@@ -183,9 +183,12 @@ public class Customer : MonoBehaviour
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerSatisfiedSounds);
-        scoreManager.OnCustomerSatisfied();
 
-        Debug.Log("Thanks for the Pizza!!!!");
+        //add tallys
+        scoreManager.OnCustomerSatisfied();
+        scoreManager.AddScore(customerOrder.score);
+
+        //Debug.Log("Thanks for the Pizza!!!!");
 
     }
 
@@ -194,6 +197,6 @@ public class Customer : MonoBehaviour
         PlayRandomSound(badOrderSounds);
         scoreManager.OnIncorrectOrder();
 
-        Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
+        //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 }
