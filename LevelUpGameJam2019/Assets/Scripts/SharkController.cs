@@ -265,6 +265,7 @@ public class SharkController : MonoBehaviour
         myAudioSource = GetComponent<AudioSource>() as AudioSource;
     }
 
+    //CREDIT: Daniel Brauer http://wiki.unity3d.com/index.php?title=Calculating_Lead_For_Projectiles
     //first-order intercept using absolute target position
     private static Vector3 FirstOrderIntercept
     (
