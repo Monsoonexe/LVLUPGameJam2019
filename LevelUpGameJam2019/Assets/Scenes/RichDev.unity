@@ -780,7 +780,7 @@ PrefabInstance:
     - target: {fileID: 1053948074837259218, guid: aa77df57f8d709847a9f15a32157499b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1053948074837259219, guid: aa77df57f8d709847a9f15a32157499b,
         type: 3}
@@ -974,11 +974,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScoreManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5111755227996988337, guid: 1fe946bf477e11b47a488bf03bd39768,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7970435097338647059, guid: 1fe946bf477e11b47a488bf03bd39768,
         type: 3}
