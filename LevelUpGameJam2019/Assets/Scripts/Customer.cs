@@ -31,7 +31,6 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private SoundList customerSatisfiedSounds;
 
-
     //member component references
     private Animator animator;
     private AudioSource audioSource;
@@ -84,7 +83,7 @@ public class Customer : MonoBehaviour
             { //compare ingredients
                 var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
-                //animator.SetBool() //tell animator results of pizza
+                animator.SetBool("bDelivered", pizzaMatches); //tell animator results of pizza
 
                 if (pizzaMatches)
                 {
