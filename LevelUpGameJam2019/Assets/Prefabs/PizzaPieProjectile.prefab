@@ -185,11 +185,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4606475560762513382}
   - component: {fileID: 4606475560762513384}
-  - component: {fileID: 4606475560762513385}
   - component: {fileID: 8648594467524991874}
   - component: {fileID: -2753496281335303446}
+  - component: {fileID: 2505455958291133347}
   m_Layer: 0
-  m_Name: PizzaPie
+  m_Name: PizzaPieProjectile
   m_TagString: PizzaProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,19 +227,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &4606475560762513385
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4606475560762513387}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.01
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8648594467524991874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -349,9 +336,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatiness: 0.1
-  lifeTime: 20
   flyingSound: {fileID: 8300000, guid: 249981457aecf6d40b74b9cf05f303c8, type: 3}
   splatSound: {fileID: 8300000, guid: cfdfec7a5e30c284aa4d4683cdf4e4ff, type: 3}
+--- !u!136 &2505455958291133347
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606475560762513387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2.15
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4606475560868040224
 GameObject:
   m_ObjectHideFlags: 0
