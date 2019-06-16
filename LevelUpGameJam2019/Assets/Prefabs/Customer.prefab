@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4396875095428384437}
   - component: {fileID: 4396875095428384439}
   - component: {fileID: 4206118922461174337}
+  - component: {fileID: 8917171206006001866}
   - component: {fileID: 5748861884818160847}
   m_Layer: 0
   m_Name: Customer
@@ -52,6 +53,8 @@ MonoBehaviour:
   badOrderSounds: {fileID: 11400000, guid: 58d152a38a6a1b842bc9d8c0b7f053f7, type: 2}
   customerSatisfiedSounds: {fileID: 11400000, guid: a49b5f221e6cbb64fa98c5ff5f503981,
     type: 2}
+  customerCollider: {fileID: 8917171206006001866}
+  pizzaBoxCollider: {fileID: 4206118922461174337}
   pizzaBoxAnimator: {fileID: 5573774265582608532}
   customerAnimator: {fileID: 4396875095428384439}
 --- !u!95 &4396875095428384439
@@ -86,6 +89,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 1.5, z: 1}
+--- !u!65 &8917171206006001866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396875095428384441}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.75, z: 0.6}
+  m_Center: {x: 0, y: 2.35, z: 0.55}
 --- !u!82 &5748861884818160847
 AudioSource:
   m_ObjectHideFlags: 0
