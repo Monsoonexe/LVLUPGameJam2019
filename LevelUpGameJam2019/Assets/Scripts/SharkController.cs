@@ -39,6 +39,9 @@ public class SharkController : MonoBehaviour
     [SerializeField]
     private AudioClip sharkDeliciousSound;
 
+    [SerializeField]
+    private AudioClip splashSound;
+
     private float nextSharkAttackTime = 0;
 
     /// <summary>
@@ -51,6 +54,8 @@ public class SharkController : MonoBehaviour
     private Rigidbody myRigidbody;
     private AudioSource myAudioSource;
 
+    private Vector3 TESTSTARTPOSITION;
+
     private void Awake()
     {
 
@@ -60,7 +65,7 @@ public class SharkController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        TESTSTARTPOSITION = myTransform.position;
     }
 
     // Update is called once per frame
@@ -171,6 +176,13 @@ public class SharkController : MonoBehaviour
         myTransform.localEulerAngles = defaultRotations;
 
         //resume patrol
+
+        //audio
+        if (splashSound)
+        {
+            myAudioSource.clip = splashSound;
+            myAudioSource.Play();
+        }
     }
 
     private void OnSharkAteAnchovies()
@@ -207,8 +219,19 @@ public class SharkController : MonoBehaviour
     
     private void StartSharkAttack()
     {
-        myTransform.LookAt(attackTarget);
+
+        //where does the shark need to aim in order to be at the same point in space at the same time as the pizza?
+        var interceptPoint = FirstOrderIntercept(myTransform.position,
+        myRigidbody.velocity,
+        sharkJumpForce,
+        attackTarget.position,
+        attackTarget.GetComponent<Rigidbody>().velocity
+        );
+
+        myTransform.LookAt(interceptPoint);
+
         myRigidbody.AddForce(myTransform.forward * sharkJumpForce, ForceMode.Impulse);
+
         myRigidbody.useGravity = true;//turn on gravity
 
         StartCoroutine(EnableColliders());
@@ -240,5 +263,80 @@ public class SharkController : MonoBehaviour
         myTransform = this.transform;
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
         myAudioSource = GetComponent<AudioSource>() as AudioSource;
+    }
+
+    //first-order intercept using absolute target position
+    private static Vector3 FirstOrderIntercept
+    (
+        Vector3 shooterPosition,
+        Vector3 shooterVelocity,
+        float shotSpeed,
+        Vector3 targetPosition,
+        Vector3 targetVelocity
+    )
+    {
+        var targetRelativePosition = targetPosition - shooterPosition;
+        var targetRelativeVelocity = targetVelocity - shooterVelocity;
+        var t = FirstOrderInterceptTime
+        (
+            shotSpeed,
+            targetRelativePosition,
+            targetRelativeVelocity
+        );
+        return targetPosition + t * (targetRelativeVelocity);
+    }
+
+    //first-order intercept using relative target position
+    private static float FirstOrderInterceptTime(float shotSpeed, Vector3 targetRelativePosition, Vector3 targetRelativeVelocity)
+    {
+        var velocitySquared = targetRelativeVelocity.sqrMagnitude;
+
+        if (velocitySquared < 0.001f)
+            return 0f;
+
+        var a = velocitySquared - shotSpeed * shotSpeed;
+
+        //handle similar velocities
+        if (Mathf.Abs(a) < 0.001f)
+        {
+            var t = -targetRelativePosition.sqrMagnitude /
+            (
+                2f * Vector3.Dot
+                (
+                    targetRelativeVelocity,
+                    targetRelativePosition
+                )
+            );
+            return Mathf.Max(t, 0f); //don't shoot back in time
+        }
+
+        var b = 2f * Vector3.Dot(targetRelativeVelocity, targetRelativePosition);
+        var c = targetRelativePosition.sqrMagnitude;
+        var determinant = b * b - 4f * a * c;
+
+        if (determinant > 0f)
+        { //determinant > 0; two intercept paths (most common)
+            float t1 = (-b + Mathf.Sqrt(determinant)) / (2f * a),
+                    t2 = (-b - Mathf.Sqrt(determinant)) / (2f * a);
+            if (t1 > 0f)
+            {
+                if (t2 > 0f)
+                    return Mathf.Min(t1, t2); //both are positive
+                else
+                    return t1; //only t1 is positive
+            }
+            else
+                return Mathf.Max(t2, 0f); //don't shoot back in time
+        }
+        else if (determinant < 0f) //determinant < 0; no intercept path
+            return 0f;
+        else //determinant = 0; one intercept path, pretty much never happens
+            return Mathf.Max(-b / (2f * a), 0f); //don't shoot back in time
+    }
+
+    [ContextMenu("Reset Position")]
+    public void ResetSharkPositionTest()
+    {
+        myTransform.position = TESTSTARTPOSITION;
     }
 }
