@@ -60,7 +60,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
-       playerScore += amount;
+        playerScore += amount;
+        scoreTMPro.text = playerScore.ToString();
     }
 
     public void OnIncorrectOrder()
