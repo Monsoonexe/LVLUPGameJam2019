@@ -186,6 +186,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &192843484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192843485}
+  m_Layer: 0
+  m_Name: 'Waypoint #1'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &192843485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192843484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22, y: 1.6, z: 30.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1118480375}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +307,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &940266156 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7154778369332759340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +480,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
+--- !u!1 &1118480374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1118480375}
+  m_Layer: 0
+  m_Name: Shark With Waypoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1118480375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118480374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.243729, y: -3.091845, z: -7.0201187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 940266156}
+  - {fileID: 192843485}
+  - {fileID: 1753915687}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1484895815
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +602,37 @@ Transform:
   m_LocalScale: {x: 100, y: 0.5, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1753915686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1753915687}
+  m_Layer: 0
+  m_Name: 'Waypoint #2'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1753915687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753915686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.7, y: 1.6, z: 26.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1118480375}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2055851350 stripped
 MonoBehaviour:
@@ -750,7 +849,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1118480375}
     m_Modifications:
     - target: {fileID: 7154778368929503622, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
@@ -760,17 +859,17 @@ PrefabInstance:
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.17
+      value: -8.413729
       objectReference: {fileID: 0}
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: 1.6718451
       objectReference: {fileID: 0}
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.3
+      value: 20.320118
       objectReference: {fileID: 0}
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
@@ -795,7 +894,7 @@ PrefabInstance:
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
@@ -811,6 +910,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: sharkJumpForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: sharkSwimSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 192843485}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 192843485}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1753915687}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: secondsBetweenSharkAttacks
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 983a1a7344d720b4193ad1d049b200c0, type: 3}
