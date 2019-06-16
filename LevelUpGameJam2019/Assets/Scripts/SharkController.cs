@@ -142,6 +142,7 @@ public class SharkController : MonoBehaviour
             scoreManager.OnSharkAtePizza();//tally
 
             Debug.Log("CHOMP!");
+            myRigidbody.angularVelocity = Vector3.zero;
 
             //play sound, if one is set
             if (sharkEatPizzaSound)
