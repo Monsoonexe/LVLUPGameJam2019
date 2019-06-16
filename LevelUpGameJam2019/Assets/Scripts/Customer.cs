@@ -25,6 +25,13 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private SoundList customerSatisfiedSounds;
 
+    [Header("---Colliders---")]
+    [SerializeField]
+    private Collider customerCollider;
+
+    [SerializeField]
+    private Collider pizzaBoxCollider;
+
     [Header("---Animators---")]
     [SerializeField]
     private Animator pizzaBoxAnimator;
@@ -76,26 +83,51 @@ public class Customer : MonoBehaviour
         //what did we get hit by?
         if(collision.gameObject.CompareTag("PizzaProjectile"))
         {
-            var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+            //if projectile hit pizza box
+            var hitPizzaBox = false;
 
-            pizzaProjectile.gameObject.SetActive(false);//expire projectile
+            ContactPoint[] contactPointList = new ContactPoint[collision.contactCount];
 
-            var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
+            collision.GetContacts(contactPointList);//fill array
 
-            pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
-            customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
-
-            if (pizzaMatches)
+            foreach(var contact in contactPointList)
             {
-                //do happy things
-                CustomerSatisfied();
+                if (contact.thisCollider == pizzaBoxCollider)
+                {
+                    hitPizzaBox = true;
+                    break;
+                }
             }
 
-            else
+            if (hitPizzaBox)
             {
-                //do bad things
-                RejectPizza();
+                var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+
+                pizzaProjectile.gameObject.SetActive(false);//expire projectile
+
+                var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
+
+                pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
+                customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
+
+                if (pizzaMatches)
+                {
+                    //do happy things
+                    CustomerSatisfied();
+                }
+
+                else
+                {
+                    //do bad things
+                    RejectPizza();
+                }
+
             }
+            else//hit customer
+            {
+                PlayRandomSound(hitWithPizzaSounds);
+            }
+            
                 
         }
         
