@@ -40,7 +40,7 @@ public class SharkController : MonoBehaviour
     private Transform[] patrolWaypoints;
 
     [SerializeField]
-    private float sharkSwimSpeed = 1.0f;
+    private float sharkSwimSpeed = 5.0f;
 
     private int patrolWaypointsIndex = 0;
 
