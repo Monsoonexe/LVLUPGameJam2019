@@ -53,9 +53,14 @@ MonoBehaviour:
   sharkJumpForce: 15
   sphereOfInfluenceCollider: {fileID: 3533558722056595866}
   mouthCollider: {fileID: 6834865703912529726}
-  sharkJumpSound: {fileID: 0}
-  sharkEatPizzaSound: {fileID: 0}
-  sharkDeliciousSound: {fileID: 0}
+  patrolWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  sharkSwimSpeed: 1
+  sharkJumpSound: {fileID: 8300000, guid: 4ed444cad68defa49b9b1057279219b1, type: 3}
+  sharkEatPizzaSound: {fileID: 8300000, guid: 024686ead4716324aafb9d075515e533, type: 3}
+  sharkDeliciousSound: {fileID: 8300000, guid: 7906b6f0475ff45458918d5672e752e2, type: 3}
+  splashSound: {fileID: 8300000, guid: 09563d71107de9740b378aad982e31ea, type: 3}
 --- !u!54 &1993991816221798359
 Rigidbody:
   m_ObjectHideFlags: 0

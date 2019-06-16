@@ -47,7 +47,12 @@ public class PizzaProjectile : MonoBehaviour
 
     private void OnDisable()
     {
+        //reset physics
         myRigidbody.velocity = Vector3.zero;
+        myRigidbody.angularVelocity = Vector3.zero;
+
+        //reset rotation
+        myTransform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
