@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(AudioSource))]
 public class Customer : MonoBehaviour
 {
 
@@ -13,14 +14,7 @@ public class Customer : MonoBehaviour
 
     [SerializeField]
     private Order customerOrder;
-
-    [Header("---Colliders---")]
-    [SerializeField]
-    private Collider pizzaHitBox;
-
-    [SerializeField]
-    private Collider customerHitBox;
-
+    
     [Header("---Audio---")]
     [SerializeField]
     private SoundList hitWithPizzaSounds;
@@ -31,9 +25,21 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private SoundList customerSatisfiedSounds;
 
+    [Header("---Colliders---")]
+    [SerializeField]
+    private Collider customerCollider;
+
+    [SerializeField]
+    private Collider pizzaBoxCollider;
+
+    [Header("---Animators---")]
+    [SerializeField]
+    private Animator pizzaBoxAnimator;
+
+    [SerializeField]
+    private Animator customerAnimator;
 
     //member component references
-    private Animator animator;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -57,7 +63,6 @@ public class Customer : MonoBehaviour
     private void GatherReferences()
     {
         //get member references
-        animator = GetComponent<Animator>() as Animator;
         audioSource = GetComponent<AudioSource>() as AudioSource;
 
         //get static reference
@@ -78,13 +83,32 @@ public class Customer : MonoBehaviour
         //what did we get hit by?
         if(collision.gameObject.CompareTag("PizzaProjectile"))
         {
-            var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+            //if projectile hit pizza box
+            var hitPizzaBox = false;
 
-            if (collision.collider == pizzaHitBox)//pizza box was hit
-            { //compare ingredients
+            ContactPoint[] contactPointList = new ContactPoint[collision.contactCount];
+
+            collision.GetContacts(contactPointList);//fill array
+
+            foreach(var contact in contactPointList)
+            {
+                if (contact.thisCollider == pizzaBoxCollider)
+                {
+                    hitPizzaBox = true;
+                    break;
+                }
+            }
+
+            if (hitPizzaBox)
+            {
+                var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+
+                pizzaProjectile.gameObject.SetActive(false);//expire projectile
+
                 var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
-                //animator.SetBool() //tell animator results of pizza
+                pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
+                customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
 
                 if (pizzaMatches)
                 {
@@ -99,11 +123,12 @@ public class Customer : MonoBehaviour
                 }
 
             }
-            else if(collision.collider == customerHitBox)//customer hit with pizza
+            else//hit customer
             {
                 PlayRandomSound(hitWithPizzaSounds);
             }
-
+            
+                
         }
         
     }
@@ -160,11 +185,15 @@ public class Customer : MonoBehaviour
         PlayRandomSound(customerSatisfiedSounds);
         scoreManager.OnCustomerSatisfied();
 
+        Debug.Log("Thanks for the Pizza!!!!");
+
     }
 
     private void RejectPizza()
     {
         PlayRandomSound(badOrderSounds);
         scoreManager.OnIncorrectOrder();
+
+        Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 }

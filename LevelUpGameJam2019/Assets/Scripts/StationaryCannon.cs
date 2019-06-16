@@ -174,9 +174,7 @@ public class StationaryCannon : MonoBehaviour
             {
                 Debug.Log("No orders given to Cannon. Blank pizza.", this);
             }
-
-            pizzaProjectile.OnProjectileFired();
-
+            
             //play cannon fire sound
             audioSource.clip = cannonFireSound;
             audioSource.Play();

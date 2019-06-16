@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1053948074466063618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053948074466063619}
+  m_Layer: 0
+  m_Name: 'Waypoint #2'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1053948074466063619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053948074466063618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.7, y: 1.6, z: 26.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1053948074837259219}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1053948074837259218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053948074837259219}
+  m_Layer: 0
+  m_Name: Shark With Waypoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1053948074837259219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053948074837259218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.243729, y: -3.091845, z: -7.0201187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1053948075816535688}
+  - {fileID: 1053948076067494649}
+  - {fileID: 1053948074466063619}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1053948076067494648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053948076067494649}
+  m_Layer: 0
+  m_Name: 'Waypoint #1'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1053948076067494649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053948076067494648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22, y: 1.6, z: 30.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1053948074837259219}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7920284955164368648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1053948074837259219}
+    m_Modifications:
+    - target: {fileID: 7154778368929503622, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_Name
+      value: Shark Attack Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.413729
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6718451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.320118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6960385
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7180046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 88.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: sharkJumpForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: sharkSwimSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1053948076067494649}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1053948076067494649}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: patrolWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1053948074466063619}
+    - target: {fileID: 7154778368929503623, guid: 983a1a7344d720b4193ad1d049b200c0,
+        type: 3}
+      propertyPath: secondsBetweenSharkAttacks
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 983a1a7344d720b4193ad1d049b200c0, type: 3}
+--- !u!4 &1053948075816535688 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7920284955164368648}
+  m_PrefabAsset: {fileID: 0}

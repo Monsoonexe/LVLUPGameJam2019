@@ -39,12 +39,22 @@ public class PizzaProjectile : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(ExpireAfterTime());
+
+        //play sound
+        audioSource.clip = flyingSound;
+        audioSource.Play();
     }
 
     private void OnDisable()
     {
+        //reset physics
         myRigidbody.velocity = Vector3.zero;
+        myRigidbody.angularVelocity = Vector3.zero;
+
+        //reset rotation
+        myTransform.rotation = Quaternion.identity;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,6 +64,14 @@ public class PizzaProjectile : MonoBehaviour
     private void FixedUpdate()
     {
         myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator ExpireAfterTime()
@@ -74,12 +92,6 @@ public class PizzaProjectile : MonoBehaviour
     public OrderStruct GetIngredientsOnPizza()
     {
         return ingredientsOnThisPizza;
-    }
-
-    public void OnProjectileFired()
-    {
-        audioSource.clip = flyingSound;
-        audioSource.Play();
     }
 
     /// <summary>

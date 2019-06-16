@@ -473,16 +473,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngredientCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1583690294410932099, guid: 48d262b804a2c974d82be509e94cb241,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
-        type: 3}
-      propertyPath: selectedIngredients.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1583690294410932103, guid: 48d262b804a2c974d82be509e94cb241,
         type: 3}
       propertyPath: m_LocalPosition.x
