@@ -53,9 +53,14 @@ MonoBehaviour:
   sharkJumpForce: 15
   sphereOfInfluenceCollider: {fileID: 3533558722056595866}
   mouthCollider: {fileID: 6834865703912529726}
+  patrolWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  sharkSwimSpeed: 1
   sharkJumpSound: {fileID: 0}
   sharkEatPizzaSound: {fileID: 0}
   sharkDeliciousSound: {fileID: 0}
+  splashSound: {fileID: 0}
 --- !u!54 &1993991816221798359
 Rigidbody:
   m_ObjectHideFlags: 0

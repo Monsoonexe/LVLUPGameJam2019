@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+public enum SharkControllerState
+{
+    patrolling,
+    jumping
+}
+
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -29,6 +35,17 @@ public class SharkController : MonoBehaviour
     [SerializeField]
     private Collider mouthCollider;
 
+    [Header("---Patrol Stuff---")]
+    [SerializeField]
+    private Transform[] patrolWaypoints;
+
+    [SerializeField]
+    private float sharkSwimSpeed = 1.0f;
+
+    private int patrolWaypointsIndex = 0;
+
+    private const float closeEnoughDistance = 0.1f;
+
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip sharkJumpSound;
@@ -44,6 +61,10 @@ public class SharkController : MonoBehaviour
 
     private float nextSharkAttackTime = 0;
 
+    /// <summary>
+    /// The state of this instance of a shark.
+    /// </summary>
+    private SharkControllerState sharkControllerState;
     /// <summary>
     /// This is the thing I want to eat.
     /// </summary>
@@ -66,6 +87,8 @@ public class SharkController : MonoBehaviour
     void Start()
     {
         TESTSTARTPOSITION = myTransform.position;
+        sharkControllerState = SharkControllerState.patrolling;
+        
     }
 
     // Update is called once per frame
@@ -76,7 +99,16 @@ public class SharkController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //course correction cuz the pizza moves so fast
+        switch (sharkControllerState)
+        {
+            case SharkControllerState.patrolling:
+                SharkPatrol();
+                break;
+            case SharkControllerState.jumping:
+                //roar
+                break;
+        }
+
     }
 
     /// <summary>
@@ -87,24 +119,38 @@ public class SharkController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PizzaProjectile"))//noms detected
         {
-            if (Time.time > nextSharkAttackTime)//it's time to shark!
+            Debug.Log("Pizza Detected.");
+            if (Time.time > nextSharkAttackTime && sharkControllerState == SharkControllerState.patrolling)//it's time to shark!
             {
                 attackTarget = other.transform;
 
-                StartSharkAttack();
+                StartSharkJump();
 
             }
 
             else
             {
-                //too tired to shark.
+                if (Time.time < nextSharkAttackTime)
+                {
+                    //too tired to shark.
+                    Debug.Log("Still in cooldown.  Seconds Remaining: " + (nextSharkAttackTime - Time.time));
+                }
             }
+        
 
         }
 
         else if (other.gameObject.CompareTag("Water"))//if shark lands back in water
         {
-            OnSharkBackInWater();
+            if(sharkControllerState == SharkControllerState.jumping)
+            {
+                OnSharkBackInWater();
+
+            }
+            else
+            {
+
+            }
 
             //lower shark so he isn't floating on top of the water
         }
@@ -119,12 +165,6 @@ public class SharkController : MonoBehaviour
             //point nose towards water
         }
 
-        else if (other.gameObject.CompareTag("Water"))//if shark lands back in water
-        {
-            myRigidbody.useGravity = true;
-
-            //lower shark so he isn't floating on top of the water
-        }
     }
 
     /// <summary>
@@ -141,7 +181,7 @@ public class SharkController : MonoBehaviour
 
             scoreManager.OnSharkAtePizza();//tally
 
-            Debug.Log("CHOMP!");
+            Debug.Log("CHOMP! Shark ate a pizza.", this);
             myRigidbody.angularVelocity = Vector3.zero;
 
             //play sound, if one is set
@@ -164,9 +204,34 @@ public class SharkController : MonoBehaviour
             //check if pizza had anchovies
         }
     }
+
+    /// <summary>
+    /// Move the Shark between waypoints.
+    /// </summary>
+    private void SharkPatrol()
+    {
+        var targetWaypoint = patrolWaypoints[patrolWaypointsIndex].position;
+
+        //Debug.Log("Moving....." + patrolWaypointsIndex);
+        if (Vector3.Distance(targetWaypoint, myTransform.position) > closeEnoughDistance)
+        {
+            //handle rotatition
+            myTransform.LookAt(targetWaypoint);
+
+            //move towards
+            myRigidbody.MovePosition(myTransform.position + myTransform.forward * Time.deltaTime * sharkSwimSpeed);
+        }
+        else
+        {
+            //set next waypoint
+            patrolWaypointsIndex = ++patrolWaypointsIndex >= patrolWaypoints.Length ? 0 : patrolWaypointsIndex;//increment / reset index
+        }
+    }
     
     private void OnSharkBackInWater()
     {
+        Debug.Log("Back in water....");
+
         myRigidbody.useGravity = false;
         myRigidbody.velocity = Vector3.zero;
 
@@ -177,6 +242,7 @@ public class SharkController : MonoBehaviour
         myTransform.localEulerAngles = defaultRotations;
 
         //resume patrol
+        sharkControllerState = SharkControllerState.patrolling;
 
         //audio
         if (splashSound)
@@ -218,8 +284,9 @@ public class SharkController : MonoBehaviour
 
     }
     
-    private void StartSharkAttack()
+    private void StartSharkJump()
     {
+        sharkControllerState = SharkControllerState.jumping;
 
         //where does the shark need to aim in order to be at the same point in space at the same time as the pizza?
         var interceptPoint = FirstOrderIntercept(myTransform.position,
