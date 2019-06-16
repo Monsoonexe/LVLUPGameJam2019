@@ -86,6 +86,8 @@ public class Customer : MonoBehaviour
             //if projectile hit pizza box
             var hitPizzaBox = false;
 
+            collision.gameObject.SetActive(false);//expire projectile
+
             ContactPoint[] contactPointList = new ContactPoint[collision.contactCount];
 
             collision.GetContacts(contactPointList);//fill array
@@ -102,9 +104,7 @@ public class Customer : MonoBehaviour
             if (hitPizzaBox)
             {
                 var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
-
-                pizzaProjectile.gameObject.SetActive(false);//expire projectile
-
+                
                 var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
 
                 pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
@@ -183,9 +183,12 @@ public class Customer : MonoBehaviour
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerSatisfiedSounds);
-        scoreManager.OnCustomerSatisfied();
 
-        Debug.Log("Thanks for the Pizza!!!!");
+        //add tallys
+        scoreManager.OnCustomerSatisfied();
+        scoreManager.AddScore(customerOrder.score);
+
+        //Debug.Log("Thanks for the Pizza!!!!");
 
     }
 
@@ -194,6 +197,6 @@ public class Customer : MonoBehaviour
         PlayRandomSound(badOrderSounds);
         scoreManager.OnIncorrectOrder();
 
-        Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
+        //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 }
