@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac02c95b0a23849a31fa7e14dfbe48, type: 3}
   m_Name: CustomerSatisfiedSounds_Male1
   m_EditorClassIdentifier: 
-  soundClipList: []
+  soundClipList:
+  - {fileID: 8300000, guid: 2b911c96f9eb16f428c8e7c82d8b2d15, type: 3}
