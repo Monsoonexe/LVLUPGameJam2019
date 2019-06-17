@@ -212,7 +212,7 @@ public class SharkController : MonoBehaviour
     {
         var targetWaypoint = patrolWaypoints[patrolWaypointsIndex].position;
 
-        //Debug.Log("Moving....." + patrolWaypointsIndex);
+        Debug.Log("Moving....." + patrolWaypointsIndex);
         if (Vector3.Distance(targetWaypoint, myTransform.position) > closeEnoughDistance)
         {
             //handle rotatition
@@ -230,7 +230,7 @@ public class SharkController : MonoBehaviour
     
     private void OnSharkBackInWater()
     {
-        //Debug.Log("Back in water....");
+        Debug.Log("Back in water....");
 
         myRigidbody.useGravity = false;
         myRigidbody.velocity = Vector3.zero;
