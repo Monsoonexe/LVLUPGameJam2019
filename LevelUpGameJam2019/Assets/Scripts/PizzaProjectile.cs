@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PizzaProjectile : MonoBehaviour
 {
-    private const int lifeTime = 8;
+    private const int lifeTime = 8;//seconds
 
     [SerializeField]
     private float floatiness = 1.0f;
@@ -14,10 +14,8 @@ public class PizzaProjectile : MonoBehaviour
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip flyingSound;
-
-    [SerializeField]
-    private AudioClip splatSound;
-
+    
+    //order
     private OrderStruct ingredientsOnThisPizza;
 
     //components
@@ -47,12 +45,7 @@ public class PizzaProjectile : MonoBehaviour
 
     private void OnDisable()
     {
-        //reset physics
-        myRigidbody.velocity = Vector3.zero;
-        myRigidbody.angularVelocity = Vector3.zero;
-
-        //reset rotation
-        myTransform.rotation = Quaternion.identity;
+        ResetProjectile();
     }
 
     // Update is called once per frame
@@ -63,17 +56,35 @@ public class PizzaProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);
+        myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);//give frisbee-like physics
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //expire projectile if hits water
         if (other.CompareTag("Water"))
         {
             this.gameObject.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// Object is part of a pool, so reset instead of Destroying.
+    /// </summary>
+    private void ResetProjectile()
+    {
+        //reset physics
+        myRigidbody.velocity = Vector3.zero;
+        myRigidbody.angularVelocity = Vector3.zero;
+
+        //reset rotation
+        myTransform.rotation = Quaternion.identity;
+    }
+
+    /// <summary>
+    /// Expire this object after established lifetime.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ExpireAfterTime()
     {
         yield return new WaitForSeconds(lifeTime);
@@ -81,6 +92,9 @@ public class PizzaProjectile : MonoBehaviour
         this.gameObject.SetActive(false);//expire
     }
 
+    /// <summary>
+    /// Get all needed member components.
+    /// </summary>
     private void GatherReferences()
     {
         myTransform = this.transform;
@@ -103,11 +117,19 @@ public class PizzaProjectile : MonoBehaviour
         ingredientsOnThisPizza = order;
     }
 
+    /// <summary>
+    /// Put these ingredients on the order.
+    /// </summary>
+    /// <param name="order"></param>
     public void GiveOrderIngredients(IngredientsENUM[] order)
     {
         GiveOrderIngredients(new OrderStruct(order));
     }
 
+    /// <summary>
+    /// Put these Ingredients on the order.
+    /// </summary>
+    /// <param name="order"></param>
     public void GiveOrderIngredients(System.Collections.Generic.List<IngredientsENUM> order)
     {
         GiveOrderIngredients(new OrderStruct(order.ToArray()));
