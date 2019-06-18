@@ -406,7 +406,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 1
   m_Center: {x: 0, y: 1.25, z: 1.25}
 --- !u!65 &8917171206006001866
 BoxCollider:
@@ -419,8 +419,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.75, z: 0.6}
-  m_Center: {x: 0, y: 2.35, z: 0.55}
+  m_Size: {x: 1.1156981, y: 1.142129, z: 0.48537767}
+  m_Center: {x: -0.04997337, y: 2.5460644, z: 0.4573112}
 --- !u!82 &5748861884818160847
 AudioSource:
   m_ObjectHideFlags: 0
@@ -684,7 +684,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 69a1ef253d9a5f64199aa68df862ae31, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
