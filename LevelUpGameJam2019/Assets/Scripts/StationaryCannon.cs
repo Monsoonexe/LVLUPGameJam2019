@@ -17,7 +17,7 @@ public class StationaryCannon : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
     
-    [Tooltip("If more than one barrel, iterates through each point.")]
+    [Tooltip("If more than one, iterates through each point.")]
     [SerializeField]
     private Transform[] projectileSpawnPoints;
 
@@ -132,7 +132,7 @@ public class StationaryCannon : MonoBehaviour
         }
     }
 
-    private Transform GetProjectileSpawnPoint()
+    private Vector3 GetProjectileSpawnPoint()
     {
         //loop index
         if (++projectileSpawnPointIndex >= projectileSpawnPoints.Length)
@@ -140,7 +140,7 @@ public class StationaryCannon : MonoBehaviour
             projectileSpawnPointIndex = 0;
         }
 
-        return projectileSpawnPoints[projectileSpawnPointIndex];
+        return projectileSpawnPoints[projectileSpawnPointIndex].position;
     }
 
     private void FireProjectile()
@@ -155,10 +155,7 @@ public class StationaryCannon : MonoBehaviour
             var newProjectile = GetNewProjectile() as GameObject;
 
             //pick a point to spawn at
-            var projectileSpawnPoint = GetProjectileSpawnPoint();
-
-            newProjectile.transform.position = projectileSpawnPoint.position;
-            newProjectile.transform.rotation = projectileSpawnPoint.rotation;
+            newProjectile.transform.position = GetProjectileSpawnPoint();
 
             //handle physics of projectile
             var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
