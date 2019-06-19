@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredients: 
   randomWeight: 1
-  score: 100
+  score: 10
