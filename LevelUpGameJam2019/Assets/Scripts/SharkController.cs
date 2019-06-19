@@ -192,7 +192,7 @@ public class SharkController : MonoBehaviour
             }
 
             //check for anchvoies on pizza
-            foreach (var ingredient in pizzaProjectile.GetIngredientsOnPizza().ingredients)
+            foreach (var ingredient in pizzaProjectile.GetIngredientsOnPizza())
             {
                 if(ingredient == IngredientsENUM.Anchovies)
                 {

@@ -25,7 +25,7 @@ public class PizzaProjectile : MonoBehaviour
     private AudioClip flyingSound;
     
     //order
-    private OrderStruct ingredientsOnThisPizza;
+    private IngredientsENUM[] ingredientsOnThisPizza;
 
     //components
     private Rigidbody myRigidbody;
@@ -112,7 +112,7 @@ public class PizzaProjectile : MonoBehaviour
 
     }
 
-    public OrderStruct GetIngredientsOnPizza()
+    public IngredientsENUM[] GetIngredientsOnPizza()
     {
         return ingredientsOnThisPizza;
     }
@@ -121,18 +121,9 @@ public class PizzaProjectile : MonoBehaviour
     /// Base.
     /// </summary>
     /// <param name="order"></param>
-    public void GiveOrderIngredients(OrderStruct order)
-    {
-        ingredientsOnThisPizza = order;
-    }
-
-    /// <summary>
-    /// Put these ingredients on the order.
-    /// </summary>
-    /// <param name="order"></param>
     public void GiveOrderIngredients(IngredientsENUM[] order)
     {
-        GiveOrderIngredients(new OrderStruct(order));
+        ingredientsOnThisPizza = order;
     }
 
     /// <summary>
@@ -141,7 +132,8 @@ public class PizzaProjectile : MonoBehaviour
     /// <param name="order"></param>
     public void GiveOrderIngredients(System.Collections.Generic.List<IngredientsENUM> order)
     {
-        GiveOrderIngredients(new OrderStruct(order.ToArray()));
+        //call base function
+        GiveOrderIngredients(order.ToArray());
     }
 
 }

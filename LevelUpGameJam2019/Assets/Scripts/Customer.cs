@@ -75,6 +75,7 @@ public class Customer : MonoBehaviour
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
+
     }
 
 
@@ -92,6 +93,7 @@ public class Customer : MonoBehaviour
 
             collision.GetContacts(contactPointList);//fill array
 
+            //did it hit pizza box collider?
             foreach(var contact in contactPointList)
             {
                 if (contact.thisCollider == pizzaBoxCollider)
@@ -105,7 +107,7 @@ public class Customer : MonoBehaviour
             {
                 var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
                 
-                var pizzaMatches = ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());
+                var pizzaMatches = Order.ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());//check that order and pizza ingredients match
 
                 pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
                 customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
@@ -127,8 +129,7 @@ public class Customer : MonoBehaviour
             {
                 PlayRandomSound(hitWithPizzaSounds);
             }
-            
-                
+             
         }
         
     }
@@ -140,44 +141,6 @@ public class Customer : MonoBehaviour
             audioSource.clip = soundClipList.GetRandomSound();
             audioSource.Play();
         }
-    }
-
-    private static bool ComparePizzaToOrder(Order customerOrder, OrderStruct pizzaIngredients)
-    {
-        var ingredientsAllMatch = true;
-        
-        //quick exit
-        if(customerOrder.ingredients.Length != pizzaIngredients.ingredients.Length)
-        {
-            ingredientsAllMatch = false;
-        }
-
-        else
-        {
-            //verify each ingredient customer wanted
-            foreach(var custIngredient in customerOrder.ingredients)
-            {
-                var ingredientOnPizza = false;
-
-                //is indeed on pizza
-                foreach (var pizzaIngredi in pizzaIngredients.ingredients)
-                {
-
-                    if(custIngredient == pizzaIngredi)
-                    {
-                        ingredientOnPizza = true;
-                    }
-                }
-
-                if (!ingredientOnPizza)
-                {
-                    ingredientsAllMatch = false;
-                    break;
-                }
-            }
-        }
-
-        return ingredientsAllMatch;
     }
 
     private void CustomerSatisfied()
