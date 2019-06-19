@@ -107,7 +107,7 @@ public class Customer : MonoBehaviour
             {
                 var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
                 
-                var pizzaMatches = Order.ComparePizzaToOrder(customerOrder, pizzaProjectile.GetIngredientsOnPizza());//check that order and pizza ingredients match
+                var pizzaMatches = Order.CompareOrderToPizza(customerOrder, pizzaProjectile.GetIngredientsOnPizza());//check that order and pizza ingredients match
 
                 pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
                 customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator

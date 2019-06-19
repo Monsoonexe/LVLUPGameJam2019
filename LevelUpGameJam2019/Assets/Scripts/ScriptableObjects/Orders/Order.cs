@@ -10,53 +10,124 @@ public class Order : ScriptableObject
     public int score = 100;
 
     /// <summary>
-    /// Determines if the ingredients on the pizza match the Customer's order.  Currently does not support double ingredients.
+    /// Determines if customer order and pizza are exactly the same.
+    /// </summary>
+    /// <param name="customerOrder"></param>
+    /// <param name="ingredientsOnPizza"></param>
+    /// <returns>Returns true if all ingredients in order are included on pizza, in proper quantities, and pizza contains no ingredient not on order.</returns>
+    public static bool CompareOrderToPizza(Order customerOrder, IngredientsENUM[] ingredientsOnPizza)
+    {
+        return CompareOrderToPizza(customerOrder.ingredients, ingredientsOnPizza);
+    }
+
+    /// <summary>
+    /// Determines if customer order and pizza are exactly the same.
     /// </summary>
     /// <param name="customerOrder"></param>
     /// <param name="ingredientsOnPizza"></param>
     /// <returns>Returns true if all ingredients in order are included on pizza, and pizza contains no ingredient not on order.</returns>
-    public static bool ComparePizzaToOrder(Order customerOrder, IngredientsENUM[] ingredientsOnPizza)
+    public static bool CompareOrderToPizza(IngredientsENUM[] ingredientsOnOrder, IngredientsENUM[] ingredientsOnPizza)
     {
-        var allCustomersIngredientsOnPizza = true;
-        var noExtraIngredientsOnPizza = true;
-
-        //quick exit
-        if (customerOrder.ingredients.Length != ingredientsOnPizza.Length)
+        //base
+        //quick exit (agnostic)
+        if (ingredientsOnOrder.Length != ingredientsOnPizza.Length)
         {
-            //one of the below is false
-            allCustomersIngredientsOnPizza = false;
-            noExtraIngredientsOnPizza = false;
+            return false;
+        }
+
+        else if (ingredientsOnOrder.Length == 0 && ingredientsOnPizza.Length == 0)//are both orders plain?
+        {
+            //plain pizza matches plain order
+            return true;
         }
 
         else
         {
-            //verify that every ingredient customer wanted is present on pizza
-            foreach (var custIngredient in customerOrder.ingredients)
+            //all ingredients on order are present on pizza, quantities match, and no extra ingredients are pizza that are not in order
+
+            //sort lists
+            ingredientsOnOrder = SortIngredientsListAscending(ingredientsOnOrder);
+            ingredientsOnPizza = SortIngredientsListAscending(ingredientsOnPizza);
+                       
+            //check if lists are exactly the same. (fact: they are the same length)
+            for(var i = 0; i < ingredientsOnOrder.Length; ++i)
             {
-                var ingredientOnPizza = false;
-
-                //is indeed on pizza
-                foreach (var pizzaIngredi in ingredientsOnPizza)
+                if(ingredientsOnOrder[i] != ingredientsOnPizza[i])
                 {
-
-                    if (custIngredient == pizzaIngredi)
-                    {
-                        ingredientOnPizza = true;
-                    }
-                }
-                //verify no extra ingredients
-
-
-                if (!ingredientOnPizza)
-                {
-                    allCustomersIngredientsOnPizza = false;
-                    break;
+                    return false;
                 }
             }
 
-
         }
 
-        return allCustomersIngredientsOnPizza;
+        return true;
+
     }
+
+    /// <summary>
+    /// Sort the list in ascending order based on numeric value of enum.
+    /// </summary>
+    /// <param name="ingredientsList"></param>
+    public static IngredientsENUM[] SortIngredientsListAscending(IngredientsENUM[] ingredientsList)
+    {
+        var length = ingredientsList.Length;//cache length
+
+        if(length < 2)//don't sort small lists
+        {
+            return ingredientsList;
+        }
+
+        //selection sort
+        for (var i = 0; i < length - 1; ++i)
+        {
+            var lowIndex = i;
+
+            for(var j = length - 1; j > i; --j)
+            {
+                if(ingredientsList[j] < ingredientsList[i])
+                {
+                    lowIndex = j;
+                }
+            }
+
+            //swap elements
+            var temp = ingredientsList[lowIndex];//cache current occupant
+
+            ingredientsList[lowIndex] = ingredientsList[i];//put correct element in place
+            ingredientsList[i] = temp;//put temp back in for later
+
+        }//end for
+
+        return ingredientsList;
+
+    }//end func
+
+    public override string ToString()
+    {
+        //might override in the future
+        var stringBuilder = new System.Text.StringBuilder();
+
+        foreach (var ingredient in ingredients)
+        {
+            stringBuilder.Append(ingredient.ToString());
+            stringBuilder.Append(" | ");
+        }
+
+        stringBuilder.Append(randomWeight.ToString());
+
+        stringBuilder.Append(" | ");//divider
+
+        stringBuilder.Append(score.ToString());
+
+        return stringBuilder.ToString();
+    }
+
+    /// <summary>
+    /// Sort this instance's list of ingredients
+    /// </summary>
+    public void SortIngredientsList()
+    {
+        ingredients = SortIngredientsListAscending(ingredients);
+    }
+
 }
