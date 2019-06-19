@@ -10,7 +10,16 @@ public class PizzaProjectile : MonoBehaviour
 
     [SerializeField]
     private float floatiness = 1.0f;
-    
+
+    [Header("---Visuals---")]
+    [Tooltip("The visuals of the projectile.")]
+    [SerializeField]
+    private GameObject pizzaPieModel;//Toggle them off so whole object doesn't need to be affected.  sound and effects will exist after pie disappears
+
+    [Tooltip("The visuals of the trail effect.")]
+    [SerializeField]
+    private GameObject trailEffect;//Toggle them off so whole object doesn't need to be affected.  sound and effects will exist after pie disappears
+
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip flyingSound;
