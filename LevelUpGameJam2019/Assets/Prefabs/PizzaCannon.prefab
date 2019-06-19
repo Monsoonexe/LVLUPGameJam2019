@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f103aef71948c40409af95bab0e8a505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4606475560762513387, guid: 72576c003e0d76b42bcde44fb0a42679,
+  projectilePrefab: {fileID: 2959233902562555564, guid: 32a00856c16e5ce4cb4ca0df4cad0b05,
     type: 3}
   projectileSpawnPoints:
   - {fileID: 2375593037653733193}
