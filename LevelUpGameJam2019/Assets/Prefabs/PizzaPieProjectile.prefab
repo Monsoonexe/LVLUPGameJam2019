@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatiness: 0.1
+  pizzaPieModel: {fileID: 3149892591808619}
+  trailEffect: {fileID: 8758050266015915472}
   flyingSound: {fileID: 8300000, guid: 249981457aecf6d40b74b9cf05f303c8, type: 3}
 --- !u!136 &821377774927473882
 CapsuleCollider:
