@@ -103,7 +103,7 @@ PrefabInstance:
     - target: {fileID: 7154778368929503622, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
       propertyPath: m_Name
-      value: Shark Attack Controller
+      value: Shark Controller
       objectReference: {fileID: 0}
     - target: {fileID: 7154778368929503616, guid: 983a1a7344d720b4193ad1d049b200c0,
         type: 3}
