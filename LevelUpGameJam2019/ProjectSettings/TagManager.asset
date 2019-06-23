@@ -8,6 +8,7 @@ TagManager:
   - CustomerManager
   - ScoreManager
   - Water
+  - Customer
   layers:
   - Default
   - TransparentFX
