@@ -230,7 +230,7 @@ MonoBehaviour:
     type: 2}
   customerCollider: {fileID: 8917171206006001866}
   pizzaBoxCollider: {fileID: 4206118922461174337}
-  pizzaBoxAnimator: {fileID: 0}
+  pizzaBoxAnimator: {fileID: 5739146250167042507}
   customerAnimator: {fileID: 4396875095428384439}
 --- !u!95 &4396875095428384439
 Animator:
@@ -3319,6 +3319,12 @@ PrefabInstance:
 --- !u!4 &2500792172275682700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6541377184427493313, guid: 6dae3131e40cabb4893e17da651df406,
+    type: 3}
+  m_PrefabInstance: {fileID: 8679345636966173261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5739146250167042507 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4023598773900692358, guid: 6dae3131e40cabb4893e17da651df406,
     type: 3}
   m_PrefabInstance: {fileID: 8679345636966173261}
   m_PrefabAsset: {fileID: 0}
