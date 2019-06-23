@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public class Customer : MonoBehaviour
 {
-
+    //static object references
     private static CustomerManager customerManager;
     private static ScoreManager scoreManager;
 
@@ -42,6 +39,9 @@ public class Customer : MonoBehaviour
     //member component references
     private AudioSource audioSource;
 
+    //other stuff
+    private bool orderHasBeenDelivered = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -49,7 +49,7 @@ public class Customer : MonoBehaviour
 
         if (!customerOrder)
         {
-            customerOrder = customerManager.GetNewOrder();
+            customerOrder = customerManager.GetNewRandomOrder();
         }
 
     }
@@ -105,33 +105,37 @@ public class Customer : MonoBehaviour
 
             if (hitPizzaBox)
             {
-                var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
-                
-                var pizzaMatches = Order.CompareOrderToPizza(customerOrder, pizzaProjectile.GetIngredientsOnPizza());//check that order and pizza ingredients match
-
-                pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
-                customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
-
-                if (pizzaMatches)
+                if (!orderHasBeenDelivered)
                 {
-                    //do happy things
-                    CustomerSatisfied();
+                    var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
+
+                    var pizzaMatches = Order.CompareOrderToPizza(customerOrder, pizzaProjectile.GetIngredientsOnPizza());//check that order and pizza ingredients match
+
+                    pizzaBoxAnimator.SetBool("bDelivered", pizzaMatches); //tell box animator results of pizza
+                    customerAnimator.SetBool("bDelivered", pizzaMatches); //tell customer animator
+
+                    if (pizzaMatches)
+                    {
+                        //do happy things
+                        CustomerSatisfied();
+                    }
+                    else
+                    {
+                        //do bad things
+                        RejectPizza();
+                    }
                 }
-
-                else
+                else//order has already been delivered and accepted
                 {
-                    //do bad things
                     RejectPizza();
                 }
-
             }
-            else//hit customer
+            else//hit customer right in the NUTS!
             {
                 PlayRandomSound(hitWithPizzaSounds);
+                scoreManager.OnCustomerHit();
             }
-             
-        }
-        
+        }//end if
     }
 
     private void PlayRandomSound(SoundList soundClipList)
@@ -151,6 +155,7 @@ public class Customer : MonoBehaviour
         scoreManager.OnCustomerSatisfied();
         scoreManager.AddScore(customerOrder.score);
 
+        orderHasBeenDelivered = true;
         //Debug.Log("Thanks for the Pizza!!!!");
 
     }
