@@ -48,6 +48,14 @@ public class ScoreManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Update UI visuals with current values.
+    /// </summary>
+    private void UpdateScoreText()
+    {
+        scoreTMPro.text = playerScore.ToString();
+    }
+
     public void OnShotFired()
     {
         ++shotsFired;
@@ -61,7 +69,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         playerScore += amount;
-        scoreTMPro.text = playerScore.ToString();
+        UpdateScoreText();
     }
 
     public void OnIncorrectOrder()
@@ -74,4 +82,22 @@ public class ScoreManager : MonoBehaviour
         ++sharksFed;
     }
 
+    public void OnCustomerHit()
+    {
+        ++customersHit;
+    }
+
+    /// <summary>
+    /// Set all scores to 0.
+    /// </summary>
+    public void ResetScores()
+    {
+        playerScore = 0;
+        shotsFired = 0;
+        customersSatisfied = 0;
+        customersHit = 0;
+        customersMissed = 0;
+        wrongOrders = 0;
+        sharksFed = 0;
+    }
 }
