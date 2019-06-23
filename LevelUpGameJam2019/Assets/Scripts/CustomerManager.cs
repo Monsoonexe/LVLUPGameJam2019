@@ -24,6 +24,11 @@ public class CustomerManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Add up all the weights in this list.
+    /// </summary>
+    /// <param name="orders"></param>
+    /// <returns></returns>
     private static int SumOrderWeights(Order[] orders)
     {
         var summedWeight = 0;
@@ -51,6 +56,38 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public int GetNumCustomersInScene()
+    {
+        return customersInScene.Length;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public int CountSatisfiedCustomers()
+    {
+        var satisfiedCustomers = 0;
+
+        for(var i = 0; i < customersInScene.Length; ++i)
+        {
+            if (customersInScene[i].WasCustomersOrderDelivered())
+            {
+                ++satisfiedCustomers;
+            }
+        }
+
+        return satisfiedCustomers;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public Order GetNewRandomOrder()
     {
         var randomNumber = Random.Range(0, SumOrderWeights(possibleOrders));

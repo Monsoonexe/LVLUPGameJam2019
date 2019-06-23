@@ -167,4 +167,13 @@ public class Customer : MonoBehaviour
 
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
+
+    /// <summary>
+    /// Did this Customer receive an Order that matched the desired Order?
+    /// </summary>
+    /// <returns>True if proper Order was received.</returns>
+    public bool WasCustomersOrderDelivered()
+    {
+        return orderHasBeenDelivered;
+    }
 }
