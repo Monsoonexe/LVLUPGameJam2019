@@ -7,7 +7,9 @@ public class CustomerManager : MonoBehaviour
     [SerializeField]
     private Order[] possibleOrders;
 
-    [SerializeField]
+    /// <summary>
+    /// List of all Customers that exist at the time of gathering.
+    /// </summary>
     private Customer[] customersInScene;
 
     // Start is called before the first frame update
@@ -34,7 +36,22 @@ public class CustomerManager : MonoBehaviour
         return summedWeight;
     }
 
-    public Order GetNewOrder()
+    /// <summary>
+    /// Get a handle on every Customer in scene an keep in array.
+    /// </summary>
+    private void GatherCustomersInScene()
+    {
+        var customerGameObjects = GameObject.FindGameObjectsWithTag("Customers");//gather GO
+
+        customersInScene = new Customer[customerGameObjects.Length];//create array
+
+        for (var i = 0; i < customersInScene.Length; ++i)//fill array
+        {
+            customersInScene[i] = customerGameObjects[i].GetComponent<Customer>() as Customer;
+        }
+    }
+
+    public Order GetNewRandomOrder()
     {
         var randomNumber = Random.Range(0, SumOrderWeights(possibleOrders));
         
@@ -53,9 +70,6 @@ public class CustomerManager : MonoBehaviour
             }
 
         }
-
-
         return selectedOrder;
-        
     }
 }
