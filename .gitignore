@@ -4,7 +4,6 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-Assets/[Aa]rt/
 
 # Visual Studio cache directory
 .vs/
@@ -38,8 +37,13 @@ sysinfo.txt
 *.unitypackage
 
 #Art Assets
-[Aa]rt/
+LevelUpGameJam2019/Assets/Art/
 LevelUpGameJam2019/Assets/Art.meta
 
+!Assets/Art/*.meta
+!Assets/Art/Icons
+!Assets/Art/Menus
+
+#Importables
 TextMesh Pro/
 TextMesh Pro.meta
