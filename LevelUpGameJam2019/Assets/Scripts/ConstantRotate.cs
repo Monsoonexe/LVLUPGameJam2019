@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContantRotate : MonoBehaviour
+public class ConstantRotate : MonoBehaviour
 {
 
     public float RotateSpeed;
