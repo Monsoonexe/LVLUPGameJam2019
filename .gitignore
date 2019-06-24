@@ -37,10 +37,13 @@ sysinfo.txt
 *.unitypackage
 
 #Art Assets
-Assets/Art/*
+LevelUpGameJam2019/Assets/Art/
+LevelUpGameJam2019/Assets/Art.meta
+
 !Assets/Art/*.meta
 !Assets/Art/Icons
 !Assets/Art/Menus
 
+#Importables
 TextMesh Pro/
 TextMesh Pro.meta
