@@ -36,13 +36,12 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-#Art Assets
-LevelUpGameJam2019/Assets/Art/
-LevelUpGameJam2019/Assets/Art.meta
+# Art Assets
+LevelUpGameJam2019/Assets/Art/Vendor/*
 
-!Assets/Art/*.meta
-!Assets/Art/Icons
-!Assets/Art/Menus
+# Exclusions
+!*.meta
+!*.md
 
 #Importables
 TextMesh Pro/
