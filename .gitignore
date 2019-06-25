@@ -41,8 +41,9 @@ LevelUpGameJam2019/Assets/Art/
 LevelUpGameJam2019/Assets/Art.meta
 
 !Assets/Art/*.meta
-!Assets/Art/Icons
-!Assets/Art/Menus
+!Assets/Art/UI/Icons
+!Assets/Art/UI/Menus
+!Assets/Art/UI/Orders
 
 #Importables
 TextMesh Pro/
