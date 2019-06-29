@@ -1601,6 +1601,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.75757
       objectReference: {fileID: 0}
+    - target: {fileID: 2309994, guid: 4982275e186455342a472e320445fdda, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62802929091d95b48a1ebaae01f6dd82, type: 2}
+    - target: {fileID: 2314998, guid: 4982275e186455342a472e320445fdda, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62802929091d95b48a1ebaae01f6dd82, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4982275e186455342a472e320445fdda, type: 3}
 --- !u!4 &90803532 stripped
@@ -2100,6 +2108,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 91880275}
     m_Modifications:
+    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
+        type: 3}
+      propertyPath: m_Name
+      value: Building_F
+      objectReference: {fileID: 0}
     - target: {fileID: 8731491109846866115, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2154,11 +2167,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
-        type: 3}
-      propertyPath: m_Name
-      value: Building_F
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe5e48372ea82e4d90ea14cc7ca173b, type: 3}
@@ -2549,10 +2557,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_05
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 21
@@ -2560,6 +2564,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_05
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2712,6 +2720,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 91880275}
     m_Modifications:
+    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
+        type: 3}
+      propertyPath: m_Name
+      value: Building_F (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 8731491109846866115, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2766,11 +2779,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
-        type: 3}
-      propertyPath: m_Name
-      value: Building_F (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe5e48372ea82e4d90ea14cc7ca173b, type: 3}
@@ -2879,10 +2887,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_06
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 30
@@ -2890,6 +2894,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_06
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4509,6 +4517,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.75757
       objectReference: {fileID: 0}
+    - target: {fileID: 2327054, guid: 4911f67b57e336d49982101e934a4e7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62802929091d95b48a1ebaae01f6dd82, type: 2}
+    - target: {fileID: 2343964, guid: 4911f67b57e336d49982101e934a4e7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62802929091d95b48a1ebaae01f6dd82, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4911f67b57e336d49982101e934a4e7f, type: 3}
 --- !u!4 &323229403 stripped
@@ -7012,10 +7028,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900622660}
     m_Modifications:
-    - target: {fileID: 148902, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Base_09 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 413522, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
       propertyPath: m_RootOrder
       value: 64
@@ -7031,6 +7043,10 @@ PrefabInstance:
     - target: {fileID: 413522, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -18.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 148902, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Base_09 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
@@ -7207,10 +7223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_07
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 48.5
@@ -7223,6 +7235,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_07
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &591094933
@@ -7425,10 +7441,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_03
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.499999
@@ -7441,6 +7453,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1 &620026256
@@ -7533,10 +7549,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_04
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 21.5
@@ -7549,6 +7561,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1 &638948604
@@ -8759,6 +8775,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 91880275}
     m_Modifications:
+    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
+        type: 3}
+      propertyPath: m_Name
+      value: Building_F (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 8731491109846866115, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8813,11 +8834,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622744227636784208, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
-        type: 3}
-      propertyPath: m_Name
-      value: Building_F (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4163615136865403206, guid: cfe5e48372ea82e4d90ea14cc7ca173b,
         type: 3}
@@ -9129,10 +9145,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_05
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 21
@@ -9140,6 +9152,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_05
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10253,10 +10269,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_06
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 39.5
@@ -10269,6 +10281,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1 &854923238
@@ -12733,10 +12749,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900622660}
     m_Modifications:
-    - target: {fileID: 148902, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Base_09 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 413522, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
       propertyPath: m_RootOrder
       value: 66
@@ -12752,6 +12764,10 @@ PrefabInstance:
     - target: {fileID: 413522, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -32.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 148902, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Base_09 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
@@ -13200,10 +13216,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_07
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 48.5
@@ -13216,6 +13228,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_07
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &1052089973
@@ -13294,10 +13310,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_07
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 39
@@ -13305,6 +13317,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_07
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -15602,10 +15618,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_04
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12
@@ -15613,6 +15625,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_04
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -18591,10 +18607,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1900622660}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_02 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_RootOrder
       value: 65
@@ -18610,6 +18622,10 @@ PrefabInstance:
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: -18.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_02 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
@@ -19581,10 +19597,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_03
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.499999
@@ -19597,6 +19609,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &1561511709
@@ -19635,10 +19651,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_08
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 48
@@ -19646,6 +19658,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_08
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -20903,10 +20919,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1510730617}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_02 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_RootOrder
       value: 65
@@ -20922,6 +20934,10 @@ PrefabInstance:
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: -18.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_02 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
@@ -21303,10 +21319,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_07
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 39
@@ -21314,6 +21326,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_07
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21531,10 +21547,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_09
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 57
@@ -21542,6 +21554,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_09
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21757,10 +21773,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_04
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 21.5
@@ -21773,6 +21785,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &1734372720
@@ -21782,10 +21798,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_08
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 48
@@ -21793,6 +21805,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_08
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -23726,10 +23742,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_04
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12
@@ -23737,6 +23749,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_04
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -23928,10 +23944,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_06
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 39.5
@@ -23944,6 +23956,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &1940834432
@@ -24954,10 +24970,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_09
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 57
@@ -24965,6 +24977,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_09
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26755,10 +26771,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1012894635}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_05
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 30.499998
@@ -26771,6 +26783,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1001 &2103489357
@@ -26780,10 +26796,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_Roof_06
-      objectReference: {fileID: 0}
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 30
@@ -26791,6 +26803,10 @@ PrefabInstance:
     - target: {fileID: 479420, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 111276, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_Roof_06
       objectReference: {fileID: 0}
     - target: {fileID: 2359360, guid: 8e6be04d8370d1c4fa754d22592984f1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26882,10 +26898,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572004188}
     m_Modifications:
-    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
-      propertyPath: m_Name
-      value: SM_Bld_OfficeSquare_05
-      objectReference: {fileID: 0}
     - target: {fileID: 481636, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
       propertyPath: m_LocalPosition.y
       value: 30.499998
@@ -26898,6 +26910,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
+    - target: {fileID: 121088, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_OfficeSquare_05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3bfa14ca03549852bc34961b1515, type: 3}
 --- !u!1 &2131771378
