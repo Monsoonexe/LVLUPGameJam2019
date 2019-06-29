@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredients: 00000000
   randomWeight: 1
   score: 50
+  itemIcons:
+  - {fileID: 6912278044930861747, guid: dfd715e165e8301469b77d184f2dba4a, type: 3}
