@@ -176,4 +176,9 @@ public class Customer : MonoBehaviour
     {
         return orderHasBeenDelivered;
     }
+
+    public IngredientsENUM[] GetOrderIngredients()
+    {
+        return customerOrder.ingredients;
+    }
 }
