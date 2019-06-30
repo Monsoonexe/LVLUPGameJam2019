@@ -91,7 +91,7 @@ public class CustomerManager : MonoBehaviour
     public Order GetNewRandomOrder()
     {
         var randomNumber = Random.Range(0, SumOrderWeights(possibleOrders));
-        
+
         Order selectedOrder = null;
 
         foreach(var order in possibleOrders)
@@ -99,6 +99,7 @@ public class CustomerManager : MonoBehaviour
             if(randomNumber < order.randomWeight)
             {
                 selectedOrder = order;
+                break;//DERP
             }
 
             else
@@ -107,6 +108,7 @@ public class CustomerManager : MonoBehaviour
             }
 
         }
+        
         return selectedOrder;
     }
 }
