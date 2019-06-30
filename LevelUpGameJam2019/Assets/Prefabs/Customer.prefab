@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a8cb2700e8118439dae4d854547756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerOrder: {fileID: 11400000, guid: 2b25d9dcb736e3846a633ad5044f31e0, type: 2}
+  customerOrder: {fileID: 0}
   hitWithPizzaSounds: {fileID: 11400000, guid: 478ca8b92ed190043955c60e06c8eac0, type: 2}
   badOrderSounds: {fileID: 11400000, guid: 58d152a38a6a1b842bc9d8c0b7f053f7, type: 2}
   customerSatisfiedSounds: {fileID: 11400000, guid: a49b5f221e6cbb64fa98c5ff5f503981,
@@ -3406,11 +3406,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4396875095428384440}
     m_Modifications:
-    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
-        type: 3}
-      propertyPath: m_Name
-      value: PizzaBox
-      objectReference: {fileID: 0}
     - target: {fileID: 6541377184427493313, guid: 6dae3131e40cabb4893e17da651df406,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3480,6 +3475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 36.000034
+      objectReference: {fileID: 0}
+    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
+        type: 3}
+      propertyPath: m_Name
+      value: PizzaBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dae3131e40cabb4893e17da651df406, type: 3}
