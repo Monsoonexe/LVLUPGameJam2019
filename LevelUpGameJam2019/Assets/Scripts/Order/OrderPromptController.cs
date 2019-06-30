@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class OrderPromptController : MonoBehaviour
 {
-    //static object references
+    
     [SerializeField]
     private Customer customer;
 
-    [SerializeField]
-    private bool[] isFull;
+    /*[SerializeField]
+    private bool[] isFull;*/
 
     [SerializeField]
     private GameObject[] slots;
@@ -31,14 +31,12 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject anchovyIcon;
 
-    /*[SerializeField]
-    private List<IngredientsENUM> selectedIngredientIcons = new List<IngredientsENUM>();*/
-
     private IngredientsENUM[] ingredientsList;
      
 
     void Awake()
     {
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -55,16 +53,15 @@ public class OrderPromptController : MonoBehaviour
 
     public void ReadRecipe()
     {
-
         ingredientIcons = new GameObject[ingredientsList.Length];
         Debug.Log(ingredientIcons.Length);
         foreach (var ingredient in ingredientsList)
         {
             Debug.Log(ingredient.ToString());
         }
-        for (var i =0; i<ingredientsList.Length; i++)
+        for (var i = 0; i < ingredientsList.Length; i++)
         {
-            switch (ingredientsList[i])
+            switch (ingredientsList[i])                
             {
                 case IngredientsENUM.Sauce:
                     ingredientIcons[i] = sauceIcon;
@@ -73,6 +70,8 @@ public class OrderPromptController : MonoBehaviour
                 case IngredientsENUM.Cheese:
                     ingredientIcons[i] = cheeseIcon;
                     Debug.Log(ingredientIcons[i].name);
+                    
+                    Debug.Log("after " + ingredientIcons[i]);
                     break;
                 case IngredientsENUM.Pepperoni:
                     ingredientIcons[i] = peppIcon;
@@ -84,11 +83,9 @@ public class OrderPromptController : MonoBehaviour
                     ingredientIcons[i] = anchovyIcon;
                     break;
             }
-
-            CheckSlot();
-
         }
 
+        CheckSlot();
     }
 
     public void CheckSlot()
@@ -96,13 +93,6 @@ public class OrderPromptController : MonoBehaviour
         for (int i = 0; i < ingredientsList.Length; i++)
         {
             Instantiate(ingredientIcons[i], slots[i].transform, false);
-            /*if (isFull[i] == false)
-            {
-                // Ingrediant can be added to the first available slot
-                isFull[i] = true;
-                Instantiate(ingredientIcons[i], slots[i].transform, false);
-                break;
-            }*/
         }
     }
 }
