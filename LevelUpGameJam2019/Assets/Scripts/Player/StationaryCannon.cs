@@ -16,7 +16,10 @@ public class StationaryCannon : MonoBehaviour
     [Header("Projectile Stuff")]
     [SerializeField]
     private GameObject projectilePrefab;
-    
+
+    /// <summary>
+    /// "If more than one barrel, iterates through each point."
+    /// </summary>
     [Tooltip("If more than one barrel, iterates through each point.")]
     [SerializeField]
     private Transform[] projectileSpawnPoints;
@@ -37,6 +40,9 @@ public class StationaryCannon : MonoBehaviour
     [SerializeField]
     private Transform objectToTrack;
 
+    /// <summary>
+    /// pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
+    /// </summary>
     [SerializeField]
     private Transform turretTransform;//pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
 
@@ -85,14 +91,14 @@ public class StationaryCannon : MonoBehaviour
         
         HandleTargetTracking();
 
-        if(Input.GetButtonDown("Fire1"))
-        {
-            HandleShooting();
-            
-        }
+        HandleShooting();
+
         
     }
 
+    /// <summary>
+    /// Gathers references that this behavior depends on.
+    /// </summary>
     private void GatherReferences()
     {
 
@@ -102,6 +108,10 @@ public class StationaryCannon : MonoBehaviour
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
     }
 
+    /// <summary>
+    /// Get an expired projectile from the pool or create a new one.
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetNewProjectile()
     {
         //first try to use an expired projectile
@@ -114,7 +124,7 @@ public class StationaryCannon : MonoBehaviour
                 return projectile;
             }
         }
-        //no expired projectile, create a new one if there is space
+        //no expired projectile; create a new one if there is space
         if (projectilePool.Count < maxProjectilesInScene)
         {
             var newProjectile = Instantiate(projectilePrefab);
@@ -126,11 +136,15 @@ public class StationaryCannon : MonoBehaviour
 
         else//create a new object not controlled by pool
         {
-            Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed", this.gameObject);
+            Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed.  Change fire rate or pool quantity.", this.gameObject);
             return Instantiate(projectilePrefab); 
         }
     }
 
+    /// <summary>
+    /// Get the point at which the projectile should spawn.
+    /// </summary>
+    /// <returns></returns>
     private Transform GetProjectileSpawnPoint()
     {
         //loop index
@@ -142,6 +156,9 @@ public class StationaryCannon : MonoBehaviour
         return projectileSpawnPoints[projectileSpawnPointIndex];
     }
 
+    /// <summary>
+    /// Do all the things.
+    /// </summary>
     private void FireProjectile()
     {
         //pew pew
@@ -189,21 +206,25 @@ public class StationaryCannon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handle input and cooldown of Shooting.
+    /// </summary>
     private void HandleShooting()
     {
-
-        //Debug.Log("HIT PLAYER! ZAP ZAP ZAP!!!!");
-        //check shoot delay
-        if (Time.time > nextShootTime)
+        if (Input.GetButtonDown("Fire1"))//check for input
         {
-            //Debug.Log("Time To ZAPPPPPPPPPPPPPPPP!");
-            FireProjectile();
-            nextShootTime = Time.time + secondsBetweenShots;
-
+            if (Time.time > nextShootTime)//check for cooldown
+            {
+                //Debug.Log("Time To ZAPPPPPPPPPPPPPPPP!");
+                FireProjectile();
+                nextShootTime = Time.time + secondsBetweenShots;//apply cooldown
+            }
         }
-
     }
     
+    /// <summary>
+    /// Rotate the Base and Turret to point at the Target.
+    /// </summary>
     private void HandleTargetTracking()
     {
         //get relative position of target 
@@ -228,6 +249,7 @@ public class StationaryCannon : MonoBehaviour
 
         //CLAMP TURRET SO DOESN'T SHOOT OWN SPACE STATION!!!
         var localRot = turretTransform.localEulerAngles.x;
+
         if (localRot < 180)
         {
             if (localRot > minPitch)
@@ -241,6 +263,5 @@ public class StationaryCannon : MonoBehaviour
         }
 
         turretTransform.localEulerAngles = new Vector3(localRot, 0, 0);
-        
     }
 }
