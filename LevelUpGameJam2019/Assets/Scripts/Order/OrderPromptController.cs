@@ -34,6 +34,7 @@ public class OrderPromptController : MonoBehaviour
     {
         ingredientsList = customer.GetOrderIngredients();
         ReadRecipe();
+        CheckSlot();
     }
 
     public void ReadRecipe()
@@ -61,8 +62,6 @@ public class OrderPromptController : MonoBehaviour
                     break;
             }
         }
-
-        CheckSlot();
     }
 
     public void CheckSlot()
