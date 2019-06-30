@@ -3,6 +3,7 @@ using UnityEngine;
 
 [SelectionBase]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody))]
 public class StationaryCannon : MonoBehaviour
 {
     /// <summary>
@@ -63,9 +64,10 @@ public class StationaryCannon : MonoBehaviour
     private AudioClip cannonFireSound;
 
     //GO components
-    private AudioSource audioSource;
-    private Transform baseTransform;//swivel on Y //
-    private Animator anim;
+    private Animator myAnimator;
+    private AudioSource myAudioSource;
+    private Rigidbody myRigidbody;
+    private Transform myBaseTransform;//swivel on Y 
 
     private float nextShootTime = 0;
 
@@ -82,18 +84,14 @@ public class StationaryCannon : MonoBehaviour
     void Start()
     {
         GatherReferences();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         HandleTargetTracking();
 
         HandleShooting();
-
-        
     }
 
     /// <summary>
@@ -101,10 +99,12 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     private void GatherReferences()
     {
+        //get Components on this GO
+        myBaseTransform = this.transform;
+        myAudioSource = GetComponent<AudioSource>() as AudioSource;
+        myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
 
-        baseTransform = this.transform;
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-
+        //get handles to external Objects
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
     }
 
@@ -137,7 +137,7 @@ public class StationaryCannon : MonoBehaviour
         else//create a new object not controlled by pool
         {
             Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed.  Change fire rate or pool quantity.", this.gameObject);
-            return Instantiate(projectilePrefab); 
+            return null; 
         }
     }
 
@@ -179,7 +179,8 @@ public class StationaryCannon : MonoBehaviour
             //handle physics of projectile
             var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
 
-            attachedRB.AddForce(turretTransform.forward * projectileForce, ForceMode.Impulse);
+            //attachedRB.velocity = myRigidbody.velocity;//apply velocity of cannon //CANNON HAS NO VELOCITY!
+            attachedRB.AddForce(turretTransform.forward * projectileForce, ForceMode.Impulse);//add ballistics forward force
 
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
@@ -195,13 +196,13 @@ public class StationaryCannon : MonoBehaviour
             }
             
             //play cannon fire sound
-            audioSource.clip = cannonFireSound;
-            audioSource.Play();
+            myAudioSource.clip = cannonFireSound;
+            myAudioSource.Play();
         }
 
         else
         {
-            Debug.Log(this.gameObject.name + ": BANG!", this.gameObject);
+            Debug.Log(this.gameObject.name + ":  No Projectile Prefab.  BANG!", this.gameObject);
 
         }
     }
@@ -228,7 +229,7 @@ public class StationaryCannon : MonoBehaviour
     private void HandleTargetTracking()
     {
         //get relative position of target 
-        var relative = baseTransform.InverseTransformPoint(objectToTrack.position);
+        var relative = myBaseTransform.InverseTransformPoint(objectToTrack.position);
 
         //get the angle between base forward and target on horizontal plane
         var horAngle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
@@ -242,7 +243,7 @@ public class StationaryCannon : MonoBehaviour
         //Debug.Log("HorAngle: " + horAngle + " | VertAngle: " + vertAngle);
 
         //handle base swivel
-        if (Mathf.Abs(horAngle) > optimalAngle) baseTransform.Rotate(0, Time.deltaTime * horAngle * swivelSpeed, 0);
+        if (Mathf.Abs(horAngle) > optimalAngle) myBaseTransform.Rotate(0, Time.deltaTime * horAngle * swivelSpeed, 0);
 
         //handle turret pitch
         if (Mathf.Abs(vertAngle) > optimalAngle) turretTransform.Rotate(Time.deltaTime * -vertAngle * swivelSpeed, 0, 0);
