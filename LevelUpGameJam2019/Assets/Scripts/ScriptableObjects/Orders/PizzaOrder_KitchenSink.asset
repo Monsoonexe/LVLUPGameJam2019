@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bccfd11b2e4f4824e8f55cbdb90b8608, type: 3}
-  m_Name: PizzaOrder_Dough
+  m_Name: PizzaOrder_Works 1
   m_EditorClassIdentifier: 
-  ingredients: 
-  randomWeight: 0
-  score: 10
+  ingredients: 03000000010000000200000004000000
+  randomWeight: 50
+  score: 100

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PizzaOrder_Works
   m_EditorClassIdentifier: 
   ingredients: 0300000001000000020000000400000000000000
-  randomWeight: 1
+  randomWeight: 50
   score: 100

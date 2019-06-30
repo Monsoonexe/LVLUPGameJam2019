@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: PizzaOrder_Pepp
   m_EditorClassIdentifier: 
   ingredients: 030000000100000002000000
-  randomWeight: 1
+  randomWeight: 75
   score: 100
-  itemIcons:
-  - {fileID: 6846949705273245007, guid: c833d698e0d93a649a17198637e768e3, type: 3}
-  - {fileID: 6768656680346625796, guid: 7bd276dd9482e8b4d9ecd45951f2f15b, type: 3}
-  - {fileID: 1169993426088164048, guid: abb5207613a64c14f85777a72f19a116, type: 3}
