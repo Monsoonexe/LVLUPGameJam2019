@@ -8,9 +8,6 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private Customer customer;
 
-    /*[SerializeField]
-    private bool[] isFull;*/
-
     [SerializeField]
     private GameObject[] slots;
 
@@ -33,45 +30,25 @@ public class OrderPromptController : MonoBehaviour
 
     private IngredientsENUM[] ingredientsList;
      
-
-    void Awake()
-    {
-        
-    }
-    // Start is called before the first frame update
     void Start()
     {
         ingredientsList = customer.GetOrderIngredients();
         ReadRecipe();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ReadRecipe()
     {
         ingredientIcons = new GameObject[ingredientsList.Length];
-        Debug.Log(ingredientIcons.Length);
-        foreach (var ingredient in ingredientsList)
-        {
-            Debug.Log(ingredient.ToString());
-        }
+
         for (var i = 0; i < ingredientsList.Length; i++)
         {
             switch (ingredientsList[i])                
             {
                 case IngredientsENUM.Sauce:
                     ingredientIcons[i] = sauceIcon;
-                    Debug.Log(ingredientIcons[i].name);
                     break;
                 case IngredientsENUM.Cheese:
                     ingredientIcons[i] = cheeseIcon;
-                    Debug.Log(ingredientIcons[i].name);
-                    
-                    Debug.Log("after " + ingredientIcons[i]);
                     break;
                 case IngredientsENUM.Pepperoni:
                     ingredientIcons[i] = peppIcon;
