@@ -111,4 +111,12 @@ public class CustomerManager : MonoBehaviour
         
         return selectedOrder;
     }
+
+    /// <summary>
+    /// Create a new Order SO (avoiding duplicates) and add it to folder.)
+    /// </summary>
+    public void RandomlyGenerateNewOrder()
+    {
+        Debug.Log("NOT YET IMPLEMENTED");
+    }
 }
