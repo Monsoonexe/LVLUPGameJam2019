@@ -444,6 +444,11 @@ PrefabInstance:
       propertyPath: orderBuilder
       value: 
       objectReference: {fileID: 2055851350}
+    - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: projectileForce
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 3002040636171306165, guid: e0061a8ddbcc8e74489afd536a0e12f9,
         type: 3}
       propertyPath: m_LocalPosition.z
