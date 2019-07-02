@@ -59,7 +59,7 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-
+        RandomizeVisuals();
     }
 
     // Update is called once per frame
