@@ -3,27 +3,26 @@
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SkinnedMeshRenderer))]
 public class Customer : MonoBehaviour
 {
     //static object references
     private static CustomerManager customerManager;
     private static ScoreManager scoreManager;
 
+    [Header("---Order Stuff---")]
     [SerializeField]
-    private OrderPromptController orderControl;
+    private OrderPromptController orderPromptController;
 
     [SerializeField]
     private Order customerOrder;
-    
-    [Header("---Audio---")]
-    [SerializeField]
-    private SoundList hitWithPizzaSounds;
 
+    /// <summary>
+    /// Holds visual mesh and material and sound effects.
+    /// </summary>
+    [Header("---Profile---")]
     [SerializeField]
-    private SoundList badOrderSounds;
-
-    [SerializeField]
-    private SoundList customerSatisfiedSounds;
+    private CustomerProfile customerProfile;
 
     [Header("---Colliders---")]
     [SerializeField]
@@ -34,20 +33,14 @@ public class Customer : MonoBehaviour
 
     [Header("---Animators---")]
     [SerializeField]
-    private Animator pizzaBoxAnimator;
-
-    [SerializeField]
     private Animator customerAnimator;
 
-    [Header("---Visuals---")]
     [SerializeField]
-    private SkinnedMeshRenderer skinnedMeshRenderer;
-
-    [SerializeField]
-    private Mesh characterVisualMesh;
-
+    private Animator pizzaBoxAnimator;
+        
     //member component references
     private AudioSource audioSource;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
 
     //other stuff
     private bool orderHasBeenDelivered = false;
@@ -74,12 +67,18 @@ public class Customer : MonoBehaviour
     {
         
     }
-    
-    
+
+    private void OnValidate()
+    {
+        GatherReferences();
+        UpdateVisuals();
+    }
+
     private void GatherReferences()
     {
         //get member references
         audioSource = GetComponent<AudioSource>() as AudioSource;
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
         //get static reference
         if (!customerManager)
@@ -92,8 +91,7 @@ public class Customer : MonoBehaviour
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
     }
-
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         //what did we get hit by?
@@ -104,7 +102,7 @@ public class Customer : MonoBehaviour
 
             collision.gameObject.SetActive(false);//expire projectile
 
-            ContactPoint[] contactPointList = new ContactPoint[collision.contactCount];
+            var contactPointList = new ContactPoint[collision.contactCount];
 
             collision.GetContacts(contactPointList);//fill array
 
@@ -147,10 +145,16 @@ public class Customer : MonoBehaviour
             }
             else//hit customer right in the NUTS!
             {
-                PlayRandomSound(hitWithPizzaSounds);
+                PlayRandomSound(customerProfile.hitWithPizzaSounds);
                 scoreManager.OnCustomerHit();
             }
         }//end if
+    }
+
+    [ContextMenu("Update Visuals")]
+    private void UpdateVisuals()
+    {
+        skinnedMeshRenderer.sharedMesh = customerProfile.characterVisualMesh;
     }
 
     private void PlayRandomSound(SoundList soundClipList)
@@ -164,13 +168,13 @@ public class Customer : MonoBehaviour
 
     private void CustomerSatisfied()
     {
-        PlayRandomSound(customerSatisfiedSounds);
+        PlayRandomSound(customerProfile.customerSatisfiedSounds);
 
         //tally and adjust score
         scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);
 
         //update visuals
-        orderControl.SuccessfulOrder();
+        orderPromptController.SuccessfulOrder();
 
         orderHasBeenDelivered = true;
         //Debug.Log("Thanks for the Pizza!!!!");
@@ -178,7 +182,7 @@ public class Customer : MonoBehaviour
 
     private void RejectPizza()
     {
-        PlayRandomSound(badOrderSounds);
+        PlayRandomSound(customerProfile.badOrderSounds);
         scoreManager.OnIncorrectOrderDelivered();
 
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
@@ -196,5 +200,12 @@ public class Customer : MonoBehaviour
     public IngredientsENUM[] GetOrderIngredients()
     {
         return customerOrder.ingredients;
+    }
+
+    [ContextMenu("Randomize Visuals")]
+    public void RandomizeVisuals()
+    {
+        GatherReferences();
+        skinnedMeshRenderer.material = customerProfile.GetRandomMaterial();
     }
 }
