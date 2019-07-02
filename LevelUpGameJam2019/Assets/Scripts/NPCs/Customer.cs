@@ -74,12 +74,7 @@ public class Customer : MonoBehaviour
     {
         
     }
-
-    private void UpdateVisuals()
-    {
-
-    }
-
+    
     private void GatherReferences()
     {
         //get member references
