@@ -7,8 +7,9 @@ public class CustomerManager : MonoBehaviour
     [SerializeField]
     private Order[] possibleOrders;
 
+    
     /// <summary>
-    /// List of all Customers that exist at the time of gathering.
+    /// List of all Customers that exist in Scene at the time of gathering.
     /// </summary>
     private Customer[] customersInScene;
 
