@@ -14,6 +14,9 @@ public class OrderPromptController : MonoBehaviour
     private GameObject[] ingredientIcons;
 
     [SerializeField]
+    private GameObject reactionSlot;
+
+    [SerializeField]
     private GameObject sauceIcon;
 
     [SerializeField]
@@ -28,6 +31,9 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject anchovyIcon;
 
+    [SerializeField]
+    private GameObject happyIcon;
+
     private IngredientsENUM[] ingredientsList;
      
     void Start()
@@ -37,7 +43,7 @@ public class OrderPromptController : MonoBehaviour
         CheckSlot();
     }
 
-    public void ReadRecipe()
+    private void ReadRecipe()
     {
         ingredientIcons = new GameObject[ingredientsList.Length];
 
@@ -64,11 +70,21 @@ public class OrderPromptController : MonoBehaviour
         }
     }
 
-    public void CheckSlot()
+    private void CheckSlot()
     {
         for (int i = 0; i < ingredientsList.Length; i++)
         {
             Instantiate(ingredientIcons[i], slots[i].transform, false);
         }
+    }
+
+    public void SuccessfulOrder()
+    {
+        foreach (var icon in slots)
+        {
+            icon.SetActive(false);
+        }
+
+        Instantiate(happyIcon, reactionSlot.transform, false);
     }
 }

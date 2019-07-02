@@ -9,6 +9,7 @@ TagManager:
   - ScoreManager
   - Water
   - Customer
+  - OrderControl
   layers:
   - Default
   - TransparentFX

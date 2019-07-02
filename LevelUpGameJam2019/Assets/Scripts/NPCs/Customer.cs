@@ -10,6 +10,9 @@ public class Customer : MonoBehaviour
     private static ScoreManager scoreManager;
 
     [SerializeField]
+    private OrderPromptController orderControl;
+
+    [SerializeField]
     private Order customerOrder;
     
     [Header("---Audio---")]
@@ -75,7 +78,6 @@ public class Customer : MonoBehaviour
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
-
     }
 
 
@@ -155,8 +157,11 @@ public class Customer : MonoBehaviour
         scoreManager.OnCustomerSatisfied();
         scoreManager.AddScore(customerOrder.score);
 
+        orderControl.SuccessfulOrder();
+
         orderHasBeenDelivered = true;
         //Debug.Log("Thanks for the Pizza!!!!");
+               
 
     }
 

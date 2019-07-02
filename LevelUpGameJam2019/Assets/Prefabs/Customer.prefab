@@ -369,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a8cb2700e8118439dae4d854547756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderControl: {fileID: 6585203837869068981}
   customerOrder: {fileID: 0}
   hitWithPizzaSounds: {fileID: 11400000, guid: 478ca8b92ed190043955c60e06c8eac0, type: 2}
   badOrderSounds: {fileID: 11400000, guid: 58d152a38a6a1b842bc9d8c0b7f053f7, type: 2}
@@ -531,7 +532,7 @@ GameObject:
   - component: {fileID: 6585203837869068981}
   m_Layer: 0
   m_Name: Customer Order Prompt
-  m_TagString: Untagged
+  m_TagString: OrderControl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,6 +571,7 @@ MonoBehaviour:
   - {fileID: 765633972}
   - {fileID: 730997373}
   - {fileID: 1551151623}
+  reactionSlot: {fileID: 5882258919378445530}
   sauceIcon: {fileID: 6846949705273245007, guid: c833d698e0d93a649a17198637e768e3,
     type: 3}
   cheeseIcon: {fileID: 6768656680346625796, guid: 7bd276dd9482e8b4d9ecd45951f2f15b,
@@ -580,6 +582,52 @@ MonoBehaviour:
     type: 3}
   anchovyIcon: {fileID: 6912278044930861747, guid: dfd715e165e8301469b77d184f2dba4a,
     type: 3}
+  happyIcon: {fileID: 153092732767239929, guid: a615e19f218edfa479266468357abe5d,
+    type: 3}
+--- !u!1 &5882258919378445530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9051119015244125273}
+  - component: {fileID: 5029895221596823898}
+  m_Layer: 5
+  m_Name: ReactionSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9051119015244125273
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882258919378445530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2965473515644314782}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 18.4}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5029895221596823898
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882258919378445530}
+  m_CullTransparentMesh: 0
 --- !u!1 &7463041686970125221
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +662,7 @@ RectTransform:
   - {fileID: 765633973}
   - {fileID: 730997374}
   - {fileID: 1551151624}
+  - {fileID: 9051119015244125273}
   m_Father: {fileID: 3647270872572798292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3406,6 +3455,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4396875095428384440}
     m_Modifications:
+    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
+        type: 3}
+      propertyPath: m_Name
+      value: PizzaBox
+      objectReference: {fileID: 0}
     - target: {fileID: 6541377184427493313, guid: 6dae3131e40cabb4893e17da651df406,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3475,11 +3529,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 36.000034
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
-        type: 3}
-      propertyPath: m_Name
-      value: PizzaBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dae3131e40cabb4893e17da651df406, type: 3}
