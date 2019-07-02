@@ -39,6 +39,13 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private Animator customerAnimator;
 
+    [Header("---Visuals---")]
+    [SerializeField]
+    private SkinnedMeshRenderer skinnedMeshRenderer;
+
+    [SerializeField]
+    private Mesh characterVisualMesh;
+
     //member component references
     private AudioSource audioSource;
 
@@ -57,10 +64,20 @@ public class Customer : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        UpdateVisuals();
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void UpdateVisuals()
+    {
+
     }
 
     private void GatherReferences()
