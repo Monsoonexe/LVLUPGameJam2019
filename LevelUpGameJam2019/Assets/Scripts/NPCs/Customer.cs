@@ -153,22 +153,20 @@ public class Customer : MonoBehaviour
     {
         PlayRandomSound(customerSatisfiedSounds);
 
-        //add tallys
-        scoreManager.OnCustomerSatisfied();
-        scoreManager.AddScore(customerOrder.score);
+        //tally and adjust score
+        scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);
 
+        //update visuals
         orderControl.SuccessfulOrder();
 
         orderHasBeenDelivered = true;
         //Debug.Log("Thanks for the Pizza!!!!");
-               
-
     }
 
     private void RejectPizza()
     {
         PlayRandomSound(badOrderSounds);
-        scoreManager.OnIncorrectOrder();
+        scoreManager.OnIncorrectOrderDelivered();
 
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }

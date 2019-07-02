@@ -7,8 +7,6 @@ public class Order : ScriptableObject
 
     public int randomWeight = 1;
 
-    public int score = 100;
-
     /// <summary>
     /// Determines if customer order and pizza are exactly the same.
     /// </summary>
@@ -114,11 +112,7 @@ public class Order : ScriptableObject
         }
 
         stringBuilder.Append(randomWeight.ToString());
-
-        stringBuilder.Append(" | ");//divider
-
-        stringBuilder.Append(score.ToString());
-
+        
         return stringBuilder.ToString();
     }
 
