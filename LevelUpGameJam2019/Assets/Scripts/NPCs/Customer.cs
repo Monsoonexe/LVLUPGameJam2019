@@ -66,7 +66,7 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-        UpdateVisuals();
+
     }
 
     // Update is called once per frame
@@ -74,6 +74,7 @@ public class Customer : MonoBehaviour
     {
         
     }
+    
     
     private void GatherReferences()
     {
