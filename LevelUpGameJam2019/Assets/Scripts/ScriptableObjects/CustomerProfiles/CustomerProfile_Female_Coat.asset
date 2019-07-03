@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ffb7e4281618284083be989f3851c16, type: 3}
-  m_Name: CustomerProfile_BusinessMan_Suit
+  m_Name: CustomerProfile_Female_Coat
   m_EditorClassIdentifier: 
-  hitWithPizzaSounds: {fileID: 11400000, guid: 478ca8b92ed190043955c60e06c8eac0, type: 2}
-  badOrderSounds: {fileID: 11400000, guid: 58d152a38a6a1b842bc9d8c0b7f053f7, type: 2}
-  customerSatisfiedSounds: {fileID: 11400000, guid: a49b5f221e6cbb64fa98c5ff5f503981,
+  hitWithPizzaSounds: {fileID: 11400000, guid: 980912dffe8bb724c92a9c9f346d4c17, type: 2}
+  badOrderSounds: {fileID: 11400000, guid: 4daf96389f52c7f4c90444d1b2c4d366, type: 2}
+  customerSatisfiedSounds: {fileID: 11400000, guid: 52e50261effb485459c9a6a86103d789,
     type: 2}
-  characterVisualMesh: {fileID: 4300004, guid: 897b34267f422c1499700402763d096e, type: 3}
+  characterVisualMesh: {fileID: 4300010, guid: 897b34267f422c1499700402763d096e, type: 3}
   materialVariations: {fileID: 11400000, guid: e7acf71b4c5b79140b2c37292043c6a3, type: 2}
