@@ -76,7 +76,7 @@ public class Customer : MonoBehaviour
 
     private void GatherReferences()
     {
-        //get member references
+        //get references on this GameObject references
         audioSource = GetComponent<AudioSource>() as AudioSource;
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
