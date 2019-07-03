@@ -16,5 +16,5 @@ MonoBehaviour:
   badOrderSounds: {fileID: 11400000, guid: 4daf96389f52c7f4c90444d1b2c4d366, type: 2}
   customerSatisfiedSounds: {fileID: 11400000, guid: 52e50261effb485459c9a6a86103d789,
     type: 2}
-  characterVisualMesh: {fileID: 4300016, guid: 91028badc63f59f43a9c5bda64fbd608, type: 3}
+  characterVisualMesh: {fileID: 4300016, guid: 897b34267f422c1499700402763d096e, type: 3}
   materialVariations: {fileID: 11400000, guid: e7acf71b4c5b79140b2c37292043c6a3, type: 2}
