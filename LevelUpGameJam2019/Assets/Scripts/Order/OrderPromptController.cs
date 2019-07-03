@@ -34,6 +34,10 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject happyIcon;
 
+    [SerializeField]
+    private GameObject madIcon;
+
+
     private IngredientsENUM[] ingredientsList;
      
     void Start()
@@ -86,5 +90,15 @@ public class OrderPromptController : MonoBehaviour
         }
 
         Instantiate(happyIcon, reactionSlot.transform, false);
+    }
+
+    public void FailureOrder()
+    {
+        foreach (var icon in slots)
+        {
+            icon.SetActive(false);
+        }
+
+        Instantiate(madIcon, reactionSlot.transform, false);
     }
 }

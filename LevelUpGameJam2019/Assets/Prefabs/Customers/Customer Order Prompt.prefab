@@ -507,3 +507,4 @@ MonoBehaviour:
     type: 3}
   happyIcon: {fileID: 153092732767239929, guid: a615e19f218edfa479266468357abe5d,
     type: 3}
+  madIcon: {fileID: 2141587608172731305, guid: e7420c19771a0d4459aa0995c89b6648, type: 3}

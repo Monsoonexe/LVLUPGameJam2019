@@ -185,6 +185,8 @@ public class Customer : MonoBehaviour
         PlayRandomSound(customerProfile.badOrderSounds);
         scoreManager.OnIncorrectOrderDelivered();
 
+        orderPromptController.FailureOrder();
+
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 
