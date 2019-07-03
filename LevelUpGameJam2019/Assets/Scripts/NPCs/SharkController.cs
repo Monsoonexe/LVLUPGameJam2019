@@ -136,8 +136,6 @@ public class SharkController : MonoBehaviour
                     Debug.Log("Still in cooldown.  Seconds Remaining: " + (nextSharkAttackTime - Time.time));
                 }
             }
-        
-
         }
 
         else if (other.gameObject.CompareTag("Water"))//if shark lands back in water
@@ -276,11 +274,16 @@ public class SharkController : MonoBehaviour
             myAudioSource.Play();
         }
     }
-
+    
+    [System.Obsolete("What does this do??")]
+    /// <summary>
+    /// Deprecated
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator EnableColliders()
     {
         yield return new WaitForSeconds(1.0f);
-        sphereOfInfluenceCollider.enabled = false;//stop using this collider for now.
+        sphereOfInfluenceCollider.enabled = true;//stop using this collider for now.
 
     }
     
@@ -302,8 +305,8 @@ public class SharkController : MonoBehaviour
 
         myRigidbody.useGravity = true;//turn on gravity
 
-        StartCoroutine(EnableColliders());
-
+        sphereOfInfluenceCollider.enabled = false;
+        
         //set cooldown
         nextSharkAttackTime = Time.time + secondsBetweenSharkAttacks;
 
