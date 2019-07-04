@@ -1823,15 +1823,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4396875095428384440}
     m_Modifications:
+    - target: {fileID: 8198757133952098191, guid: 27af453e2996ae74aa06703e5d897a9e,
+        type: 3}
+      propertyPath: m_Name
+      value: Customer Order Prompt
+      objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.71
+      value: -0.87
       objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.316
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
@@ -1846,7 +1851,7 @@ PrefabInstance:
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
@@ -1856,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
@@ -1871,17 +1876,12 @@ PrefabInstance:
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3293717724320115370, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8198757133952098191, guid: 27af453e2996ae74aa06703e5d897a9e,
-        type: 3}
-      propertyPath: m_Name
-      value: Customer Order Prompt
       objectReference: {fileID: 0}
     - target: {fileID: 7328544334669837338, guid: 27af453e2996ae74aa06703e5d897a9e,
         type: 3}
@@ -1915,6 +1915,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4396875095428384440}
     m_Modifications:
+    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
+        type: 3}
+      propertyPath: m_Name
+      value: PizzaBox
+      objectReference: {fileID: 0}
     - target: {fileID: 6541377184427493313, guid: 6dae3131e40cabb4893e17da651df406,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1984,11 +1989,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 36.000034
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826405391628219858, guid: 6dae3131e40cabb4893e17da651df406,
-        type: 3}
-      propertyPath: m_Name
-      value: PizzaBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dae3131e40cabb4893e17da651df406, type: 3}

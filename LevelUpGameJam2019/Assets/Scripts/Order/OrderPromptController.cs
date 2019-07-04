@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrderPromptController : MonoBehaviour
 {
-    
+    private static Transform mainCameraTransform;
+
     [SerializeField]
     private Customer customer;
 
@@ -37,14 +36,38 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject madIcon;
 
+    //Component References
+    private Transform myTransform;
+
 
     private IngredientsENUM[] ingredientsList;
      
     void Start()
     {
+        GatherReferences();
+
         ingredientsList = customer.GetOrderIngredients();
+
         ReadRecipe();
+
         CheckSlot();
+    }
+
+    private void Update()
+    {
+        PointUITowardsCamera();
+    }
+
+    private void GatherReferences()
+    {
+        //get handle on static GameObjects
+        if (!mainCameraTransform)
+        {
+            mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
+        }
+
+        //Components on this GO
+        myTransform = this.gameObject.transform;
     }
 
     private void ReadRecipe()
@@ -72,6 +95,11 @@ public class OrderPromptController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void PointUITowardsCamera()
+    {
+        myTransform.LookAt(mainCameraTransform);
     }
 
     private void CheckSlot()
