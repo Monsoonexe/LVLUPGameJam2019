@@ -39,6 +39,11 @@ public class GameController : MonoBehaviour
         //nada
     }
 
+    public void ReloadLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+    }
+
     public void QuitGame()
     {
         SaveData();
