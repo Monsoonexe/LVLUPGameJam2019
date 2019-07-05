@@ -132,6 +132,7 @@ public class ScoreManager : MonoBehaviour
     {
         ++incorrectOrdersDelivered;
         playerScore -= incorrectOrderDeduction;
+        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         //update visuals
         UpdateScoreText();
@@ -146,6 +147,7 @@ public class ScoreManager : MonoBehaviour
     {
         ++customersHit;
         playerScore -= customerHitDeduction;
+        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         //update visuals
         UpdateScoreText();
