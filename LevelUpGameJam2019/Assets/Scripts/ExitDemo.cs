@@ -5,7 +5,7 @@ public class ExitDemo : MonoBehaviour
     private static GameController gameControllerInstance;
 
     [SerializeField]
-    private Transform EndGameWhenThisObjectEntersVolume;
+    private GameObject EndGameWhenThisObjectEntersVolume;
 
     private void Start()
     {
