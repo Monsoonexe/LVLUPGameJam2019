@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     [Header("---Scenes---")]
     [SerializeField]
-    private Scene mainMenuScene;
+    private string mainMenuSceneName = "MainMenu_Scene";
     
 
     // Start is called before the first frame update
@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour
         SaveData();
 
         //load next scene
-        SceneManager.LoadSceneAsync(mainMenuScene.ToString());
+        SceneManager.LoadSceneAsync(mainMenuSceneName);
     }
 
 
