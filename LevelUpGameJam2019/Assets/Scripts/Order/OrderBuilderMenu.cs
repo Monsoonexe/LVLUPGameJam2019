@@ -12,6 +12,27 @@ public class OrderBuilderMenu : MonoBehaviour
     [SerializeField]
     private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
 
+    //[Header("---Ingredient Icons---")]
+
+    [Header("---Ingredient Backgrounds---")]
+    [SerializeField]
+    private Image sauceBackgroundImage;
+
+    [SerializeField]
+    private Image cheeseBackgroundImage;
+
+    [SerializeField]
+    private Image peppBackgroundImage;
+
+    [SerializeField]
+    private Image sausageBackgroundImage;
+
+    [SerializeField]
+    private Image anchovyBackgroundImage;
+
+    [Header("---Selected Color---")]
+    [SerializeField] private Color ingredientAddedColor;
+
     // Start is called before the first frame update
     void Start()
     {

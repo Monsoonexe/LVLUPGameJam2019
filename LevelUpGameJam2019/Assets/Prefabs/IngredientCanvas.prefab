@@ -591,6 +591,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientLoaderAnimator: {fileID: 0}
   selectedIngredients: 
+  sauceBackgroundImage: {fileID: 6554005878607096035}
+  cheeseBackgroundImage: {fileID: 2233276166265870976}
+  peppBackgroundImage: {fileID: 1177465615932561935}
+  sausageBackgroundImage: {fileID: 5259958104503319154}
+  anchovyBackgroundImage: {fileID: 757315092338815646}
+  ingredientAddedColor: {r: 1, g: 0.95206225, b: 0, a: 0}
 --- !u!114 &1583690294410932097
 MonoBehaviour:
   m_ObjectHideFlags: 0
