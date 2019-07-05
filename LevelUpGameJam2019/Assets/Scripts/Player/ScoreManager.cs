@@ -7,6 +7,8 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    private const string highscoreKey = "HighScore";
+
     [Header("---Score---")]
     [SerializeField]
     private int playerScore;
@@ -109,9 +111,25 @@ public class ScoreManager : MonoBehaviour
     /// <summary>
     /// Update UI visuals with current values.  Must be called after any changes to values are made.
     /// </summary>
-    private void UpdateScoreText()
+    private void UpdatePlayerScoreText()
     {
         scoreTMPro.text = playerScore.ToString();
+    }
+
+    /// <summary>
+    /// Checks high score and saves existing score if higher.//initials are always RSO
+    /// </summary>
+    private void HandleHighScore()
+    {
+        var currentHighScore = PlayerPrefs.GetInt(highscoreKey);
+
+        if (playerScore > currentHighScore)
+        {
+            Debug.Log("PLAYER BEAT THE HIGH SCORE! Old score: " + currentHighScore.ToString() + " | new high score: " + playerScore.ToString());
+
+            //set new high score
+            PlayerPrefs.SetInt(highscoreKey, playerScore);
+        }
     }
 
     public void OnShotFired()
@@ -125,7 +143,7 @@ public class ScoreManager : MonoBehaviour
 
         playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
 
-        UpdateScoreText();
+        UpdatePlayerScoreText();
     }
     
     public void OnIncorrectOrderDelivered()
@@ -135,7 +153,7 @@ public class ScoreManager : MonoBehaviour
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         //update visuals
-        UpdateScoreText();
+        UpdatePlayerScoreText();
     }
 
     public void OnSharkAtePizza()
@@ -150,7 +168,7 @@ public class ScoreManager : MonoBehaviour
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         //update visuals
-        UpdateScoreText();
+        UpdatePlayerScoreText();
     }
 
     /// <summary>
@@ -167,7 +185,12 @@ public class ScoreManager : MonoBehaviour
         incorrectOrdersDelivered = 0;
         sharksFed = 0;
 
-        UpdateScoreText();
+        UpdatePlayerScoreText();
+    }
+
+    public static void UpdateHighScore(TextMeshProUGUI tmpObject)
+    {
+        tmpObject.text = PlayerPrefs.GetInt(highscoreKey).ToString();
     }
 
 }
