@@ -91,7 +91,7 @@ public class Order : ScriptableObject
 
             for(var j = length - 1; j > i; --j)
             {
-                if(ingredientsList[j] < ingredientsList[i])
+                if(ingredientsList[j] < ingredientsList[lowIndex])
                 {
                     lowIndex = j;
                 }
