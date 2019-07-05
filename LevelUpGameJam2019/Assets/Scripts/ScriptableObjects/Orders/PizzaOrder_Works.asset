@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccfd11b2e4f4824e8f55cbdb90b8608, type: 3}
   m_Name: PizzaOrder_Works
   m_EditorClassIdentifier: 
-  ingredients: 0300000001000000020000000400000000000000
+  ingredients: 0000000001000000020000000300000004000000
   randomWeight: 50
-  score: 100
