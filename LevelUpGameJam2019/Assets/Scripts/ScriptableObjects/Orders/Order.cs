@@ -6,6 +6,15 @@ public class Order : ScriptableObject
     public IngredientsENUM[] ingredients;
 
     public int randomWeight = 1;
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>VS does not recognize this as a valid Unity Callback (Message) but it totally works.</remarks>
+    private void OnValidate()
+    {
+        ingredients = SortIngredientsListAscending(ingredients);//sort list
+    }
 
     /// <summary>
     /// Determines if customer order and pizza are exactly the same.
@@ -24,6 +33,7 @@ public class Order : ScriptableObject
     /// <param name="customerOrder"></param>
     /// <param name="ingredientsOnPizza"></param>
     /// <returns>Returns true if all ingredients in order are included on pizza, and pizza contains no ingredient not on order.</returns>
+    /// <remarks>Assumes both lists are sorted in ascending numeric order.</remarks>
     public static bool CompareOrderToPizza(IngredientsENUM[] ingredientsOnOrder, IngredientsENUM[] ingredientsOnPizza)
     {
         //base
@@ -41,11 +51,10 @@ public class Order : ScriptableObject
 
         else
         {
-            //all ingredients on order are present on pizza, quantities match, and no extra ingredients are pizza that are not in order
-
-            //sort lists
-            ingredientsOnOrder = SortIngredientsListAscending(ingredientsOnOrder);
-            ingredientsOnPizza = SortIngredientsListAscending(ingredientsOnPizza);
+            //all ingredients in order are present on pizza, quantities match, and no extra ingredients exist on pizza that are not in order
+            //sort list
+            //ingredientsOnOrder = SortIngredientsListAscending(ingredientsOnOrder); //call this at loadtime to avoid redundant sorts
+            ingredientsOnPizza = SortIngredientsListAscending(ingredientsOnPizza);//sort this only when needed.
                        
             //check if lists are exactly the same. (fact: they are the same length)
             for(var i = 0; i < ingredientsOnOrder.Length; ++i)
@@ -63,7 +72,7 @@ public class Order : ScriptableObject
     }
 
     /// <summary>
-    /// Sort the list in ascending order based on numeric value of enum.
+    /// Sort the list in ascending order based on numeric value of enum using Selection Sort.
     /// </summary>
     /// <param name="ingredientsList"></param>
     public static IngredientsENUM[] SortIngredientsListAscending(IngredientsENUM[] ingredientsList)
@@ -100,6 +109,10 @@ public class Order : ScriptableObject
 
     }//end func
 
+    /// <summary>
+    /// String consists of each ingredient. Supports multiples of ingredient.
+    /// </summary>
+    /// <returns>e.g. "Sauce | Cheese | Anchovies | "</returns>
     public override string ToString()
     {
         //might override in the future
@@ -117,7 +130,7 @@ public class Order : ScriptableObject
     }
 
     /// <summary>
-    /// Sort this instance's list of ingredients
+    /// Sort this instance's list of ingredients.
     /// </summary>
     public void SortIngredientsList()
     {
