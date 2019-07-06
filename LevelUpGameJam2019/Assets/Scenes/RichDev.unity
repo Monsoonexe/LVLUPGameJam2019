@@ -670,7 +670,7 @@ PrefabInstance:
         type: 3}
       propertyPath: customerOrder
       value: 
-      objectReference: {fileID: 11400000, guid: a6f39a67b0f722641aea646009ac6fd2,
+      objectReference: {fileID: 11400000, guid: 4b14fc47f49625f4d84915f4d9724086,
         type: 2}
     - target: {fileID: 8725625374599710963, guid: 9eccff67d181a3d4ea4fe51c2be28ee9,
         type: 3}
