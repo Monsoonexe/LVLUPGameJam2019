@@ -44,6 +44,9 @@ public class OrderPromptController : MonoBehaviour
 
     [SerializeField]
     private float customerHitReactionTime = 1.5f;
+
+    [SerializeField]
+    private float closeOrderPromptWindowTime = 3.0f;
     
     //
     private GameObject[] ingredientIcons;
@@ -63,12 +66,15 @@ public class OrderPromptController : MonoBehaviour
 
         CheckSlot();
     }
-
+    
     private void Update()
     {
         PointUITowardsCamera();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void GatherReferences()
     {
         //get handle on static GameObjects
@@ -81,6 +87,9 @@ public class OrderPromptController : MonoBehaviour
         myTransform = this.gameObject.transform as Transform;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void ReadRecipe()
     {
         ingredientIcons = new GameObject[ingredientsList.Length];
@@ -108,11 +117,17 @@ public class OrderPromptController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void PointUITowardsCamera()
     {
         myTransform.LookAt(mainCameraTransform);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void CheckSlot()
     {
         for (int i = 0; i < ingredientsList.Length; i++)
@@ -146,30 +161,47 @@ public class OrderPromptController : MonoBehaviour
     }
 
     /// <summary>
+    /// Disable Prompt when Order is no longer needed.
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    private IEnumerator CloseOrderBubbleAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        this.gameObject.SetActive(false);
+    }
+
+    private void ShowReaction(Sprite sprite)
+    {
+        ToggleAllIcons(false);//hide ingredients
+        reactionImage.sprite = sprite;//swap sprite
+        reactionImage.enabled = true;//show reaction
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public void OnSuccessfulOrder()
     {
-        ToggleAllIcons(false);
-        reactionImage.sprite = happySprite;
-        reactionImage.enabled = true;
-        //Instantiate(happyIcon, reactionSlot.transform, false);
+        ShowReaction(happySprite);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnFailedOrder()
     {
-        ToggleAllIcons(false);
-
-        //Instantiate(madIcon, reactionSlot.transform, false);
-        reactionImage.sprite = madSprite;
-        reactionImage.enabled = true;
-        StartCoroutine(HideIngredientsWithReactionForSeconds(badOrderReactionTime));
+        ShowReaction(madSprite);
+        StartCoroutine(HideIngredientsWithReactionForSeconds(badOrderReactionTime));//show Ingredients after time
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnCustomerHit()
     {
-        reactionImage.sprite = madSprite;
-        reactionImage.enabled = true;
-        StartCoroutine(HideIngredientsWithReactionForSeconds(customerHitReactionTime));
+        ShowReaction(madSprite);
+        StartCoroutine(HideIngredientsWithReactionForSeconds(customerHitReactionTime));//show Ingredients after time
     }
 }
