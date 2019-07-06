@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class OrderPromptController : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class OrderPromptController : MonoBehaviour
 
     [SerializeField]
     private GameObject[] slots;
-
-    private GameObject[] ingredientIcons;
 
     [SerializeField]
     private GameObject reactionSlot;
@@ -36,12 +35,13 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject madIcon;
 
-    //Component References
-    private Transform myTransform;
-
+    private GameObject[] ingredientIcons;
 
     private IngredientsENUM[] ingredientsList;
-     
+
+    //Component References
+    private Transform myTransform;
+    
     void Start()
     {
         GatherReferences();
@@ -67,7 +67,7 @@ public class OrderPromptController : MonoBehaviour
         }
 
         //Components on this GO
-        myTransform = this.gameObject.transform;
+        myTransform = this.gameObject.transform as Transform;
     }
 
     private void ReadRecipe()
@@ -110,22 +110,27 @@ public class OrderPromptController : MonoBehaviour
         }
     }
 
-    public void SuccessfulOrder()
+    /// <summary>
+    /// SetActive(false) on all icons.
+    /// </summary>
+    private void DisableAllIcons()
     {
         foreach (var icon in slots)
         {
             icon.SetActive(false);
         }
 
+    }
+
+    public void SuccessfulOrder()
+    {
+        
         Instantiate(happyIcon, reactionSlot.transform, false);
     }
 
     public void FailureOrder()
     {
-        foreach (var icon in slots)
-        {
-            icon.SetActive(false);
-        }
+        DisableAllIcons();
 
         Instantiate(madIcon, reactionSlot.transform, false);
     }
