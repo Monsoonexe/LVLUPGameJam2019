@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HighScores_", menuName = "ScriptableObjects/New High Score")]
+[CreateAssetMenu(fileName = "Leaderboard_", menuName = "ScriptableObjects/New Leaderboard")]
 public class LeaderboardSO : ScriptableObject
 {
     [SerializeField]
