@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class OrderBuilderMenu : MonoBehaviour
 {
     public const int maxIngredientsOnAnOrder = 5;
+    public const int maxIngredientStack = 2;
+    private const int maxIngredientsInCannon = maxIngredientsOnAnOrder * maxIngredientStack; //5 ingredients, 2 stack per.  
 
     [SerializeField]
     private Animator ingredientLoaderAnimator;
