@@ -49,16 +49,16 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         GatherReferences();
+        if (!customerOrder)
+        {
+            GetNewRandomOrderFromCustomerManager();
+        }
     }
 
     private void Start()
     {
         RandomizeVisuals();
 
-        if (!customerOrder)
-        {
-            GetNewRandomOrderFromCustomerManager();
-        }
     }
 
     // Update is called once per frame
