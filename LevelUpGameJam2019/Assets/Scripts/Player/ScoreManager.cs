@@ -13,6 +13,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int playerScore;
 
+    [SerializeField]
+    private LeaderboardSO leaderboard;
+
     [Header("---Tallys---")]
     [SerializeField]
     private int shotsFired;
@@ -82,7 +85,10 @@ public class ScoreManager : MonoBehaviour
     [Header("---UI Elements---")]
     [SerializeField]
     private TextMeshProUGUI scoreTMPro;
-       
+
+    [SerializeField]
+    private TextMeshProUGUI highScoreTMPro;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -92,6 +98,8 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         //GatherReferences();   
+        UpdatePlayerScoreText();
+        UpdateHighScoreText();
     }
 
     // Update is called once per frame
@@ -116,19 +124,28 @@ public class ScoreManager : MonoBehaviour
         scoreTMPro.text = playerScore.ToString();
     }
 
+    public void UpdateHighScoreText()
+    {
+        highScoreTMPro.text = leaderboard.GetHighScore().ToString();
+    }
+
     /// <summary>
     /// Checks high score and saves existing score if higher.//initials are always RSO
     /// </summary>
-    private void HandleHighScore()
+    public void HandleHighScore()
     {
-        var currentHighScore = PlayerPrefs.GetInt(highscoreKey);
+        var currentHighScore = leaderboard.GetHighScore();
 
         if (playerScore > currentHighScore)
         {
             Debug.Log("PLAYER BEAT THE HIGH SCORE! Old score: " + currentHighScore.ToString() + " | new high score: " + playerScore.ToString());
+            //show UI stuff
+            //input initials RSO
 
             //set new high score
-            PlayerPrefs.SetInt(highscoreKey, playerScore);
+            leaderboard.SetNewHighScore(playerScore);
+
+            UpdateHighScoreText();
         }
     }
 
@@ -186,11 +203,6 @@ public class ScoreManager : MonoBehaviour
         sharksFed = 0;
 
         UpdatePlayerScoreText();
-    }
-
-    public static void UpdateHighScore(TextMeshProUGUI tmpObject)
-    {
-        tmpObject.text = PlayerPrefs.GetInt(highscoreKey).ToString();
     }
 
 }
