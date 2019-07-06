@@ -13,5 +13,10 @@ public class Customer_Inspector : Editor
         {
             customer.RandomizeVisuals();
         }
+
+        else if(GUILayout.Button("Request New Random Order From Manager"))
+        {
+            customer.GetNewRandomOrderFromCustomerManager();
+        }
     }
 }

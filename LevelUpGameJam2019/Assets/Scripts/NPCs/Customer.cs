@@ -49,17 +49,16 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         GatherReferences();
-
-        if (!customerOrder)
-        {
-            customerOrder = customerManager.GetNewRandomOrder();
-        }
-
     }
 
     private void Start()
     {
         RandomizeVisuals();
+
+        if (!customerOrder)
+        {
+            GetNewRandomOrderFromCustomerManager();
+        }
     }
 
     // Update is called once per frame
@@ -209,5 +208,12 @@ public class Customer : MonoBehaviour
     {
         GatherReferences();
         skinnedMeshRenderer.material = customerProfile.GetRandomMaterial();
+    }
+
+    [ContextMenu("Get New Random Order From Customer Manager")]
+    public void GetNewRandomOrderFromCustomerManager()
+    {
+        GatherReferences();
+        customerOrder = customerManager.GetNewRandomOrder();
     }
 }
