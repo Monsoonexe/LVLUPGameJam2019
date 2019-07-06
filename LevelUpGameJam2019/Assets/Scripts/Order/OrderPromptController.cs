@@ -124,7 +124,8 @@ public class OrderPromptController : MonoBehaviour
 
     public void SuccessfulOrder()
     {
-        
+        DisableAllIcons();
+
         Instantiate(happyIcon, reactionSlot.transform, false);
     }
 
