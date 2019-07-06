@@ -14,7 +14,7 @@ public class LeaderboardSO : ScriptableObject
     [Header("***Leaderboard***")]
     [Tooltip("Alpha")]
     [SerializeField]
-    private int[] leaderboardScores = new int[5];
+    private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[5];
 
     public void SetNewHighScore(int newScore)
     {
