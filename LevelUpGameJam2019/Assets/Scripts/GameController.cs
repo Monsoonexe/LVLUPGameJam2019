@@ -14,12 +14,14 @@ public class GameController : MonoBehaviour
     [Header("---Scenes---")]
     [SerializeField]
     private string mainMenuSceneName = "MainMenu_Scene";
-    
+
+    //external Component references
+    private ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GatherReferences();
     }
 
     // Update is called once per frame
@@ -31,12 +33,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void GatherReferences()
+    {
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+    }
+
     /// <summary>
-    /// [ALPHA] Nothing happens yet.
+    /// Save high score.
     /// </summary>
     private void SaveData()
     {
-        //nada
+        scoreManager.HandleHighScore();
     }
 
     public void ReloadLevel()
@@ -46,7 +53,6 @@ public class GameController : MonoBehaviour
 
     public void QuitGame()
     {
-        SaveData();
         Debug.Log("THANKS FOR PLAYING!");
 
         Application.Quit();//that's all, folks
@@ -63,6 +69,7 @@ public class GameController : MonoBehaviour
         //-enable menu controls (mouse, keyboard)
         //Show player stats
         //wait for Player to move on to next level
+        SaveData();
         ReturnToMainMenu();
     }
 
@@ -71,8 +78,6 @@ public class GameController : MonoBehaviour
     ///</summary>
     public void ReturnToMainMenu()
     {
-        SaveData();
-
         //load next scene
         SceneManager.LoadSceneAsync(mainMenuSceneName);
     }
