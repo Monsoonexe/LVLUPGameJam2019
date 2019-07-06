@@ -144,10 +144,19 @@ public class Customer : MonoBehaviour
             }
             else//hit customer right in the NUTS!
             {
-                PlayRandomSound(customerProfile.hitWithPizzaSounds);
-                scoreManager.OnCustomerHit();
+                OnCustomerHit();
             }
         }//end if
+    }
+
+    /// <summary>
+    /// The Customer was hit with a PizzaProjectile. REACT! roll a d6.
+    /// </summary>
+    private void OnCustomerHit()
+    {
+        PlayRandomSound(customerProfile.hitWithPizzaSounds);
+        scoreManager.OnCustomerHit();
+        orderPromptController.OnCustomerHit();
     }
 
     [ContextMenu("Update Visuals")]
@@ -167,24 +176,29 @@ public class Customer : MonoBehaviour
 
     private void CustomerSatisfied()
     {
+        //audio
         PlayRandomSound(customerProfile.customerSatisfiedSounds);
 
         //tally and adjust score
         scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);
 
         //update visuals
-        orderPromptController.SuccessfulOrder();
+        orderPromptController.OnSuccessfulOrder();
 
-        orderHasBeenDelivered = true;
+        orderHasBeenDelivered = true;//flag
         //Debug.Log("Thanks for the Pizza!!!!");
     }
 
     private void RejectPizza()
     {
+        //audio
         PlayRandomSound(customerProfile.badOrderSounds);
+
+        //score
         scoreManager.OnIncorrectOrderDelivered();
 
-        orderPromptController.FailureOrder();
+        //update visuals
+        orderPromptController.OnFailedOrder();
 
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderPromptController : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject[] slots;
 
-    [SerializeField]
-    private GameObject reactionSlot;
-
+    [Header("---Ingredient Icons---")]
     [SerializeField]
     private GameObject sauceIcon;
 
@@ -29,12 +28,24 @@ public class OrderPromptController : MonoBehaviour
     [SerializeField]
     private GameObject anchovyIcon;
 
+    [Header("---Reaction Icons---")]
     [SerializeField]
-    private GameObject happyIcon;
+    private Image reactionImage;
 
     [SerializeField]
-    private GameObject madIcon;
+    private Sprite happySprite;
 
+    [SerializeField]
+    private Sprite madSprite;
+
+    [Header("---Delays---")]
+    [SerializeField]
+    private float badOrderReactionTime = 1.0f;
+
+    [SerializeField]
+    private float customerHitReactionTime = 1.5f;
+    
+    //
     private GameObject[] ingredientIcons;
 
     private IngredientsENUM[] ingredientsList;
@@ -122,17 +133,43 @@ public class OrderPromptController : MonoBehaviour
 
     }
 
-    public void SuccessfulOrder()
+    /// <summary>
+    /// Wait some seconds and then disable the reaction.
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    private IEnumerator HideIngredientsWithReactionForSeconds(float seconds)
     {
-        DisableAllIcons();
+        yield return new WaitForSeconds(seconds);
 
-        Instantiate(happyIcon, reactionSlot.transform, false);
+        reactionImage.enabled = false;
     }
 
-    public void FailureOrder()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void OnSuccessfulOrder()
+    {
+        DisableAllIcons();
+        reactionImage.sprite = happySprite;
+        reactionImage.enabled = true;
+        //Instantiate(happyIcon, reactionSlot.transform, false);
+    }
+
+    public void OnFailedOrder()
     {
         DisableAllIcons();
 
-        Instantiate(madIcon, reactionSlot.transform, false);
+        //Instantiate(madIcon, reactionSlot.transform, false);
+        reactionImage.sprite = madSprite;
+        reactionImage.enabled = true;
+        StartCoroutine(HideIngredientsWithReactionForSeconds(badOrderReactionTime));
+    }
+
+    public void OnCustomerHit()
+    {
+        reactionImage.sprite = madSprite;
+        reactionImage.enabled = true;
+        StartCoroutine(HideIngredientsWithReactionForSeconds(customerHitReactionTime));
     }
 }
