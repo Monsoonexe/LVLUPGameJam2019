@@ -13,6 +13,13 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     private Customer[] customersInScene;
 
+    [Header("---Reaction Delays---")]
+    [SerializeField]
+    private float badOrderReactionTime = 1.0f;
+
+    [SerializeField]
+    private float customerHitReactionTime = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +62,12 @@ public class CustomerManager : MonoBehaviour
         {
             customersInScene[i] = customerGameObjects[i].GetComponent<Customer>() as Customer;
         }
+    }
+
+    public void InitReactionDelays(ref float badOrderReactionTime, ref float customerHitReactionTime)
+    {
+        badOrderReactionTime = this.badOrderReactionTime;
+        customerHitReactionTime = this.customerHitReactionTime;
     }
 
     /// <summary>

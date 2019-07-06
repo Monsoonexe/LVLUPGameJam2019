@@ -10,6 +10,10 @@ public class Customer : MonoBehaviour
     private static CustomerManager customerManager;
     private static ScoreManager scoreManager;
 
+    //delays
+    private static float badOrderDelay = 1.0f;
+    private static float customerHitDelay = 1.5f;
+
     [Header("---Order Stuff---")]
     [SerializeField]
     private OrderPromptController orderPromptController;
@@ -49,6 +53,7 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         GatherReferences();
+
         if (!customerOrder)
         {
             GetNewRandomOrderFromCustomerManager();
@@ -58,7 +63,6 @@ public class Customer : MonoBehaviour
     private void Start()
     {
         RandomizeVisuals();
-
     }
 
     // Update is called once per frame
@@ -70,7 +74,16 @@ public class Customer : MonoBehaviour
     private void OnValidate()
     {
         GatherReferences();
+
         UpdateVisuals();
+    }
+
+    private static void InitDelays()
+    {
+        if (customerManager)//if not, use default values
+        {
+            customerManager.InitReactionDelays(ref badOrderDelay, ref customerHitDelay);
+        }
     }
 
     private void GatherReferences()
@@ -83,8 +96,9 @@ public class Customer : MonoBehaviour
         if (!customerManager)
         {
             customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+            InitDelays();//or use defaults
         }
-
+        
         if (!scoreManager)
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
@@ -171,34 +185,28 @@ public class Customer : MonoBehaviour
     {
         PlayRandomSound(customerProfile.hitWithPizzaSounds);
         scoreManager.OnCustomerHit();
-        orderPromptController.OnCustomerHit();
+        orderPromptController.OnCustomerHit(customerHitDelay);
     }
 
     private void CustomerSatisfied()
     {
-        //audio
-        PlayRandomSound(customerProfile.customerSatisfiedSounds);
+        PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
+        
+        scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);//tally and adjust score
+        
+        orderPromptController.OnSuccessfulOrder();//update visuals
 
-        //tally and adjust score
-        scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);
-
-        //update visuals
-        orderPromptController.OnSuccessfulOrder();
-
-        orderHasBeenDelivered = true;//flag
+        orderHasBeenDelivered = true;//flag to reject all future Orders
         //Debug.Log("Thanks for the Pizza!!!!");
     }
 
     private void RejectPizza()
     {
-        //audio
-        PlayRandomSound(customerProfile.badOrderSounds);
-
-        //score
-        scoreManager.OnIncorrectOrderDelivered();
-
-        //update visuals
-        orderPromptController.OnFailedOrder();
+        PlayRandomSound(customerProfile.badOrderSounds);//audio
+        
+        scoreManager.OnIncorrectOrderDelivered();//score
+        
+        orderPromptController.OnFailedOrder(badOrderDelay);//update visuals
 
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }

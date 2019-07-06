@@ -40,13 +40,7 @@ public class OrderPromptController : MonoBehaviour
 
     [Header("---Delays---")]
     [SerializeField]
-    private float badOrderReactionTime = 1.0f;
-
-    [SerializeField]
-    private float customerHitReactionTime = 1.5f;
-
-    [SerializeField]
-    private float closeOrderPromptWindowTime = 3.0f;
+    private float closePromptAfterSeconds = 3.0f;
     
     //
     private GameObject[] ingredientIcons;
@@ -184,28 +178,39 @@ public class OrderPromptController : MonoBehaviour
     }
 
     /// <summary>
+    /// Called externally.
+    /// </summary>
+    /// <param name="seconds"></param>
+    public void CloseOrderPromptAfterSeconds(float seconds)
+    {
+        StartCoroutine(CloseOrderBubbleAfterSeconds(seconds));
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public void OnSuccessfulOrder()
     {
         ShowReaction(happySprite);
+
+        StartCoroutine(CloseOrderBubbleAfterSeconds(closePromptAfterSeconds));
     }
 
     /// <summary>
     /// 
     /// </summary>
-    public void OnFailedOrder()
+    public void OnFailedOrder(float reactionDelaySeconds = 1.0f)
     {
         ShowReaction(madSprite);
-        StartCoroutine(HideIngredientsWithReactionForSeconds(badOrderReactionTime));//show Ingredients after time
+        StartCoroutine(HideIngredientsWithReactionForSeconds(reactionDelaySeconds));
     }
 
     /// <summary>
     /// 
     /// </summary>
-    public void OnCustomerHit()
+    public void OnCustomerHit(float reactionDelaySeconds = 1.5f)
     {
         ShowReaction(madSprite);
-        StartCoroutine(HideIngredientsWithReactionForSeconds(customerHitReactionTime));//show Ingredients after time
+        StartCoroutine(HideIngredientsWithReactionForSeconds(reactionDelaySeconds));
     }
 }
