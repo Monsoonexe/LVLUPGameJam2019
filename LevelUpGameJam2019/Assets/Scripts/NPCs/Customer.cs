@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Animator))]
@@ -13,6 +14,9 @@ public class Customer : MonoBehaviour
     //delays
     private static float badOrderDelay = 1.0f;
     private static float customerHitDelay = 1.5f;
+
+    [SerializeField]
+    private CustomerStateENUM customerState;
 
     [Header("---Order Stuff---")]
     [SerializeField]
@@ -48,6 +52,13 @@ public class Customer : MonoBehaviour
 
     //other stuff
     private bool orderHasBeenDelivered = false;
+
+    /// <summary>
+    /// Customer will reject all Orders and hide Ingredients list when mad.
+    /// </summary>
+    private bool customerMad = false;
+
+    private Coroutine coroutine_rejectOrders;
 
     // Start is called before the first frame update
     void Awake()
@@ -131,7 +142,7 @@ public class Customer : MonoBehaviour
 
             if (hitPizzaBox)
             {
-                if (!orderHasBeenDelivered)
+                if (!orderHasBeenDelivered && !customerMad)
                 {
                     var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
@@ -183,15 +194,19 @@ public class Customer : MonoBehaviour
     /// </summary>
     private void OnCustomerHit()
     {
-        PlayRandomSound(customerProfile.hitWithPizzaSounds);
-        scoreManager.OnCustomerHit();
-        orderPromptController.OnCustomerHit(customerHitDelay);
+        PlayRandomSound(customerProfile.hitWithPizzaSounds);//audio
+
+        scoreManager.OnCustomerHit();//score
+
+        orderPromptController.OnCustomerHit(customerHitDelay);//update visuals
+        
+        HandleRejectOrderCooldown();//handle cooldown coroutine
     }
 
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
-        
+
         scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);//tally and adjust score
         
         orderPromptController.OnSuccessfulOrder();//update visuals
@@ -208,7 +223,33 @@ public class Customer : MonoBehaviour
         
         orderPromptController.OnFailedOrder(badOrderDelay);//update visuals
 
+        HandleRejectOrderCooldown();//handle cooldown
+
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
+    }
+
+    /// <summary>
+    /// Start new, restart if already existing to avoid overlap.
+    /// </summary>
+    private void HandleRejectOrderCooldown()
+    {
+        //handle cooldown coroutine
+        if (coroutine_rejectOrders != null)//stop existing
+        {
+            StopCoroutine(coroutine_rejectOrders);
+        }
+        coroutine_rejectOrders = StartCoroutine(RejectOrdersWhileMad());//start new
+    }
+
+    /// <summary>
+    /// Reject Orders while mad.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RejectOrdersWhileMad()
+    {
+        customerMad = true;
+        yield return new WaitForSeconds(badOrderDelay);
+        customerMad = false;
     }
 
     /// <summary>
