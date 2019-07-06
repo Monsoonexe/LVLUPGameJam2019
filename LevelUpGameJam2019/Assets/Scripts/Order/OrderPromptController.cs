@@ -122,15 +122,14 @@ public class OrderPromptController : MonoBehaviour
     }
 
     /// <summary>
-    /// SetActive(false) on all icons.
+    /// Iterate through and call SetActive(active) on all icons.
     /// </summary>
-    private void DisableAllIcons()
+    private void ToggleAllIcons(bool active)
     {
         foreach (var icon in slots)
         {
-            icon.SetActive(false);
+            icon.SetActive(active);
         }
-
     }
 
     /// <summary>
@@ -143,6 +142,7 @@ public class OrderPromptController : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         reactionImage.enabled = false;
+        ToggleAllIcons(true);
     }
 
     /// <summary>
@@ -150,7 +150,7 @@ public class OrderPromptController : MonoBehaviour
     /// </summary>
     public void OnSuccessfulOrder()
     {
-        DisableAllIcons();
+        ToggleAllIcons(false);
         reactionImage.sprite = happySprite;
         reactionImage.enabled = true;
         //Instantiate(happyIcon, reactionSlot.transform, false);
@@ -158,7 +158,7 @@ public class OrderPromptController : MonoBehaviour
 
     public void OnFailedOrder()
     {
-        DisableAllIcons();
+        ToggleAllIcons(false);
 
         //Instantiate(madIcon, reactionSlot.transform, false);
         reactionImage.sprite = madSprite;
