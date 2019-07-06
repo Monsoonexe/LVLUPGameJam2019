@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a8cb2700e8118439dae4d854547756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerState: 0
   orderPromptController: {fileID: 6585203837869068981}
   customerOrder: {fileID: 0}
   customerProfile: {fileID: 11400000, guid: a99c6bfc2c913384db771ca47854b9d5, type: 2}
