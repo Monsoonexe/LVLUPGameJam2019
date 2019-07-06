@@ -172,6 +172,10 @@ public class OrderPromptController : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Hide Ingredients, swap reaction sprite, and enable Component.
+    /// </summary>
+    /// <param name="sprite"></param>
     private void ShowReaction(Sprite sprite)
     {
         ToggleAllIcons(false);//hide ingredients
