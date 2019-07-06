@@ -6380,6 +6380,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: normalBackgroundColor.r
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: normalBackgroundColor.g
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: normalBackgroundColor.b
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: normalBackgroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: ingredientAddedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583690294410932102, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4468825678486826087, guid: 48d262b804a2c974d82be509e94cb241,
         type: 3}
       propertyPath: m_IsActive
