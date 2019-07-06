@@ -149,16 +149,6 @@ public class Customer : MonoBehaviour
         }//end if
     }
 
-    /// <summary>
-    /// The Customer was hit with a PizzaProjectile. REACT! roll a d6.
-    /// </summary>
-    private void OnCustomerHit()
-    {
-        PlayRandomSound(customerProfile.hitWithPizzaSounds);
-        scoreManager.OnCustomerHit();
-        orderPromptController.OnCustomerHit();
-    }
-
     [ContextMenu("Update Visuals")]
     private void UpdateVisuals()
     {
@@ -172,6 +162,16 @@ public class Customer : MonoBehaviour
             audioSource.clip = soundClipList.GetRandomSound();
             audioSource.Play();
         }
+    }
+    
+    /// <summary>
+    /// The Customer was hit with a PizzaProjectile. REACT! roll a d6.
+    /// </summary>
+    private void OnCustomerHit()
+    {
+        PlayRandomSound(customerProfile.hitWithPizzaSounds);
+        scoreManager.OnCustomerHit();
+        orderPromptController.OnCustomerHit();
     }
 
     private void CustomerSatisfied()
