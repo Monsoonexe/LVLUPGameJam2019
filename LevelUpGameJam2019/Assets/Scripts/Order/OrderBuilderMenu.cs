@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class OrderBuilderMenu : MonoBehaviour
 {
+    public const int maxIngredientsOnAnOrder = 5;
+
     [SerializeField]
     private Animator ingredientLoaderAnimator;
 
@@ -30,13 +32,22 @@ public class OrderBuilderMenu : MonoBehaviour
     [SerializeField]
     private Image anchovyBackgroundImage;
 
-    [Header("---Selected Color---")]
+    [Space(5)]
+    [Header("---Icon Background Colors---")]
     [SerializeField] private Color ingredientAddedColor;
+
+    [SerializeField] private Color normalBackgroundColor;
+
+    /// <summary>
+    /// List of all background images.
+    /// </summary>
+    private readonly Image[] backgroundImages = new Image[maxIngredientsOnAnOrder];
 
     // Start is called before the first frame update
     void Start()
     {
-
+        InitBackgroundImagesArray();
+        ResetAllBackgrounds();
     }
 
     // Update is called once per frame
@@ -46,9 +57,30 @@ public class OrderBuilderMenu : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Add all reference to a list for easy iteration.
+    /// </summary>
+    private void InitBackgroundImagesArray()
+    {
+        backgroundImages[0] = sauceBackgroundImage;
+        backgroundImages[1] = cheeseBackgroundImage;
+        backgroundImages[2] = peppBackgroundImage;
+        backgroundImages[3] = sausageBackgroundImage;
+        backgroundImages[4] = anchovyBackgroundImage;
+    }
+
+    private void ResetAllBackgrounds()
+    {
+        foreach(var image in backgroundImages)
+        {
+            image.color = normalBackgroundColor;
+        }
+    }
+
     public void OnOrderFired()
     {
         selectedIngredients.Clear();
+        ResetAllBackgrounds();
     }
 
     /// <summary>
@@ -66,26 +98,31 @@ public class OrderBuilderMenu : MonoBehaviour
     public void AddAnchovies()
     {
         selectedIngredients.Add(IngredientsENUM.Anchovies);
+        anchovyBackgroundImage.color = ingredientAddedColor;
     }
 
     public void AddCheese()
     {
         selectedIngredients.Add(IngredientsENUM.Cheese);
+        cheeseBackgroundImage.color = ingredientAddedColor;
     }
 
     public void AddPepperoni()
     {
         selectedIngredients.Add(IngredientsENUM.Pepperoni);
+        peppBackgroundImage.color = ingredientAddedColor;
     }
 
     public void AddSauce()
     {
         selectedIngredients.Add(IngredientsENUM.Sauce);
+        sauceBackgroundImage.color = ingredientAddedColor;
     }
 
     public void AddSausage()
     {
         selectedIngredients.Add(IngredientsENUM.Sausage);
+        sausageBackgroundImage.color = ingredientAddedColor;
     }
 
     /// <summary>
