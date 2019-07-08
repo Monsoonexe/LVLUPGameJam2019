@@ -80,6 +80,17 @@ public class CustomerManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Count how many Customers in Level did not receive their Order.
+    /// </summary>
+    /// <returns></returns>
+    public int CountMissedCustomers()
+    {
+        var satisfiedCustomers = CountSatisfiedCustomers();
+
+        return customersInScene.Length - satisfiedCustomers;
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
