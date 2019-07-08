@@ -212,5 +212,6 @@ public class ScoreManager : MonoBehaviour
     public void ShowLevelTally()
     {
         levelEndReadoutController.LoadTallyData(customersSatisfied, missedOrders, customersHit, incorrectOrders, sharksFed, shotsFired);
+        levelEndReadoutController.ReadLeaderboard(leaderboard);
     }
 }
