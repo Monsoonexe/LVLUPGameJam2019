@@ -12,10 +12,14 @@ public class LeaderboardSO : ScriptableObject
     /// [Alpha]
     /// </summary>
     [Header("***Leaderboard***")]
-    [Tooltip("Alpha")]
+    [Tooltip("[Alpha]")]
     [SerializeField]
     private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[5];
 
+    /// <summary>
+    /// Set a new high score.
+    /// </summary>
+    /// <param name="newScore"></param>
     public void SetNewHighScore(int newScore)
     {
         if(newScore > highScore)
@@ -24,7 +28,7 @@ public class LeaderboardSO : ScriptableObject
         }
         else
         {
-            Debug.LogError("What are you trying to pull? Hax!");
+            Debug.LogError("What are you trying to pull? Haxx!");
         }
     }
 
@@ -37,5 +41,14 @@ public class LeaderboardSO : ScriptableObject
     {
         return base.ToString();
         //do more here.
+    }
+
+    public void SubmitNewScore(int newScore)
+    {
+        //determine if new score belongs on leaderboard
+        //determine which position
+        //add this to proper place and move all other names lower
+        //remove lowest name
+
     }
 }
