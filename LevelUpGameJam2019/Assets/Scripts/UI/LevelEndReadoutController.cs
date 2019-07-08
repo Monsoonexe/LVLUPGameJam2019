@@ -46,7 +46,10 @@ public class LevelEndReadoutController : MonoBehaviour
 
     private void Start()
     {
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        if (!scoreManager)
+        {
+            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        }
     }
 
     [ContextMenu("Load Tally Data")]
