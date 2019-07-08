@@ -136,4 +136,13 @@ public class PizzaProjectile : MonoBehaviour
         GiveOrderIngredients(order.ToArray());
     }
 
+    /// <summary>
+    /// Apply launch force, such as when fired out of a cannon.
+    /// </summary>
+    /// <param name="force"></param>
+    public void GiveProjectileForce(Vector3 force)
+    {
+        myRigidbody.AddForce(force, ForceMode.Impulse);
+    }
+
 }

@@ -72,8 +72,8 @@ public class StationaryCannon : MonoBehaviour
     private float nextShootTime = 0;
 
     //object pooling stuff
-    private readonly List<GameObject> projectilePool = new List<GameObject>();
-    private const int maxProjectilesInScene = 30;
+    private const int projectilePoolSize = 20;
+    private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
 
     private void Awake()
     {
@@ -84,6 +84,8 @@ public class StationaryCannon : MonoBehaviour
     void Start()
     {
         GatherReferences();
+
+        InitProjectilePool();
     }
 
     // Update is called once per frame
@@ -109,35 +111,35 @@ public class StationaryCannon : MonoBehaviour
     }
 
     /// <summary>
+    /// Create GOs from Prefab and add to queue.
+    /// </summary>
+    private void InitProjectilePool()
+    {
+        for(var i = 0; i < projectilePoolSize; ++i)
+        {
+            var newProjectile = Instantiate(projectilePrefab);
+            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;//is this really necessary?
+
+            newProjectile.SetActive(false);
+            projectilePool.Enqueue(newProjectile);
+        }
+    }
+
+    /// <summary>
     /// Get an expired projectile from the pool or create a new one.
     /// </summary>
     /// <returns></returns>
     private GameObject GetNewProjectile()
     {
-        //first try to use an expired projectile
-        foreach(var projectile in projectilePool)
+        if(projectilePool.Count > 0)
         {
-            if (!projectile.activeSelf)//this projectile has expired and can be reused
-            {
-                projectile.SetActive(true);
-
-                return projectile;
-            }
-        }
-        //no expired projectile; create a new one if there is space
-        if (projectilePool.Count < maxProjectilesInScene)
-        {
-            var newProjectile = Instantiate(projectilePrefab);
-
-            projectilePool.Add(newProjectile);
-
-            return newProjectile;
+            return projectilePool.Dequeue();
         }
 
-        else//create a new object not controlled by pool
+        else//object pool is empty
         {
             Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed.  Change fire rate or pool quantity.", this.gameObject);
-            return null; 
+            return null;
         }
     }
 
@@ -168,7 +170,7 @@ public class StationaryCannon : MonoBehaviour
             scoreManager.OnShotFired();//increment counter
 
             //Get projectile from pool
-            var newProjectile = GetNewProjectile() as GameObject;
+            var newProjectile = GetNewProjectile();
 
             //pick a point to spawn at
             var projectileSpawnPoint = GetProjectileSpawnPoint();
@@ -176,14 +178,11 @@ public class StationaryCannon : MonoBehaviour
             newProjectile.transform.position = projectileSpawnPoint.position;
             newProjectile.transform.rotation = projectileSpawnPoint.rotation;
 
-            //handle physics of projectile
-            var attachedRB = newProjectile.GetComponent<Rigidbody>() as Rigidbody;
-
-            //attachedRB.velocity = myRigidbody.velocity;//apply velocity of cannon //CANNON HAS NO VELOCITY!
-            attachedRB.AddForce(turretTransform.forward * projectileForce, ForceMode.Impulse);//add ballistics forward force
-
             //give proper order
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
+
+            //handle physics
+            pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);
 
             if (orderBuilder)
             {
@@ -195,7 +194,7 @@ public class StationaryCannon : MonoBehaviour
                 Debug.Log("No orders given to Cannon. Blank pizza.", this);
             }
             
-            //play cannon fire sound
+            //audio
             myAudioSource.clip = cannonFireSound;
             myAudioSource.Play();
         }
@@ -203,7 +202,6 @@ public class StationaryCannon : MonoBehaviour
         else
         {
             Debug.Log(this.gameObject.name + ":  No Projectile Prefab.  BANG!", this.gameObject);
-
         }
     }
 
