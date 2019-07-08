@@ -15,4 +15,9 @@ public struct LeaderboardEntry
         this.name = name;
         this.score = score;
     }
+
+    public override string ToString()
+    {
+        return name.ToString() + " " + score.ToString();
+    }
 }
