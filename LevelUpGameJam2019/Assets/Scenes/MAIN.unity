@@ -5643,19 +5643,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 479769678}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &394886884
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 394886879}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &396789575
 GameObject:
   m_ObjectHideFlags: 0
@@ -29160,6 +29147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '*Level End Volume'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403924368105705957, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7403924368105705956, guid: f4880a872c6dab24b8bbbfe3a485881a,
         type: 3}
