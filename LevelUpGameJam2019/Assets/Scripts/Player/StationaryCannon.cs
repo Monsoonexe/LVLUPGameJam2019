@@ -72,14 +72,9 @@ public class StationaryCannon : MonoBehaviour
     private float nextShootTime = 0;
 
     //object pooling stuff
-    private const int projectilePoolSize = 20;
+    private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
-
-    private void Awake()
-    {
-
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -118,7 +113,7 @@ public class StationaryCannon : MonoBehaviour
         for(var i = 0; i < projectilePoolSize; ++i)
         {
             var newProjectile = Instantiate(projectilePrefab);
-            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;//is this really necessary?
+            //var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;//is this really necessary?
 
             newProjectile.SetActive(false);
             projectilePool.Enqueue(newProjectile);
@@ -136,6 +131,8 @@ public class StationaryCannon : MonoBehaviour
             var queuedProjectile = projectilePool.Dequeue();
 
             queuedProjectile.SetActive(true);
+
+            projectilePool.Enqueue(queuedProjectile);//re-queue for re-use
 
             return queuedProjectile;
         }
