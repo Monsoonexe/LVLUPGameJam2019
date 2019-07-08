@@ -14,7 +14,13 @@ public class LeaderboardSO : ScriptableObject
     [Tooltip("[Alpha]")]
     [SerializeField]
     private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[leaderboardSize];
-    
+
+    [ContextMenu("WIPE ALL SCORES")]
+    private void ResetAllScores()
+    {
+        leaderboardScores = new LeaderboardEntry[leaderboardSize];
+    }
+
     public override string ToString()
     {
         return base.ToString();
@@ -34,10 +40,18 @@ public class LeaderboardSO : ScriptableObject
             }
         }
     }
-
-    [ContextMenu("WIPE ALL SCORES")]
-    private void ResetAllScores()
+    
+    public LeaderboardEntry GetEntry(int index)
     {
-        leaderboardScores = new LeaderboardEntry[leaderboardSize];
+        if(index > 0 && index < leaderboardScores.Length)
+        {
+            return leaderboardScores[index];
+        }
+        else
+        {
+            Debug.LogError("ERROR! Request leaderboard Entry out of array index!");
+            //gotta return something.
+            return new LeaderboardEntry("", 0);
+        }
     }
 }
