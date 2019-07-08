@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
@@ -18,6 +14,9 @@ public class ScoreManager : MonoBehaviour
 
     [Header("---Tallys---")]
     [SerializeField]
+    private LevelEndReadoutController levelEndReadoutController;
+
+    [SerializeField]
     private int shotsFired;
 
     [SerializeField]
@@ -27,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     private int customersHit;
 
     [SerializeField]
-    private int incorrectOrdersDelivered;
+    private int incorrectOrders;
 
     [SerializeField]
     private int missedOrders;
@@ -103,10 +102,44 @@ public class ScoreManager : MonoBehaviour
         scoreTMPro.text = playerScore.ToString();
     }
 
-    public void UpdateHighScoreText()
+    private void UpdateHighScoreText()
     {
         highScoreTMPro.text = leaderboard.highScore.ToString();
     }
+
+    #region Get Tally Methods
+
+    public int GetTallyCustomersSatisfied()
+    {
+        return customersSatisfied;
+    }
+
+    public int GetTallyMissedOrders()
+    {
+        return missedOrders;
+    }
+
+    public int GetTallyCustomersHit()
+    {
+        return customersHit;
+    }
+
+    public int GetTallyIncorrectOrders()
+    {
+        return incorrectOrders;
+    }
+
+    public int GetTallySharksFed()
+    {
+        return sharksFed;
+    }
+
+    public int GetTallyShotsFired()
+    {
+        return shotsFired;
+    }
+
+    #endregion
 
     public void OnShotFired()
     {
@@ -124,7 +157,7 @@ public class ScoreManager : MonoBehaviour
     
     public void OnIncorrectOrderDelivered()
     {
-        ++incorrectOrdersDelivered;
+        ++incorrectOrders;
 
         playerScore -= incorrectOrderDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
@@ -168,11 +201,16 @@ public class ScoreManager : MonoBehaviour
         customersSatisfied = 0;
         customersHit = 0;
         missedOrders = 0;
-        incorrectOrdersDelivered = 0;
+        incorrectOrders = 0;
         sharksFed = 0;
 
         //update UI
         UpdatePlayerScoreText();
         UpdateHighScoreText();
+    }
+
+    public void ShowLevelTally()
+    {
+        levelEndReadoutController.LoadTallyData(customersSatisfied, missedOrders, customersHit, incorrectOrders, sharksFed, shotsFired);
     }
 }
