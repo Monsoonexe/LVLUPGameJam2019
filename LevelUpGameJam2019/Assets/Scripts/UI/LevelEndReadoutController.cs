@@ -86,10 +86,10 @@ public class LevelEndReadoutController : MonoBehaviour
         }
     }
 
-    private static void LoadLeaderboardEntry(TextMeshProUGUI scoreElement, TextMeshProUGUI nameElement, LeaderboardEntry entryData)
+    private static void LoadLeaderboardEntry(TextMeshProUGUI nameElement, TextMeshProUGUI scoreElement, LeaderboardEntry entryData)
     {
-        scoreElement.text = entryData.score.ToString();
         nameElement.text = entryData.name.ToString();
+        scoreElement.text = entryData.score.ToString();
     }
 
     [ContextMenu("Load Tally Data")]
