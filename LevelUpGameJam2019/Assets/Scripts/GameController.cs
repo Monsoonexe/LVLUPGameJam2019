@@ -72,8 +72,8 @@ public class GameController : MonoBehaviour
         //-enable menu controls (mouse, keyboard)
         //Show player stats
         //wait for Player to move on to next level
-        scoreManager.ShowLevelTally();
         SaveData();
+        scoreManager.ShowLevelTally();
         //ReturnToMainMenu();
     }
 
