@@ -86,6 +86,12 @@ public class LevelEndReadoutController : MonoBehaviour
         }
     }
 
+    private static void LoadLeaderboardEntry(TextMeshProUGUI scoreElement, TextMeshProUGUI nameElement, LeaderboardEntry entryData)
+    {
+        scoreElement.text = entryData.score.ToString();
+        nameElement.text = entryData.name.ToString();
+    }
+
     [ContextMenu("Load Tally Data")]
     public void LoadTallyData()
     {
@@ -111,9 +117,10 @@ public class LevelEndReadoutController : MonoBehaviour
         value_piesFired.text = shotsFired.ToString();
     }
 
-    public void ReadLeaderboard()
-    {
 
+    public void ReadLeaderboard(LeaderboardSO leaderboardData)
+    {
+        
     }
 
 }
