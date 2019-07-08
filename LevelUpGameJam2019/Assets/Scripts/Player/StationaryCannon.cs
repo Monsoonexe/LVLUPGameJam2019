@@ -113,8 +113,7 @@ public class StationaryCannon : MonoBehaviour
         for(var i = 0; i < projectilePoolSize; ++i)
         {
             var newProjectile = Instantiate(projectilePrefab);
-            //var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;//is this really necessary?
-
+            
             newProjectile.SetActive(false);
             projectilePool.Enqueue(newProjectile);
         }
@@ -126,23 +125,16 @@ public class StationaryCannon : MonoBehaviour
     /// <returns></returns>
     private GameObject GetNewProjectile()
     {
-        if(projectilePool.Count > 0)
-        {
-            var queuedProjectile = projectilePool.Dequeue();
+        var queuedProjectile = projectilePool.Dequeue();
 
-            queuedProjectile.SetActive(true);
+        queuedProjectile.SetActive(false);//reset projectile
+        queuedProjectile.SetActive(true);//turn on
 
-            projectilePool.Enqueue(queuedProjectile);//re-queue for re-use
+        projectilePool.Enqueue(queuedProjectile);//re-queue for re-use
 
-            return queuedProjectile;
-        }
+        //var pizzaProjectile = queuedProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;//is this really necessary?//avoid reflection where possible
 
-        else//object pool is empty
-        {
-            Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed.  Change fire rate or pool quantity.", this.gameObject);
-
-            return null;
-        }
+        return queuedProjectile;
     }
 
     /// <summary>
