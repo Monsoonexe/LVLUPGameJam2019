@@ -2925,6 +2925,16 @@ MonoBehaviour:
   value_wrongOrders: {fileID: 1786579009489114020}
   value_sharksFed: {fileID: 5893650468108504144}
   value_piesFired: {fileID: 4687794521187937469}
+  entry1_score: {fileID: 8379564211738894840}
+  entry2_score: {fileID: 4611833706833558617}
+  entry3_score: {fileID: 848761313630489504}
+  entry4_score: {fileID: 8609074973175094697}
+  entry5_score: {fileID: 3298977116198826766}
+  entry1_name: {fileID: 1551304975793649343}
+  entry2_name: {fileID: 3582883759970836779}
+  entry3_name: {fileID: 6899562773735960361}
+  entry4_name: {fileID: 5821574129994767395}
+  entry5_name: {fileID: 8739482976957518341}
 --- !u!1 &3849456739687758198
 GameObject:
   m_ObjectHideFlags: 0

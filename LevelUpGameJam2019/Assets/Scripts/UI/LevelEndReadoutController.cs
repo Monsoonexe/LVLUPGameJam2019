@@ -44,6 +44,40 @@ public class LevelEndReadoutController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI value_piesFired;
 
+    [Space(5)]
+    [Header("---Leaderboard Scores---")]
+    [SerializeField]
+    private TextMeshProUGUI entry1_score;
+
+    [SerializeField]
+    private TextMeshProUGUI entry2_score;
+
+    [SerializeField]
+    private TextMeshProUGUI entry3_score;
+
+    [SerializeField]
+    private TextMeshProUGUI entry4_score;
+
+    [SerializeField]
+    private TextMeshProUGUI entry5_score;
+
+    [Space(5)]
+    [Header("---Leaderboard Initials---")]
+    [SerializeField]
+    private TextMeshProUGUI entry1_name;
+
+    [SerializeField]
+    private TextMeshProUGUI entry2_name;
+
+    [SerializeField]
+    private TextMeshProUGUI entry3_name;
+
+    [SerializeField]
+    private TextMeshProUGUI entry4_name;
+
+    [SerializeField]
+    private TextMeshProUGUI entry5_name;
+
     private void Start()
     {
         if (!scoreManager)
@@ -75,6 +109,11 @@ public class LevelEndReadoutController : MonoBehaviour
         value_wrongOrders.text =wrongOrders.ToString();
         value_sharksFed.text = sharksFed.ToString();
         value_piesFired.text = shotsFired.ToString();
+    }
+
+    public void ReadLeaderboard()
+    {
+
     }
 
 }
