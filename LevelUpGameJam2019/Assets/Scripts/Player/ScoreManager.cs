@@ -89,31 +89,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI highScoreTMPro;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-      
-    }
-
     private void Start()
     {
-        //GatherReferences();   
         UpdatePlayerScoreText();
         UpdateHighScoreText();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    /// <summary>
-    /// Get a handle on every class reference.
-    /// </summary>
-    private void GatherReferences()
-    {
-        //Gather external references
     }
 
     /// <summary>
@@ -126,27 +105,7 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateHighScoreText()
     {
-        highScoreTMPro.text = leaderboard.GetHighScore().ToString();
-    }
-
-    /// <summary>
-    /// Checks high score and saves existing score if higher.//initials are always RSO
-    /// </summary>
-    public void HandleHighScore()
-    {
-        var currentHighScore = leaderboard.GetHighScore();
-
-        if (playerScore > currentHighScore)
-        {
-            Debug.Log("PLAYER BEAT THE HIGH SCORE! Old score: " + currentHighScore.ToString() + " | new high score: " + playerScore.ToString());
-            //show UI stuff
-            //input initials RSO
-
-            //set new high score
-            leaderboard.SetNewHighScore(playerScore);
-
-            UpdateHighScoreText();
-        }
+        highScoreTMPro.text = leaderboard.highScore.ToString();
     }
 
     public void OnShotFired()
@@ -166,6 +125,7 @@ public class ScoreManager : MonoBehaviour
     public void OnIncorrectOrderDelivered()
     {
         ++incorrectOrdersDelivered;
+
         playerScore -= incorrectOrderDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
@@ -181,11 +141,19 @@ public class ScoreManager : MonoBehaviour
     public void OnCustomerHit()
     {
         ++customersHit;
+
         playerScore -= customerHitDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         //update visuals
         UpdatePlayerScoreText();
+    }
+
+    public void HandleHighScore()
+    {
+        var temporaryInitials = "RSO";
+
+        leaderboard.SubmitNewScore(new LeaderboardEntry(temporaryInitials, playerScore));
     }
 
     /// <summary>
@@ -194,6 +162,7 @@ public class ScoreManager : MonoBehaviour
     [ContextMenu("Reset Score and Tallys")]
     public void ResetScores()
     {
+        //reset values
         playerScore = 0;
         shotsFired = 0;
         customersSatisfied = 0;
@@ -202,7 +171,8 @@ public class ScoreManager : MonoBehaviour
         incorrectOrdersDelivered = 0;
         sharksFed = 0;
 
+        //update UI
         UpdatePlayerScoreText();
+        UpdateHighScoreText();
     }
-
 }
