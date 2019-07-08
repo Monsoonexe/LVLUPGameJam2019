@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Leaderboard_", menuName = "ScriptableObjects/New Leaderboard")]
 public class LeaderboardSO : ScriptableObject
 {
-    [SerializeField]
-    private int highScore = 0;
+    private const int leaderboardSize = 5;
+
+    public int highScore { get { return leaderboardScores[0].score; } }
 
     /// <summary>
     /// [Alpha]
@@ -14,41 +13,31 @@ public class LeaderboardSO : ScriptableObject
     [Header("***Leaderboard***")]
     [Tooltip("[Alpha]")]
     [SerializeField]
-    private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[5];
-
-    /// <summary>
-    /// Set a new high score.
-    /// </summary>
-    /// <param name="newScore"></param>
-    public void SetNewHighScore(int newScore)
-    {
-        if(newScore > highScore)
-        {
-            highScore = newScore;
-        }
-        else
-        {
-            Debug.LogError("What are you trying to pull? Haxx!");
-        }
-    }
-
-    public int GetHighScore()
-    {
-        return highScore;
-    }
-
+    private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[leaderboardSize];
+    
     public override string ToString()
     {
         return base.ToString();
         //do more here.
     }
 
-    public void SubmitNewScore(int newScore)
+    public void SubmitNewScore(LeaderboardEntry newScoreEntry)
     {
         //determine if new score belongs on leaderboard
-        //determine which position
-        //add this to proper place and move all other names lower
-        //remove lowest name
+        for(var i = 0; i < leaderboardScores.Length; ++i)
+        {
+            if(leaderboardScores[i].score < newScoreEntry.score)
+            {
+                var temp = leaderboardScores[i];
+                leaderboardScores[i] = newScoreEntry;
+                newScoreEntry = temp;
+            }
+        }
+    }
 
+    [ContextMenu("WIPE ALL SCORES")]
+    private void ResetAllScores()
+    {
+        leaderboardScores = new LeaderboardEntry[leaderboardSize];
     }
 }
