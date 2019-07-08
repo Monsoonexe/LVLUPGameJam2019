@@ -35,7 +35,10 @@ public class GameController : MonoBehaviour
 
     private void GatherReferences()
     {
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        if (!scoreManager)
+        {
+            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        }
     }
 
     /// <summary>
@@ -69,8 +72,9 @@ public class GameController : MonoBehaviour
         //-enable menu controls (mouse, keyboard)
         //Show player stats
         //wait for Player to move on to next level
+        scoreManager.ShowLevelTally();
         SaveData();
-        ReturnToMainMenu();
+        //ReturnToMainMenu();
     }
 
     ///<summary>
@@ -81,6 +85,5 @@ public class GameController : MonoBehaviour
         //load next scene
         SceneManager.LoadSceneAsync(mainMenuSceneName);
     }
-
 
 }
