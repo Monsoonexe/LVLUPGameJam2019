@@ -133,12 +133,17 @@ public class StationaryCannon : MonoBehaviour
     {
         if(projectilePool.Count > 0)
         {
-            return projectilePool.Dequeue();
+            var queuedProjectile = projectilePool.Dequeue();
+
+            queuedProjectile.SetActive(true);
+
+            return queuedProjectile;
         }
 
         else//object pool is empty
         {
             Debug.LogError("Object Pooling ERROR! Cannon requesting more projectiles than allowed.  Change fire rate or pool quantity.", this.gameObject);
+
             return null;
         }
     }
