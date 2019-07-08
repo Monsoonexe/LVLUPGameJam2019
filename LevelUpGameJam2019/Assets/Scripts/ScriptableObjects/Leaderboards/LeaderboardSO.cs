@@ -43,13 +43,13 @@ public class LeaderboardSO : ScriptableObject
     
     public LeaderboardEntry GetEntry(int index)
     {
-        if(index > 0 && index < leaderboardScores.Length)
+        if(index >= 0 && index < leaderboardScores.Length)
         {
             return leaderboardScores[index];
         }
         else
         {
-            Debug.LogError("ERROR! Request leaderboard Entry out of array index!");
+            Debug.LogError("ERROR! Request leaderboard Entry out of array index: " + index.ToString());
             //gotta return something.
             return new LeaderboardEntry("", 0);
         }
