@@ -86,6 +86,12 @@ public class LevelEndReadoutController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Load data into TMPro Texts.
+    /// </summary>
+    /// <param name="nameElement"></param>
+    /// <param name="scoreElement"></param>
+    /// <param name="entryData"></param>
     private static void LoadLeaderboardEntry(TextMeshProUGUI nameElement, TextMeshProUGUI scoreElement, LeaderboardEntry entryData)
     {
         nameElement.text = entryData.name.ToString();
@@ -120,7 +126,11 @@ public class LevelEndReadoutController : MonoBehaviour
 
     public void ReadLeaderboard(LeaderboardSO leaderboardData)
     {
-        
+        LoadLeaderboardEntry(entry1_name, entry1_score, leaderboardData.GetEntry(0));
+        LoadLeaderboardEntry(entry2_name, entry2_score, leaderboardData.GetEntry(1));
+        LoadLeaderboardEntry(entry3_name, entry3_score, leaderboardData.GetEntry(2));
+        LoadLeaderboardEntry(entry4_name, entry4_score, leaderboardData.GetEntry(3));
+        LoadLeaderboardEntry(entry5_name, entry5_score, leaderboardData.GetEntry(4));
     }
 
 }
