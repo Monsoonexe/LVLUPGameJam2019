@@ -7,7 +7,6 @@ public class CustomerManager : MonoBehaviour
     [SerializeField]
     private Order[] possibleOrders;
 
-    
     /// <summary>
     /// List of all Customers that exist in Scene at the time of gathering.
     /// </summary>
@@ -23,7 +22,7 @@ public class CustomerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        customersInScene = GatherCustomersInScene();
     }
 
     // Update is called once per frame
@@ -52,16 +51,18 @@ public class CustomerManager : MonoBehaviour
     /// <summary>
     /// Get a handle on every Customer in scene an keep in array.
     /// </summary>
-    private void GatherCustomersInScene()
+    private static Customer[] GatherCustomersInScene()
     {
-        var customerGameObjects = GameObject.FindGameObjectsWithTag("Customers");//gather GO
+        var customerGameObjects = GameObject.FindGameObjectsWithTag("Customer");//gather GO
 
-        customersInScene = new Customer[customerGameObjects.Length];//create array
+        var customersInScene = new Customer[customerGameObjects.Length];//create array
 
         for (var i = 0; i < customersInScene.Length; ++i)//fill array
         {
             customersInScene[i] = customerGameObjects[i].GetComponent<Customer>() as Customer;
         }
+
+        return customersInScene;
     }
 
     public void InitReactionDelays(ref float badOrderReactionTime, ref float customerHitReactionTime)
@@ -107,6 +108,15 @@ public class CustomerManager : MonoBehaviour
         }
 
         return satisfiedCustomers;
+    }
+
+    /// <summary>
+    /// How many Customers are in this Scene?
+    /// </summary>
+    /// <returns></returns>
+    public int CountCustomersInScene()
+    {
+        return customersInScene.Length;
     }
 
     /// <summary>
