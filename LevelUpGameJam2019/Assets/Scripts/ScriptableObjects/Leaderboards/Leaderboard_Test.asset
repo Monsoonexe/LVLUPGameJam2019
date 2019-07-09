@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Leaderboard_Test
   m_EditorClassIdentifier: 
   leaderboardScores:
+  - name: Brih!
+    score: 2265
+  - name: Rich
+    score: 890
   - name: RSO
     score: 320
   - name: RSO
     score: 320
   - name: RSO
     score: 145
-  - name: RSO
-    score: 145
-  - name: 
-    score: 0
