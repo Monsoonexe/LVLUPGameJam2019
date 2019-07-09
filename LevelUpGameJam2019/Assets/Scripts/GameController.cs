@@ -4,9 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-
     [SerializeField]
-    private GameObject playerObject;
+    private StationaryCannon pizzaCannon;
 
     /// <summary>
     /// 
@@ -39,6 +38,11 @@ public class GameController : MonoBehaviour
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
+
+        if (!pizzaCannon)
+        {
+            pizzaCannon = GameObject.FindGameObjectWithTag("Player").GetComponent<StationaryCannon>() as StationaryCannon;
+        }
     }
 
     public void ReloadLevel()
@@ -61,7 +65,7 @@ public class GameController : MonoBehaviour
     {
         //migrate Player input 
         //-disable cannon input
-        //-enable menu controls (mouse, keyboard)
+        pizzaCannon.gameObject.SetActive(false);
         //Show player stats
         //wait for Player to move on to next level
         scoreManager.OnLevelsEnd();
