@@ -88,10 +88,23 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI highScoreTMPro;
 
+    //external Mono References
+    private CustomerManager customerManager;
+
     private void Start()
     {
+        GatherReferences();
+
         UpdatePlayerScoreText();
         UpdateHighScoreText();
+    }
+
+    private void GatherReferences()
+    {
+        if (!customerManager)
+        {
+            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+        }
     }
 
     /// <summary>
@@ -114,9 +127,13 @@ public class ScoreManager : MonoBehaviour
         return customersSatisfied;
     }
 
+    /// <summary>
+    /// Of all the Customers in the Scene, how many of them got an incorrect Order?
+    /// </summary>
+    /// <returns></returns>
     public int GetTallyMissedOrders()
     {
-        return missedOrders;
+        return customerManager.CountMissedCustomers();
     }
 
     public int GetTallyCustomersHit()
@@ -140,6 +157,16 @@ public class ScoreManager : MonoBehaviour
     }
 
     #endregion
+
+    /// <summary>
+    /// Get a copy of the entry with given index.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public LeaderboardEntry GetEntry(int index)
+    {
+        return leaderboard.GetEntry(index);
+    }
 
     public void OnShotFired()
     {
@@ -211,7 +238,6 @@ public class ScoreManager : MonoBehaviour
 
     public void ShowLevelTally()
     {
-        levelEndReadoutController.LoadTallyData(customersSatisfied, missedOrders, customersHit, incorrectOrders, sharksFed, shotsFired);
-        levelEndReadoutController.ReadLeaderboard(leaderboard);
+        levelEndReadoutController.gameObject.SetActive(true);
     }
 }
