@@ -248,7 +248,6 @@ public class ScoreManager : MonoBehaviour
         if (leaderboard.IsScoreOnLeaderboard(playerScore))
         {
             newHighScoreWindowManager.gameObject.SetActive(true);
-            UpdateHighScoreText();
         }
 
         else
@@ -266,6 +265,7 @@ public class ScoreManager : MonoBehaviour
     {
         leaderboard.SubmitNewScore(new LeaderboardEntry(playerName, playerScore));
         levelEndReadoutController.gameObject.SetActive(true);
+        UpdateHighScoreText();
     }
 
 }
