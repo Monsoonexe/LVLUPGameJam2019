@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private StationaryCannon pizzaCannon;
 
+    [SerializeField]
+    private GameObject ingredientBuilderCanvas;
+
     /// <summary>
     /// 
     /// </summary>
@@ -66,6 +69,7 @@ public class GameController : MonoBehaviour
         //migrate Player input 
         //-disable cannon input
         pizzaCannon.gameObject.SetActive(false);
+        ingredientBuilderCanvas.SetActive(false);
         //Show player stats
         //wait for Player to move on to next level
         scoreManager.OnLevelsEnd();
