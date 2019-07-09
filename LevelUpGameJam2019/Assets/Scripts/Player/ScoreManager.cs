@@ -244,9 +244,8 @@ public class ScoreManager : MonoBehaviour
     public void OnLevelsEnd()
     {
         //check if Player got a new high score
-        var PlayerGotHighScore = true;
-
-        if (PlayerGotHighScore)
+        
+        if (leaderboard.IsScoreOnLeaderboard(playerScore))
         {
             newHighScoreWindowManager.gameObject.SetActive(true);
         }
