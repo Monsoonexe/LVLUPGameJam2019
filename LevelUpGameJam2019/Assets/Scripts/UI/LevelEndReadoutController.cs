@@ -77,13 +77,27 @@ public class LevelEndReadoutController : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI entry5_name;
+    
+    private void Awake()
+    {
+        GatherReferences();
+    }
 
-    private void Start()
+    private void OnEnable()
+    {
+        GatherReferences();
+
+        LoadTallyData();
+        ReadLeaderboardData();
+    }
+
+    private void GatherReferences()
     {
         if (!scoreManager)
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
         }
+
     }
 
     /// <summary>
@@ -99,10 +113,9 @@ public class LevelEndReadoutController : MonoBehaviour
     }
 
     [ContextMenu("Load Tally Data")]
-    public void LoadTallyData()
+    private void LoadTallyData()
     {
-        this.gameObject.SetActive(true);
-
+        if (!scoreManager) Debug.Log("FUCK ALL!");
         value_customersSatisfied.text = scoreManager.GetTallyCustomersSatisfied().ToString();
         value_customersMissed.text = scoreManager.GetTallyMissedOrders().ToString();
         value_customersHit.text = scoreManager.GetTallyCustomersHit().ToString();
@@ -111,26 +124,48 @@ public class LevelEndReadoutController : MonoBehaviour
         value_piesFired.text = scoreManager.GetTallyShotsFired().ToString();
     }
 
-    public void LoadTallyData(int customersSatisfied, int customersMissed, int customersHit, int wrongOrders, int sharksFed, int shotsFired)
+    [ContextMenu("Read Leaderboard Data")]
+    private void ReadLeaderboardData()
     {
-        this.gameObject.SetActive(true);
-
-        value_customersSatisfied.text = customersSatisfied.ToString();
-        value_customersMissed.text = customersMissed.ToString();
-        value_customersHit.text = customersHit.ToString();
-        value_wrongOrders.text =wrongOrders.ToString();
-        value_sharksFed.text = sharksFed.ToString();
-        value_piesFired.text = shotsFired.ToString();
+        LoadLeaderboardEntry(entry1_name, entry1_score, scoreManager.GetEntry(0));
+        LoadLeaderboardEntry(entry2_name, entry2_score, scoreManager.GetEntry(1));
+        LoadLeaderboardEntry(entry3_name, entry3_score, scoreManager.GetEntry(2));
+        LoadLeaderboardEntry(entry4_name, entry4_score, scoreManager.GetEntry(3));
+        LoadLeaderboardEntry(entry5_name, entry5_score, scoreManager.GetEntry(4));
     }
 
+    ///// <summary>
+    ///// Called Externally.
+    ///// </summary>
+    ///// <param name="customersSatisfied"></param>
+    ///// <param name="customersMissed"></param>
+    ///// <param name="customersHit"></param>
+    ///// <param name="wrongOrders"></param>
+    ///// <param name="sharksFed"></param>
+    ///// <param name="shotsFired"></param>
+    //public void LoadTallyData(int customersSatisfied, int customersMissed, int customersHit, int wrongOrders, int sharksFed, int shotsFired)
+    //{
+    //    this.gameObject.SetActive(true);
 
-    public void ReadLeaderboard(LeaderboardSO leaderboardData)
-    {
-        LoadLeaderboardEntry(entry1_name, entry1_score, leaderboardData.GetEntry(0));
-        LoadLeaderboardEntry(entry2_name, entry2_score, leaderboardData.GetEntry(1));
-        LoadLeaderboardEntry(entry3_name, entry3_score, leaderboardData.GetEntry(2));
-        LoadLeaderboardEntry(entry4_name, entry4_score, leaderboardData.GetEntry(3));
-        LoadLeaderboardEntry(entry5_name, entry5_score, leaderboardData.GetEntry(4));
-    }
+    //    value_customersSatisfied.text = customersSatisfied.ToString();
+    //    value_customersMissed.text = customersMissed.ToString();
+    //    value_customersHit.text = customersHit.ToString();
+    //    value_wrongOrders.text =wrongOrders.ToString();
+    //    value_sharksFed.text = sharksFed.ToString();
+    //    value_piesFired.text = shotsFired.ToString();
+    //}
+
+    ///// <summary>
+    ///// Called Externally.
+    ///// </summary>
+    ///// <param name="leaderboardData"></param>
+    //public void ReadLeaderboard(LeaderboardSO leaderboardData)
+    //{
+    //    LoadLeaderboardEntry(entry1_name, entry1_score, leaderboardData.GetEntry(0));
+    //    LoadLeaderboardEntry(entry2_name, entry2_score, leaderboardData.GetEntry(1));
+    //    LoadLeaderboardEntry(entry3_name, entry3_score, leaderboardData.GetEntry(2));
+    //    LoadLeaderboardEntry(entry4_name, entry4_score, leaderboardData.GetEntry(3));
+    //    LoadLeaderboardEntry(entry5_name, entry5_score, leaderboardData.GetEntry(4));
+    //}
 
 }
