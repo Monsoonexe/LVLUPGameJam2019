@@ -17,7 +17,7 @@ public class NewHighScoreWindowManager : MonoBehaviour
     private ScoreManager scoreManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GatherReferences();
     }
