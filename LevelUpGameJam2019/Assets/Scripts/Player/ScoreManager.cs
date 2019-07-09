@@ -12,10 +12,14 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private LeaderboardSO leaderboard;
 
-    [Header("---Tallys---")]
+    [Header("---Windows---")]
     [SerializeField]
     private LevelEndReadoutController levelEndReadoutController;
 
+    [SerializeField]
+    private NewHighScoreWindowManager newHighScoreWindowManager;
+
+    [Header("---Tallys---")]
     [SerializeField]
     private int shotsFired;
 
@@ -158,6 +162,11 @@ public class ScoreManager : MonoBehaviour
 
     #endregion
 
+    public int GetPlayerScore()
+    {
+        return playerScore;
+    }
+
     /// <summary>
     /// Get a copy of the entry with given index.
     /// </summary>
@@ -209,13 +218,6 @@ public class ScoreManager : MonoBehaviour
         UpdatePlayerScoreText();
     }
 
-    public void HandleHighScore()
-    {
-        var temporaryInitials = "RSO";
-
-        leaderboard.SubmitNewScore(new LeaderboardEntry(temporaryInitials, playerScore));
-    }
-
     /// <summary>
     /// Set all scores to 0.
     /// </summary>
@@ -236,8 +238,34 @@ public class ScoreManager : MonoBehaviour
         UpdateHighScoreText();
     }
 
-    public void ShowLevelTally()
+    /// <summary>
+    /// Things to do when the level has ended.
+    /// </summary>
+    public void OnLevelsEnd()
     {
+        //check if Player got a new high score
+        var PlayerGotHighScore = true;
+
+        if (PlayerGotHighScore)
+        {
+            newHighScoreWindowManager.gameObject.SetActive(true);
+        }
+
+        else
+        {
+            levelEndReadoutController.gameObject.SetActive(true);
+        }
+
+    }
+
+    /// <summary>
+    /// Called by Okay Button.
+    /// </summary>
+    /// <param name="playerName"></param>
+    public void ConfirmNewHighScoreName(string playerName)
+    {
+        leaderboard.SubmitNewScore(new LeaderboardEntry(playerName, playerScore));
         levelEndReadoutController.gameObject.SetActive(true);
     }
+
 }
