@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "Leaderboard_", menuName = "ScriptableObjects/New Leaderboard")]
 public class LeaderboardSO : ScriptableObject
 {
-    private const int leaderboardSize = 5;
+    private const int defaultLeaderboardSize = 5;
 
     public int highScore { get { return leaderboardScores[0].score; } }
 
@@ -13,12 +13,12 @@ public class LeaderboardSO : ScriptableObject
     [Header("***Leaderboard***")]
     [Tooltip("[Alpha]")]
     [SerializeField]
-    private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[leaderboardSize];
+    private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[defaultLeaderboardSize];
 
     [ContextMenu("WIPE ALL SCORES")]
     private void ResetAllScores()
     {
-        leaderboardScores = new LeaderboardEntry[leaderboardSize];
+        leaderboardScores = new LeaderboardEntry[defaultLeaderboardSize];
     }
 
     public override string ToString()
@@ -54,4 +54,5 @@ public class LeaderboardSO : ScriptableObject
             return new LeaderboardEntry("", 0);
         }
     }
+
 }
