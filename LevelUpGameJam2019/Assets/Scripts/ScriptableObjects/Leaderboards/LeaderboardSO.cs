@@ -55,4 +55,9 @@ public class LeaderboardSO : ScriptableObject
         }
     }
 
+    public bool IsScoreOnLeaderboard(int playerScore)
+    {
+        //is player score greater than lowest score?
+        return playerScore > leaderboardScores[leaderboardScores.Length - 1].score;
+    }
 }
