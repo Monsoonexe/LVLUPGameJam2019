@@ -41,14 +41,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Save high score.
-    /// </summary>
-    private void SaveData()
-    {
-        scoreManager.HandleHighScore();
-    }
-
     public void ReloadLevel()
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
@@ -72,8 +64,7 @@ public class GameController : MonoBehaviour
         //-enable menu controls (mouse, keyboard)
         //Show player stats
         //wait for Player to move on to next level
-        SaveData();
-        scoreManager.ShowLevelTally();
+        scoreManager.OnLevelsEnd();
         //ReturnToMainMenu();
     }
 
