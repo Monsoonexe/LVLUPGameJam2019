@@ -248,6 +248,7 @@ public class ScoreManager : MonoBehaviour
         if (leaderboard.IsScoreOnLeaderboard(playerScore))
         {
             newHighScoreWindowManager.gameObject.SetActive(true);
+            UpdateHighScoreText();
         }
 
         else
