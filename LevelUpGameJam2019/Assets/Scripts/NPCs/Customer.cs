@@ -23,6 +23,7 @@ public class Customer : MonoBehaviour
     private OrderPromptController orderPromptController;
 
     [SerializeField]
+    [Tooltip("If this reference is null, Customer will ask CustomerManager for a random Order.")]
     private Order customerOrder;
 
     /// <summary>
