@@ -39,6 +39,10 @@ sysinfo.txt
 # Art Assets
 LevelUpGameJam2019/Assets/Art/Vendor/*
 
+#3rd party Assets
+
+LevelUpGameJam2019/Assets/3rdParty/Vendor/*
+
 # Exclusions
 !*.meta
 !*.md
@@ -46,3 +50,4 @@ LevelUpGameJam2019/Assets/Art/Vendor/*
 #Importables
 TextMesh Pro/
 TextMesh Pro.meta
+LevelUpGameJam2019/Assets/3rdParty/Vendor/Demigiant.meta
