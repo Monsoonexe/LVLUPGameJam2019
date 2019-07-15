@@ -7,6 +7,9 @@ public class OrderPromptController : MonoBehaviour
     private static Transform mainCameraTransform;
 
     [SerializeField]
+    private GameObject UIRoot;
+
+    [SerializeField]
     private Customer customer;
 
     [SerializeField]
@@ -163,7 +166,7 @@ public class OrderPromptController : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
 
-        this.gameObject.SetActive(false);
+        ToggleVisuals(false);
     }
 
     /// <summary>
@@ -175,6 +178,11 @@ public class OrderPromptController : MonoBehaviour
         ToggleAllIcons(false);//hide ingredients
         reactionImage.sprite = sprite;//swap sprite
         reactionImage.enabled = true;//show reaction
+    }
+
+    public void ToggleVisuals(bool active)
+    {
+        UIRoot.SetActive(active);
     }
 
     /// <summary>

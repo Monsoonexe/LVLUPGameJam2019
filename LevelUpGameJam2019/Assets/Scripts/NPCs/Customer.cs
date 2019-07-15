@@ -75,14 +75,10 @@ public class Customer : MonoBehaviour
     private void Start()
     {
         RandomizeVisuals();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        orderPromptController.ToggleVisuals(false);//start with UI hidden until in range of Player
     }
-
+    
     private void OnValidate()
     {
         //GatherReferences();
@@ -93,37 +89,10 @@ public class Customer : MonoBehaviour
         UpdateVisuals();
     }
 
-    private static void InitDelays()
-    {
-        if (customerManager)//if not, use default values
-        {
-            customerManager.InitReactionDelays(ref badOrderDelay, ref customerHitDelay);
-        }
-    }
-
-    private void GatherReferences()
-    {
-        //get references on this GameObject references
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
-
-        //get static reference
-        if (!customerManager)
-        {
-            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-            InitDelays();//or use defaults
-        }
-        
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-    }
-    
     private void OnCollisionEnter(Collision collision)
     {
         //what did we get hit by?
-        if(collision.gameObject.CompareTag("PizzaProjectile"))
+        if (collision.gameObject.CompareTag("PizzaProjectile"))
         {
             //if projectile hit pizza box
             var hitPizzaBox = false;
@@ -135,7 +104,7 @@ public class Customer : MonoBehaviour
             collision.GetContacts(contactPointList);//fill array
 
             //did it hit pizza box collider?
-            foreach(var contact in contactPointList)
+            foreach (var contact in contactPointList)
             {
                 if (contact.thisCollider == pizzaBoxCollider)
                 {
@@ -176,6 +145,49 @@ public class Customer : MonoBehaviour
                 OnCustomerHit();
             }
         }//end if
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))//if we collided with Player
+        {
+            orderPromptController.ToggleVisuals(true);//show
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))//if we collided with Player
+        {
+            orderPromptController.ToggleVisuals(false);//hide
+        }
+    }
+
+    private static void InitDelays()
+    {
+        if (customerManager)//if not, use default values
+        {
+            customerManager.InitReactionDelays(ref badOrderDelay, ref customerHitDelay);
+        }
+    }
+
+    private void GatherReferences()
+    {
+        //get references on this GameObject references
+        audioSource = GetComponent<AudioSource>() as AudioSource;
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
+
+        //get static reference
+        if (!customerManager)
+        {
+            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+            InitDelays();//or use defaults
+        }
+        
+        if (!scoreManager)
+        {
+            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        }
     }
 
     [ContextMenu("Update Visuals")]
