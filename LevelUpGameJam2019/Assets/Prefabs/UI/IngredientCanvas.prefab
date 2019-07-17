@@ -597,7 +597,7 @@ MonoBehaviour:
   sausageBackgroundImage: {fileID: 5259958104503319154}
   anchovyBackgroundImage: {fileID: 757315092338815646}
   ingredientAddedColor: {r: 1, g: 0.95206225, b: 0, a: 1}
-  normalBackgroundColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+  normalBackgroundColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0}
 --- !u!114 &1583690294410932097
 MonoBehaviour:
   m_ObjectHideFlags: 0
