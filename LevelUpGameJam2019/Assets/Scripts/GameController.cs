@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject ingredientBuilderCanvas;
 
+    [SerializeField]
+    private GameObject returnToMainMenuPrompt;
+
     /// <summary>
     /// 
     /// </summary>
@@ -20,10 +23,15 @@ public class GameController : MonoBehaviour
     //external Component references
     private ScoreManager scoreManager;
 
+    private void Awake()
+    {
+        GatherReferences();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        GatherReferences();
+        returnToMainMenuPrompt.SetActive(false);
     }
 
     // Update is called once per frame
@@ -73,7 +81,7 @@ public class GameController : MonoBehaviour
         //Show player stats
         //wait for Player to move on to next level
         scoreManager.OnLevelsEnd();
-        //ReturnToMainMenu();
+        returnToMainMenuPrompt.SetActive(true);
     }
 
     ///<summary>

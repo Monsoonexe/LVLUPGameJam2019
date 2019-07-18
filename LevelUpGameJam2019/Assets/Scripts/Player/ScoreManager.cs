@@ -95,12 +95,16 @@ public class ScoreManager : MonoBehaviour
     //external Mono References
     private CustomerManager customerManager;
 
-    private void Start()
+    private void Awake()
     {
         GatherReferences();
+    }
 
+    private void Start()
+    {
         UpdatePlayerScoreText();
         UpdateHighScoreText();
+        levelEndReadoutController.gameObject.SetActive(false);
     }
 
     private void GatherReferences()
