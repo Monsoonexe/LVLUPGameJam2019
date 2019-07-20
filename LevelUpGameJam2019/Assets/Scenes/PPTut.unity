@@ -6127,7 +6127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &451506809
 Transform:
   m_ObjectHideFlags: 0
@@ -6173,6 +6173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PizzaCannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118152546697191637, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
         type: 3}
@@ -10877,8 +10882,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15740,6 +15745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScoreManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111755227996988337, guid: 1fe946bf477e11b47a488bf03bd39768,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7970435097338647059, guid: 1fe946bf477e11b47a488bf03bd39768,
         type: 3}
@@ -24550,6 +24560,11 @@ PrefabInstance:
       propertyPath: ingredientBuilderCanvas
       value: 
       objectReference: {fileID: 376165064}
+    - target: {fileID: 8262829354720557807, guid: b0ec3976024b0924883dda7398da97a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0ec3976024b0924883dda7398da97a2, type: 3}
 --- !u!1001 &1510730616
@@ -32175,7 +32190,7 @@ MonoBehaviour:
   textDisplay: {fileID: 869461970}
   sentences:
   - Ahoy scallywag, I be so glad ye decided t' join us here at Pirate Pizza.
-  - I be Rando, but ye can call me RR, 'n this here be me humble raft 'n hand cannon.
+  - I be Rando, but ye can call me R.R. 'n this here be me humble raft 'n hand cannon.
   - Here at Pirate Pizza we deliver Pizzas wit' a smile.
   - Well actually a cannon... a cannon 'n a smile.
   - Th' customers will be askin' fer orders.
