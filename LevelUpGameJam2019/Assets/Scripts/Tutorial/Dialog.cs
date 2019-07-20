@@ -31,18 +31,22 @@ public class Dialog : MonoBehaviour
 
     private void NextSentence()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Return))
+        if (textDisplay.text == sentences[index]) //Makes it so player can't spam through the text and break it.
         {
-            Debug.Log("Next Sentence Please");
-            if (index < sentences.Length - 1)
-        {
-            index++;
-            textDisplay.text = "";
-            StartCoroutine(Type());
-        } else
-        {
-            textDisplay.text = "";
-        }
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Return)) //checks for if the next key is pressed
+            {
+                Debug.Log("Next Sentence Please");
+                if (index < sentences.Length - 1)
+                {
+                    index++;
+                    textDisplay.text = "";
+                    StartCoroutine(Type());
+                }
+                else
+                {
+                    textDisplay.text = "";
+                }
+            }
         }
     }
 }
