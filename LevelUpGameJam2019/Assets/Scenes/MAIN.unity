@@ -6137,6 +6137,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PizzaCannon
       objectReference: {fileID: 0}
+    - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: orderBuilder
+      value: 
+      objectReference: {fileID: 532134606}
+    - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
+        type: 3}
+      propertyPath: projectileForce
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 5599406827822538936, guid: e0061a8ddbcc8e74489afd536a0e12f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6191,16 +6201,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
-        type: 3}
-      propertyPath: orderBuilder
-      value: 
-      objectReference: {fileID: 532134606}
-    - target: {fileID: 4924641268906619095, guid: e0061a8ddbcc8e74489afd536a0e12f9,
-        type: 3}
-      propertyPath: projectileForce
-      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
@@ -6487,7 +6487,7 @@ PrefabInstance:
     - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
         type: 3}
       propertyPath: normalBackgroundColor.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1583690294410932100, guid: 48d262b804a2c974d82be509e94cb241,
         type: 3}
@@ -6503,6 +6503,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554005878607096035, guid: 48d262b804a2c974d82be509e94cb241,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d262b804a2c974d82be509e94cb241, type: 3}

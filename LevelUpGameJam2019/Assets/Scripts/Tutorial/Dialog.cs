@@ -35,7 +35,6 @@ public class Dialog : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Return)) //checks for if the next key is pressed
             {
-                Debug.Log("Next Sentence Please");
                 if (index < sentences.Length - 1)
                 {
                     index++;
