@@ -137,50 +137,50 @@ public class OrderBuilderMenu : MonoBehaviour
             AddSauce();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             AddCheese();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AddPepperoni();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             AddSausage();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             AddAnchovies();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            Debug.Log("No Ingredient for this key.");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha6))
+        //{
+        //    Debug.Log("No Ingredient for this key.");
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Debug.Log("No Ingredient for this key.");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha7))
+        //{
+        //    Debug.Log("No Ingredient for this key.");
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            Debug.Log("No Ingredient for this key.");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha8))
+        //{
+        //    Debug.Log("No Ingredient for this key.");
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            Debug.Log("No Ingredient for this key.");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha9))
+        //{
+        //    Debug.Log("No Ingredient for this key.");
+        //}
 
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log("No Ingredient for this key.");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    Debug.Log("No Ingredient for this key.");
+        //}
 
     }
 }
