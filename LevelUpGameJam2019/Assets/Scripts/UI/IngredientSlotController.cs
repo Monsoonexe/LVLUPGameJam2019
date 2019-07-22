@@ -4,6 +4,14 @@ using TMPro;
 
 public class IngredientSlotController : MonoBehaviour
 {
+    /// <summary>
+    /// Max number of duplicate Ingredients allowed.
+    /// </summary>
+    public const int maxIngredientStack = 2;
+
+    /// <summary>
+    /// Shared class reference.
+    /// </summary>
     private static OrderBuilderMenu parentOrderBuilder;
 
     /// <summary>
@@ -13,7 +21,7 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private IngredientsENUM ingredient;//used internally
 
-    public IngredientsENUM Ingredient { get { return ingredient; } }//visibly external, readonly
+    public IngredientsENUM Ingredient { get { return ingredient; } }//visible externally, readonly
 
     /// <summary>
     /// Background image of this slot.  Yellow if selected.
@@ -23,7 +31,7 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private Image backgroundImage;//used internally
 
-    public Image BackgroundImage { get { return backgroundImage; } }//visibly external, readonly
+    public Image BackgroundImage { get { return backgroundImage; } }//visible externally, readonly
 
     /// <summary>
     /// Picture of ingredient.
@@ -32,7 +40,7 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private Image ingredientIcon;//used internally
 
-    public Image IngredientIcon { get { return ingredientIcon; } }//visibly external, readonly
+    public Image IngredientIcon { get { return ingredientIcon; } }//visible externally, readonly
 
     /// <summary>
     /// Which key one presses to get this ingredient.
@@ -41,7 +49,7 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private TextMeshProUGUI keystrokeTMP;//used internally
 
-    public TextMeshProUGUI KeystrokeTMP { get { return keystrokeTMP; } }//visibly external, readonly
+    public TextMeshProUGUI KeystrokeTMP { get { return keystrokeTMP; } }//visible externally, readonly
 
     /// <summary>
     /// Quantity of ingredient.  ie double pepp.
@@ -50,7 +58,7 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private TextMeshProUGUI quantityTMP;//used internally
 
-    public TextMeshProUGUI QuantityTMP { get { return quantityTMP; } }//visibly external, readonly
+    public TextMeshProUGUI QuantityTMP { get { return quantityTMP; } }//visible externally, readonly
 
     /// <summary>
     /// Button to add this Ingredient onto Order.
@@ -59,7 +67,9 @@ public class IngredientSlotController : MonoBehaviour
     [SerializeField]//set by Developer
     private Button iconButton;//used internally
 
-    public Button IconButton { get { return iconButton; } }//visibly external, readonly
+    public Button IconButton { get { return iconButton; } }//visible externally, readonly
+
+    private int ingredientQuantity = 0;
 
     /// <summary>
     /// Used to init references.
@@ -85,7 +95,12 @@ public class IngredientSlotController : MonoBehaviour
     /// </summary>
     public void AddIngredientToOrder()
     {
-        parentOrderBuilder.AddIngredient(ingredient);
+        if (++ingredientQuantity > maxIngredientStack) return;//only have 0, 1, or 2 quantity
+
+        backgroundImage.color = parentOrderBuilder.AddedBackgroundColor;//change background color
+        parentOrderBuilder.AddIngredient(ingredient);//add to Ingredients on Order list
+        quantityTMP.enabled = ingredientQuantity > 1;//enable tmp if x2 quantity
+                
     }
 
     public void SetKeystrokeValue(int keystroke)
@@ -112,6 +127,16 @@ public class IngredientSlotController : MonoBehaviour
     public void DisableSlot()
     {
         this.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Hide visuals, reset counter...
+    /// </summary>
+    public void ResetSlot()
+    {
+        ingredientQuantity = 0;
+        backgroundImage.color = parentOrderBuilder.NormalBackgroundColor;//reset background color
+        quantityTMP.enabled = false;//disabled double ingredients indicator (don't show 0 or 1)
     }
 
 }

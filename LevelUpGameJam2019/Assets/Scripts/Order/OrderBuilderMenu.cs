@@ -1,32 +1,38 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OrderBuilderMenu : MonoBehaviour
 {
-    public const int maxIngredientsOnAnOrder = 5;
-    public const int maxIngredientStack = 2;
-    private const int maxIngredientsInCannon = maxIngredientsOnAnOrder * maxIngredientStack; //5 ingredients, 2 stack per.  
+    #region static consts
+    /// <summary>
+    /// Number of different Ingredients that can exist in a Level.
+    /// </summary>
+    public const int uniqueIngredients = 5;
+    
+    #endregion
 
     [SerializeField]
     private Animator ingredientLoaderAnimator;
 
     //ingredients that are on pizza
-    [SerializeField]
+    [SerializeField]//visualization only! no touchy
     private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
-
-    //[Header("---Ingredient Icons---")]
-
+    
     [Header("---Ingredient Slots---")]
-    [SerializeField]
-    private IngredientSlotController[] ingredientSlots;  
+    [SerializeField]//set by Developer
+    private IngredientSlotController[] ingredientSlots = new IngredientSlotController[uniqueIngredients];
     
-    [Space(5)]
     [Header("---Icon Background Colors---")]
-    [SerializeField] private Color ingredientAddedColor;
+    [SerializeField]//set by Developer
+    private Color addedBackgroundColor;
 
-    [SerializeField] private Color normalBackgroundColor;
-    
+    public Color AddedBackgroundColor { get { return addedBackgroundColor; } }// externally visible, readonly
+
+    [SerializeField]//set by Developer
+    private Color normalBackgroundColor;
+
+    public Color NormalBackgroundColor { get { return normalBackgroundColor; } }// externally visible, readonly
+
     //external mono Components
     private static LevelManager levelManager;
 
@@ -65,7 +71,6 @@ public class OrderBuilderMenu : MonoBehaviour
         }        
     }
     
-
     /// <summary>
     /// Set to default state.
     /// </summary>
@@ -73,8 +78,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         foreach(var slot in ingredientSlots)
         {
-            slot.BackgroundImage.color = normalBackgroundColor;//reset background color
-            slot.QuantityTMP.enabled = false;//disabled double ingredients indicator
+            slot.ResetSlot();//start over
         }
     }
 
@@ -105,8 +109,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         AddIngredient((IngredientsENUM)ingredient);
     }
-
-
+    
     /// <summary>
     /// Add an Ingredient to the list.
     /// </summary>
@@ -124,6 +127,7 @@ public class OrderBuilderMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AddIngredient(0);// 1 - 1
+            ingredientSlots[0].AddIngredientToOrder();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -186,11 +190,25 @@ public class OrderBuilderMenu : MonoBehaviour
     /// Remove Ingredients as options that are not in this list.
     /// </summary>
     /// <param name="availableIngredients"></param>
-    public void SetAvailableIngredients(IngredientsENUM[] availableIngredients)
+    public void SetAvailableIngredients(IngredientsENUM[] ingredientsAvailableOnCannon)
     {
         //iterate through each element in list
         //toggle on or off if icon is in list
         Debug.Log("Shelled function: SetAvailableIngredients");
+
+        foreach(var slot in ingredientSlots)//disable ALL slots.
+        {
+            slot.DisableSlot();
+        }
+
+        for(var i = 0; i < ingredientSlots.Length; ++i)//only add the ones you need.
+        {
+            if (ingredientSlots[i].Ingredient == ingredientsAvailableOnCannon[i])
+            {
+
+            }
+
+        }
 
     }
 }
