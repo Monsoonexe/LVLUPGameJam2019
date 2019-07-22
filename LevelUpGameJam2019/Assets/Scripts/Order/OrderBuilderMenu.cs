@@ -126,28 +126,27 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddIngredient(0);// 1 - 1
             ingredientSlots[0].AddIngredientToOrder();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AddIngredient(1);// 2 - 1
+            ingredientSlots[1].AddIngredientToOrder();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            AddIngredient(2);// 3 - 1
+            ingredientSlots[2].AddIngredientToOrder();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            AddIngredient(3);// 4 - 1
+            ingredientSlots[3].AddIngredientToOrder();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            AddIngredient(4);// 5 - 1
+            ingredientSlots[4].AddIngredientToOrder();
         }
 
         //guaranteed 5 ingredients max
@@ -192,22 +191,18 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <param name="availableIngredients"></param>
     public void SetAvailableIngredients(IngredientsENUM[] ingredientsAvailableOnCannon)
     {
-        //iterate through each element in list
-        //toggle on or off if icon is in list
-        Debug.Log("Shelled function: SetAvailableIngredients");
-
         foreach(var slot in ingredientSlots)//disable ALL slots.
         {
             slot.DisableSlot();
         }
 
-        for(var i = 0; i < ingredientSlots.Length; ++i)//only add the ones you need.
+        foreach(var ingredient in ingredientsAvailableOnCannon)
         {
-            if (ingredientSlots[i].Ingredient == ingredientsAvailableOnCannon[i])
-            {
+            for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
+            { 
+                
 
             }
-
         }
 
     }
