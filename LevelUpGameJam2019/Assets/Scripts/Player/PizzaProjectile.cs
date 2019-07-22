@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PizzaProjectile : MonoBehaviour
 {
+    private static LevelManager levelManager;
+
     private const int lifeTime = 8;//seconds
 
     [SerializeField]
@@ -38,14 +40,10 @@ public class PizzaProjectile : MonoBehaviour
         GatherReferences();
     }
 
-    private void Start()
-    {
-
-    }
-
     private void OnEnable()
     {
         StartCoroutine(ExpireAfterTime());
+        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);
 
         //play sound
         audioSource.clip = flyingSound;
@@ -55,14 +53,9 @@ public class PizzaProjectile : MonoBehaviour
     private void OnDisable()
     {
         ResetProjectile();
+        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     private void FixedUpdate()
     {
         myRigidbody.AddForce(myTransform.up * floatiness, ForceMode.Impulse);//give frisbee-like physics
@@ -75,6 +68,14 @@ public class PizzaProjectile : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// End-of-the-level procedure.
+    /// </summary>
+    private void OnLevelsEnd()
+    {
+        this.gameObject.SetActive(false);//no points allowed after buzzer
     }
 
     /// <summary>
@@ -106,9 +107,16 @@ public class PizzaProjectile : MonoBehaviour
     /// </summary>
     private void GatherReferences()
     {
+        //gather component references
         myTransform = this.transform;
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
         audioSource = GetComponent<AudioSource>() as AudioSource;
+
+        //gather external references
+        if (!levelManager)
+        {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        }
 
     }
 
