@@ -19,21 +19,7 @@ public class OrderBuilderMenu : MonoBehaviour
 
     [Header("---Ingredient Slots---")]
     [SerializeField]
-    private IngredientSlotController ingredientSlot_0;
-
-    [SerializeField]
-    private IngredientSlotController ingredientSlot_1;
-
-    [SerializeField]
-    private IngredientSlotController ingredientSlot_2;
-
-    [SerializeField]
-    private IngredientSlotController ingredientSlot_3;
-
-    [SerializeField]
-    private IngredientSlotController ingredientSlot_4;
-
-    private readonly IngredientSlotController[] ingredientSlotArray = new IngredientSlotController[maxIngredientsOnAnOrder];
+    private IngredientSlotController[] ingredientSlots;  
     
     [Space(5)]
     [Header("---Icon Background Colors---")]
@@ -52,8 +38,6 @@ public class OrderBuilderMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitBackgroundImagesArray();
-
         ResetSelectedSlots();
     }
 
@@ -80,25 +64,14 @@ public class OrderBuilderMenu : MonoBehaviour
             levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         }        
     }
-
-    /// <summary>
-    /// Add all reference to a list for easy iteration.
-    /// </summary>
-    private void InitBackgroundImagesArray()
-    {
-        ingredientSlotArray[0] = ingredientSlot_0;
-        ingredientSlotArray[1] = ingredientSlot_1;
-        ingredientSlotArray[2] = ingredientSlot_2;
-        ingredientSlotArray[3] = ingredientSlot_3;
-        ingredientSlotArray[4] = ingredientSlot_4;
-    }
+    
 
     /// <summary>
     /// Set to default state.
     /// </summary>
     private void ResetSelectedSlots()
     {
-        foreach(var slot in ingredientSlotArray)
+        foreach(var slot in ingredientSlots)
         {
             slot.BackgroundImage.color = normalBackgroundColor;//reset background color
             slot.QuantityTMP.enabled = false;//disabled double ingredients indicator
