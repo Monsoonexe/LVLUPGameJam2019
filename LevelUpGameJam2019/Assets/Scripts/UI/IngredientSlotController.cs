@@ -43,9 +43,9 @@ public class IngredientSlotController : MonoBehaviour
     public Image IngredientIcon { get { return ingredientIcon; } }//visible externally, readonly
 
     /// <summary>
-    /// Which key one presses to get this ingredient.
+    /// Which key Player presses to get this ingredient. Display only.
     /// </summary>
-    [Tooltip("Which key one presses to get this ingredient.")]
+    [Tooltip("Which key Player presses to get this ingredient. Display only.")]
     [SerializeField]//set by Developer
     private TextMeshProUGUI keystrokeTMP;//used internally
 
@@ -137,6 +137,19 @@ public class IngredientSlotController : MonoBehaviour
         ingredientQuantity = 0;
         backgroundImage.color = parentOrderBuilder.NormalBackgroundColor;//reset background color
         quantityTMP.enabled = false;//disabled double ingredients indicator (don't show 0 or 1)
+    }
+
+    /// <summary>
+    /// Externally configure Slot.
+    /// </summary>
+    /// <param name="keystroke">What to show to the Player.</param>
+    /// <param name="ingredient">Which Ingredient this Slot adds.</param>
+    /// <param name="ingredientIcon">The graphic to display.</param>
+    public void ConfigureSlot(int keystroke, IngredientsENUM ingredient, Sprite ingredientIcon)
+    {
+        keystrokeTMP.text = keystroke.ToString();
+        this.ingredient = ingredient;
+        this.ingredientIcon.sprite = ingredientIcon;
     }
 
 }
