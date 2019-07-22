@@ -6,6 +6,8 @@ using TMPro;
 public class Dialog : MonoBehaviour
 {
     public TextMeshProUGUI textDisplay;
+
+    [TextArea]
     public string[] sentences;
     private int index;
     public float typingSpeed;
