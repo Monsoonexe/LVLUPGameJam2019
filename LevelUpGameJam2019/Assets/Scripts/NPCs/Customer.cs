@@ -248,7 +248,7 @@ public class Customer : MonoBehaviour
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
 
-        scoreManager.OnCustomerSatisfied(customerOrder.ingredients.Length);//tally and adjust score
+        scoreManager.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
         
         orderPromptController.OnSuccessfulOrder();//update visuals
 
@@ -304,7 +304,7 @@ public class Customer : MonoBehaviour
 
     public IngredientsENUM[] GetOrderIngredients()
     {
-        return customerOrder.ingredients;
+        return customerOrder.Ingredients;
     }
 
     [ContextMenu("Randomize Visuals")]

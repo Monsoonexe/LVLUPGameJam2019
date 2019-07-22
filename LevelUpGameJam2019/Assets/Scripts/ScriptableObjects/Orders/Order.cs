@@ -3,9 +3,15 @@
 [CreateAssetMenu(fileName = "PizzaOrder_", menuName = "ScriptableObjects/New Order")]
 public class Order : ScriptableObject
 {
-    public IngredientsENUM[] ingredients;
+    [SerializeField]//set in Inspector
+    private IngredientsENUM[] ingredients;
 
-    public int randomWeight = 1;
+    public IngredientsENUM[] Ingredients { get { return ingredients; } }//publicly accessible, but readonly
+
+    [SerializeField]//set in Inspector
+    private int randomWeight = 1;
+
+    public int RandomWeight { get { return randomWeight; } }//publicly accessible, but readonly
     
     /// <summary>
     /// 
@@ -70,7 +76,7 @@ public class Order : ScriptableObject
         return true;
 
     }
-
+    
     /// <summary>
     /// Sort the list in ascending order based on numeric value of enum using Selection Sort.
     /// </summary>
@@ -108,6 +114,14 @@ public class Order : ScriptableObject
         return ingredientsList;
 
     }//end func
+    
+    /// <summary>
+    /// Sort this instance's list of ingredients.
+    /// </summary>
+    public void SortIngredientsList()
+    {
+        ingredients = SortIngredientsListAscending(ingredients);
+    }
 
     /// <summary>
     /// String consists of each ingredient. Supports multiples of ingredient.
@@ -127,14 +141,6 @@ public class Order : ScriptableObject
         stringBuilder.Append(randomWeight.ToString());
         
         return stringBuilder.ToString();
-    }
-
-    /// <summary>
-    /// Sort this instance's list of ingredients.
-    /// </summary>
-    public void SortIngredientsList()
-    {
-        ingredients = SortIngredientsListAscending(ingredients);
     }
 
 }

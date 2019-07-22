@@ -42,7 +42,7 @@ public class CustomerManager : MonoBehaviour
 
         foreach(var order in orders)
         {
-            summedWeight += order.randomWeight;
+            summedWeight += order.RandomWeight;
         }
 
         return summedWeight;
@@ -131,7 +131,7 @@ public class CustomerManager : MonoBehaviour
 
         foreach(var order in possibleOrders)
         {
-            if(randomNumber < order.randomWeight)
+            if(randomNumber < order.RandomWeight)
             {
                 selectedOrder = order;
                 break;//DERP
@@ -139,7 +139,7 @@ public class CustomerManager : MonoBehaviour
 
             else
             {
-                randomNumber -= order.randomWeight;
+                randomNumber -= order.RandomWeight;
             }
 
         }
