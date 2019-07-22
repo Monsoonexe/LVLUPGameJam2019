@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6531794921392061259}
   - component: {fileID: 9207216823552862606}
   m_Layer: 5
-  m_Name: Ingredient Buttons
+  m_Name: Ingredient Buttons (horizontal layout group)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,11 +122,11 @@ MonoBehaviour:
   ingredientLoaderAnimator: {fileID: 0}
   selectedIngredients: 
   ingredientSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4696979372215123720}
+  - {fileID: 5587052389166920473}
+  - {fileID: 7285769883992687723}
+  - {fileID: 6771526348902542475}
+  - {fileID: 1379633201589721437}
   addedBackgroundColor: {r: 1, g: 1, b: 0, a: 1}
   normalBackgroundColor: {r: 0.9058824, g: 0.80392164, b: 0.7058824, a: 0}
 --- !u!223 &1583690294410932102
@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: m_Name
-      value: Slot3 (Pepp)
+      value: Slot3
       objectReference: {fileID: 0}
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -444,6 +444,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 80672654738169364}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7285769883992687723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
+    type: 3}
+  m_PrefabInstance: {fileID: 80672654738169364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfeeec1d9f07be48b5c593b61a6d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2679043213597484407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,7 +466,7 @@ PrefabInstance:
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: m_Name
-      value: Slot1 (Sauce)
+      value: Slot1
       objectReference: {fileID: 0}
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -579,6 +591,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2679043213597484407}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4696979372215123720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2679043213597484407}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfeeec1d9f07be48b5c593b61a6d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2993742333202442598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -589,7 +613,7 @@ PrefabInstance:
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: m_Name
-      value: Slot2 (Cheese)
+      value: Slot2
       objectReference: {fileID: 0}
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -760,6 +784,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2993742333202442598}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5587052389166920473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2993742333202442598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfeeec1d9f07be48b5c593b61a6d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4178092611310368500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -770,7 +806,7 @@ PrefabInstance:
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: m_Name
-      value: Slot4 (Sausage)
+      value: Slot4
       objectReference: {fileID: 0}
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -941,6 +977,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4178092611310368500}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6771526348902542475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
+    type: 3}
+  m_PrefabInstance: {fileID: 4178092611310368500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfeeec1d9f07be48b5c593b61a6d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8586019608770183970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -951,7 +999,7 @@ PrefabInstance:
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: m_Name
-      value: Slot5 (Anchovy)
+      value: Slot5
       objectReference: {fileID: 0}
     - target: {fileID: 3156723286256607331, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -1122,3 +1170,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8586019608770183970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1379633201589721437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586019608770183970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfeeec1d9f07be48b5c593b61a6d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
