@@ -10,56 +10,56 @@ public class IngredientSlotController : MonoBehaviour
     /// Which Ingredient this slot represents.
     /// </summary>
     [Tooltip("Which Ingredient this slot represents.")]
-    [SerializeField]
-    private IngredientsENUM ingredient;
+    [SerializeField]//set by Developer
+    private IngredientsENUM ingredient;//used internally
 
-    public IngredientsENUM Ingredient { get { return ingredient; } }//readonly
+    public IngredientsENUM Ingredient { get { return ingredient; } }//visibly external, readonly
 
     /// <summary>
     /// Background image of this slot.  Yellow if selected.
     /// </summary>
     [Header("---Component References---")]
     [Tooltip("Background image of this slot.  Yellow if selected.")]
-    [SerializeField]
-    private Image backgroundImage;
-    
-    public Image BackgroundImage { get { return backgroundImage; } }//readonly
+    [SerializeField]//set by Developer
+    private Image backgroundImage;//used internally
+
+    public Image BackgroundImage { get { return backgroundImage; } }//visibly external, readonly
 
     /// <summary>
     /// Picture of ingredient.
     /// </summary>
     [Tooltip("Picture of ingredient.")]
-    [SerializeField]
-    private Image ingredientIcon;
+    [SerializeField]//set by Developer
+    private Image ingredientIcon;//used internally
 
-    public Image IngredientIcon { get { return ingredientIcon; } }//readonly
+    public Image IngredientIcon { get { return ingredientIcon; } }//visibly external, readonly
 
     /// <summary>
     /// Which key one presses to get this ingredient.
     /// </summary>
     [Tooltip("Which key one presses to get this ingredient.")]
-    [SerializeField]
-    private TextMeshProUGUI keystrokeTMP;
+    [SerializeField]//set by Developer
+    private TextMeshProUGUI keystrokeTMP;//used internally
 
-    public TextMeshProUGUI KeystrokeTMP { get { return keystrokeTMP; } }//readonly
+    public TextMeshProUGUI KeystrokeTMP { get { return keystrokeTMP; } }//visibly external, readonly
 
     /// <summary>
     /// Quantity of ingredient.  ie double pepp.
     /// </summary>
     [Tooltip("Quantity of ingredient.  ie double pepp.")]
-    [SerializeField]
-    private TextMeshProUGUI quantityTMP;
+    [SerializeField]//set by Developer
+    private TextMeshProUGUI quantityTMP;//used internally
 
-    public TextMeshProUGUI QuantityTMP { get { return quantityTMP; } }//readonly
+    public TextMeshProUGUI QuantityTMP { get { return quantityTMP; } }//visibly external, readonly
 
     /// <summary>
     /// Button to add this Ingredient onto Order.
     /// </summary>
     [Tooltip("Button to add this Ingredient onto Order.")]
-    [SerializeField]
-    private Button iconButton;
+    [SerializeField]//set by Developer
+    private Button iconButton;//used internally
 
-    public Button IconButton { get { return iconButton; } }//readonly
+    public Button IconButton { get { return iconButton; } }//visibly external, readonly
 
     /// <summary>
     /// Used to init references.
@@ -68,6 +68,16 @@ public class IngredientSlotController : MonoBehaviour
     {
         if(!parentOrderBuilder)
             parentOrderBuilder = GetComponentInParent<OrderBuilderMenu>();
+    }
+
+    private void OnEnable()
+    {
+        iconButton.onClick.AddListener(AddIngredientToOrder);//handle event
+    }
+
+    private void OnDisable()
+    {
+        iconButton.onClick.RemoveListener(AddIngredientToOrder);//handle event
     }
 
     /// <summary>
@@ -94,6 +104,14 @@ public class IngredientSlotController : MonoBehaviour
         this.ingredient = ingredient;
         this.ingredientIcon.sprite = sprite;
         this.keystrokeTMP.text = keystroke.ToString();
+    }
+
+    /// <summary>
+    /// Inform this Slot that it will not be used this round.
+    /// </summary>
+    public void DisableSlot()
+    {
+        this.gameObject.SetActive(false);
     }
 
 }
