@@ -2,7 +2,7 @@
 
 public class ExitDemo : MonoBehaviour
 {
-    private static GameController gameControllerInstance;
+    private static LevelManager levelManager;
 
     [SerializeField]
     private GameObject EndGameWhenThisObjectEntersVolume;
@@ -10,9 +10,9 @@ public class ExitDemo : MonoBehaviour
     private void Start()
     {
         //gather references
-        if (!gameControllerInstance)
+        if (!levelManager)
         {
-            gameControllerInstance = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         }
     }
 
@@ -21,7 +21,7 @@ public class ExitDemo : MonoBehaviour
         if(EndGameWhenThisObjectEntersVolume == other.gameObject)
         {
             Debug.Log("Player hit end collider.  Ending the game.");
-            gameControllerInstance.OnLevelsEnd();//tell GO this is so and move on to next phase
+            levelManager.OnLevelsEnd();//tell GO this is so and move on to next phase
         }
     }
 }
