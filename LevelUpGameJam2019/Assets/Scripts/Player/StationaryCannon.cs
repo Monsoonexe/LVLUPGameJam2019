@@ -6,15 +6,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class StationaryCannon : MonoBehaviour
 {
+    private static LevelManager levelManager;
+
     /// <summary>
     /// Stop adjusting rotation if target within this angle.
     /// </summary>
     private const float optimalAngle = .05f;
 
-    //outside monobehaviors
-    private static ScoreManager scoreManager;
-
-    [Header("Projectile Stuff")]
+    [Header("---Order Stuff---")]
+    [SerializeField]
+    private IngredientsENUM[] availableIngredients = { IngredientsENUM.Sauce, IngredientsENUM.Cheese };
+    
+    [Header("---Projectile Stuff---")]
     [SerializeField]
     private GameObject projectilePrefab;
 
@@ -24,28 +27,22 @@ public class StationaryCannon : MonoBehaviour
     [Tooltip("If more than one barrel, iterates through each point.")]
     [SerializeField]
     private Transform[] projectileSpawnPoints;
-
-    /// <summary>
-    /// Ask this guy what to put on the pizza when it's fired.
-    /// </summary>
-    [SerializeField]
-    private OrderBuilderMenu orderBuilder;
-
+    
     [SerializeField]
     private float projectileForce = 5.0f;
 
     private int projectileSpawnPointIndex = 0;
 
-    [Header("Turret Target Tracking")]
-
+    [Header("---Turret Target Tracking---")]
     [SerializeField]
     private Transform objectToTrack;
 
     /// <summary>
-    /// pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
+    /// Pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
     /// </summary>
     [SerializeField]
-    private Transform turretTransform;//pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED
+    [Tooltip("Pitch on X //CAN BE THE SAME OBJECT AS BASE, IF NO SEPARATE TURRET.  WHOLE OBJECT WILL ROTATE AS EXPECTED")]
+    private Transform turretTransform;
 
     [SerializeField]
     private int minPitch = 15;
@@ -62,7 +59,7 @@ public class StationaryCannon : MonoBehaviour
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip cannonFireSound;
-
+    
     //GO components
     private Animator myAnimator;
     private AudioSource myAudioSource;
@@ -75,12 +72,28 @@ public class StationaryCannon : MonoBehaviour
     private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
     
+    //outside monobehaviors
+    /// <summary>
+    /// Handles the scores and tallies.
+    /// </summary>
+    private ScoreManager scoreManager;
+
+    /// <summary>
+    /// Ask this guy what to put on the pizza when it's fired.
+    /// </summary>
+    private OrderBuilderMenu orderBuilder;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GatherReferences();
 
         InitProjectilePool();
+    }
+
+    private void Start()
+    {
+        orderBuilder.SetAvailableIngredients(availableIngredients);
     }
 
     // Update is called once per frame
@@ -89,6 +102,24 @@ public class StationaryCannon : MonoBehaviour
         HandleTargetTracking();
 
         HandleShooting();
+    }
+
+    private void OnEnable()
+    {
+        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    private void OnDisable()
+    {
+        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    /// <summary>
+    /// Procedure to follow when the level is at an end.
+    /// </summary>
+    private void OnLevelsEnd()
+    {
+        this.enabled = false;//disable controls, but not visuals
     }
 
     /// <summary>
@@ -102,7 +133,7 @@ public class StationaryCannon : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
 
         //get handles to external Objects
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
     }
 
     /// <summary>
@@ -185,7 +216,7 @@ public class StationaryCannon : MonoBehaviour
             }
             else
             {
-                Debug.Log("No orders given to Cannon. Blank pizza.", this);
+                Debug.Log("No Order Builder connected to Cannon. Blank pizza.", this);
             }
             
             //audio
@@ -256,5 +287,24 @@ public class StationaryCannon : MonoBehaviour
         }
 
         turretTransform.localEulerAngles = new Vector3(localRot, 0, 0);
+    }
+
+    /// <summary>
+    /// Set a hook.
+    /// </summary>
+    /// <param name="orderBuilder"></param>
+    public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
+    {
+        this.orderBuilder = orderBuilder;
+        orderBuilder.SetAvailableIngredients(availableIngredients);
+    }
+
+    /// <summary>
+    /// Set Score Manager externally.
+    /// </summary>
+    /// <param name="scoreManager"></param>
+    public void SetScoreManager(ScoreManager scoreManager)
+    {
+        this.scoreManager = scoreManager;
     }
 }
