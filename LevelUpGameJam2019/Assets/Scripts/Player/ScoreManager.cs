@@ -94,6 +94,7 @@ public class ScoreManager : MonoBehaviour
 
     //external Mono References
     private CustomerManager customerManager;
+    private LevelManager levelManager;
 
     private void Awake()
     {
@@ -105,14 +106,15 @@ public class ScoreManager : MonoBehaviour
         UpdatePlayerScoreText();
         UpdateHighScoreText();
         levelEndReadoutController.gameObject.SetActive(false);
+
+        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);
     }
 
     private void GatherReferences()
     {
-        if (!customerManager)
-        {
-            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-        }
+        //gather external mono references
+        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
     }
 
     /// <summary>
@@ -126,6 +128,25 @@ public class ScoreManager : MonoBehaviour
     private void UpdateHighScoreText()
     {
         highScoreTMPro.text = leaderboard.highScore.ToString();
+    }
+
+    /// <summary>
+    /// Things to do when the level has ended.
+    /// </summary>
+    private void OnLevelsEnd()
+    {
+        //check if Player got a new high score
+
+        if (leaderboard.IsScoreOnLeaderboard(playerScore))
+        {
+            newHighScoreWindowManager.gameObject.SetActive(true);
+        }
+
+        else
+        {
+            levelEndReadoutController.gameObject.SetActive(true);
+        }
+
     }
 
     #region Get Tally Methods
@@ -201,9 +222,8 @@ public class ScoreManager : MonoBehaviour
 
         playerScore -= incorrectOrderDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
-
-        //update visuals
-        UpdatePlayerScoreText();
+        
+        UpdatePlayerScoreText();//update visuals
     }
 
     public void OnSharkAtePizza()
@@ -218,8 +238,7 @@ public class ScoreManager : MonoBehaviour
         playerScore -= customerHitDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
-        //update visuals
-        UpdatePlayerScoreText();
+        UpdatePlayerScoreText();//update visuals
     }
 
     /// <summary>
@@ -240,25 +259,6 @@ public class ScoreManager : MonoBehaviour
         //update UI
         UpdatePlayerScoreText();
         UpdateHighScoreText();
-    }
-
-    /// <summary>
-    /// Things to do when the level has ended.
-    /// </summary>
-    public void OnLevelsEnd()
-    {
-        //check if Player got a new high score
-        
-        if (leaderboard.IsScoreOnLeaderboard(playerScore))
-        {
-            newHighScoreWindowManager.gameObject.SetActive(true);
-        }
-
-        else
-        {
-            levelEndReadoutController.gameObject.SetActive(true);
-        }
-
     }
 
     /// <summary>
