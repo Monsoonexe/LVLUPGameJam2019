@@ -11167,7 +11167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f969fdfb3486fb448a4ca9636e77da97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 0.25
+  RotateSpeed: 0
 --- !u!4 &882352392
 Transform:
   m_ObjectHideFlags: 0
@@ -32194,10 +32194,10 @@ MonoBehaviour:
   - Here at Pirate Pizza we deliver Pizzas wit' a smile.
   - Well actually a cannon... a cannon 'n a smile.
   - Th' customers will be askin' fer orders.
-  - All ye 'ave t' do be load th' correct ingredients into th' cannon...
+  - All ye 'ave t' do be load th' correct toppings into th' cannon...
   - '''N shoot them in th'' customers pizza box ''n collect yer gold!'
-  - But watch out fer th' sharks, they be a pain in th' booty.
-  - Oh, 'n whatever ye do, don't hit th' customer in th' face!
+  - Are ye ready t' give that a go?
+  - Oh, 'n whatever ye do, try nah t' hit th' payin' customers in th' face!
   typingSpeed: 0.08
 --- !u!1001 &2064734812
 PrefabInstance:
