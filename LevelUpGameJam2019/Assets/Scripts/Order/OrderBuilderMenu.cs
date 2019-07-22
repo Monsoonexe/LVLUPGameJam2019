@@ -17,7 +17,7 @@ public class OrderBuilderMenu : MonoBehaviour
 
     //[Header("---Ingredient Icons---")]
 
-    [Header("---Ingredient Backgrounds---")]
+    [Header("---Ingredient Slots---")]
     [SerializeField]
     private IngredientSlotController ingredientSlot_0;
 
