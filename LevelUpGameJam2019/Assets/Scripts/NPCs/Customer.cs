@@ -10,6 +10,7 @@ public class Customer : MonoBehaviour
     //static object references
     private static CustomerManager customerManager;
     private static ScoreManager scoreManager;
+    private static LevelManager levelManager;
 
     //delays
     private static float badOrderDelay = 1.0f;
@@ -57,7 +58,7 @@ public class Customer : MonoBehaviour
     /// <summary>
     /// Customer will reject all Orders and hide Ingredients list when mad.
     /// </summary>
-    private bool customerMad = false;
+    private bool canDeliver = true;
 
     private Coroutine coroutine_rejectOrders;
 
@@ -65,23 +66,22 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         GatherReferences();
-
-        if (!customerOrder)
-        {
-            GetNewRandomOrderFromCustomerManager();
-        }
     }
 
     private void Start()
     {
-        RandomizeVisuals();
+        if (!customerOrder)//get an order if don't have one
+        {
+            GetNewRandomOrderFromCustomerManager();
+        }
+
+        RandomizeVisuals();//look different
 
         orderPromptController.ToggleVisuals(false);//start with UI hidden until in range of Player
     }
     
     private void OnValidate()
     {
-        //GatherReferences();
         //get references on this GameObject references
         audioSource = GetComponent<AudioSource>() as AudioSource;
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
@@ -115,7 +115,7 @@ public class Customer : MonoBehaviour
 
             if (hitPizzaBox)
             {
-                if (!orderHasBeenDelivered && !customerMad)
+                if (!orderHasBeenDelivered && canDeliver)
                 {
                     var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;
 
@@ -163,6 +163,26 @@ public class Customer : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    private void OnDisable()
+    {
+        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    private void OnLevelsEnd()
+    {
+        orderPromptController.ToggleVisuals(false);//hide visuals
+        canDeliver = false;//stop taking orders
+        //do something else
+    }
+
+    /// <summary>
+    /// Init how long delays should be.
+    /// </summary>
     private static void InitDelays()
     {
         if (customerManager)//if not, use default values
@@ -177,7 +197,7 @@ public class Customer : MonoBehaviour
         audioSource = GetComponent<AudioSource>() as AudioSource;
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
-        //get static reference
+        //get references to monos in scene
         if (!customerManager)
         {
             customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
@@ -187,6 +207,11 @@ public class Customer : MonoBehaviour
         if (!scoreManager)
         {
             scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        }
+
+        if (!levelManager)
+        {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
         }
     }
 
@@ -263,9 +288,9 @@ public class Customer : MonoBehaviour
     /// <returns></returns>
     private IEnumerator RejectOrdersWhileMad()
     {
-        customerMad = true;
+        canDeliver = false;
         yield return new WaitForSeconds(badOrderDelay);
-        customerMad = false;
+        canDeliver = true;
     }
 
     /// <summary>
