@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,10 +44,19 @@ public class OrderBuilderMenu : MonoBehaviour
     /// </summary>
     private readonly Image[] backgroundImages = new Image[maxIngredientsOnAnOrder];
 
+    //external mono Components
+    private static LevelManager levelManager;
+
+    private void Awake()
+    {
+        GatherReferences();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         InitBackgroundImagesArray();
+
         ResetAllBackgrounds();
     }
 
@@ -56,7 +64,24 @@ public class OrderBuilderMenu : MonoBehaviour
     void Update()
     {
         GetKeyBoardInput();
+    }
 
+    private void OnEnable()
+    {
+        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    private void OnDisable()
+    {
+        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
+    }
+
+    private void GatherReferences()
+    {
+        if (!levelManager)
+        {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        }        
     }
 
     /// <summary>
@@ -181,6 +206,26 @@ public class OrderBuilderMenu : MonoBehaviour
         //{
         //    Debug.Log("No Ingredient for this key.");
         //}
+
+    }
+
+    /// <summary>
+    /// Procedure to follow at the end of the level.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        this.gameObject.SetActive(false);//disable this whole object.  no taking orders after time is up!
+    }
+
+    /// <summary>
+    /// Remove Ingredients as options that are not in this list.
+    /// </summary>
+    /// <param name="availableIngredients"></param>
+    public void SetAvailableIngredients(IngredientsENUM[] availableIngredients)
+    {
+        //iterate through each element in list
+        //toggle on or off if icon is in list
+        Debug.Log("Shelled function: SetAvailableIngredients");
 
     }
 }
