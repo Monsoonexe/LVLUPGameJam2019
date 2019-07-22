@@ -19,31 +19,28 @@ public class OrderBuilderMenu : MonoBehaviour
 
     [Header("---Ingredient Backgrounds---")]
     [SerializeField]
-    private Image sauceBackgroundImage;
+    private IngredientSlotController ingredientSlot_0;
 
     [SerializeField]
-    private Image cheeseBackgroundImage;
+    private IngredientSlotController ingredientSlot_1;
 
     [SerializeField]
-    private Image peppBackgroundImage;
+    private IngredientSlotController ingredientSlot_2;
 
     [SerializeField]
-    private Image sausageBackgroundImage;
+    private IngredientSlotController ingredientSlot_3;
 
     [SerializeField]
-    private Image anchovyBackgroundImage;
+    private IngredientSlotController ingredientSlot_4;
 
+    private readonly IngredientSlotController[] ingredientSlotArray = new IngredientSlotController[maxIngredientsOnAnOrder];
+    
     [Space(5)]
     [Header("---Icon Background Colors---")]
     [SerializeField] private Color ingredientAddedColor;
 
     [SerializeField] private Color normalBackgroundColor;
-
-    /// <summary>
-    /// List of all background images.
-    /// </summary>
-    private readonly Image[] backgroundImages = new Image[maxIngredientsOnAnOrder];
-
+    
     //external mono Components
     private static LevelManager levelManager;
 
@@ -57,7 +54,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         InitBackgroundImagesArray();
 
-        ResetAllBackgrounds();
+        ResetSelectedSlots();
     }
 
     // Update is called once per frame
@@ -89,25 +86,30 @@ public class OrderBuilderMenu : MonoBehaviour
     /// </summary>
     private void InitBackgroundImagesArray()
     {
-        backgroundImages[0] = sauceBackgroundImage;
-        backgroundImages[1] = cheeseBackgroundImage;
-        backgroundImages[2] = peppBackgroundImage;
-        backgroundImages[3] = sausageBackgroundImage;
-        backgroundImages[4] = anchovyBackgroundImage;
+        ingredientSlotArray[0] = ingredientSlot_0;
+        ingredientSlotArray[1] = ingredientSlot_1;
+        ingredientSlotArray[2] = ingredientSlot_2;
+        ingredientSlotArray[3] = ingredientSlot_3;
+        ingredientSlotArray[4] = ingredientSlot_4;
     }
 
-    private void ResetAllBackgrounds()
+    /// <summary>
+    /// Set to default state.
+    /// </summary>
+    private void ResetSelectedSlots()
     {
-        foreach(var image in backgroundImages)
+        foreach(var slot in ingredientSlotArray)
         {
-            image.color = normalBackgroundColor;
+            slot.BackgroundImage.color = normalBackgroundColor;//reset background color
+            slot.QuantityTMP.enabled = false;//disabled double ingredients indicator
         }
     }
 
     public void OnOrderFired()
     {
         selectedIngredients.Clear();
-        ResetAllBackgrounds();
+
+        ResetSelectedSlots();
     }
 
     /// <summary>
@@ -122,34 +124,23 @@ public class OrderBuilderMenu : MonoBehaviour
         return ingredients;
     }
 
-    public void AddAnchovies()
+    /// <summary>
+    /// Add an Ingredient to the list.
+    /// </summary>
+    /// <param name="ingredient">Int to cast to an ENUM</param>
+    public void AddIngredient(int ingredient)
     {
-        selectedIngredients.Add(IngredientsENUM.Anchovies);
-        anchovyBackgroundImage.color = ingredientAddedColor;
+        AddIngredient((IngredientsENUM)ingredient);
     }
 
-    public void AddCheese()
-    {
-        selectedIngredients.Add(IngredientsENUM.Cheese);
-        cheeseBackgroundImage.color = ingredientAddedColor;
-    }
 
-    public void AddPepperoni()
+    /// <summary>
+    /// Add an Ingredient to the list.
+    /// </summary>
+    /// <param name="ingredient"></param>
+    public void AddIngredient(IngredientsENUM ingredientToAdd)
     {
-        selectedIngredients.Add(IngredientsENUM.Pepperoni);
-        peppBackgroundImage.color = ingredientAddedColor;
-    }
-
-    public void AddSauce()
-    {
-        selectedIngredients.Add(IngredientsENUM.Sauce);
-        sauceBackgroundImage.color = ingredientAddedColor;
-    }
-
-    public void AddSausage()
-    {
-        selectedIngredients.Add(IngredientsENUM.Sausage);
-        sausageBackgroundImage.color = ingredientAddedColor;
+        selectedIngredients.Add(ingredientToAdd);
     }
 
     /// <summary>
@@ -159,29 +150,30 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddSauce();
+            AddIngredient(0);// 1 - 1
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AddCheese();
+            AddIngredient(1);// 2 - 1
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            AddPepperoni();
+            AddIngredient(2);// 3 - 1
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            AddSausage();
+            AddIngredient(3);// 4 - 1
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            AddAnchovies();
+            AddIngredient(4);// 5 - 1
         }
 
+        //guaranteed 5 ingredients max
         //if (Input.GetKeyDown(KeyCode.Alpha6))
         //{
         //    Debug.Log("No Ingredient for this key.");
