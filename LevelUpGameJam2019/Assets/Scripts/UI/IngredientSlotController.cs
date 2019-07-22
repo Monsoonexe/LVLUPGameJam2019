@@ -100,7 +100,6 @@ public class IngredientSlotController : MonoBehaviour
         backgroundImage.color = parentOrderBuilder.AddedBackgroundColor;//change background color
         parentOrderBuilder.AddIngredient(ingredient);//add to Ingredients on Order list
         quantityTMP.enabled = ingredientQuantity > 1;//enable tmp if x2 quantity
-                
     }
 
     public void SetKeystrokeValue(int keystroke)
@@ -147,7 +146,7 @@ public class IngredientSlotController : MonoBehaviour
     /// <param name="ingredientIcon">The graphic to display.</param>
     public void ConfigureSlot(int keystroke, IngredientsENUM ingredient, Sprite ingredientIcon)
     {
-        keystrokeTMP.text = keystroke.ToString();
+        this.keystrokeTMP.text = keystroke.ToString();
         this.ingredient = ingredient;
         this.ingredientIcon.sprite = ingredientIcon;
     }
