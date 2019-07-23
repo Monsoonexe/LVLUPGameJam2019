@@ -156,10 +156,6 @@ public class CustomerManager : MonoBehaviour
 
         for(var i = 0; i < possibleOrders.Length; ++i)//for each order,
         {
-            //does the order contain an ingredient NOT in list?
-            //if yes, remove order
-            //++removedOrderCount;
-            //if no, continue
             for(var j = 0; j < possibleOrders[i].Ingredients.Length; ++j)//for each ingredient on each order
             {
                 var ingredientIsInList = false;
@@ -175,6 +171,7 @@ public class CustomerManager : MonoBehaviour
                 if (!ingredientIsInList)//
                 {
                     possibleOrders[i] = null;//remove Order from list
+                    ++removedOrderCount;
                     break;
                 }
             }
