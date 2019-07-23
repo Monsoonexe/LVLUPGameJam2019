@@ -1501,7 +1501,7 @@ PrefabInstance:
     - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
         type: 3}
       propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
         type: 3}
