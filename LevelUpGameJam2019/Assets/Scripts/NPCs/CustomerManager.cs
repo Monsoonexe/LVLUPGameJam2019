@@ -148,14 +148,6 @@ public class CustomerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Create a new Order SO (avoiding duplicates) and add it to folder.)
-    /// </summary>
-    public void RandomlyGenerateNewOrder()
-    {
-        Debug.Log("NOT YET IMPLEMENTED");
-    }
-
-    /// <summary>
     /// Orders should only be given to customers that have ingredients that are available to the Player.  Remove Orders that have Ingredients not available to Player.
     /// </summary>
     public void RemoveOrdersWithUnavailableIngredients()
