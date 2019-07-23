@@ -4,9 +4,9 @@
 public class Order : ScriptableObject
 {
     [SerializeField]//set in Inspector
-    private IngredientsENUM[] ingredients;
+    private IngredientSO[] ingredientSOs;
 
-    public IngredientsENUM[] Ingredients { get { return ingredients; } }//publicly accessible, but readonly
+    public IngredientSO[] Ingredients { get { return ingredientSOs; } }//publicly accessible, but gets a copy, not actual.
 
     [SerializeField]//set in Inspector
     private int randomWeight = 1;
@@ -19,7 +19,7 @@ public class Order : ScriptableObject
     /// <remarks>VS does not recognize this as a valid Unity Callback (Message) but it totally works.</remarks>
     private void OnValidate()
     {
-        ingredients = SortIngredientsListAscending(ingredients);//sort list
+        ingredientSOs = SortIngredientsListAscending(ingredientSOs);//sort list
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ public class Order : ScriptableObject
     /// <returns>Returns true if all ingredients in order are included on pizza, in proper quantities, and pizza contains no ingredient not on order.</returns>
     public static bool CompareOrderToPizza(Order customerOrder, IngredientsENUM[] ingredientsOnPizza)
     {
-        return CompareOrderToPizza(customerOrder.ingredients, ingredientsOnPizza);
+        return CompareOrderToPizza(customerOrder.Ingredients, ingredientsOnPizza);
     }
 
     /// <summary>
@@ -40,6 +40,48 @@ public class Order : ScriptableObject
     /// <param name="ingredientsOnPizza"></param>
     /// <returns>Returns true if all ingredients in order are included on pizza, and pizza contains no ingredient not on order.</returns>
     /// <remarks>Assumes both lists are sorted in ascending numeric order.</remarks>
+    public static bool CompareOrderToPizza(IngredientSO[] ingredientsOnOrder, IngredientsENUM[] ingredientsOnPizza)
+    {
+        //base
+        //quick exit (agnostic)
+        if (ingredientsOnOrder.Length != ingredientsOnPizza.Length)
+        {
+            return false;
+        }
+
+        else if (ingredientsOnOrder.Length == 0 && ingredientsOnPizza.Length == 0)//are both orders plain?
+        {
+            //plain pizza matches plain order
+            return true;
+        }
+
+        else
+        {
+            //all ingredients in order are present on pizza, quantities match, and no extra ingredients exist on pizza that are not in order
+            //sort list
+            //ingredientsOnOrder = SortIngredientsListAscending(ingredientsOnOrder); //call this at loadtime to avoid redundant sorts
+            ingredientsOnPizza = SortIngredientsListAscending(ingredientsOnPizza);//sort this only when needed.
+
+            //check if lists are exactly the same. (fact: they are the same length)
+            for (var i = 0; i < ingredientsOnOrder.Length; ++i)
+            {
+                if (ingredientsOnOrder[i].Ingredient != ingredientsOnPizza[i])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Determines if customer order and pizza are exactly the same.
+    /// </summary>
+    /// <param name="customerOrder"></param>
+    /// <param name="ingredientsOnPizza"></param>
+    /// <returns>Returns true if all ingredients in order are included on pizza, and pizza contains no ingredient not on order.</returns>
+    /// <remarks>Assumes both lists are sorted in ascending numeric order.</remarks>
+    [System.Obsolete("RSO.  Deprecated because it will probably never be used.  Use different overloaded version instead.")]
     public static bool CompareOrderToPizza(IngredientsENUM[] ingredientsOnOrder, IngredientsENUM[] ingredientsOnPizza)
     {
         //base
@@ -70,18 +112,15 @@ public class Order : ScriptableObject
                     return false;
                 }
             }
-
         }
-
         return true;
-
     }
     
     /// <summary>
     /// Sort the list in ascending order based on numeric value of enum using Selection Sort.
     /// </summary>
     /// <param name="ingredientsList"></param>
-    public static IngredientsENUM[] SortIngredientsListAscending(IngredientsENUM[] ingredientsList)
+    public static IngredientSO[] SortIngredientsListAscending(IngredientSO[] ingredientsList)
     {
         var length = ingredientsList.Length;//cache length
 
@@ -114,13 +153,51 @@ public class Order : ScriptableObject
         return ingredientsList;
 
     }//end func
-    
+
+    /// <summary>
+    /// Sort the list in ascending order based on numeric value of enum using Selection Sort.
+    /// </summary>
+    /// <param name="ingredientsList"></param>
+    public static IngredientsENUM[] SortIngredientsListAscending(IngredientsENUM[] ingredientsList)
+    {
+        var length = ingredientsList.Length;//cache length
+
+        if (length < 2)//don't sort small lists
+        {
+            return ingredientsList;
+        }
+
+        //selection sort
+        for (var i = 0; i < length - 1; ++i)
+        {
+            var lowIndex = i;
+
+            for (var j = length - 1; j > i; --j)
+            {
+                if (ingredientsList[j] < ingredientsList[lowIndex])
+                {
+                    lowIndex = j;
+                }
+            }
+
+            //swap elements
+            var temp = ingredientsList[lowIndex];//cache current occupant
+
+            ingredientsList[lowIndex] = ingredientsList[i];//put correct element in place
+            ingredientsList[i] = temp;//put temp back in for later
+
+        }//end for
+
+        return ingredientsList;
+
+    }//end func
+
     /// <summary>
     /// Sort this instance's list of ingredients.
     /// </summary>
     public void SortIngredientsList()
     {
-        ingredients = SortIngredientsListAscending(ingredients);
+        ingredientSOs = SortIngredientsListAscending(ingredientSOs);
     }
 
     /// <summary>
@@ -132,7 +209,7 @@ public class Order : ScriptableObject
         //might override in the future
         var stringBuilder = new System.Text.StringBuilder();
 
-        foreach (var ingredient in ingredients)
+        foreach (var ingredient in ingredientSOs)
         {
             stringBuilder.Append(ingredient.ToString());
             stringBuilder.Append(" | ");
