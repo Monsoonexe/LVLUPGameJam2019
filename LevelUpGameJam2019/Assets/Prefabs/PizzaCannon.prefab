@@ -201,6 +201,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalSpeed: 1
   horizontalSpeed: 1
+--- !u!1 &4892255508845633223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820724080383695359}
+  m_Layer: 0
+  m_Name: Camera Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820724080383695359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892255508845633223}
+  m_LocalRotation: {x: 0.026146779, y: 0.04796168, z: -0.0012559195, w: 0.9985061}
+  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5599406827822538936}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 3, y: 5.5, z: 0}
 --- !u!1 &5172529314404056172
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +422,7 @@ Transform:
   - {fileID: 8184128873966849663}
   - {fileID: 2375593037653733193}
   - {fileID: 4309768682175808438}
+  - {fileID: 1820724080383695359}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -407,18 +438,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f103aef71948c40409af95bab0e8a505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraHandle: {fileID: 1820724080383695359}
+  availableIngredients:
+  - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
   projectilePrefab: {fileID: 2959233902562555564, guid: 32a00856c16e5ce4cb4ca0df4cad0b05,
     type: 3}
   projectileSpawnPoints:
   - {fileID: 2375593037653733193}
-  orderBuilder: {fileID: 0}
   projectileForce: 15
+  secondsBetweenShots: 1
   objectToTrack: {fileID: 4309768682175808438}
   turretTransform: {fileID: 3176839628521285191}
   minPitch: 15
   maxPitch: 75
   swivelSpeed: 3
-  secondsBetweenShots: 1
   cannonFireSound: {fileID: 8300000, guid: 13305355e09f3714a995dcdc69ad9088, type: 3}
 --- !u!82 &1506711607487349319
 AudioSource:

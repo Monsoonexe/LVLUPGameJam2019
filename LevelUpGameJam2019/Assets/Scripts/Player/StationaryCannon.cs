@@ -6,14 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class StationaryCannon : MonoBehaviour
 {
-    private static LevelManager levelManager;
+    private static LevelManager levelManager;//subscribe to event
 
     /// <summary>
     /// Stop adjusting rotation if target within this angle.
     /// </summary>
     private const float optimalAngle = .05f;
 
-    [Header("---Order Stuff---")]
+    /// <summary>
+    /// Object to which Camera will be hooked.
+    /// </summary>
+    [Tooltip("Object to which Camera will be hooked.  Set this to be camera point.")]
+    public Transform cameraHandle;
+
+    [Header("---Ingredients---")]
     [SerializeField]
     private IngredientSO[] availableIngredients;
 
@@ -32,6 +38,11 @@ public class StationaryCannon : MonoBehaviour
     
     [SerializeField]
     private float projectileForce = 5.0f;
+
+    [SerializeField]
+    private float secondsBetweenShots = 3f;
+
+    private float nextShootTime = 0;
 
     private int projectileSpawnPointIndex = 0;
 
@@ -55,9 +66,6 @@ public class StationaryCannon : MonoBehaviour
     [SerializeField]
     private float swivelSpeed = 3f;
 
-    [SerializeField]
-    private float secondsBetweenShots = 3f;
-
     [Header("---Audio---")]
     [SerializeField]
     private AudioClip cannonFireSound;
@@ -67,9 +75,7 @@ public class StationaryCannon : MonoBehaviour
     private AudioSource myAudioSource;
     private Rigidbody myRigidbody;
     private Transform myBaseTransform;//swivel on Y 
-
-    private float nextShootTime = 0;
-
+    
     //object pooling stuff
     private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
