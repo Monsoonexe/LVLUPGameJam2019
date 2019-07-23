@@ -95,14 +95,13 @@ public class StationaryCannon : MonoBehaviour
     void Awake()
     {
         GatherReferences();
+        availableIngredients = Order.SortIngredientsListAscending(availableIngredients);//sort list
     }
 
     // Start is called before the first frame update
     private void Start()
     {
         InitProjectilePool();
-        myAudioSource.clip = cannonFireSound;//load audio
-        availableIngredients = Order.SortIngredientsListAscending(availableIngredients);//sort list
     }
 
     // Update is called once per frame
@@ -116,6 +115,7 @@ public class StationaryCannon : MonoBehaviour
     private void OnEnable()
     {
         levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
+        myAudioSource.clip = cannonFireSound;//load audio
     }
 
     private void OnDisable()
