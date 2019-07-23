@@ -15,6 +15,9 @@ public class StationaryCannon : MonoBehaviour
     private static ScoreManager scoreManager;
 
     [Header("Projectile Stuff")]
+    [Tooltip("Allows the cannon to continue tracking but disables trigger.")]
+    public bool disableCannonTrigger = false;//used by Tutorial
+
     [SerializeField]
     private GameObject projectilePrefab;
 
@@ -204,7 +207,7 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     private void HandleShooting()
     {
-        if (Input.GetButtonDown("Fire1"))//check for input
+        if (Input.GetButtonDown("Fire1") && !disableCannonTrigger)//check for input and not disabled
         {
             if (Time.time > nextShootTime)//check for cooldown
             {
