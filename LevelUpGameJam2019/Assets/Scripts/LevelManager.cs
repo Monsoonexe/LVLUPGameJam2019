@@ -46,7 +46,6 @@ public class LevelManager : MonoBehaviour
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-
     }
 
     public void OnTriggerEnter(Collider other)
@@ -75,7 +74,6 @@ public class LevelManager : MonoBehaviour
         //configure cannon
         cannonController.SetOrderBuilder(orderBuilder);
         cannonController.SetScoreManager(scoreManager);
-
     }
 
     /// <summary>
