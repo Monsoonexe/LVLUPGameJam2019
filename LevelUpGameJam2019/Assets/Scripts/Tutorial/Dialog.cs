@@ -5,18 +5,14 @@ using TMPro;
 
 public class Dialog : MonoBehaviour
 {
-    public GameObject tutPopupscript;
-
     public TextMeshProUGUI textDisplay;
-
-    [TextArea]
     public string[] sentences;
     private int index;
     public float typingSpeed;
 
     private void Start()
     {
-        StartCoroutine(TypeLvl1Tut1());
+        StartCoroutine(Type());
     }
 
     private void Update()
@@ -24,7 +20,7 @@ public class Dialog : MonoBehaviour
         NextSentence();
     }
 
-    IEnumerator TypeLvl1Tut1()
+    IEnumerator Type()
     {
         foreach (char letter in sentences[index].ToCharArray())
         {
@@ -37,29 +33,20 @@ public class Dialog : MonoBehaviour
     {
         if (textDisplay.text == sentences[index]) //Makes it so player can't spam through the text and break it.
         {
-            if (index < sentences.Length - 1)
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Return)) //checks for if the next key is pressed
             {
-                index++;
-                textDisplay.text = "";
-                StartCoroutine(TypeLvl1Tut1());
-            } else
-            {
-                tutPopupscript.SetActive(true);
+                Debug.Log("Next Sentence Please");
+                if (index < sentences.Length - 1)
+                {
+                    index++;
+                    textDisplay.text = "";
+                    StartCoroutine(Type());
+                }
+                else
+                {
+                    textDisplay.text = "";
+                }
             }
-            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.RightArrow)) //checks for if the next key is pressed
-            //{
-            //    if (index < sentences.Length - 1)
-            //    {
-            //        index++;
-            //        textDisplay.text = "";
-            //        StartCoroutine(TypeLvl1Tut1());
-            //    }
-            //    else
-            //    {
-            //        tutPopupscript.SetActive(true);
-            //        //textDisplay.text = "";
-            //    }
-            //}
         }
     }
 }

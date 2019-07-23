@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    public GameObject dialogVisuals;
-    public Dialog dialogManager;
     public GameObject[] popUps;
     private int popUpIndex;
 
@@ -30,23 +28,21 @@ public class TutorialManager : MonoBehaviour
         {
             Debug.Log("The Tut has started");
             //Have the Random Rabbit slide out and welcome you to the game
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                //dialogVisuals.SetActive(false);
-                //dialogManager.StartSecondStint();
                 popUpIndex++;
             }
         } else if (popUpIndex == 1)
         {
             Debug.Log("Second Part of Tut");
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 popUpIndex++;
             }
         } else if (popUpIndex == 2)
         {
             Debug.Log("Third Part of Tut");
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 popUpIndex++;
             }
