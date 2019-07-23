@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour
         orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
 
         //configure customer manager
-        
+        customerManager.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
     }
 
     /// <summary>

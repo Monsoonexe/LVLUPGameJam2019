@@ -150,8 +150,50 @@ public class CustomerManager : MonoBehaviour
     /// <summary>
     /// Orders should only be given to customers that have ingredients that are available to the Player.  Remove Orders that have Ingredients not available to Player.
     /// </summary>
-    public void RemoveOrdersWithUnavailableIngredients()
+    public void RemoveOrdersWithUnavailableIngredients(IngredientSO[] availableIngredients)
     {
-        Debug.Log("SHELLED!", this);
+        var removedOrderCount = 0;//accumulator
+
+        for(var i = 0; i < possibleOrders.Length; ++i)//for each order,
+        {
+            //does the order contain an ingredient NOT in list?
+            //if yes, remove order
+            //++removedOrderCount;
+            //if no, continue
+            for(var j = 0; j < possibleOrders[i].Ingredients.Length; ++j)//for each ingredient on each order
+            {
+                var ingredientIsInList = false;
+
+                foreach(var availIngredient in availableIngredients)//is that ingredient in this list?
+                {
+                    if(possibleOrders[i].Ingredients[j] == availIngredient)
+                    {
+                        ingredientIsInList = true;
+                    }
+                }
+
+                if (!ingredientIsInList)//
+                {
+                    possibleOrders[i] = null;//remove Order from list
+                    break;
+                }
+            }
+        }
+
+        var newOrderArray = new Order[possibleOrders.Length - removedOrderCount];
+
+        //fill array
+        var newOrderIndex = 0;
+
+        foreach(var order in possibleOrders)
+        {
+            if(order != null)
+            {
+                newOrderArray[newOrderIndex] = order;
+                ++newOrderIndex;
+            }
+        }
+
+        possibleOrders = newOrderArray;//assign to new, smaller array
     }
 }
