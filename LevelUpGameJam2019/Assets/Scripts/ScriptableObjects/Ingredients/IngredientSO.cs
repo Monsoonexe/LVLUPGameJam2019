@@ -21,4 +21,28 @@ public class IngredientSO : ScriptableObject
     {
         return ingredient.ToString();
     }
+
+    //comparison operations
+    //always a comparison of ingredient value, never of Icon.
+
+    public static bool operator >(IngredientSO a, IngredientSO b)
+    {
+        return a.ingredient > b.ingredient;
+    }
+
+    public static bool operator >=(IngredientSO a, IngredientSO b)
+    {
+        return a.ingredient >= b.ingredient;
+    }
+
+    public static bool operator <(IngredientSO a, IngredientSO b)
+    {
+        return a.ingredient < b.ingredient;
+    }
+
+    public static bool operator <=(IngredientSO a, IngredientSO b)
+    {
+        return a.ingredient <= b.ingredient;
+    }
+
 }
