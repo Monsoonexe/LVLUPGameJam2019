@@ -48,13 +48,11 @@ public class Order : ScriptableObject
         {
             return false;
         }
-
         else if (ingredientsOnOrder.Length == 0 && ingredientsOnPizza.Length == 0)//are both orders plain?
         {
             //plain pizza matches plain order
             return true;
         }
-
         else
         {
             //all ingredients in order are present on pizza, quantities match, and no extra ingredients exist on pizza that are not in order
@@ -90,13 +88,11 @@ public class Order : ScriptableObject
         {
             return false;
         }
-
         else if (ingredientsOnOrder.Length == 0 && ingredientsOnPizza.Length == 0)//are both orders plain?
         {
             //plain pizza matches plain order
             return true;
         }
-
         else
         {
             //all ingredients in order are present on pizza, quantities match, and no extra ingredients exist on pizza that are not in order
@@ -105,7 +101,7 @@ public class Order : ScriptableObject
             ingredientsOnPizza = SortIngredientsListAscending(ingredientsOnPizza);//sort this only when needed.
                        
             //check if lists are exactly the same. (fact: they are the same length)
-            for(var i = 0; i < ingredientsOnOrder.Length; ++i)
+            for (var i = 0; i < ingredientsOnOrder.Length; ++i)
             {
                 if(ingredientsOnOrder[i] != ingredientsOnPizza[i])
                 {
@@ -124,7 +120,7 @@ public class Order : ScriptableObject
     {
         var length = ingredientsList.Length;//cache length
 
-        if(length < 2)//don't sort small lists
+        if (length < 2)//don't sort small lists
         {
             return ingredientsList;
         }
