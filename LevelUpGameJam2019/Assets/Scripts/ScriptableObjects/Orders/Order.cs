@@ -4,7 +4,7 @@
 public class Order : ScriptableObject
 {
     [SerializeField]//set in Inspector
-    private IngredientSO[] ingredientSOs;
+    private IngredientSO[] ingredientSOs = new IngredientSO[0];//
 
     public IngredientSO[] Ingredients { get { return ingredientSOs; } }//publicly accessible, but gets a copy, not actual.
 
