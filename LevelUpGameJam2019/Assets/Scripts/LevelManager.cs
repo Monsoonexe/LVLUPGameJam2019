@@ -63,6 +63,12 @@ public class LevelManager : MonoBehaviour
         LevelsEndEvent.Invoke();
     }
 
+    /// <summary>
+    /// Initialization should be done here to guarantee execution order.
+    /// </summary>
+    /// <param name="playerData"></param>
+    /// <param name="shipPrefab"></param>
+    /// <param name="cannonPrefab"></param>
     public void InitLevel(PlayerStats playerData, GameObject shipPrefab, GameObject cannonPrefab)
     {
         var shipGO = Instantiate(shipPrefab, playerStartHandle);//spawn pizza ship
