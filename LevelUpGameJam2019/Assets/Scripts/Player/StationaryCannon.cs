@@ -102,6 +102,7 @@ public class StationaryCannon : MonoBehaviour
     {
         InitProjectilePool();
         myAudioSource.clip = cannonFireSound;//load audio
+        availableIngredients = Order.SortIngredientsListAscending(availableIngredients);//sort list
     }
 
     // Update is called once per frame
