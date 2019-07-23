@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Pepperoni
   m_EditorClassIdentifier: 
   ingredient: 2
-  icon: {fileID: 21300000, guid: f63879062f33a0b4497725a8aab32e5f, type: 3}
+  icon: {fileID: 21300000, guid: 53b7809efeac1b745bbe012c06014709, type: 3}
