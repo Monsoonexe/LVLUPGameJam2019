@@ -4,6 +4,7 @@ using UnityEngine.Events;
 /// <summary>
 /// Only one exists in each Level.  Handles initializing the level.
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class LevelManager : MonoBehaviour
 {
     /// <summary>
@@ -21,6 +22,13 @@ public class LevelManager : MonoBehaviour
     [Header("---UI---")]
     [SerializeField]
     private GameObject returnToMainMenuPrompt;
+
+    [Header("---Audio---")]
+    [SerializeField]
+    private AudioClip levelMusic;
+
+    //member Component refs
+    private AudioSource myAudioSource;
     
     //external mono Component references
     private GameController gameController;//should exist before this is loaded in Scene
@@ -37,6 +45,9 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         returnToMainMenuPrompt.SetActive(false);
+
+        myAudioSource.clip = levelMusic;//load level music
+        myAudioSource.Play();
     }
 
     /// <summary>
@@ -44,12 +55,15 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void GatherReferences()
     {
+        //get member refs
+        myAudioSource = GetComponent<AudioSource>();
+
         //get external references
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>() as GameController;
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>() as OrderBuilderMenu;
-        mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
+        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
+        mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     public void OnTriggerEnter(Collider other)
