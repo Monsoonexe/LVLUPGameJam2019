@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7403924368105705956}
+  - component: {fileID: 2459937797936653868}
   - component: {fileID: 7403924368105705952}
   - component: {fileID: 7403924368105705953}
-  - component: {fileID: 7403924368105705955}
   - component: {fileID: 7403924368105705954}
   m_Layer: 0
-  m_Name: _Level End Volume
+  m_Name: Level End Volume
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -28,12 +28,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7403924368105705957}
   m_LocalRotation: {x: -0, y: 0.89243263, z: -0, w: 0.45118076}
-  m_LocalPosition: {x: 295.7, y: 5, z: 420.4}
-  m_LocalScale: {x: 62.07405, y: 62.074017, z: 62.07405}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 126.36101, z: 0}
+--- !u!114 &2459937797936653868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403924368105705957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218fa3bd5a6790a4fa8772d92ed2e9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!33 &7403924368105705952
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,19 +96,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7403924368105705955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403924368105705957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d983e41b067a1c4d9c41da37dabcabe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EndGameWhenThisObjectEntersVolume: {fileID: 0}
 --- !u!135 &7403924368105705954
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -103,5 +107,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
