@@ -23,9 +23,11 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private OrderPromptController orderPromptController;
 
-    [SerializeField]
+    [SerializeField]//set in Inspector
     [Tooltip("If this reference is null, Customer will ask CustomerManager for a random Order.")]
     private Order customerOrder;
+
+    public Order CustomerOrder { get { return customerOrder; } }//publicly accessable, but readonly
 
     /// <summary>
     /// Holds visual mesh and material and sound effects.
@@ -77,6 +79,7 @@ public class Customer : MonoBehaviour
 
         RandomizeVisuals();//look different
 
+        orderPromptController.LoadIcons(customerOrder.Ingredients);
         orderPromptController.ToggleVisuals(false);//start with UI hidden until in range of Player
     }
     
@@ -300,11 +303,6 @@ public class Customer : MonoBehaviour
     public bool WasCustomersOrderDelivered()
     {
         return orderHasBeenDelivered;
-    }
-
-    public IngredientsENUM[] GetOrderIngredients()
-    {
-        return customerOrder.Ingredients;
     }
 
     [ContextMenu("Randomize Visuals")]
