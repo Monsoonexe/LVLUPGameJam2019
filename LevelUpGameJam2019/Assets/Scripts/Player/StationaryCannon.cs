@@ -15,7 +15,7 @@ public class StationaryCannon : MonoBehaviour
 
     [Header("---Order Stuff---")]
     [SerializeField]
-    private IngredientsENUM[] availableIngredients = { IngredientsENUM.Sauce, IngredientsENUM.Cheese };
+    private IngredientSO[] availableIngredients;
     
     [Header("---Projectile Stuff---")]
     [SerializeField]
@@ -91,10 +91,10 @@ public class StationaryCannon : MonoBehaviour
         InitProjectilePool();
     }
 
-    private void Start()
-    {
-        orderBuilder.SetAvailableIngredients(availableIngredients);
-    }
+    //private void Start()
+    //{
+    //    orderBuilder.SetAvailableIngredients(availableIngredients);
+    //}
 
     // Update is called once per frame
     void Update()
@@ -290,7 +290,7 @@ public class StationaryCannon : MonoBehaviour
     }
 
     /// <summary>
-    /// Set a hook.
+    /// Set hook and initialize Order Builder.
     /// </summary>
     /// <param name="orderBuilder"></param>
     public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
