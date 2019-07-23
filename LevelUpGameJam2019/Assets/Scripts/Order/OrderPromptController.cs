@@ -4,32 +4,15 @@ using UnityEngine.UI;
 
 public class OrderPromptController : MonoBehaviour
 {
+    //shared external refs
     private static Transform mainCameraTransform;
 
     [SerializeField]
     private GameObject UIRoot;
-
+    
+    [Header("---Ingredient Icon Slots---")]
     [SerializeField]
-    private Customer customer;
-
-    [SerializeField]
-    private GameObject[] slots;
-
-    [Header("---Ingredient Icons---")]
-    [SerializeField]
-    private GameObject sauceIcon;
-
-    [SerializeField]
-    private GameObject cheeseIcon;
-
-    [SerializeField]
-    private GameObject peppIcon;
-
-    [SerializeField]
-    private GameObject sausageIcon;
-
-    [SerializeField]
-    private GameObject anchovyIcon;
+    private Image[] ingredientSlotImages;
 
     [Header("---Reaction Icons---")]
     [SerializeField]
@@ -44,33 +27,22 @@ public class OrderPromptController : MonoBehaviour
     [Header("---Delays---")]
     [SerializeField]
     private float closePromptAfterSeconds = 3.0f;
-    
-    //
-    private GameObject[] ingredientIcons;
-
-    private IngredientsENUM[] ingredientsList;
 
     //Component References
     private Transform myTransform;
     
-    void Start()
+    private void Awake()
     {
         GatherReferences();
-
-        ingredientsList = customer.GetOrderIngredients();
-
-        ReadRecipe();
-
-        CheckSlot();
     }
-    
+        
     private void Update()
     {
         PointUITowardsCamera();
     }
 
     /// <summary>
-    /// 
+    /// Get handles
     /// </summary>
     private void GatherReferences()
     {
@@ -83,37 +55,7 @@ public class OrderPromptController : MonoBehaviour
         //Components on this GO
         myTransform = this.gameObject.transform as Transform;
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private void ReadRecipe()
-    {
-        ingredientIcons = new GameObject[ingredientsList.Length];
-
-        for (var i = 0; i < ingredientsList.Length; i++)
-        {
-            switch (ingredientsList[i])                
-            {
-                case IngredientsENUM.Sauce:
-                    ingredientIcons[i] = sauceIcon;
-                    break;
-                case IngredientsENUM.Cheese:
-                    ingredientIcons[i] = cheeseIcon;
-                    break;
-                case IngredientsENUM.Pepperoni:
-                    ingredientIcons[i] = peppIcon;
-                    break;
-                case IngredientsENUM.Sausage:
-                    ingredientIcons[i] = sausageIcon;
-                    break;
-                case IngredientsENUM.Anchovies:
-                    ingredientIcons[i] = anchovyIcon;
-                    break;
-            }
-        }
-    }
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -121,26 +63,15 @@ public class OrderPromptController : MonoBehaviour
     {
         myTransform.LookAt(mainCameraTransform);
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private void CheckSlot()
-    {
-        for (int i = 0; i < ingredientsList.Length; i++)
-        {
-            Instantiate(ingredientIcons[i], slots[i].transform, false);
-        }
-    }
-
+    
     /// <summary>
     /// Iterate through and call SetActive(active) on all icons.
     /// </summary>
     private void ToggleAllIcons(bool active)
     {
-        foreach (var icon in slots)
+        foreach (var icon in ingredientSlotImages)
         {
-            icon.SetActive(active);
+            icon.enabled = active;
         }
     }
 
@@ -183,6 +114,24 @@ public class OrderPromptController : MonoBehaviour
     public void ToggleVisuals(bool active)
     {
         UIRoot.SetActive(active);
+    }
+
+    /// <summary>
+    /// Load Icons from Ingredients.
+    /// </summary>
+    public void LoadIcons(IngredientSO[] ingredients)
+    {
+        for (var i = 0; i < ingredientSlotImages.Length; i++)
+        {
+            if(i < ingredients.Length)
+            {
+                ingredientSlotImages[i].sprite = ingredients[i].Icon;
+            }
+            else
+            {
+                ingredientSlotImages[i].sprite = null;
+            }
+        }
     }
 
     /// <summary>
