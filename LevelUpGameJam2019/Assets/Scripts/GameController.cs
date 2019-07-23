@@ -48,20 +48,6 @@ public class GameController : MonoBehaviour
         SceneManager.sceneLoaded += InitLevel;//subscribe to event to know when a scene has changed.
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GatherSceneReferences();
-
-        currentLevelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to event to know when level has ended.
-
-        var acceptableShipIndex = Mathf.Clamp(shipPrefabIndex, 0, shipPrefabs.Length - 1);//make sure index is w/n array bounds
-        var acceptableCannonIndex = Mathf.Clamp(cannonPrefabIndex, 0, cannonPrefabs.Length - 1);//make sure index is w/n array bounds
-
-        currentLevelManager.InitLevel(playerStats, shipPrefabs[acceptableShipIndex], cannonPrefabs[acceptableCannonIndex]);//init level
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -74,8 +60,14 @@ public class GameController : MonoBehaviour
 
     private void InitLevel(Scene newScene, LoadSceneMode loadSceneMode)
     {
-        Debug.Log("Init Level shelled...", this);
-        Start();
+        GatherSceneReferences();
+
+        currentLevelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to event to know when level has ended.
+
+        var acceptableShipIndex = Mathf.Clamp(shipPrefabIndex, 0, shipPrefabs.Length - 1);//make sure index is w/n array bounds
+        var acceptableCannonIndex = Mathf.Clamp(cannonPrefabIndex, 0, cannonPrefabs.Length - 1);//make sure index is w/n array bounds
+
+        currentLevelManager.InitLevel(playerStats, shipPrefabs[acceptableShipIndex], cannonPrefabs[acceptableCannonIndex]);//init level
 
     }
 
