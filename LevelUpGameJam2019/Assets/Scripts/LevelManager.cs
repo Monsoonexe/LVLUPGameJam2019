@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void OnLevelsEnd()
     {
+        Debug.Log("ON LEVEL'S END!");
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
         LevelsEndEvent.Invoke();
     }
