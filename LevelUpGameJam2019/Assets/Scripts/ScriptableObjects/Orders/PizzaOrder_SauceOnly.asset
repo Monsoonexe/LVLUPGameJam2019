@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientSOs:
   - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
-  randomWeight: 10
+  randomWeight: 5

@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientSOs:
   - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
   - {fileID: 11400000, guid: 3a63ab2841b96de40a943bdf4ef66991, type: 2}
-  randomWeight: 25
+  randomWeight: 30
