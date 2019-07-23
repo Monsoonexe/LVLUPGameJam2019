@@ -2,9 +2,8 @@
 using UnityEngine.Events;
 
 /// <summary>
-/// Only one exists in each Level.
+/// Only one exists in each Level.  Handles initializing the level.
 /// </summary>
-[RequireComponent(typeof(Collider))]
 public class LevelManager : MonoBehaviour
 {
     /// <summary>
@@ -58,7 +57,7 @@ public class LevelManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player hit end collider.  Ending the game.");
-            gameController.OnLevelsEnd();//tell GO this is so and move on to next phase
+            LevelsEndEvent.Invoke();
         }
     }
 
