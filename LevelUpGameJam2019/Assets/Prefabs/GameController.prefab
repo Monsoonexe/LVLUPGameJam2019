@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72bc69b9534508747bf2f9eefee6e538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  playerStats: {fileID: 11400000, guid: b3c7f26fffd2f76498d54a01ca9413ed, type: 2}
   cannonPrefabs:
   - {fileID: 6118152546697191637, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
   cannonPrefabIndex: 0
