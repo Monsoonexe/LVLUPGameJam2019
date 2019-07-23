@@ -133,23 +133,13 @@ public class OrderPromptController : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// Called externally.
-    /// </summary>
-    /// <param name="seconds"></param>
-    public void CloseOrderPromptAfterSeconds(float seconds)
-    {
-        StartCoroutine(CloseOrderBubbleAfterSeconds(seconds));
-    }
-
+    
     /// <summary>
     /// 
     /// </summary>
     public void OnSuccessfulOrder()
     {
         ShowReaction(happySprite);
-
         StartCoroutine(CloseOrderBubbleAfterSeconds(closePromptAfterSeconds));
     }
 
