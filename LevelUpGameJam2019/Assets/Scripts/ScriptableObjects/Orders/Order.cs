@@ -116,6 +116,7 @@ public class Order : ScriptableObject
     /// Sort the list in ascending order based on numeric value of enum using Selection Sort.
     /// </summary>
     /// <param name="ingredientsList"></param>
+    /// <remarks>Maybe this should be part of IngredientSO?</remarks>
     public static IngredientSO[] SortIngredientsListAscending(IngredientSO[] ingredientsList)
     {
         var length = ingredientsList.Length;//cache length
