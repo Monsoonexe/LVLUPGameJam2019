@@ -196,7 +196,7 @@ public class OrderBuilderMenu : MonoBehaviour
             slot.DisableSlot();
         }
 
-        foreach(var ingredient in ingredientsAvailableOnCannon)
+        foreach(var ingredient in ingredientsAvailableOnCannon)//enable only available ingredients
         {
             for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
             {
