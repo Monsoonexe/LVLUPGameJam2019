@@ -189,7 +189,7 @@ public class OrderBuilderMenu : MonoBehaviour
     /// Remove Ingredients as options that are not in this list.
     /// </summary>
     /// <param name="availableIngredients"></param>
-    public void SetAvailableIngredients(IngredientsENUM[] ingredientsAvailableOnCannon)
+    public void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
     {
         foreach(var slot in ingredientSlots)//disable ALL slots.
         {
@@ -199,12 +199,11 @@ public class OrderBuilderMenu : MonoBehaviour
         foreach(var ingredient in ingredientsAvailableOnCannon)
         {
             for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
-            { 
-                
-
+            {
+                var keystroke = i + 1;//keystrokes start at 1, indices at 0
+                ingredientSlots[i].ConfigureSlot(ingredient, keystroke);
             }
         }
-
     }
 }
 
