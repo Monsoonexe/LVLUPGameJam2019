@@ -21,12 +21,12 @@ public class TriggerVolume : MonoBehaviour
     private static GameObject player;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        GatherReferences();
+        FindPlayer();
     }
 
-    private void GatherReferences()
+    private void FindPlayer()
     {
         if (!player)
         {
