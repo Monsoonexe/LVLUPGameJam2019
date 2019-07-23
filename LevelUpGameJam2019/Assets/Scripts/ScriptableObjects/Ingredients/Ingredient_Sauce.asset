@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a3ebba9346b064aa6c0365eeb02d27, type: 3}
-  m_Name: Ingredient_
+  m_Name: Ingredient_Sauce
   m_EditorClassIdentifier: 
   ingredient: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3f8107f872013cb45ae136adbfbc98a9, type: 3}
