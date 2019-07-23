@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Player starts attached to this Transform.")]
     private Transform playerStartHandle;
-
+    
     [Header("---UI---")]
     [SerializeField]
     private GameObject returnToMainMenuPrompt;
@@ -64,15 +64,6 @@ public class LevelManager : MonoBehaviour
         customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
         orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Player hit end collider.  Ending the game.");
-            LevelsEndEvent.Invoke();
-        }
     }
 
     /// <summary>
