@@ -91,12 +91,17 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     private OrderBuilderMenu orderBuilder;
 
-    // Start is called before the first frame update
+    
     void Awake()
     {
         GatherReferences();
+    }
 
+    // Start is called before the first frame update
+    private void Start()
+    {
         InitProjectilePool();
+        myAudioSource.clip = cannonFireSound;//load audio
     }
 
     // Update is called once per frame
@@ -226,7 +231,6 @@ public class StationaryCannon : MonoBehaviour
             }
             
             //audio
-            myAudioSource.clip = cannonFireSound;
             myAudioSource.Play();
         }
 
