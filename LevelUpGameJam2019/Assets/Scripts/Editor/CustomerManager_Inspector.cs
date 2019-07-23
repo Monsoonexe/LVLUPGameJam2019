@@ -10,10 +10,10 @@ public class CustomerManager_Inspector : Editor
     {
         base.OnInspectorGUI();
 
-        var targetInspectorObject = (CustomerManager)target;
-        if (GUILayout.Button("Randomly Generate New Order [ALPHA]"))
-        {
-            targetInspectorObject.RandomlyGenerateNewOrder();
-        }
+        //var targetInspectorObject = (CustomerManager)target;
+        //if (GUILayout.Button("Randomly Generate New Order [ALPHA]"))
+        //{
+        //    targetInspectorObject.RandomlyGenerateNewOrder();
+        //}
     }
 }
