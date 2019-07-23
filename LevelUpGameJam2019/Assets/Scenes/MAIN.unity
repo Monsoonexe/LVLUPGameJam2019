@@ -1501,7 +1501,7 @@ PrefabInstance:
     - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
         type: 3}
       propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
         type: 3}
@@ -34176,6 +34176,36 @@ PrefabInstance:
       propertyPath: EndGameWhenThisObjectEntersVolume
       value: 
       objectReference: {fileID: 394886879}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1148396142}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLevelsEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459937797936653868, guid: f4880a872c6dab24b8bbbfe3a485881a,
+        type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4880a872c6dab24b8bbbfe3a485881a, type: 3}
 --- !u!4 &7465648010469877517
