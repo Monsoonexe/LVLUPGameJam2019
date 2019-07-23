@@ -191,17 +191,18 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <param name="availableIngredients"></param>
     public void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
     {
-        foreach(var slot in ingredientSlots)//disable ALL slots.
+        for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
         {
-            slot.DisableSlot();
-        }
-
-        foreach(var ingredient in ingredientsAvailableOnCannon)//enable only available ingredients
-        {
-            for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
-            {
+            if(i < ingredientsAvailableOnCannon.Length)
+            {   //slots in use
                 var keystroke = i + 1;//keystrokes start at 1, indices at 0
-                ingredientSlots[i].ConfigureSlot(ingredient, keystroke);
+                ingredientSlots[i].ConfigureSlot(ingredientsAvailableOnCannon[i], keystroke);
+                ingredientSlots[i].ToggleVisuals(true);
+
+            }
+            else
+            {   //icons are not in use
+                ingredientSlots[i].ToggleVisuals(false);
             }
         }
     }

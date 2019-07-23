@@ -123,9 +123,9 @@ public class IngredientSlotController : MonoBehaviour
     /// <summary>
     /// Inform this Slot that it will not be used this round.
     /// </summary>
-    public void DisableSlot()
+    public void ToggleVisuals(bool active)
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(active);
     }
 
     /// <summary>
@@ -161,4 +161,26 @@ public class IngredientSlotController : MonoBehaviour
         ConfigureSlot(keystroke, ingredient.Ingredient, ingredient.Icon);
     }
 
+    /// <summary>
+    /// Externally configure Slot.
+    /// </summary>
+    /// <param name="keystroke">What to show to the Player.</param>
+    /// <param name="ingredient">Which Ingredient this Slot adds.</param>
+    public void ConfigureSlot(IngredientSO ingredient, string keystroke)
+    {
+        ConfigureSlot(keystroke, ingredient.Ingredient, ingredient.Icon);
+    }
+
+    /// <summary>
+    /// Externally configure Slot.
+    /// </summary>
+    /// <param name="keystroke">What to show to the Player.</param>
+    /// <param name="ingredient">Which Ingredient this Slot adds.</param>
+    /// <param name="ingredientIcon">The graphic to display.</param>
+    public void ConfigureSlot(string keystroke, IngredientsENUM ingredient, Sprite ingredientIcon)
+    {
+        this.keystrokeTMP.text = keystroke;
+        this.ingredient = ingredient;
+        this.ingredientIcon.sprite = ingredientIcon;
+    }
 }
