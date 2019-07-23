@@ -132,11 +132,14 @@ public class StationaryCannon : MonoBehaviour
     {
         //get Components on this GO
         myBaseTransform = this.transform;
-        myAudioSource = GetComponent<AudioSource>() as AudioSource;
-        myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
+        myAudioSource = GetComponent<AudioSource>();
+        myRigidbody = GetComponent<Rigidbody>();
 
         //get handles to external Objects
-        //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        if (!levelManager)
+        {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        }
     }
 
     /// <summary>
