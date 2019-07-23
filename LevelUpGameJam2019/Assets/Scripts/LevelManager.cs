@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -29,7 +27,8 @@ public class LevelManager : MonoBehaviour
     private GameController gameController;//should exist before this is loaded in Scene
     private ScoreManager scoreManager;//should exist before this is loaded in Scene
     private CustomerManager customerManager;//should exist before this is loaded in Scene
-    private OrderBuilderMenu orderBuilder;
+    private OrderBuilderMenu orderBuilder;//should exist before this is loaded in Scene
+    private Transform mainCameraTransform;//should exist before this is loaded in Scene
 
     private void Awake()
     {
@@ -47,10 +46,11 @@ public class LevelManager : MonoBehaviour
     private void GatherReferences()
     {
         //get external references
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
-        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>() as GameController;
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
+        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
+        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>() as OrderBuilderMenu;
+        mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -88,6 +88,9 @@ public class LevelManager : MonoBehaviour
         //configure cannon
         cannonController.SetOrderBuilder(orderBuilder);
         cannonController.SetScoreManager(scoreManager);
+
+        //configure camera handle
+        mainCameraTransform.SetParent(cannonController.cameraHandle);
 
         //configure orderBuilder
         orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
