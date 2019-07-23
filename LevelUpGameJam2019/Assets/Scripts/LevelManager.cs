@@ -24,13 +24,12 @@ public class LevelManager : MonoBehaviour
     [Header("---UI---")]
     [SerializeField]
     private GameObject returnToMainMenuPrompt;
-
-    [SerializeField]
-    private OrderBuilderMenu orderBuilder;
-
+    
     //external mono Component references
     private GameController gameController;//should exist before this is loaded in Scene
-    private ScoreManager scoreManager;
+    private ScoreManager scoreManager;//should exist before this is loaded in Scene
+    private CustomerManager customerManager;//should exist before this is loaded in Scene
+    private OrderBuilderMenu orderBuilder;
 
     private void Awake()
     {
@@ -42,10 +41,16 @@ public class LevelManager : MonoBehaviour
         returnToMainMenuPrompt.SetActive(false);
     }
 
+    /// <summary>
+    /// Gather references to dependencies.
+    /// </summary>
     private void GatherReferences()
     {
+        //get external references
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
+        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -57,6 +62,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Procedure to follow when the level has come to an end.
+    /// </summary>
     public void OnLevelsEnd()
     {
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
@@ -83,6 +91,9 @@ public class LevelManager : MonoBehaviour
 
         //configure orderBuilder
         orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
+
+        //configure customer manager
+        
     }
 
     /// <summary>
