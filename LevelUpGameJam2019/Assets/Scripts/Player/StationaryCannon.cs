@@ -16,6 +16,8 @@ public class StationaryCannon : MonoBehaviour
     [Header("---Order Stuff---")]
     [SerializeField]
     private IngredientSO[] availableIngredients;
+
+    public IngredientSO[] AvailableIngredients { get { return availableIngredients; } }//publicly accessible, but only gets a copy.
     
     [Header("---Projectile Stuff---")]
     [SerializeField]
@@ -90,11 +92,6 @@ public class StationaryCannon : MonoBehaviour
 
         InitProjectilePool();
     }
-
-    //private void Start()
-    //{
-    //    orderBuilder.SetAvailableIngredients(availableIngredients);
-    //}
 
     // Update is called once per frame
     void Update()
@@ -296,7 +293,6 @@ public class StationaryCannon : MonoBehaviour
     public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
     {
         this.orderBuilder = orderBuilder;
-        orderBuilder.SetAvailableIngredients(availableIngredients);
     }
 
     /// <summary>

@@ -74,6 +74,9 @@ public class LevelManager : MonoBehaviour
         //configure cannon
         cannonController.SetOrderBuilder(orderBuilder);
         cannonController.SetScoreManager(scoreManager);
+
+        //configure orderBuilder
+        orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
     }
 
     /// <summary>
