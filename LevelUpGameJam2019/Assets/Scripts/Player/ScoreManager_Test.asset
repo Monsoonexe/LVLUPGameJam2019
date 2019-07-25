@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ScoreManager_TEst
   m_EditorClassIdentifier: 
   playerScore: 0
-  leaderboard: {fileID: 0}
+  leaderboard: {fileID: 11400000, guid: 4590f34936942bd4aac5e6339e2a2487, type: 2}
   levelEndReadoutController: {fileID: 0}
   newHighScoreWindowManager: {fileID: 0}
   shotsFired: 0
