@@ -4,45 +4,35 @@
 public class IngredientSO : ScriptableObject
 {
     [SerializeField]//set by Developer
-    private IngredientsENUM ingredient;
-
-    public IngredientsENUM Ingredient { get { return ingredient; } }//externally accessible, readonly
-
-    [SerializeField]//set by Developer
     private Sprite icon;
 
     public Sprite Icon { get { return icon; } }//externally accessible, readonly
 
-    /// <summary>
-    /// Prints the Ingredient this represents.
-    /// </summary>
-    /// <returns></returns>
-    public override string ToString()
-    {
-        return ingredient.ToString();
-    }
+    [SerializeField]//set by Developer
+    private int orderOnPizza = 0;
+    public int OrderOnPizza { get { return orderOnPizza; } }//externally accessible, readonly
 
     //comparison operations
     //always a comparison of ingredient value, never of Icon.
 
-    public static bool operator >(IngredientSO a, IngredientSO b)
+    public static bool operator > (IngredientSO a, IngredientSO b)
     {
-        return a.ingredient > b.ingredient;
+        return a.OrderOnPizza > b.OrderOnPizza;
     }
 
-    public static bool operator >=(IngredientSO a, IngredientSO b)
+    public static bool operator >= (IngredientSO a, IngredientSO b)
     {
-        return a.ingredient >= b.ingredient;
+        return a.OrderOnPizza >= b.OrderOnPizza;
     }
 
-    public static bool operator <(IngredientSO a, IngredientSO b)
+    public static bool operator < (IngredientSO a, IngredientSO b)
     {
-        return a.ingredient < b.ingredient;
+        return a.OrderOnPizza < b.OrderOnPizza;
     }
 
-    public static bool operator <=(IngredientSO a, IngredientSO b)
+    public static bool operator <= (IngredientSO a, IngredientSO b)
     {
-        return a.ingredient <= b.ingredient;
+        return a.OrderOnPizza <= b.OrderOnPizza;
     }
 
 }
