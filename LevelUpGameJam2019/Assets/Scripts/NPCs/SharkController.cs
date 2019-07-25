@@ -12,8 +12,8 @@ public enum SharkControllerState
 [RequireComponent(typeof(Rigidbody))]
 public class SharkController : MonoBehaviour
 {
-    private static ScoreManager scoreManager;
-    private static LevelManager levelManager;
+    [SerializeField]
+    private ScoreManager scoreManager;
 
     [Header("---SharkAttack---")]
     [SerializeField]
@@ -202,24 +202,6 @@ public class SharkController : MonoBehaviour
             //check if pizza had anchovies
         }
     }
-    
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    /// <summary>
-    /// Procedure to follow when the level ends.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        //stop patroling or something
-    }
 
     /// <summary>
     /// Move the Shark between waypoints.
@@ -342,17 +324,6 @@ public class SharkController : MonoBehaviour
     /// </summary>
     private void GatherReferences()
     {
-        //external mono references
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
-        }
-
         //member stuff
         myTransform = this.transform;
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
