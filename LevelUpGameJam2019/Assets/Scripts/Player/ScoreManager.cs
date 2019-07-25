@@ -104,7 +104,6 @@ public class ScoreManager : ScriptableObject
         UpdatePlayerScoreText();
         UpdateHighScoreText();
         levelEndReadoutController.gameObject.SetActive(false);
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);
     }
 
     private void GatherReferences()
