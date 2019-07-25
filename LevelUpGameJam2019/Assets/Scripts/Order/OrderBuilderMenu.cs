@@ -16,7 +16,7 @@ public class OrderBuilderMenu : MonoBehaviour
 
     //ingredients that are on pizza
     [SerializeField]//visualization only! no touchy
-    private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
+    private List<IngredientSO> selectedIngredients = new List<IngredientSO>();
     
     [Header("---Ingredient Slots---")]
     [SerializeField]//set by Developer
@@ -93,28 +93,19 @@ public class OrderBuilderMenu : MonoBehaviour
     /// Get Ingredients and clear list.
     /// </summary>
     /// <returns></returns>
-    public IngredientsENUM[] GetIngredients()
+    public IngredientSO[] GetIngredients()
     {
         var ingredients = selectedIngredients.ToArray();
         selectedIngredients.Clear();//clear list after cannon shot
 
         return ingredients;
     }
-
-    /// <summary>
-    /// Add an Ingredient to the list.
-    /// </summary>
-    /// <param name="ingredient">Int to cast to an ENUM</param>
-    public void AddIngredient(int ingredient)
-    {
-        AddIngredient((IngredientsENUM)ingredient);
-    }
     
     /// <summary>
     /// Add an Ingredient to the list.
     /// </summary>
     /// <param name="ingredient"></param>
-    public void AddIngredient(IngredientsENUM ingredientToAdd)
+    public void AddIngredient(IngredientSO ingredientToAdd)
     {
         selectedIngredients.Add(ingredientToAdd);
     }
