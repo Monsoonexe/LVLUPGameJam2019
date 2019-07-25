@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ScoreUIManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class ScoreUIManager : MonoBehaviour
     private LevelEndReadoutController levelEndReadoutController;
 
     [SerializeField]
-    private NewHighScoreWindowManager newHighScoreWindowManager;
+    private GameObject newHighScoreWindow;
     
     [Space(5)]
     [Header("---UI Elements---")]
@@ -25,28 +26,37 @@ public class ScoreUIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI highScoreTMPro;
 
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+
+    [SerializeField]
+    private TMP_InputField nameInputText;
+
+    [SerializeField]
+    private Button okayButton;
+
     //external Mono References
     private LevelManager levelManager;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         UpdatePlayerScoreText();
         UpdateHighScoreText();
         levelEndReadoutController.gameObject.SetActive(false);
     }
 
+    private void UpdateHighScoreText()
+    {
+        highScoreTMPro.text = leaderboard.HighScore.ToString();
+    }
+
     /// <summary>
     /// Update UI visuals with current values.  Must be called after any changes to values are made.
     /// </summary>
-    private void UpdatePlayerScoreText()
+    public void UpdatePlayerScoreText()
     {
         scoreTMPro.text = scoreData.PlayerScore.ToString();
-    }
-
-    private void UpdateHighScoreText()
-    {
-        highScoreTMPro.text = leaderboard.highScore.ToString();
     }
 
     /// <summary>
@@ -55,10 +65,10 @@ public class ScoreUIManager : MonoBehaviour
     public void OnLevelsEnd()
     {
         //check if Player got a new high score
-
         if (leaderboard.IsScoreOnLeaderboard(scoreData.PlayerScore))
         {
-            newHighScoreWindowManager.gameObject.SetActive(true);
+            newHighScoreWindow.gameObject.SetActive(true);
+            scoreText.text = scoreData.PlayerScore.ToString();
         }
 
         else
@@ -69,8 +79,17 @@ public class ScoreUIManager : MonoBehaviour
         }
     }
 
-    public void OnCustomerSatisfied(int numberOfIngredients)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="playerName"></param>
+    public void ConfirmNewHighScoreName()
     {
-
+        var newName = nameInputText.text;//read name from UI element
+        leaderboard.SubmitNewScore(new LeaderboardEntry(newName, scoreData.PlayerScore));
+        levelEndReadoutController.gameObject.SetActive(true);
+        levelEndReadoutController.LoadTallyData(scoreData);
+        levelEndReadoutController.ReadLeaderboardData(leaderboard);
+        UpdateHighScoreText();
     }
 }
