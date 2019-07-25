@@ -13,7 +13,7 @@ public enum SharkControllerState
 public class SharkController : MonoBehaviour
 {
     [SerializeField]
-    private ScoreManager scoreManager;
+    private ScoreData scoreManager;
 
     [Header("---SharkAttack---")]
     [SerializeField]
