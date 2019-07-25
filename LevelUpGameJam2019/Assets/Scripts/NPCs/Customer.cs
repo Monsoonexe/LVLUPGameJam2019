@@ -34,7 +34,7 @@ public class Customer : MonoBehaviour
     private CustomerManager customerManager;
 
     [SerializeField]
-    private ScoreManager scoreManager;
+    private ScoreData scoreManager;
 
     [Header("---UI---")]
     [SerializeField]
