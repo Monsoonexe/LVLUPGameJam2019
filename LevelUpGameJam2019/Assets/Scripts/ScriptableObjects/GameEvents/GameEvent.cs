@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameEvent_", menuName = "ScriptableObjects/Game Event")]
 public class GameEvent : ScriptableObject
 {
-    private List<GameEventListener> listeners = new List<GameEventListener>();
+    private readonly List<GameEventListener> listeners = new List<GameEventListener>();
 
     [SerializeField]
     [TextArea]
