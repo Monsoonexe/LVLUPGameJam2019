@@ -13,7 +13,11 @@ public class ScoreData : ScriptableObject
     private LeaderboardSO leaderboard;
 
     public LeaderboardSO Leaderboard { get { return leaderboard; } }//public readonly
-    
+
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent scoreChangedEvent;
+
     [Header("---Tallys---")]
     [SerializeField]
     private int shotsFired;
@@ -23,17 +27,27 @@ public class ScoreData : ScriptableObject
     [SerializeField]
     private int customersSatisfied;
 
+    public int CustomersSatisfied { get { return customersSatisfied; } }//readonly
+
     [SerializeField]
     private int customersHit;
+
+    public int CustomersHit { get { return customersHit; } }//readonly
 
     [SerializeField]
     private int incorrectOrders;
 
+    public int IncorrectOrders { get { return incorrectOrders; } }//readonly
+
     [SerializeField]
     private int missedOrders;
 
+    public int MissedOrders { get { return missedOrders; } }//reaodnly
+
     [SerializeField]
     private int sharksFed;
+
+    public int SharksFed { get { return sharksFed; } }//readonly
 
     /// <summary>
     /// Points earned for delivering a Customer's Order successfully.
@@ -81,18 +95,6 @@ public class ScoreData : ScriptableObject
     [Tooltip("Deduction caused by a Customer not receiving a correct Order.")]
     private int missedOrderDeduction = 5;
     
-    #region Get Tally Methods
-
-    public int GetTallyCustomersSatisfied()
-    {
-        return customersSatisfied;
-    }
-
-    public int GetTallyCustomersHit()
-    {
-        return customersHit;
-    }
-
     /// <summary>
     /// How many Customers did not receive a correct order.
     /// </summary>
@@ -113,18 +115,6 @@ public class ScoreData : ScriptableObject
         return satisfiedCount;
     }
 
-    public int GetTallyIncorrectOrders()
-    {
-        return incorrectOrders;
-    }
-
-    public int GetTallySharksFed()
-    {
-        return sharksFed;
-    }
-    
-    #endregion
-    
     public void OnShotFired()
     {
         ++shotsFired;
@@ -136,7 +126,7 @@ public class ScoreData : ScriptableObject
 
         playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
 
-        UpdatePlayerScoreText();
+        scoreChangedEvent.Raise();
     }
     
     public void OnIncorrectOrderDelivered()
@@ -145,8 +135,8 @@ public class ScoreData : ScriptableObject
 
         playerScore -= incorrectOrderDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
-        
-        UpdatePlayerScoreText();//update visuals
+
+        scoreChangedEvent.Raise();//update visuals
     }
 
     public void OnSharkAtePizza()
@@ -161,7 +151,7 @@ public class ScoreData : ScriptableObject
         playerScore -= customerHitDeduction;
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
-        UpdatePlayerScoreText();//update visuals
+        scoreChangedEvent.Raise();//update visuals
     }
 
     /// <summary>
@@ -170,6 +160,8 @@ public class ScoreData : ScriptableObject
     [ContextMenu("Reset Score and Tallys")]
     public void ResetScores()
     {
+        Debug.Log("SCORES RESET!", this);
+
         //reset values
         playerScore = 0;
         shotsFired = 0;
@@ -179,19 +171,6 @@ public class ScoreData : ScriptableObject
         incorrectOrders = 0;
         sharksFed = 0;
 
-        //update UI
-        UpdatePlayerScoreText();
-        UpdateHighScoreText();
-    }
-
-    /// <summary>
-    /// Called by Okay Button.
-    /// </summary>
-    /// <param name="playerName"></param>
-    public void ConfirmNewHighScoreName(string playerName)
-    {
-        leaderboard.SubmitNewScore(new LeaderboardEntry(playerName, playerScore));
-        levelEndReadoutController.gameObject.SetActive(true);
-        UpdateHighScoreText();
+        scoreChangedEvent.Raise();
     }
 }
