@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c620ddf7651e2174fa1acbd440f8ffd7, type: 3}
   m_Name: GameEvent_CustomerSatisfied
   m_EditorClassIdentifier: 
-  DeveloperDescription: when a customer received a correct order.
+  DeveloperDescription: 'when a customer received a correct order.
+
+    BROKEN! NEEDS PARAMETER!'
