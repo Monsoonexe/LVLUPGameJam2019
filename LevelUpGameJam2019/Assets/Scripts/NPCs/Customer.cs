@@ -6,10 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SkinnedMeshRenderer))]
 public class Customer : MonoBehaviour
-{
-    //static object references
-    private static LevelManager levelManager;
-   
+{   
     [SerializeField]
     private CustomerStateENUM customerState;
 
@@ -173,18 +170,14 @@ public class Customer : MonoBehaviour
             orderPromptController.ToggleVisuals(false);//hide
         }
     }
-    
+
+    /// <summary>
+    /// Get references on this GameObject.
+    /// </summary>
     private void GatherReferences()
     {
-        //get references on this GameObject references
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
-
-        //get references to monos in scene
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
-        }
+        audioSource = GetComponent<AudioSource>();
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
     }
 
     [ContextMenu("Update Visuals")]

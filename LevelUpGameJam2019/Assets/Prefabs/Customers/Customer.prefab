@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerState: 0
   customerOrder: {fileID: 0}
-  possibleOrders: {fileID: 0}
+  possibleOrders: {fileID: 11400000, guid: aca5889fab2dfb34d88183c4381c8098, type: 2}
   customerProfile: {fileID: 11400000, guid: a99c6bfc2c913384db771ca47854b9d5, type: 2}
   customerManager: {fileID: 11400000, guid: 07b50f36d92292e4a8869f2683baa7be, type: 2}
   scoreManager: {fileID: 11400000, guid: 3de07feb17f569743b804e6819ecdf5d, type: 2}
