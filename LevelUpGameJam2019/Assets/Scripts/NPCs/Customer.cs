@@ -8,19 +8,21 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     //static object references
-    private static ScoreManager scoreManager;
     private static LevelManager levelManager;
    
     [SerializeField]
     private CustomerStateENUM customerState;
 
-    [Header("---Order Stuff---")]
+    [Header("---ScriptableObject Data---")]
 
     [SerializeField]//set in Inspector
-    [Tooltip("If this reference is null, Customer will ask CustomerManager for a random Order.")]
+    [Tooltip("If this reference is null, Customer will seek a random Order.")]
     private Order customerOrder;
 
     public Order CustomerOrder { get { return customerOrder; } }//publicly accessable, but readonly
+
+    [SerializeField]
+    private PossibleOrders possibleOrders;
 
     /// <summary>
     /// Holds visual mesh and material and sound effects.
@@ -33,6 +35,9 @@ public class Customer : MonoBehaviour
     /// </summary>
     [SerializeField]
     private CustomerManager customerManager;
+
+    [SerializeField]
+    private ScoreManager scoreManager;
 
     [Header("---UI---")]
     [SerializeField]
@@ -58,6 +63,7 @@ public class Customer : MonoBehaviour
 
     //other stuff
     private bool orderHasBeenDelivered = false;
+    public bool IsSatisfied { get {return  orderHasBeenDelivered; } }
 
     /// <summary>
     /// Customer will reject all Orders and hide Ingredients list when mad.
@@ -271,16 +277,7 @@ public class Customer : MonoBehaviour
         yield return new WaitForSeconds(customerManager.BadOrderReactionTime);
         canDeliver = true;
     }
-
-    /// <summary>
-    /// Did this Customer receive an Order that matched the desired Order?
-    /// </summary>
-    /// <returns>True if proper Order was received.</returns>
-    public bool WasCustomersOrderDelivered()
-    {
-        return orderHasBeenDelivered;
-    }
-
+    
     [ContextMenu("Randomize Visuals")]
     public void RandomizeVisuals()
     {
@@ -292,6 +289,6 @@ public class Customer : MonoBehaviour
     public void GetNewRandomOrderFromCustomerManager()
     {
         GatherReferences();
-        customerOrder = customerManager.GetNewRandomOrder();
+        customerOrder = possibleOrders.GetNewRandomOrder();
     }
 }
