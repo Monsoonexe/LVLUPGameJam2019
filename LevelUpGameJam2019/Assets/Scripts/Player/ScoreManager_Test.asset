@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8e6ba84080cd1459e63938690a63f3, type: 3}
+  m_Name: ScoreManager_TEst
+  m_EditorClassIdentifier: 
+  playerScore: 0
+  leaderboard: {fileID: 0}
+  levelEndReadoutController: {fileID: 0}
+  newHighScoreWindowManager: {fileID: 0}
+  shotsFired: 0
+  customersSatisfied: 0
+  customersHit: 0
+  incorrectOrders: 0
+  missedOrders: 0
+  sharksFed: 0
+  customerSatisfiedPoints: 100
+  pointsPerIngredient: 25
+  additionalIngredientModifier: 1
+  customerHitDeduction: 5
+  incorrectOrderDeduction: 5
+  missedOrderDeduction: 5
+  scoreTMPro: {fileID: 0}
+  highScoreTMPro: {fileID: 0}
