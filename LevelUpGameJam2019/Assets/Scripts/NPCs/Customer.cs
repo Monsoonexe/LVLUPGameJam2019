@@ -8,20 +8,13 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     //static object references
-    private static CustomerManager customerManager;
     private static ScoreManager scoreManager;
     private static LevelManager levelManager;
-
-    //delays
-    private static float badOrderDelay = 1.0f;
-    private static float customerHitDelay = 1.5f;
-
+   
     [SerializeField]
     private CustomerStateENUM customerState;
 
     [Header("---Order Stuff---")]
-    [SerializeField]
-    private OrderPromptController orderPromptController;
 
     [SerializeField]//set in Inspector
     [Tooltip("If this reference is null, Customer will ask CustomerManager for a random Order.")]
@@ -32,10 +25,19 @@ public class Customer : MonoBehaviour
     /// <summary>
     /// Holds visual mesh and material and sound effects.
     /// </summary>
-    [Header("---Profile---")]
     [SerializeField]
     private CustomerProfile customerProfile;
 
+    /// <summary>
+    /// Brain that manages 
+    /// </summary>
+    [SerializeField]
+    private CustomerManager customerManager;
+
+    [Header("---UI---")]
+    [SerializeField]
+    private OrderPromptController orderPromptController;
+    
     [Header("---Colliders---")]
     [SerializeField]
     private Collider customerCollider;
@@ -182,18 +184,7 @@ public class Customer : MonoBehaviour
         canDeliver = false;//stop taking orders
         //do something else
     }
-
-    /// <summary>
-    /// Init how long delays should be.
-    /// </summary>
-    private static void InitDelays()
-    {
-        if (customerManager)//if not, use default values
-        {
-            customerManager.InitReactionDelays(ref badOrderDelay, ref customerHitDelay);
-        }
-    }
-
+    
     private void GatherReferences()
     {
         //get references on this GameObject references
@@ -201,11 +192,6 @@ public class Customer : MonoBehaviour
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
         //get references to monos in scene
-        if (!customerManager)
-        {
-            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-            InitDelays();//or use defaults
-        }
         
         if (!scoreManager)
         {
@@ -239,22 +225,16 @@ public class Customer : MonoBehaviour
     private void OnCustomerHit()
     {
         PlayRandomSound(customerProfile.hitWithPizzaSounds);//audio
-
         scoreManager.OnCustomerHit();//score
-
-        orderPromptController.OnCustomerHit(customerHitDelay);//update visuals
-        
+        orderPromptController.OnCustomerHit(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown coroutine
     }
 
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
-
         scoreManager.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
-        
         orderPromptController.OnSuccessfulOrder();//update visuals
-
         orderHasBeenDelivered = true;//flag to reject all future Orders
         //Debug.Log("Thanks for the Pizza!!!!");
     }
@@ -262,13 +242,9 @@ public class Customer : MonoBehaviour
     private void RejectPizza()
     {
         PlayRandomSound(customerProfile.badOrderSounds);//audio
-        
         scoreManager.OnIncorrectOrderDelivered();//score
-        
-        orderPromptController.OnFailedOrder(badOrderDelay);//update visuals
-
+        orderPromptController.OnFailedOrder(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown
-
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 
@@ -292,7 +268,7 @@ public class Customer : MonoBehaviour
     private IEnumerator RejectOrdersWhileMad()
     {
         canDeliver = false;
-        yield return new WaitForSeconds(badOrderDelay);
+        yield return new WaitForSeconds(customerManager.BadOrderReactionTime);
         canDeliver = true;
     }
 
