@@ -85,7 +85,7 @@ public class StationaryCannon : MonoBehaviour
     /// <summary>
     /// Handles the scores and tallies.
     /// </summary>
-    private ScoreManager scoreManager;
+    private ScoreData scoreManager;
 
     /// <summary>
     /// Ask this guy what to put on the pizza when it's fired.
@@ -294,7 +294,7 @@ public class StationaryCannon : MonoBehaviour
     /// Set Score Manager externally.
     /// </summary>
     /// <param name="scoreManager"></param>
-    public void SetScoreManager(ScoreManager scoreManager)
+    public void SetScoreManager(ScoreData scoreManager)
     {
         this.scoreManager = scoreManager;
     }
