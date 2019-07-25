@@ -67,14 +67,6 @@ public class PizzaProjectile : MonoBehaviour
     }
 
     /// <summary>
-    /// End-of-the-level procedure.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        this.gameObject.SetActive(false);//no points allowed after buzzer
-    }
-
-    /// <summary>
     /// Object is part of a pool, so reset instead of Destroying.
     /// </summary>
     private void ResetProjectile()
@@ -140,5 +132,13 @@ public class PizzaProjectile : MonoBehaviour
     public void GiveProjectileForce(Vector3 force)
     {
         myRigidbody.AddForce(force, ForceMode.Impulse);
+    }
+
+    /// <summary>
+    /// End-of-the-level procedure.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        this.gameObject.SetActive(false);//no points allowed after buzzer
     }
 }
