@@ -62,13 +62,10 @@ public class GameController : MonoBehaviour
     {
         GatherSceneReferences();
 
-        currentLevelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to event to know when level has ended.
-
         var acceptableShipIndex = Mathf.Clamp(shipPrefabIndex, 0, shipPrefabs.Length - 1);//make sure index is w/n array bounds
         var acceptableCannonIndex = Mathf.Clamp(cannonPrefabIndex, 0, cannonPrefabs.Length - 1);//make sure index is w/n array bounds
 
         currentLevelManager.InitLevel(playerStats, shipPrefabs[acceptableShipIndex], cannonPrefabs[acceptableCannonIndex]);//init level
-
     }
 
     /// <summary>
