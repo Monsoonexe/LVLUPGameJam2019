@@ -1,36 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CustomerManager : MonoBehaviour
+[CreateAssetMenu(fileName = "CustomerManager_", menuName = "ScriptableObjects/Controllers/Customer Manager")]
+public class CustomerManager : ScriptableObject
 {
     [SerializeField]
     private Order[] possibleOrders;
-
-    /// <summary>
-    /// List of all Customers that exist in Scene at the time of gathering.
-    /// </summary>
-    private Customer[] customersInScene;
-
+    
     [Header("---Reaction Delays---")]
     [SerializeField]
     private float badOrderReactionTime = 1.0f;
 
+    public float BadOrderReactionTime { get { return customerHitReactionTime; } }//publicly expose, but readonly
+
     [SerializeField]
     private float customerHitReactionTime = 1.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        customersInScene = GatherCustomersInScene();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public float CustomerHitReactionTime { get { return customerHitReactionTime; } }//publicly expose, but readonly
+    
     /// <summary>
     /// Add up all the weights in this list.
     /// </summary>
@@ -64,61 +50,7 @@ public class CustomerManager : MonoBehaviour
 
         return customersInScene;
     }
-
-    public void InitReactionDelays(ref float badOrderReactionTime, ref float customerHitReactionTime)
-    {
-        badOrderReactionTime = this.badOrderReactionTime;
-        customerHitReactionTime = this.customerHitReactionTime;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public int GetNumCustomersInScene()
-    {
-        return customersInScene.Length;
-    }
-
-    /// <summary>
-    /// Count how many Customers in Level did not receive their Order.
-    /// </summary>
-    /// <returns></returns>
-    public int CountMissedCustomers()
-    {
-        var satisfiedCustomers = CountSatisfiedCustomers();
-
-        return customersInScene.Length - satisfiedCustomers;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public int CountSatisfiedCustomers()
-    {
-        var satisfiedCustomers = 0;
-
-        for(var i = 0; i < customersInScene.Length; ++i)
-        {
-            if (customersInScene[i].WasCustomersOrderDelivered())
-            {
-                ++satisfiedCustomers;
-            }
-        }
-
-        return satisfiedCustomers;
-    }
-
-    /// <summary>
-    /// How many Customers are in this Scene?
-    /// </summary>
-    /// <returns></returns>
-    public int CountCustomersInScene()
-    {
-        return customersInScene.Length;
-    }
-
+    
     /// <summary>
     /// 
     /// </summary>
