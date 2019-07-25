@@ -3,8 +3,6 @@ using TMPro;
 
 public class LevelEndReadoutController : MonoBehaviour
 {
-    private ScoreManager scoreManager;
-
     [Header("---Tally Labels---")]
     [SerializeField]
     private TextMeshProUGUI label_customersSatisfied;
@@ -78,28 +76,6 @@ public class LevelEndReadoutController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI entry5_name;
     
-    private void Awake()
-    {
-        GatherReferences();
-    }
-
-    private void OnEnable()
-    {
-        GatherReferences();
-
-        LoadTallyData();
-        ReadLeaderboardData();
-    }
-
-    private void GatherReferences()
-    {
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-
-    }
-
     /// <summary>
     /// Load data into TMPro Texts.
     /// </summary>
@@ -112,60 +88,22 @@ public class LevelEndReadoutController : MonoBehaviour
         scoreElement.text = entryData.score.ToString();
     }
 
-    [ContextMenu("Load Tally Data")]
-    private void LoadTallyData()
-    {
-        if (!scoreManager) Debug.Log("FUCK ALL!");
-        value_customersSatisfied.text = scoreManager.GetTallyCustomersSatisfied().ToString();
-        value_customersMissed.text = scoreManager.GetTallyMissedOrders().ToString();
-        value_customersHit.text = scoreManager.GetTallyCustomersHit().ToString();
-        value_wrongOrders.text = scoreManager.GetTallyIncorrectOrders().ToString();
-        value_sharksFed.text = scoreManager.GetTallySharksFed().ToString();
-        value_piesFired.text = scoreManager.GetTallyShotsFired().ToString();
+    public void LoadTallyData(ScoreData scoreData)
+    { 
+        value_customersSatisfied.text = scoreData.CustomersSatisfied.ToString();
+        value_customersMissed.text = scoreData.MissedOrders.ToString();
+        value_customersHit.text = scoreData.CustomersHit.ToString();
+        value_wrongOrders.text = scoreData.IncorrectOrders.ToString();
+        value_sharksFed.text = scoreData.SharksFed.ToString();
+        value_piesFired.text = scoreData.ShotsFired.ToString();
     }
 
-    [ContextMenu("Read Leaderboard Data")]
-    private void ReadLeaderboardData()
+    public void ReadLeaderboardData(LeaderboardSO leaderboard)
     {
-        LoadLeaderboardEntry(entry1_name, entry1_score, scoreManager.GetEntry(0));
-        LoadLeaderboardEntry(entry2_name, entry2_score, scoreManager.GetEntry(1));
-        LoadLeaderboardEntry(entry3_name, entry3_score, scoreManager.GetEntry(2));
-        LoadLeaderboardEntry(entry4_name, entry4_score, scoreManager.GetEntry(3));
-        LoadLeaderboardEntry(entry5_name, entry5_score, scoreManager.GetEntry(4));
+        LoadLeaderboardEntry(entry1_name, entry1_score, leaderboard.GetEntry(0));
+        LoadLeaderboardEntry(entry2_name, entry2_score, leaderboard.GetEntry(1));
+        LoadLeaderboardEntry(entry3_name, entry3_score, leaderboard.GetEntry(2));
+        LoadLeaderboardEntry(entry4_name, entry4_score, leaderboard.GetEntry(3));
+        LoadLeaderboardEntry(entry5_name, entry5_score, leaderboard.GetEntry(4));
     }
-
-    ///// <summary>
-    ///// Called Externally.
-    ///// </summary>
-    ///// <param name="customersSatisfied"></param>
-    ///// <param name="customersMissed"></param>
-    ///// <param name="customersHit"></param>
-    ///// <param name="wrongOrders"></param>
-    ///// <param name="sharksFed"></param>
-    ///// <param name="shotsFired"></param>
-    //public void LoadTallyData(int customersSatisfied, int customersMissed, int customersHit, int wrongOrders, int sharksFed, int shotsFired)
-    //{
-    //    this.gameObject.SetActive(true);
-
-    //    value_customersSatisfied.text = customersSatisfied.ToString();
-    //    value_customersMissed.text = customersMissed.ToString();
-    //    value_customersHit.text = customersHit.ToString();
-    //    value_wrongOrders.text =wrongOrders.ToString();
-    //    value_sharksFed.text = sharksFed.ToString();
-    //    value_piesFired.text = shotsFired.ToString();
-    //}
-
-    ///// <summary>
-    ///// Called Externally.
-    ///// </summary>
-    ///// <param name="leaderboardData"></param>
-    //public void ReadLeaderboard(LeaderboardSO leaderboardData)
-    //{
-    //    LoadLeaderboardEntry(entry1_name, entry1_score, leaderboardData.GetEntry(0));
-    //    LoadLeaderboardEntry(entry2_name, entry2_score, leaderboardData.GetEntry(1));
-    //    LoadLeaderboardEntry(entry3_name, entry3_score, leaderboardData.GetEntry(2));
-    //    LoadLeaderboardEntry(entry4_name, entry4_score, leaderboardData.GetEntry(3));
-    //    LoadLeaderboardEntry(entry5_name, entry5_score, leaderboardData.GetEntry(4));
-    //}
-
 }
