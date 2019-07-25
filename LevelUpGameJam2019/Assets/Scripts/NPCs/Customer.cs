@@ -173,23 +173,6 @@ public class Customer : MonoBehaviour
             orderPromptController.ToggleVisuals(false);//hide
         }
     }
-
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnLevelsEnd()
-    {
-        orderPromptController.ToggleVisuals(false);//hide visuals
-        canDeliver = false;//stop taking orders
-        //do something else
-    }
     
     private void GatherReferences()
     {
@@ -198,12 +181,6 @@ public class Customer : MonoBehaviour
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
         //get references to monos in scene
-        
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-
         if (!levelManager)
         {
             levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
@@ -290,5 +267,16 @@ public class Customer : MonoBehaviour
     {
         GatherReferences();
         customerOrder = possibleOrders.GetNewRandomOrder();
+    }
+
+    /// <summary>
+    /// Procedure to follow at the end of the level.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        orderPromptController.ToggleVisuals(false);//hide visuals
+        canDeliver = false;//stop taking orders
+        //do something else
+        //tally order received or not.
     }
 }
