@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScore: 0
   leaderboard: {fileID: 11400000, guid: 4590f34936942bd4aac5e6339e2a2487, type: 2}
-  levelEndReadoutController: {fileID: 0}
-  newHighScoreWindowManager: {fileID: 0}
+  scoreChangedEvent: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
   shotsFired: 0
   customersSatisfied: 0
   customersHit: 0
@@ -28,5 +27,3 @@ MonoBehaviour:
   customerHitDeduction: 5
   incorrectOrderDeduction: 5
   missedOrderDeduction: 5
-  scoreTMPro: {fileID: 0}
-  highScoreTMPro: {fileID: 0}
