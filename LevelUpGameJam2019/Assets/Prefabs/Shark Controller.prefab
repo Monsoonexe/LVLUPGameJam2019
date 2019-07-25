@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsBetweenSharkAttacks: 10
+  favoriteIngredient: {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
   anchovieCoolDown: 15
   sharkJumpForce: 15
   sphereOfInfluenceCollider: {fileID: 3533558722056595866}

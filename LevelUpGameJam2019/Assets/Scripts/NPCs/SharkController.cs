@@ -20,6 +20,13 @@ public class SharkController : MonoBehaviour
     private int secondsBetweenSharkAttacks = 10;
 
     /// <summary>
+    /// If this ingredient is included on Order, cooldown is increased.
+    /// </summary>
+    [SerializeField]//set by Developer
+    [Tooltip("If this ingredient is included on Order, cooldown is increased.")]
+    private IngredientSO favoriteIngredient;
+
+    /// <summary>
     /// Seconds added to shark attack timer if Pizza had anchovies on it.
     /// </summary>
     [SerializeField]
@@ -185,7 +192,7 @@ public class SharkController : MonoBehaviour
             //check for anchvoies on pizza
             foreach (var ingredient in pizzaProjectile.GetIngredientsOnPizza())
             {
-                if(ingredient == IngredientsENUM.Anchovies)
+                if(ingredient == favoriteIngredient)
                 {
                     //Sharks love anchovies
                     OnSharkAteAnchovies();
