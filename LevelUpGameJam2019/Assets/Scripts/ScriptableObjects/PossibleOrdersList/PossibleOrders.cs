@@ -3,12 +3,12 @@
 /// <summary>
 /// Possible orders that can be given during a level or time.
 /// </summary>
-[CreateAssetMenu(fileName = "PossibleOrders_", menuName = "ScriptableObjects/Orders/Possible Orders")]
+[CreateAssetMenu(fileName = "PossibleOrders_", menuName = "ScriptableObjects/Possible Orders")]
 public class PossibleOrders : ScriptableObject
 {
     [SerializeField]
-    private Order[] possibleOrders;
-
+    private Order[] possibleOrders = new Order[0];
+    
     /// <summary>
     /// Add up all the weights in this list.
     /// </summary>
@@ -24,23 +24,6 @@ public class PossibleOrders : ScriptableObject
         }
 
         return summedWeight;
-    }
-
-    /// <summary>
-    /// Get a handle on every Customer in scene an keep in array.
-    /// </summary>
-    private static Customer[] GatherCustomersInScene()
-    {
-        var customerGameObjects = GameObject.FindGameObjectsWithTag("Customer");//gather GO
-
-        var customersInScene = new Customer[customerGameObjects.Length];//create array
-
-        for (var i = 0; i < customersInScene.Length; ++i)//fill array
-        {
-            customersInScene[i] = customerGameObjects[i].GetComponent<Customer>() as Customer;
-        }
-
-        return customersInScene;
     }
 
     /// <summary>
