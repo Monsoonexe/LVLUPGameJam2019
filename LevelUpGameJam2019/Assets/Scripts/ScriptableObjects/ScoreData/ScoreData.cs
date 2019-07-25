@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
-using TMPro;
 
-[CreateAssetMenu(fileName = "ScoreManager_", menuName = "ScriptableObjects/Controllers/Score Manager")]
-public class ScoreManager : ScriptableObject
+[CreateAssetMenu(fileName = "ScoreData_", menuName = "ScriptableObjects/Score Data")]
+public class ScoreData : ScriptableObject
 {
     [Header("---Score---")]
     [SerializeField]
     private int playerScore;
 
+    public int PlayerScore { get { return playerScore; } }//public readonly
+
     [SerializeField]
     private LeaderboardSO leaderboard;
 
-    [Header("---Windows---")]
-    [SerializeField]
-    private LevelEndReadoutController levelEndReadoutController;
-
-    [SerializeField]
-    private NewHighScoreWindowManager newHighScoreWindowManager;
-
+    public LeaderboardSO Leaderboard { get { return leaderboard; } }//public readonly
+    
     [Header("---Tallys---")]
     [SerializeField]
     private int shotsFired;
+
+    public int ShotsFired { get { return shotsFired; } }//public readonly
 
     [SerializeField]
     private int customersSatisfied;
@@ -82,68 +80,7 @@ public class ScoreManager : ScriptableObject
     [SerializeField]
     [Tooltip("Deduction caused by a Customer not receiving a correct Order.")]
     private int missedOrderDeduction = 5;
-
-    [Space(5)]
-    [Header("---UI Elements---")]
-    [SerializeField]
-    private TextMeshProUGUI scoreTMPro;
-
-    [SerializeField]
-    private TextMeshProUGUI highScoreTMPro;
-
-    //external Mono References
-    private LevelManager levelManager;
-
-    private void Awake()
-    {
-        GatherReferences();
-    }
-
-    private void Start()
-    {
-        UpdatePlayerScoreText();
-        UpdateHighScoreText();
-        levelEndReadoutController.gameObject.SetActive(false);
-    }
-
-    private void GatherReferences()
-    {
-        //gather external mono references
-        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-    }
-
-    /// <summary>
-    /// Update UI visuals with current values.  Must be called after any changes to values are made.
-    /// </summary>
-    private void UpdatePlayerScoreText()
-    {
-        scoreTMPro.text = playerScore.ToString();
-    }
-
-    private void UpdateHighScoreText()
-    {
-        highScoreTMPro.text = leaderboard.highScore.ToString();
-    }
-
-    /// <summary>
-    /// Things to do when the level has ended.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        //check if Player got a new high score
-
-        if (leaderboard.IsScoreOnLeaderboard(playerScore))
-        {
-            newHighScoreWindowManager.gameObject.SetActive(true);
-        }
-
-        else
-        {
-            levelEndReadoutController.gameObject.SetActive(true);
-        }
-
-    }
-
+    
     #region Get Tally Methods
 
     public int GetTallyCustomersSatisfied()
@@ -161,7 +98,7 @@ public class ScoreManager : ScriptableObject
     /// </summary>
     /// <returns></returns>
     public int GetTallyMissedOrders()
-    {
+    {//this could be improved
         var customerGameObjs = GameObject.FindGameObjectsWithTag("Customer");
 
         var satisfiedCount = 0;
@@ -185,29 +122,9 @@ public class ScoreManager : ScriptableObject
     {
         return sharksFed;
     }
-
-    public int GetTallyShotsFired()
-    {
-        return shotsFired;
-    }
-
+    
     #endregion
-
-    public int GetPlayerScore()
-    {
-        return playerScore;
-    }
-
-    /// <summary>
-    /// Get a copy of the entry with given index.
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public LeaderboardEntry GetEntry(int index)
-    {
-        return leaderboard.GetEntry(index);
-    }
-
+    
     public void OnShotFired()
     {
         ++shotsFired;
