@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class StationaryCannon : MonoBehaviour
 {
-    private static LevelManager levelManager;//subscribe to event
-
     /// <summary>
     /// Stop adjusting rotation if target within this angle.
     /// </summary>
@@ -117,21 +115,7 @@ public class StationaryCannon : MonoBehaviour
 
     private void OnEnable()
     {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
         myAudioSource.clip = cannonFireSound;//load audio
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    /// <summary>
-    /// Procedure to follow when the level is at an end.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        this.enabled = false;//disable controls, but not visuals
     }
 
     /// <summary>
@@ -143,12 +127,6 @@ public class StationaryCannon : MonoBehaviour
         myBaseTransform = this.transform;
         myAudioSource = GetComponent<AudioSource>();
         myRigidbody = GetComponent<Rigidbody>();
-
-        //get handles to external Objects
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        }
     }
 
     /// <summary>
@@ -319,5 +297,13 @@ public class StationaryCannon : MonoBehaviour
     public void SetScoreManager(ScoreManager scoreManager)
     {
         this.scoreManager = scoreManager;
+    }
+
+    /// <summary>
+    /// Procedure to follow when the level is at an end.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        this.enabled = false;//disable controls, but not visuals
     }
 }

@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 1506711607487349319}
   - component: {fileID: 4628576256423401218}
   - component: {fileID: 7379555322973953970}
+  - component: {fileID: 3629271830575154526}
   m_Layer: 0
   m_Name: PizzaCannon
   m_TagString: Player
@@ -445,6 +446,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59cc2d9a90bdd644999c8be1e845a82f, type: 2}
   - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
   - {fileID: 11400000, guid: 3e9a783c7eaf22746998cbdffd3e5b93, type: 2}
+  disableCannonTrigger: 0
   projectilePrefab: {fileID: 2959233902562555564, guid: 32a00856c16e5ce4cb4ca0df4cad0b05,
     type: 3}
   projectileSpawnPoints:
@@ -582,6 +584,35 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3629271830575154526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118152546697191637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4924641268906619095}
+        m_MethodName: OnLevelsEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6806961687475416007
 GameObject:
   m_ObjectHideFlags: 0
