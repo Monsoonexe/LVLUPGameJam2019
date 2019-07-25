@@ -52,17 +52,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         GetKeyBoardInput();
     }
-
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
+    
     private void GatherReferences()
     {
         if (!levelManager)

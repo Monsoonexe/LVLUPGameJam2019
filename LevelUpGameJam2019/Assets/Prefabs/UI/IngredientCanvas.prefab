@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 1583690294410932102}
   - component: {fileID: 1583690294410932097}
   - component: {fileID: 1583690294410932096}
+  - component: {fileID: 7707707726527756610}
   m_Layer: 5
   m_Name: IngredientCanvas
   m_TagString: OrderBuilder
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientLoaderAnimator: {fileID: 0}
-  selectedIngredients: 
+  selectedIngredients: []
   ingredientSlots:
   - {fileID: 4696979372215123720}
   - {fileID: 5587052389166920473}
@@ -189,6 +190,35 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7707707726527756610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583690294410932099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1583690294410932100}
+        m_MethodName: OnLevelsEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &4584999414855583088
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: ingredient
-      value: 2
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2679043214324295569, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -728,7 +758,7 @@ PrefabInstance:
     - target: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: ingredient
-      value: 1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2679043214324295569, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -921,7 +951,7 @@ PrefabInstance:
     - target: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: ingredient
-      value: 3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2679043214324295569, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
@@ -1114,7 +1144,7 @@ PrefabInstance:
     - target: {fileID: 7206562329580673663, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
       propertyPath: ingredient
-      value: 4
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2679043214324295569, guid: eebbdfc6c9b5a19449fd19c9ca698dff,
         type: 3}
