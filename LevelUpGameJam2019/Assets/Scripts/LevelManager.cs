@@ -10,7 +10,10 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Event that gets called when the level is over.
     /// </summary>
-    public readonly UnityEvent LevelsEndEvent = new UnityEvent();
+    [SerializeField]
+    private GameEvent levelsEndEvent;
+
+    public GameEvent LevelsEndEvent { get { return levelsEndEvent; } }//readonly
 
     /// <summary>
     /// Player starts attached to this Transform.
@@ -32,8 +35,7 @@ public class LevelManager : MonoBehaviour
     
     //external mono Component references
     private GameController gameController;//should exist before this is loaded in Scene
-    private ScoreManager scoreManager;//should exist before this is loaded in Scene
-    private CustomerManager customerManager;//should exist before this is loaded in Scene
+    //private ScoreManager scoreManager;//should exist before this is loaded in Scene
     private OrderBuilderMenu orderBuilder;//should exist before this is loaded in Scene
     private Transform mainCameraTransform;//should exist before this is loaded in Scene
 
@@ -60,8 +62,6 @@ public class LevelManager : MonoBehaviour
 
         //get external references
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
         orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("ON LEVEL'S END!");
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
-        LevelsEndEvent.Invoke();
+        LevelsEndEvent.Raise();
     }
 
     /// <summary>
@@ -92,7 +92,6 @@ public class LevelManager : MonoBehaviour
 
         //configure cannon
         cannonController.SetOrderBuilder(orderBuilder);
-        cannonController.SetScoreManager(scoreManager);
 
         //configure camera handle
         mainCameraTransform.SetParent(cannonController.cameraHandle);//hook camera to handle
@@ -102,8 +101,10 @@ public class LevelManager : MonoBehaviour
         //configure orderBuilder
         orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
 
-        //configure customer manager
-        customerManager.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
+        //configure Remove Orders With Ingredients Unavailable to player
+        //var customers = GameObject.FindGameObjectsWithTag("Customer");
+        //var customersObj = 
+        //possibleOrders.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
 
         //maybe call the garbage collector here?
     }
