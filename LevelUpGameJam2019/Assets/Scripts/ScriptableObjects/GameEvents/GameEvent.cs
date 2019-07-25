@@ -6,6 +6,10 @@ public class GameEvent : ScriptableObject
 {
     private List<GameEventListener> listeners = new List<GameEventListener>();
 
+    [SerializeField]
+    [TextArea]
+    private string DeveloperDescription;
+
     /// <summary>
     /// Call all functions in list.
     /// </summary>
@@ -17,6 +21,15 @@ public class GameEvent : ScriptableObject
             listeners[i].OnEventRaised();
         }
     }
+
+    //make this work!!!
+    //public void Raise(int value)
+    //{
+    //    for (var i = listeners.Count - 1; i >= 0; --i)
+    //    {
+    //        listeners[i].OnEventRaised(value);
+    //    }
+    //}
 
     public void RegisterListener(GameEventListener listener)
     {

@@ -3,6 +3,10 @@ using UnityEngine.Events;
 
 public class GameEventListener : MonoBehaviour
 {
+
+    //[System.Serializable]
+    //public class RichEvent : UnityEvent { }
+
     public GameEvent Event;
     public UnityEvent Response;
 
@@ -21,4 +25,9 @@ public class GameEventListener : MonoBehaviour
         Response.Invoke();
     }
 
+    //MAKE THIS WORK!!!!!
+    //public void OnEventRaised(int value)
+    //{
+    //    Response.Invoke(value)
+    //}
 }
