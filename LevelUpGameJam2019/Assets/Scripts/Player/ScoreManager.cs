@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class ScoreManager : MonoBehaviour
+[CreateAssetMenu(fileName = "ScoreManager_", menuName = "ScriptableObjects/Controllers/Score Manager")]
+public class ScoreManager : ScriptableObject
 {
-    private const string highscoreKey = "HighScore";
-
     [Header("---Score---")]
     [SerializeField]
     private int playerScore;
@@ -93,7 +92,6 @@ public class ScoreManager : MonoBehaviour
     private TextMeshProUGUI highScoreTMPro;
 
     //external Mono References
-    private CustomerManager customerManager;
     private LevelManager levelManager;
 
     private void Awake()
@@ -106,15 +104,13 @@ public class ScoreManager : MonoBehaviour
         UpdatePlayerScoreText();
         UpdateHighScoreText();
         levelEndReadoutController.gameObject.SetActive(false);
-
         levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);
     }
 
     private void GatherReferences()
     {
         //gather external mono references
-        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
+        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     /// <summary>
@@ -156,18 +152,29 @@ public class ScoreManager : MonoBehaviour
         return customersSatisfied;
     }
 
+    public int GetTallyCustomersHit()
+    {
+        return customersHit;
+    }
+
     /// <summary>
-    /// Of all the Customers in the Scene, how many of them got an incorrect Order?
+    /// How many Customers did not receive a correct order.
     /// </summary>
     /// <returns></returns>
     public int GetTallyMissedOrders()
     {
-        return customerManager.CountMissedCustomers();
-    }
+        var customerGameObjs = GameObject.FindGameObjectsWithTag("Customer");
 
-    public int GetTallyCustomersHit()
-    {
-        return customersHit;
+        var satisfiedCount = 0;
+
+        for (var i = 0; i < customerGameObjs.Length; ++i)
+        {
+            var customer = customerGameObjs[i].GetComponent<Customer>();
+            if (customer.IsSatisfied)
+                ++satisfiedCount;
+        }
+
+        return satisfiedCount;
     }
 
     public int GetTallyIncorrectOrders()
@@ -271,5 +278,4 @@ public class ScoreManager : MonoBehaviour
         levelEndReadoutController.gameObject.SetActive(true);
         UpdateHighScoreText();
     }
-
 }
