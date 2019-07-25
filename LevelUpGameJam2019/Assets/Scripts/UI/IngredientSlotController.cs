@@ -19,9 +19,9 @@ public class IngredientSlotController : MonoBehaviour
     /// </summary>
     [Tooltip("Which Ingredient this slot represents.")]
     [SerializeField]//set by Developer
-    private IngredientsENUM ingredient;//used internally
+    private IngredientSO ingredient;//used internally
 
-    public IngredientsENUM Ingredient { get { return ingredient; } }//visible externally, readonly
+    public IngredientSO Ingredient { get { return ingredient; } }//visible externally, readonly
 
     /// <summary>
     /// Background image of this slot.  Yellow if selected.
@@ -113,7 +113,7 @@ public class IngredientSlotController : MonoBehaviour
     /// <param name="ingredient"></param>
     /// <param name="sprite"></param>
     /// <param name="keystroke"></param>
-    public void InitSlot(IngredientsENUM ingredient, Sprite sprite, int keystroke)
+    public void InitSlot(IngredientSO ingredient, Sprite sprite, int keystroke)
     {
         this.ingredient = ingredient;
         this.ingredientIcon.sprite = sprite;
@@ -144,7 +144,7 @@ public class IngredientSlotController : MonoBehaviour
     /// <param name="keystroke">What to show to the Player.</param>
     /// <param name="ingredient">Which Ingredient this Slot adds.</param>
     /// <param name="ingredientIcon">The graphic to display.</param>
-    public void ConfigureSlot(int keystroke, IngredientsENUM ingredient, Sprite ingredientIcon)
+    public void ConfigureSlot(int keystroke, IngredientSO ingredient, Sprite ingredientIcon)
     {//base
         this.keystrokeTMP.text = keystroke.ToString();
         this.ingredient = ingredient;
@@ -158,17 +158,7 @@ public class IngredientSlotController : MonoBehaviour
     /// <param name="ingredient">Which Ingredient this Slot adds.</param>
     public void ConfigureSlot(IngredientSO ingredient, int keystroke)
     {
-        ConfigureSlot(keystroke, ingredient.Ingredient, ingredient.Icon);
-    }
-
-    /// <summary>
-    /// Externally configure Slot.
-    /// </summary>
-    /// <param name="keystroke">What to show to the Player.</param>
-    /// <param name="ingredient">Which Ingredient this Slot adds.</param>
-    public void ConfigureSlot(IngredientSO ingredient, string keystroke)
-    {
-        ConfigureSlot(keystroke, ingredient.Ingredient, ingredient.Icon);
+        ConfigureSlot(keystroke, ingredient, ingredient.Icon);
     }
 
     /// <summary>
@@ -177,7 +167,7 @@ public class IngredientSlotController : MonoBehaviour
     /// <param name="keystroke">What to show to the Player.</param>
     /// <param name="ingredient">Which Ingredient this Slot adds.</param>
     /// <param name="ingredientIcon">The graphic to display.</param>
-    public void ConfigureSlot(string keystroke, IngredientsENUM ingredient, Sprite ingredientIcon)
+    public void ConfigureSlot(string keystroke, IngredientSO ingredient, Sprite ingredientIcon)
     {
         this.keystrokeTMP.text = keystroke;
         this.ingredient = ingredient;
