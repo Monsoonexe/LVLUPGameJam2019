@@ -37,10 +37,7 @@ public class GameController : MonoBehaviour
     [Header("---Scenes---")]
     [SerializeField]
     private string mainMenuSceneName = "MainMenu_Scene";
-
-    //external Component references
-    private ScoreManager scoreManager;
-
+    
     private void Awake()
     {
         InitSingleton(this);
@@ -94,14 +91,7 @@ public class GameController : MonoBehaviour
     private void GatherSceneReferences()
     {
         GameObject gameObjectQuery;//re-use init
-
-        //handle score manager
-        gameObjectQuery = GameObject.FindGameObjectWithTag("ScoreManager");
-        if (gameObjectQuery)
-            scoreManager = gameObjectQuery.GetComponent<ScoreManager>() as ScoreManager;
-        else
-            Debug.LogError("ERROR! No Score Manager in Scene!");
-
+        
         //handle level manager
         gameObjectQuery = GameObject.FindGameObjectWithTag("LevelManager");
         if (gameObjectQuery)
