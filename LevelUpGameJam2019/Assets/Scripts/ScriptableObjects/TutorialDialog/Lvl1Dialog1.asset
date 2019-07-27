@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc4f7a9416aa5540866860b8669ca8d, type: 3}
+  m_Name: Lvl1Dialog1
+  m_EditorClassIdentifier: 
+  sentences:
+  - Ahoy scallywag, I be so glad ye decided t' join us here at Pirate Pizza.
+  - I be Rando, but ye can call me R.R. 'n this here be me humble raft 'n hand cannon.
+  - Here at Pirate Pizza we deliver Pizzas wit' a smile.
+  - Well actually a cannon... a cannon 'n a smile.
+  - Fer th' first order o' business we needs ye t' try t' fire th' cannon...
+  - Go ahead, click the left mouse button anywhere on th' island.
+  sentences2:
+  - Ahoy scallywag, I be so glad ye decided t' join us here at Pirate Pizza.
+  - I be Rando, but ye can call me R.R. 'n this here be me humble raft 'n hand cannon.
+  - Here at Pirate Pizza we deliver Pizzas wit' a smile.
+  - Well actually a cannon... a cannon 'n a smile.
+  - Fer th' first order o' business we needs ye t' try t' fire th' cannon...
+  - Go ahead, click the left mouse button anywhere on th' island.
