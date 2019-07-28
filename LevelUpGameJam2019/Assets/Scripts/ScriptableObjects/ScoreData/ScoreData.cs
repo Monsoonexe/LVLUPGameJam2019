@@ -37,7 +37,7 @@ public class ScoreData : RichScriptableObject
     [Tooltip("Event that fires every time the Player shoots the weapon.")]
     private GameEvent shotFiredEvent;
 
-    [Header("---Tallys---")]
+    [Header("---Level Tallys---")]
     [SerializeField]
     private int shotsFired;
 
