@@ -25,7 +25,10 @@ public class ScoreData : RichScriptableObject
     private GameEvent scoreChangedEvent;
 
     [SerializeField]
-    private GameEvent customerReceivedWrongOrder;
+    private GameEvent customerReceivedWrongOrderEvent;
+
+    [SerializeField]
+    private GameEvent sharkAtePizzaEvent;
 
     /// <summary>
     /// Event that fires every time the Player shoots the weapon.
@@ -125,7 +128,8 @@ public class ScoreData : RichScriptableObject
     {
         levelBeginEvent.AddListener(OnLevelBegin);
         levelEndEvent.AddListener(OnLevelsEnd);
-        customerReceivedWrongOrder.AddListener(OnIncorrectOrderDelivered);
+        customerReceivedWrongOrderEvent.AddListener(OnIncorrectOrderDelivered);
+        sharkAtePizzaEvent.AddListener(OnSharkAtePizza);
     }
 
     /// <summary>
@@ -146,10 +150,7 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();
     }
 
-    private void OnShotFired()
-    {
-        ++shotsFired;
-    }
+    #region Event Responders
 
     private void OnIncorrectOrderDelivered()
     {
@@ -158,6 +159,16 @@ public class ScoreData : RichScriptableObject
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
         scoreChangedEvent.Raise();//update visuals
     }
+    private void OnSharkAtePizza()
+    {
+        ++sharksFed;
+    }
+    private void OnShotFired()
+    {
+        ++shotsFired;
+    }
+
+    #endregion
 
     /// <summary>
     /// How many Customers did not receive a correct order.
@@ -188,11 +199,6 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();
     }
     
-    public void OnSharkAtePizza()
-    {
-        ++sharksFed;
-    }
-
     public void OnCustomerHit()
     {
         ++customersHit;

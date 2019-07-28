@@ -12,9 +12,6 @@ public enum SharkControllerState
 [RequireComponent(typeof(Rigidbody))]
 public class SharkController : MonoBehaviour
 {
-    [SerializeField]
-    private ScoreData scoreManager;
-
     [Header("---SharkAttack---")]
     [SerializeField]
     private int secondsBetweenSharkAttacks = 10;
@@ -53,6 +50,10 @@ public class SharkController : MonoBehaviour
     private int patrolWaypointsIndex = 0;
 
     private const float closeEnoughDistance = 0.1f;
+
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent SharkAtePizzaEvent;
 
     [Header("---Audio---")]
     [SerializeField]
@@ -123,9 +124,7 @@ public class SharkController : MonoBehaviour
             if (Time.time > nextSharkAttackTime && sharkControllerState == SharkControllerState.patrolling)//it's time to shark!
             {
                 attackTarget = other.transform;
-
                 StartSharkJump();
-
             }
 
             else
@@ -159,10 +158,8 @@ public class SharkController : MonoBehaviour
         if (other.gameObject.transform == attackTarget)//if our target has elluded us,
         {
             attackTarget = null;
-
             //point nose towards water
         }
-
     }
 
     /// <summary>
@@ -176,14 +173,11 @@ public class SharkController : MonoBehaviour
             var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;//
 
             collision.gameObject.SetActive(false);//chomp pizza
-
-            scoreManager.OnSharkAtePizza();//tally
-
+            SharkAtePizzaEvent.Raise();//tally
             Debug.Log("CHOMP! Shark ate a pizza.", this);
             myRigidbody.angularVelocity = Vector3.zero;
 
-            //play sound, if one is set
-            if (sharkEatPizzaSound)
+            if (sharkEatPizzaSound)//play sound, if one is set
             {
                 myAudioSource.clip = sharkEatPizzaSound;
                 myAudioSource.Play();
@@ -196,10 +190,9 @@ public class SharkController : MonoBehaviour
                 {
                     //Sharks love anchovies
                     OnSharkAteAnchovies();
-
+                    break;
                 }
             }
-            //check if pizza had anchovies
         }
     }
 
@@ -253,7 +246,6 @@ public class SharkController : MonoBehaviour
     private void OnSharkAteAnchovies()
     {
         StartCoroutine(PlayDeliciousSound());//make yummy sound
-
         nextSharkAttackTime = Time.time + anchovieCoolDown;//increase delay
     }
 
