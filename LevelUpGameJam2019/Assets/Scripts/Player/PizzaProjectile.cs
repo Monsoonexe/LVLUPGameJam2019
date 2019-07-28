@@ -25,7 +25,7 @@ public class PizzaProjectile : MonoBehaviour
     private AudioClip flyingSound;
     
     //order
-    private IngredientSO[] ingredientsOnThisPizza;
+    private IngredientSO[] ingredientsOnThisPizza = new IngredientSO[0];
 
     //components
     private Rigidbody myRigidbody;
