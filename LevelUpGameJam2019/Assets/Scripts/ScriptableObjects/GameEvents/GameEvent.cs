@@ -4,28 +4,51 @@ using UnityEngine;
 public abstract class GameEvent<T> : GameEvent, IGameEvent<T>
 {
     private readonly List<IGameEventListener<T>> typedListeners = new List<IGameEventListener<T>>();
+    private readonly List<System.Action<T>> typedActions = new List<System.Action<T>>();
 
     [SerializeField]
     protected T debugValue = default;//like saying "null", but for generics
 
     public void AddListener(IGameEventListener<T> listener)
     {
-        throw new System.NotImplementedException();
+        if (!typedListeners.Contains(listener))
+            typedListeners.Add(listener);
+    }
+
+    public void AddListener(System.Action<T> action)
+    {
+        if (!typedActions.Contains(action))
+            typedActions.Add(action);
     }
 
     public void Raise(T value)
     {
-        throw new System.NotImplementedException();
+        //TODO AddStackTrace(value);
+
+        for (var i = typedListeners.Count - 1; i >= 0; --i)
+            typedListeners[i].OnEventRaised(value);
+
+        for (var i = typedActions.Count - 1; i >= 0; --i)
+            typedActions[i](value);
     }
 
-    public void RemoveAll()
+    override public void RemoveAll()
     {
-        throw new System.NotImplementedException();
+        base.RemoveAll();
+        typedListeners.RemoveRange(0, typedListeners.Count);
+        typedActions.RemoveRange(0, typedActions.Count);
     }
 
     public void RemoveListener(IGameEventListener<T> listener)
     {
-        throw new System.NotImplementedException();
+        if (typedListeners.Contains(listener))
+            typedListeners.Remove(listener);
+    }
+
+    public void RemoveListener(System.Action<T> action)
+    {
+        if (typedActions.Contains(action))
+            typedActions.Remove(action);
     }
 }
 
@@ -92,7 +115,7 @@ public abstract class GameEvent : GameEventBase, IGameEvent
     /// <summary>
     /// Remove all actions and listeners.
     /// </summary>
-    public void RemoveAll()
+    virtual public void RemoveAll()
     {
         listeners.RemoveRange(0, listeners.Count);
         actions.RemoveRange(0, actions.Count);
