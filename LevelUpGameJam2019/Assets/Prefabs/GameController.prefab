@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7577711792845625447}
   - component: {fileID: 6028133399720584587}
-  - component: {fileID: -992540853152088955}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -52,32 +51,3 @@ MonoBehaviour:
   - {fileID: 4901266195469884088, guid: a0593ec20901d844c8fabfce0019fd23, type: 3}
   shipPrefabIndex: 0
   mainMenuSceneName: MENU
---- !u!114 &-992540853152088955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6288248286277771740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6028133399720584587}
-        m_MethodName: OnLevelsEnd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
