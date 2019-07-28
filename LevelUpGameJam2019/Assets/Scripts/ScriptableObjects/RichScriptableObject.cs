@@ -6,7 +6,7 @@
 public abstract class RichScriptableObject : ScriptableObject
 {
 #pragma warning disable 0414
-    [Header("=GameEventBase=")]
+    [Header("= Game Event Base =")]
     [SerializeField]
     [TextArea(1, 5)]
     private string developerDescription = "Enter a description!";
