@@ -15,7 +15,22 @@ public class StationaryCannon : MonoBehaviour
     /// Object to which Camera will be hooked.
     /// </summary>
     [Tooltip("Object to which Camera will be hooked.  Set this to be camera point.")]
-    public Transform cameraHandle;
+    [SerializeField]
+    private Transform cameraHandle;
+
+    /// <summary>
+    /// Object to which Camera will be hooked.
+    /// </summary>
+    public Transform CameraHandle {  get { return cameraHandle; } }//public readonly
+
+    //outside monobehaviors
+    /// <summary>
+    /// Handles the scores and tallies.
+    /// </summary>
+    [Header("---SO Refs---")]
+    [SerializeField]
+    [Tooltip("Handles the scores and tallies.")]
+    private ScoreData scoreData;
 
     [Header("---Ingredients---")]
     [SerializeField]
@@ -80,18 +95,11 @@ public class StationaryCannon : MonoBehaviour
     //object pooling stuff
     private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
-    
-    //outside monobehaviors
-    /// <summary>
-    /// Handles the scores and tallies.
-    /// </summary>
-    private ScoreData scoreManager;
-
+        
     /// <summary>
     /// Ask this guy what to put on the pizza when it's fired.
     /// </summary>
     private OrderBuilderMenu orderBuilder;
-
     
     void Awake()
     {
@@ -185,7 +193,7 @@ public class StationaryCannon : MonoBehaviour
         if (projectilePrefab)
         {
             //Debug.Log("Firing a Projectile from Spawn Point No: " + projectileSpawnPointIndex + " / " + projectileSpawnPoints.Length, this.gameObject );
-            scoreManager.OnShotFired();//increment counter
+            scoreData.OnShotFired();//increment counter
 
             //Get projectile from pool
             var newProjectile = GetNewProjectile();
@@ -288,15 +296,6 @@ public class StationaryCannon : MonoBehaviour
     public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
     {
         this.orderBuilder = orderBuilder;
-    }
-
-    /// <summary>
-    /// Set Score Manager externally.
-    /// </summary>
-    /// <param name="scoreManager"></param>
-    public void SetScoreManager(ScoreData scoreManager)
-    {
-        this.scoreManager = scoreManager;
     }
 
     /// <summary>

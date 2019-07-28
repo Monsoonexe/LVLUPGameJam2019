@@ -94,9 +94,9 @@ public class LevelManager : MonoBehaviour
         cannonController.SetOrderBuilder(orderBuilder);
 
         //configure camera handle
-        mainCameraTransform.SetParent(cannonController.cameraHandle);//hook camera to handle
+        mainCameraTransform.SetParent(cannonController.CameraHandle);//hook camera to handle
         mainCameraTransform.localPosition = Vector3.zero;//center to handle
-        cannonController.cameraHandle.SetParent(shipGO.transform);//move cannon up a level in hierarchy so doesn't spin around cannon
+        cannonController.CameraHandle.SetParent(shipGO.transform);//move cannon up a level in hierarchy so doesn't spin around cannon
 
         //configure orderBuilder
         orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
