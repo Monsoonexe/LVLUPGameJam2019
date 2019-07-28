@@ -16,10 +16,10 @@ public class GameController : MonoBehaviour
     [Header("---Player Data---")]
     [SerializeField]
     private PlayerStats playerStats;
-    
+
     [Header("---Cannons---")]
     [SerializeField]
-    private GameObject[] cannonPrefabs;
+    private GameObject[] cannonPrefabs = new GameObject[1];
 
     [SerializeField]
     private int cannonPrefabIndex = 0;
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
     [Space(10)]
     [Header("---Ships---")]
     [SerializeField]
-    private GameObject[] shipPrefabs;
+    private GameObject[] shipPrefabs = new GameObject[1];
     [SerializeField]
     private int shipPrefabIndex = 0;
 
@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     [Header("---Scenes---")]
     [SerializeField]
-    private string mainMenuSceneName = "MainMenu_Scene";
+    private string mainMenuSceneName = "MENU";
     
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 
         SceneManager.sceneLoaded += InitLevel;//subscribe to event to know when a scene has changed.
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -55,6 +55,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        Debug.Log("THANKS FOR PLAYING!");
+    }
+
     private void InitLevel(Scene newScene, LoadSceneMode loadSceneMode)
     {
         GatherSceneReferences();
@@ -62,7 +67,8 @@ public class GameController : MonoBehaviour
         var acceptableShipIndex = Mathf.Clamp(shipPrefabIndex, 0, shipPrefabs.Length - 1);//make sure index is w/n array bounds
         var acceptableCannonIndex = Mathf.Clamp(cannonPrefabIndex, 0, cannonPrefabs.Length - 1);//make sure index is w/n array bounds
 
-        currentLevelManager.InitLevel(playerStats, shipPrefabs[acceptableShipIndex], cannonPrefabs[acceptableCannonIndex]);//init level
+        if(currentLevelManager)
+            currentLevelManager.InitLevel(playerStats, shipPrefabs[acceptableShipIndex], cannonPrefabs[acceptableCannonIndex]);//init level
     }
 
     /// <summary>
@@ -96,10 +102,8 @@ public class GameController : MonoBehaviour
         gameObjectQuery = GameObject.FindGameObjectWithTag("LevelManager");
         if (gameObjectQuery)
             currentLevelManager = gameObjectQuery.GetComponent<LevelManager>() as LevelManager;
-            
         else
             Debug.LogError("ERROR! No LevelManager in scene!", this);
-
     }
 
     public void ReloadLevel()
