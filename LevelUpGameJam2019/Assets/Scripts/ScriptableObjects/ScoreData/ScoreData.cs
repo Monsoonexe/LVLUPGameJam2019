@@ -107,7 +107,13 @@ public class ScoreData : RichScriptableObject
     [SerializeField]
     [Tooltip("Deduction caused by a Customer not receiving a correct Order.")]
     private int missedOrderDeduction = 5;
-    
+
+    private void OnEnable()//when entering Play Mode
+    {
+        levelBeginEvent.AddListener(OnLevelBegin);
+        levelEndEvent.AddListener(OnLevelsEnd);
+    }
+
     /// <summary>
     /// How many Customers did not receive a correct order.
     /// </summary>
@@ -167,9 +173,14 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();//update visuals
     }
 
-    public void OnLevelsEnd()
+    public void OnLevelBegin()
     {
         ResetScores();
+    }
+
+    public void OnLevelsEnd()
+    {
+        //ResetScores();
     }
 
     /// <summary>
