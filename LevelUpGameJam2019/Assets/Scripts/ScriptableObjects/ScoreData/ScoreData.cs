@@ -16,6 +16,12 @@ public class ScoreData : RichScriptableObject
 
     [Header("---Game Events---")]
     [SerializeField]
+    private GameEvent levelBeginEvent;
+
+    [SerializeField]
+    private GameEvent levelEndEvent;
+
+    [SerializeField]
     private GameEvent scoreChangedEvent;
 
     /// <summary>
@@ -159,6 +165,11 @@ public class ScoreData : RichScriptableObject
         playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
 
         scoreChangedEvent.Raise();//update visuals
+    }
+
+    public void OnLevelsEnd()
+    {
+        ResetScores();
     }
 
     /// <summary>
