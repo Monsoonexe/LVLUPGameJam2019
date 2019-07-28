@@ -37,6 +37,26 @@ public abstract class GameEvent : GameEventBase, IGameEvent
     protected readonly List<IGameEventListener> listeners = new List<IGameEventListener>();//
     protected readonly List<System.Action> actions = new List<System.Action>();//function pointers. can handle actions, too
 
+    #region stack trace
+    //    public List<StackTraceEntry> StackTraces { get { return _stackTraces; } }
+    //    private List<StackTraceEntry> _stackTraces = new List<StackTraceEntry>();
+
+    //    public void AddStackTrace()
+    //    {
+    //#if UNITY_EDITOR
+    //        if (SOArchitecture_Settings.Instance.EnableDebug)
+    //            _stackTraces.Insert(0, StackTraceEntry.Create());
+    //#endif
+    //    }
+    //    public void AddStackTrace(object value)
+    //    {
+    //#if UNITY_EDITOR
+    //        if (SOArchitecture_Settings.Instance.EnableDebug)
+    //            _stackTraces.Insert(0, StackTraceEntry.Create(value));
+    //#endif
+    //    }
+    #endregion
+
     /// <summary>
     /// Subscribe a new listener.
     /// </summary>
