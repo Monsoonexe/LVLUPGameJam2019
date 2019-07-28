@@ -52,7 +52,7 @@ public abstract class GameEventBase<T> : GameEventBase, IGameEvent<T>
     }
 }
 
-public abstract class GameEventBase : GameEventBaseObject, IGameEvent
+public abstract class GameEventBase : RichScriptableObject, IGameEvent
 {
     /// <summary>
     /// Collection of listeners.
