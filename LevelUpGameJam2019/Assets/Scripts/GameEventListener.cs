@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventListener : MonoBehaviour
+public class GameEventListener : MonoBehaviour, IGameEventListener
 {
 
     //[System.Serializable]
@@ -12,12 +12,12 @@ public class GameEventListener : MonoBehaviour
 
     private void OnEnable()
     {
-        Event.RegisterListener(this);
+        Event.AddListener(this);
     }
 
     private void OnDisable()
     {
-        Event.UnregisterListener(this);
+        Event.RemoveListener(this);
     }
 
     public void OnEventRaised()
