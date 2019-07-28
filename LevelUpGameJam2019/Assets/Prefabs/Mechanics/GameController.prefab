@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: b3c7f26fffd2f76498d54a01ca9413ed, type: 2}
+  enterPlayModeEvent: {fileID: 11400000, guid: 9900dcb8703fe604caf5af0be3e61645, type: 2}
+  exitPlayModeEvent: {fileID: 11400000, guid: 9720dc1509538c643b2170708aee96db, type: 2}
   cannonPrefabs:
   - {fileID: 6118152546697191637, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
   cannonPrefabIndex: 0
