@@ -17,7 +17,6 @@ public abstract class BaseGameEventListener<TType, TEvent, TResponse> : MonoBeha
 
     private void OnEnable()
     {
-        Debug.Log(this.gameObject.name);
         gameEvent.AddListener(this);
     }
 
@@ -49,7 +48,6 @@ public abstract class GameEventListenerBase<TEvent, TResponse> : MonoBehaviour, 
 
     private void OnEnable()
     {
-        Debug.Log(this.gameObject.name);
         gameEvent.AddListener(this);
     }
 
