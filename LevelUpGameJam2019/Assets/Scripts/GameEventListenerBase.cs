@@ -1,33 +1,64 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventListenerBase : MonoBehaviour, IGameEventListener
+public abstract class BaseGameEventListener<TType, TEvent, TResponse> : MonoBehaviour, IGameEventListener<TType>
+    where TEvent : GameEventBase<TType>
+    where TResponse : UnityEvent<TType>
 {
+    protected ScriptableObject GameEvent { get { return gameEvent; } }
+    protected UnityEventBase Response { get { return response; } }
 
-    //[System.Serializable]
-    //public class RichEvent : UnityEvent { }
+    [SerializeField]
+    private TEvent gameEvent = default;
 
-    public GameEvent Event;
-    public UnityEvent Response;
+    [SerializeField]
+    private TResponse response = default;
 
     private void OnEnable()
     {
-        Event.AddListener(this);
+        Debug.Log(this.gameObject.name);
+        gameEvent.AddListener(this);
     }
 
     private void OnDisable()
     {
-        Event.RemoveListener(this);
+        gameEvent.RemoveListener(this);
+    }
+
+    public void OnEventRaised(TType value)
+    {
+        response.Invoke(value);
+    }
+}
+
+public abstract class GameEventListenerBase<TEvent, TResponse> : MonoBehaviour, IGameEventListener
+    where TEvent : GameEventBase
+    where TResponse : UnityEvent
+{
+    [SerializeField]
+    private TEvent gameEvent = default;
+
+    protected virtual ScriptableObject GameEvent { get { return gameEvent; } }
+
+    [SerializeField]
+    private TResponse response = default;
+
+    protected virtual UnityEventBase Response { get { return response; } }
+
+    private void OnEnable()
+    {
+        Debug.Log(this.gameObject.name);
+        gameEvent.AddListener(this);
+    }
+
+    private void OnDisable()
+    {
+        gameEvent.RemoveListener(this);
     }
 
     public void OnEventRaised()
     {
-        Response.Invoke();
+        response.Invoke();
     }
-
-    //MAKE THIS WORK!!!!!
-    //public void OnEventRaised(int value)
-    //{
-    //    Response.Invoke(value)
-    //}
 }
