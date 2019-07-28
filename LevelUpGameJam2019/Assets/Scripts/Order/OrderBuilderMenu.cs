@@ -32,15 +32,7 @@ public class OrderBuilderMenu : MonoBehaviour
     private Color normalBackgroundColor;
 
     public Color NormalBackgroundColor { get { return normalBackgroundColor; } }// externally visible, readonly
-
-    //external mono Components
-    private static LevelManager levelManager;
-
-    private void Awake()
-    {
-        GatherReferences();
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -52,15 +44,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         GetKeyBoardInput();
     }
-    
-    private void GatherReferences()
-    {
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        }        
-    }
-    
+        
     /// <summary>
     /// Set to default state.
     /// </summary>
