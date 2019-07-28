@@ -137,6 +137,11 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();
     }
 
+    private void OnShotFired()
+    {
+        ++shotsFired;
+    }
+
     /// <summary>
     /// How many Customers did not receive a correct order.
     /// </summary>
@@ -164,11 +169,6 @@ public class ScoreData : RichScriptableObject
         playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
 
         scoreChangedEvent.Raise();
-    }
-
-    public void OnShotFired()
-    {
-        ++shotsFired;
     }
     
     public void OnIncorrectOrderDelivered()
