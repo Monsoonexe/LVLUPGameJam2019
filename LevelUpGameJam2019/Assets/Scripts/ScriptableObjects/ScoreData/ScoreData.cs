@@ -18,6 +18,13 @@ public class ScoreData : ScriptableObject
     [SerializeField]
     private GameEvent scoreChangedEvent;
 
+    /// <summary>
+    /// Event that fires every time the Player shoots the weapon.
+    /// </summary>
+    [SerializeField]
+    [Tooltip("Event that fires every time the Player shoots the weapon.")]
+    private GameEvent shotFiredEvent;
+
     [Header("---Tallys---")]
     [SerializeField]
     private int shotsFired;
@@ -114,12 +121,7 @@ public class ScoreData : ScriptableObject
 
         return satisfiedCount;
     }
-
-    public void OnShotFired()
-    {
-        ++shotsFired;
-    }
-
+    
     public void OnCustomerSatisfied(int numberOfIngredients)
     {
         ++customersSatisfied;
@@ -127,6 +129,11 @@ public class ScoreData : ScriptableObject
         playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
 
         scoreChangedEvent.Raise();
+    }
+
+    public void OnShotFired()
+    {
+        ++shotsFired;
     }
     
     public void OnIncorrectOrderDelivered()

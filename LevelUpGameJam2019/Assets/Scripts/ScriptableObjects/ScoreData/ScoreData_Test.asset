@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8e6ba84080cd1459e63938690a63f3, type: 3}
   m_Name: ScoreData_Test
   m_EditorClassIdentifier: 
-  playerScore: 0
+  playerScore: 520
   leaderboard: {fileID: 11400000, guid: 4590f34936942bd4aac5e6339e2a2487, type: 2}
   scoreChangedEvent: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
-  shotsFired: 0
-  customersSatisfied: 0
-  customersHit: 0
-  incorrectOrders: 0
+  shotFiredEvent: {fileID: 11400000, guid: 5ff337d578e8b0c46a4177532661d923, type: 2}
+  shotsFired: 16
+  customersSatisfied: 3
+  customersHit: 1
+  incorrectOrders: 1
   missedOrders: 0
-  sharksFed: 0
+  sharksFed: 1
   customerSatisfiedPoints: 100
   pointsPerIngredient: 25
   additionalIngredientModifier: 1
