@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHandle: {fileID: 1820724080383695359}
+  scoreData: {fileID: 11400000, guid: 3de07feb17f569743b804e6819ecdf5d, type: 2}
   availableIngredients:
   - {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
   - {fileID: 11400000, guid: 3a63ab2841b96de40a943bdf4ef66991, type: 2}
