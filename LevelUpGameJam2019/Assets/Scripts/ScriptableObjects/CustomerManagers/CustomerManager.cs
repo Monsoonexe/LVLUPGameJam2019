@@ -6,7 +6,7 @@
 [CreateAssetMenu(fileName = "CustomerManager_", menuName = "ScriptableObjects/Controllers/Customer Manager")]
 public class CustomerManager : RichScriptableObject
 {
-    [Header("---Reaction Delays---")]
+    [Header("= Customer Manager =")]
     [SerializeField]
     private float badOrderReactionTime = 1.0f;
 
