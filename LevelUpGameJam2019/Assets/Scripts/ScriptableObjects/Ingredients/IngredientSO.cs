@@ -8,7 +8,11 @@ public class IngredientSO : ScriptableObject
 
     public Sprite Icon { get { return icon; } }//externally accessible, readonly
 
+    /// <summary>
+    /// In which order does this ingredient go on a pizza? ex first, second.
+    /// </summary>
     [SerializeField]//set by Developer
+    [Tooltip("In which order does this ingredient go on a pizza? ex first, second.")]
     private int orderOnPizza = 0;
     public int OrderOnPizza { get { return orderOnPizza; } }//externally accessible, readonly
 
