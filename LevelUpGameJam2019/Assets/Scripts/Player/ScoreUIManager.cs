@@ -41,9 +41,7 @@ public class ScoreUIManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        UpdatePlayerScoreText();
-        UpdateHighScoreText();
-        levelEndReadoutController.gameObject.SetActive(false);
+        OnLevelBegin();
     }
 
     private void UpdateHighScoreText()
@@ -57,6 +55,13 @@ public class ScoreUIManager : MonoBehaviour
     public void UpdatePlayerScoreText()
     {
         scoreTMPro.text = scoreData.PlayerScore.ToString();
+    }
+
+    public void OnLevelBegin()
+    {
+        UpdatePlayerScoreText();
+        UpdateHighScoreText();
+        levelEndReadoutController.gameObject.SetActive(false);
     }
 
     /// <summary>

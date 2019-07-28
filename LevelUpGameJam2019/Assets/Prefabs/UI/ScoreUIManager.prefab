@@ -269,10 +269,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7970435097338647059}
   - component: {fileID: 6735711319787323394}
-  - component: {fileID: 7676291051235325130}
-  - component: {fileID: 4254062198028239308}
+  - component: {fileID: 6741327069737366301}
+  - component: {fileID: 3802240146122057636}
+  - component: {fileID: 690203811298314108}
   m_Layer: 0
-  m_Name: ScoreManager
+  m_Name: ScoreUIManager
   m_TagString: ScoreManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,7 +315,7 @@ MonoBehaviour:
   scoreText: {fileID: 7044248219337347253}
   nameInputText: {fileID: 1964357778194038071}
   okayButton: {fileID: 5305630428297287020}
---- !u!114 &7676291051235325130
+--- !u!114 &6741327069737366301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,11 +324,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5111755227996988337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 794774ec85d0e444ba226e6885b7f886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
-  Response:
+  gameEvent: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6735711319787323394}
@@ -343,7 +344,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4254062198028239308
+--- !u!114 &3802240146122057636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,11 +353,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 5111755227996988337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 794774ec85d0e444ba226e6885b7f886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
-  Response:
+  gameEvent: {fileID: 11400000, guid: a917927c0dbb2d143b648f4699e2cc15, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6735711319787323394}
+        m_MethodName: OnLevelBegin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &690203811298314108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111755227996988337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794774ec85d0e444ba226e6885b7f886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
+  response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6735711319787323394}
@@ -551,6 +581,16 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7425690815569011882, guid: 2759c8b15fa17414dbd2f74688d877b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6735711319787323394}
+    - target: {fileID: 7425690815569011882, guid: 2759c8b15fa17414dbd2f74688d877b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConfirmNewHighScoreName
+      objectReference: {fileID: 0}
     - target: {fileID: 4085781629610725174, guid: 2759c8b15fa17414dbd2f74688d877b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -655,16 +695,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7425690815569011882, guid: 2759c8b15fa17414dbd2f74688d877b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 6735711319787323394}
-    - target: {fileID: 7425690815569011882, guid: 2759c8b15fa17414dbd2f74688d877b9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ConfirmNewHighScoreName
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7623949905792360362, guid: 2759c8b15fa17414dbd2f74688d877b9, type: 3}
