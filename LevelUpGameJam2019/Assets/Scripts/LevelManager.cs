@@ -12,9 +12,6 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [Header("---Game Events---")]
     [SerializeField]
-    private GameEvent levelsEndEvent;
-
-    [SerializeField]
     private GameEvent levelBeginEvent;
 
     /// <summary>
@@ -75,7 +72,6 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("ON LEVEL'S END!");
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
-        levelsEndEvent.Raise();
     }
 
     /// <summary>
