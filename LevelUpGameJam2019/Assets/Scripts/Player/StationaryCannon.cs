@@ -23,14 +23,13 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     public Transform CameraHandle {  get { return cameraHandle; } }//public readonly
 
-    //outside monobehaviors
     /// <summary>
-    /// Handles the scores and tallies.
+    /// Event called every time the Player pulls the trigger.
     /// </summary>
-    [Header("---SO Refs---")]
+    [Header("---Game Events---")]
     [SerializeField]
-    [Tooltip("Handles the scores and tallies.")]
-    private ScoreData scoreData;
+    [Tooltip("Event called every time the Player pulls the trigger.")]
+    private GameEvent shotFiredEvent;
 
     [Header("---Ingredients---")]
     [SerializeField]
@@ -189,11 +188,12 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     private void FireProjectile()
     {
+        shotFiredEvent.Raise();//increment tally counter
+
         //pew pew
         if (projectilePrefab)
         {
             //Debug.Log("Firing a Projectile from Spawn Point No: " + projectileSpawnPointIndex + " / " + projectileSpawnPoints.Length, this.gameObject );
-            scoreData.OnShotFired();//increment counter
 
             //Get projectile from pool
             var newProjectile = GetNewProjectile();
