@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "ScoreData_", menuName = "ScriptableObjects/Score Data")]
-public class ScoreData : ScriptableObject
+public class ScoreData : RichScriptableObject
 {
-    [Header("---Score---")]
+    [Header("= Score Data =")]
     [SerializeField]
     private int playerScore;
 
