@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Ingredient_", menuName = "ScriptableObjects/New Ingredient")]
-public class IngredientSO : ScriptableObject
+public class IngredientSO : RichScriptableObject
 {
+    [Header("= Ingredient =")]
     [SerializeField]//set by Developer
     private Sprite icon;
 

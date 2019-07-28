@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "PizzaOrder_", menuName = "ScriptableObjects/New Order")]
-public class Order : ScriptableObject
+public class Order : RichScriptableObject
 {
+    [Header("= Order =")]
     [SerializeField]//set in Inspector
     private IngredientSO[] ingredientSOs = new IngredientSO[0];//
 

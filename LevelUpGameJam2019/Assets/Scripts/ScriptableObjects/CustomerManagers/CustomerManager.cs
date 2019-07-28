@@ -4,7 +4,7 @@
 /// Holds data that is common to all Customers.
 /// </summary>
 [CreateAssetMenu(fileName = "CustomerManager_", menuName = "ScriptableObjects/Controllers/Customer Manager")]
-public class CustomerManager : ScriptableObject
+public class CustomerManager : RichScriptableObject
 {
     [Header("---Reaction Delays---")]
     [SerializeField]

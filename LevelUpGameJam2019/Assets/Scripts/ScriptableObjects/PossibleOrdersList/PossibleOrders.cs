@@ -4,8 +4,9 @@
 /// Possible orders that can be given during a level or time.
 /// </summary>
 [CreateAssetMenu(fileName = "PossibleOrders_", menuName = "ScriptableObjects/Possible Orders")]
-public class PossibleOrders : ScriptableObject
+public class PossibleOrders : RichScriptableObject
 {
+    [Header("= Possible Orders =")]
     [SerializeField]
     private Order[] possibleOrders = new Order[0];
     

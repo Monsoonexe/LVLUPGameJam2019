@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Leaderboard_", menuName = "ScriptableObjects/New Leaderboard")]
-public class LeaderboardSO : ScriptableObject
+public class LeaderboardSO : RichScriptableObject
 {
     private const int defaultLeaderboardSize = 5;
 
