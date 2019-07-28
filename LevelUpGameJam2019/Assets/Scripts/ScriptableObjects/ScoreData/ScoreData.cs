@@ -114,6 +114,29 @@ public class ScoreData : RichScriptableObject
         levelEndEvent.AddListener(OnLevelsEnd);
     }
 
+    private void OnDisable()
+    {
+        ResetRoundScores();//reset to zero
+    }
+
+    /// <summary>
+    /// Set all scores to 0.
+    /// </summary>
+    [ContextMenu("Reset Score and Tallys")]
+    private void ResetRoundScores()
+    {
+        //reset values
+        playerScore = 0;
+        shotsFired = 0;
+        customersSatisfied = 0;
+        customersHit = 0;
+        missedOrders = 0;
+        incorrectOrders = 0;
+        sharksFed = 0;
+
+        scoreChangedEvent.Raise();
+    }
+
     /// <summary>
     /// How many Customers did not receive a correct order.
     /// </summary>
@@ -175,7 +198,7 @@ public class ScoreData : RichScriptableObject
 
     public void OnLevelBegin()
     {
-        ResetScores();
+        ResetRoundScores();
     }
 
     public void OnLevelsEnd()
@@ -183,23 +206,4 @@ public class ScoreData : RichScriptableObject
         //ResetScores();
     }
 
-    /// <summary>
-    /// Set all scores to 0.
-    /// </summary>
-    [ContextMenu("Reset Score and Tallys")]
-    public void ResetScores()
-    {
-        Debug.Log("SCORES RESET!", this);
-
-        //reset values
-        playerScore = 0;
-        shotsFired = 0;
-        customersSatisfied = 0;
-        customersHit = 0;
-        missedOrders = 0;
-        incorrectOrders = 0;
-        sharksFed = 0;
-
-        scoreChangedEvent.Raise();
-    }
 }
