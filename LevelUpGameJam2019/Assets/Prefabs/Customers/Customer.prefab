@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8917171206006001866}
   - component: {fileID: 5748861884818160847}
   - component: {fileID: 3817723437793459051}
-  - component: {fileID: 1307621774657652005}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Customer
@@ -57,7 +56,7 @@ MonoBehaviour:
   possibleOrders: {fileID: 11400000, guid: aca5889fab2dfb34d88183c4381c8098, type: 2}
   customerProfile: {fileID: 11400000, guid: a99c6bfc2c913384db771ca47854b9d5, type: 2}
   customerManager: {fileID: 11400000, guid: 07b50f36d92292e4a8869f2683baa7be, type: 2}
-  scoreManager: {fileID: 11400000, guid: 3de07feb17f569743b804e6819ecdf5d, type: 2}
+  scoreData: {fileID: 11400000, guid: 3de07feb17f569743b804e6819ecdf5d, type: 2}
   orderPromptController: {fileID: 6585203837869068981}
   customerCollider: {fileID: 8917171206006001866}
   pizzaBoxCollider: {fileID: 4206118922461174337}
@@ -302,35 +301,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 86.43996, z: -6.5513744}
     m_Extent: {x: 102.45596, y: 96.25047, z: 26.754984}
   m_DirtyAABB: 0
---- !u!114 &1307621774657652005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396875095428384441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5508c657437b2e40b4ff6471317afd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4396875095428384437}
-        m_MethodName: OnLevelsEnd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &8725625374599643699
 GameObject:
   m_ObjectHideFlags: 0

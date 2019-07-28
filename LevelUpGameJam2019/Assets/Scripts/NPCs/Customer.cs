@@ -34,7 +34,7 @@ public class Customer : MonoBehaviour
     private CustomerManager customerManager;
 
     [SerializeField]
-    private ScoreData scoreManager;
+    private ScoreData scoreData;
 
     [Header("---UI---")]
     [SerializeField]
@@ -88,14 +88,14 @@ public class Customer : MonoBehaviour
         orderPromptController.ToggleVisuals(false);//start with UI hidden until in range of Player
     }
     
-    private void OnValidate()
-    {
-        //get references on this GameObject references
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
+    //private void OnValidate()
+    //{
+    //    //get references on this GameObject references
+    //    audioSource = GetComponent<AudioSource>() as AudioSource;
+    //    skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
-        UpdateVisuals();
-    }
+    //    UpdateVisuals();
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -201,7 +201,7 @@ public class Customer : MonoBehaviour
     private void OnCustomerHit()
     {
         PlayRandomSound(customerProfile.hitWithPizzaSounds);//audio
-        scoreManager.OnCustomerHit();//score
+        scoreData.OnCustomerHit();//score
         orderPromptController.OnCustomerHit(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown coroutine
     }
@@ -209,7 +209,7 @@ public class Customer : MonoBehaviour
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
-        scoreManager.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
+        scoreData.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
         orderPromptController.OnSuccessfulOrder();//update visuals
         orderHasBeenDelivered = true;//flag to reject all future Orders
         //Debug.Log("Thanks for the Pizza!!!!");
@@ -218,7 +218,7 @@ public class Customer : MonoBehaviour
     private void RejectPizza()
     {
         PlayRandomSound(customerProfile.badOrderSounds);//audio
-        scoreManager.OnIncorrectOrderDelivered();//score
+        scoreData.OnIncorrectOrderDelivered();//score
         orderPromptController.OnFailedOrder(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
