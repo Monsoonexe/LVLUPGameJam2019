@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "GameEvent_Bool_", menuName = "ScriptableObjects/Game Events/Bool Game Event")]
 public class BoolGameEvent : GameEventBase<bool>
 {
