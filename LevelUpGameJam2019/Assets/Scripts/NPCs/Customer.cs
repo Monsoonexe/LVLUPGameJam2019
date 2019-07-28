@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SkinnedMeshRenderer))]
+[SelectionBase]
 public class Customer : MonoBehaviour
 {   
     [SerializeField]
@@ -35,6 +36,10 @@ public class Customer : MonoBehaviour
 
     [SerializeField]
     private ScoreData scoreData;
+
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent wrongOrderReceivedEvent;
 
     [Header("---UI---")]
     [SerializeField]
@@ -218,7 +223,7 @@ public class Customer : MonoBehaviour
     private void RejectPizza()
     {
         PlayRandomSound(customerProfile.badOrderSounds);//audio
-        scoreData.OnIncorrectOrderDelivered();//score
+        wrongOrderReceivedEvent.Raise();//score
         orderPromptController.OnFailedOrder(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");

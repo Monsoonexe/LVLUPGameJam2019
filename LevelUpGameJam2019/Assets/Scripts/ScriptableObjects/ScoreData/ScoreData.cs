@@ -24,6 +24,9 @@ public class ScoreData : RichScriptableObject
     [SerializeField]
     private GameEvent scoreChangedEvent;
 
+    [SerializeField]
+    private GameEvent customerReceivedWrongOrder;
+
     /// <summary>
     /// Event that fires every time the Player shoots the weapon.
     /// </summary>
@@ -110,13 +113,19 @@ public class ScoreData : RichScriptableObject
 
     private void OnEnable()//when entering Play Mode
     {
-        levelBeginEvent.AddListener(OnLevelBegin);
-        levelEndEvent.AddListener(OnLevelsEnd);
+        SubscribeToGameEvents();
     }
 
     private void OnDisable()
     {
         ResetRoundScores();//reset to zero
+    }
+
+    private void SubscribeToGameEvents()
+    {
+        levelBeginEvent.AddListener(OnLevelBegin);
+        levelEndEvent.AddListener(OnLevelsEnd);
+        customerReceivedWrongOrder.AddListener(OnIncorrectOrderDelivered);
     }
 
     /// <summary>
@@ -140,6 +149,14 @@ public class ScoreData : RichScriptableObject
     private void OnShotFired()
     {
         ++shotsFired;
+    }
+
+    private void OnIncorrectOrderDelivered()
+    {
+        ++incorrectOrders;//increment tally
+        playerScore -= incorrectOrderDeduction;//reduce score
+        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
+        scoreChangedEvent.Raise();//update visuals
     }
 
     /// <summary>
@@ -171,16 +188,6 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();
     }
     
-    public void OnIncorrectOrderDelivered()
-    {
-        ++incorrectOrders;
-
-        playerScore -= incorrectOrderDeduction;
-        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
-
-        scoreChangedEvent.Raise();//update visuals
-    }
-
     public void OnSharkAtePizza()
     {
         ++sharksFed;

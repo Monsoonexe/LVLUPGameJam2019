@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8e6ba84080cd1459e63938690a63f3, type: 3}
   m_Name: ScoreData_Test
   m_EditorClassIdentifier: 
-  playerScore: 520
+  developerDescription: Enter a description!
+  playerScore: 0
   leaderboard: {fileID: 11400000, guid: 4590f34936942bd4aac5e6339e2a2487, type: 2}
+  levelBeginEvent: {fileID: 11400000, guid: a917927c0dbb2d143b648f4699e2cc15, type: 2}
+  levelEndEvent: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
   scoreChangedEvent: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
+  customerReceivedWrongOrder: {fileID: 11400000, guid: 005f73aaf7f7c8a40b1884044867e394,
+    type: 2}
   shotFiredEvent: {fileID: 11400000, guid: 5ff337d578e8b0c46a4177532661d923, type: 2}
-  shotsFired: 16
-  customersSatisfied: 3
-  customersHit: 1
+  shotsFired: 0
+  customersSatisfied: 0
+  customersHit: 0
   incorrectOrders: 1
   missedOrders: 0
-  sharksFed: 1
+  sharksFed: 0
   customerSatisfiedPoints: 100
   pointsPerIngredient: 25
   additionalIngredientModifier: 1

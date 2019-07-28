@@ -57,6 +57,8 @@ MonoBehaviour:
   customerProfile: {fileID: 11400000, guid: a99c6bfc2c913384db771ca47854b9d5, type: 2}
   customerManager: {fileID: 11400000, guid: 07b50f36d92292e4a8869f2683baa7be, type: 2}
   scoreData: {fileID: 11400000, guid: 3de07feb17f569743b804e6819ecdf5d, type: 2}
+  wrongOrderReceivedEvent: {fileID: 11400000, guid: 005f73aaf7f7c8a40b1884044867e394,
+    type: 2}
   orderPromptController: {fileID: 6585203837869068981}
   customerCollider: {fileID: 8917171206006001866}
   pizzaBoxCollider: {fileID: 4206118922461174337}
