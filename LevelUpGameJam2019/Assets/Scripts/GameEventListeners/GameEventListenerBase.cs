@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BaseGameEventListener<TType, TEvent, TResponse> : MonoBehaviour, IGameEventListener<TType>
@@ -9,6 +8,7 @@ public abstract class BaseGameEventListener<TType, TEvent, TResponse> : MonoBeha
     protected ScriptableObject GameEvent { get { return gameEvent; } }
     protected UnityEventBase Response { get { return response; } }
 
+    [Header("= Listener Base =")]
     [SerializeField]
     private TEvent gameEvent = default;
 
@@ -36,6 +36,7 @@ public abstract class GameEventListenerBase<TEvent, TResponse> : MonoBehaviour, 
     where TEvent : GameEventBase
     where TResponse : UnityEvent
 {
+    [Header("= Listener Base =")]
     [SerializeField]
     private TEvent gameEvent = default;
 
