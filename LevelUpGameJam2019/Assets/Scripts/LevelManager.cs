@@ -10,10 +10,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Event that gets called when the level is over.
     /// </summary>
+    [Header("---Game Events---")]
     [SerializeField]
     private GameEvent levelsEndEvent;
 
-    public GameEvent LevelsEndEvent { get { return levelsEndEvent; } }//readonly
+    [SerializeField]
+    private GameEvent levelBeginEvent;
 
     /// <summary>
     /// Player starts attached to this Transform.
@@ -73,7 +75,7 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("ON LEVEL'S END!");
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
-        LevelsEndEvent.Raise();
+        levelsEndEvent.Raise();
     }
 
     /// <summary>
@@ -106,6 +108,7 @@ public class LevelManager : MonoBehaviour
         //var customersObj = 
         //possibleOrders.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
 
+        levelBeginEvent.Raise();//call everything else
         //maybe call the garbage collector here?
     }
 

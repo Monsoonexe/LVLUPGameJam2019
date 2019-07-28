@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsEndEvent: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  levelBeginEvent: {fileID: 11400000, guid: a917927c0dbb2d143b648f4699e2cc15, type: 2}
   playerStartHandle: {fileID: 0}
   returnToMainMenuPrompt: {fileID: 2375097139154704646}
   levelMusic: {fileID: 8300000, guid: df57a08b657c6db49933c30f86c21e4a, type: 3}
