@@ -22,6 +22,9 @@ public class ScoreData : RichScriptableObject
     private GameEvent levelEndEvent;
 
     [SerializeField]
+    private GameEvent exitPlayModeEvent;
+
+    [SerializeField]
     private GameEvent scoreChangedEvent;
 
     [SerializeField]
@@ -116,20 +119,18 @@ public class ScoreData : RichScriptableObject
 
     private void OnEnable()//when entering Play Mode
     {
+        //Debug.Log("ENABLED");
+        ResetRoundScores();//reset to zero
         SubscribeToGameEvents();
     }
-
-    private void OnDisable()
-    {
-        ResetRoundScores();//reset to zero
-    }
-
+    
     private void SubscribeToGameEvents()
     {
         levelBeginEvent.AddListener(OnLevelBegin);
         levelEndEvent.AddListener(OnLevelsEnd);
         customerReceivedWrongOrderEvent.AddListener(OnIncorrectOrderDelivered);
         sharkAtePizzaEvent.AddListener(OnSharkAtePizza);
+        exitPlayModeEvent.AddListener(ResetRoundScores);
     }
 
     /// <summary>
