@@ -33,9 +33,15 @@ public class StationaryCannon : MonoBehaviour
 
     [Header("---Ingredients---")]
     [SerializeField]
-    private IngredientSO[] availableIngredients;
+    private IngredientList availableIngredients;
 
-    public IngredientSO[] AvailableIngredients { get { return availableIngredients; } }//publicly accessible, but only gets a copy.
+    public IngredientSO[] AvailableIngredients { get { return availableIngredients.ingredients.ToArray(); } }//publicly accessible, but only gets a copy.
+
+    /// <summary>
+    /// This is the SO that holds the Order the Player is working on.
+    /// </summary>
+    [SerializeField]
+    private IngredientList orderInProgress;
     
     [Header("Projectile Stuff")]
     [Tooltip("Allows the cannon to continue tracking but disables trigger.")]
@@ -94,16 +100,11 @@ public class StationaryCannon : MonoBehaviour
     //object pooling stuff
     private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
-        
-    /// <summary>
-    /// Ask this guy what to put on the pizza when it's fired.
-    /// </summary>
-    private OrderBuilderMenu orderBuilder;
-    
+            
     void Awake()
     {
         GatherReferences();
-        availableIngredients = Order.SortIngredientsListAscending(availableIngredients);//sort list
+        availableIngredients.ingredients = new List<IngredientSO>(Order.SortIngredientsListAscending(availableIngredients.ingredients.ToArray()));//sort list
     }
 
     // Start is called before the first frame update
@@ -188,8 +189,6 @@ public class StationaryCannon : MonoBehaviour
     /// </summary>
     private void FireProjectile()
     {
-        shotFiredEvent.Raise();//increment tally counter
-
         //pew pew
         if (projectilePrefab)
         {
@@ -204,24 +203,14 @@ public class StationaryCannon : MonoBehaviour
             newProjectile.transform.position = projectileSpawnPoint.position;
             newProjectile.transform.rotation = projectileSpawnPoint.rotation;
 
-            //give proper order
-            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
+            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>();//give proper order
 
-            //handle physics
-            pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);
+            pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);//handle physics
+            pizzaProjectile.GiveOrderIngredients(orderInProgress.ingredients.ToArray());
 
-            if (orderBuilder)
-            {
-                pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
-                orderBuilder.OnOrderFired();
-            }
-            else
-            {
-                Debug.Log("No Order Builder connected to Cannon. Blank pizza.", this);
-            }
-            
-            //audio
-            myAudioSource.Play();
+            shotFiredEvent.Raise();//increment tally counter and reset order
+
+            myAudioSource.Play();//audio
         }
 
         else
@@ -287,15 +276,6 @@ public class StationaryCannon : MonoBehaviour
         }
 
         turretTransform.localEulerAngles = new Vector3(localRot, 0, 0);
-    }
-
-    /// <summary>
-    /// Set hook and initialize Order Builder.
-    /// </summary>
-    /// <param name="orderBuilder"></param>
-    public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
-    {
-        this.orderBuilder = orderBuilder;
     }
 
     /// <summary>
