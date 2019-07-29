@@ -8,6 +8,11 @@ public class CustomerManager : RichScriptableObject
 {
     [Header("= Customer Manager =")]
     [SerializeField]
+    private IngredientList ingredientsAvailableToPlayer;
+
+    public IngredientList IngredientsAvailableToPlayer { get { return ingredientsAvailableToPlayer; } }
+
+    [SerializeField]
     private float badOrderReactionTime = 1.0f;
 
     public float BadOrderReactionTime { get { return customerHitReactionTime; } }//publicly expose, but readonly
