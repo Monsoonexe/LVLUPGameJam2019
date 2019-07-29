@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptableListBase<T> : RichScriptableObject
+public abstract class ScriptableListBase<T> : RichScriptableObject
 {
     public List<T> list;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         ValidateArray();
     }
 
-    private void ValidateArray()
+    protected virtual void ValidateArray()
     {
         while (list.Remove(default(T)) && list.Count != 0) { }//remove nulls until none or nothing left
     }
