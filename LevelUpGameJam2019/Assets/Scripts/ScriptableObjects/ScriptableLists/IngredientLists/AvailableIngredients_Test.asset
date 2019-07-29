@@ -15,6 +15,7 @@ MonoBehaviour:
   developerDescription: These are the ingredients this Player has access to. Might
     be restricted by what's on Cannon.
   list:
+  - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
   - {fileID: 11400000, guid: 3a63ab2841b96de40a943bdf4ef66991, type: 2}
-  - {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
   - {fileID: 11400000, guid: 59cc2d9a90bdd644999c8be1e845a82f, type: 2}
+  - {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
