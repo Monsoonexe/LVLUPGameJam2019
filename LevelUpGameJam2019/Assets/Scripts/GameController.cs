@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour
         if (gameObjectQuery)
             currentLevelManager = gameObjectQuery.GetComponent<LevelManager>() as LevelManager;
         else
-            Debug.LogError("ERROR! No LevelManager in scene!", this);
+            Debug.Log("ERROR! No LevelManager in scene!", this);
     }
 
     public void ReloadLevel()
