@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "PizzaOrder_", menuName = "ScriptableObjects/New Order")]
+[CreateAssetMenu(fileName = "PizzaOrder_", menuName = "ScriptableObjects/Orders/New Order")]
 public class Order : RichScriptableObject
 {
     [Header("= Order =")]
