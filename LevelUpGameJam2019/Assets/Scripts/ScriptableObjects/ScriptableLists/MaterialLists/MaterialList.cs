@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "MaterialList_", menuName = "ScriptableObjects/New Material List")]
+[CreateAssetMenu(fileName = "MaterialList_", menuName = "ScriptableObjects/Scriptable Lists/Material List")]
 public class MaterialList : ScriptableObject
 {
     [Header("= Material List =")]
