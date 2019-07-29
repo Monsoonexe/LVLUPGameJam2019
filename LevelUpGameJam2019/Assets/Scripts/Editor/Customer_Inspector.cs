@@ -16,7 +16,7 @@ public class Customer_Inspector : Editor
 
         else if(GUILayout.Button("Request New Random Order From Manager"))
         {
-            customer.GetNewRandomOrderFromCustomerManager();
+            customer.GetNewRandomOrder();
         }
     }
 }
