@@ -31,6 +31,9 @@ public class ScoreData : RichScriptableObject
     private GameEvent customerReceivedWrongOrderEvent;
 
     [SerializeField]
+    private GameEvent customerHitEvent;
+
+    [SerializeField]
     private GameEvent sharkAtePizzaEvent;
 
     /// <summary>
@@ -131,6 +134,7 @@ public class ScoreData : RichScriptableObject
         customerReceivedWrongOrderEvent.AddListener(OnIncorrectOrderDelivered);
         sharkAtePizzaEvent.AddListener(OnSharkAtePizza);
         exitPlayModeEvent.AddListener(ResetRoundScores);
+        customerHitEvent.AddListener(OnCustomerHit);
     }
 
     /// <summary>
@@ -168,6 +172,14 @@ public class ScoreData : RichScriptableObject
     {
         ++shotsFired;
     }
+    private void OnCustomerHit()
+    {
+        ++customersHit;
+        playerScore -= customerHitDeduction;
+        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
+
+        scoreChangedEvent.Raise();//update visuals
+    }
 
     #endregion
 
@@ -200,15 +212,6 @@ public class ScoreData : RichScriptableObject
         scoreChangedEvent.Raise();
     }
     
-    public void OnCustomerHit()
-    {
-        ++customersHit;
-
-        playerScore -= customerHitDeduction;
-        playerScore = playerScore < 0 ? 0 : playerScore;//prevent player score from falling below 0
-
-        scoreChangedEvent.Raise();//update visuals
-    }
 
     public void OnLevelBegin()
     {

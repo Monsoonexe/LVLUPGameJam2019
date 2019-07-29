@@ -39,6 +39,9 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private GameEvent wrongOrderReceivedEvent;
 
+    [SerializeField]
+    private GameEvent customerHitEvent;
+
     [Header("---UI---")]
     [SerializeField]
     private OrderPromptController orderPromptController;
@@ -212,7 +215,7 @@ public class Customer : MonoBehaviour
     private void OnCustomerHit()
     {
         PlayRandomSound(customerProfile.hitWithPizzaSounds);//audio
-        scoreData.OnCustomerHit();//score
+        customerHitEvent.Raise();//score
         orderPromptController.OnCustomerHit(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown coroutine
     }
