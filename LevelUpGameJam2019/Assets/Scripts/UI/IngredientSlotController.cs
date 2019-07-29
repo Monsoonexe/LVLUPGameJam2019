@@ -15,10 +15,10 @@ public class IngredientSlotController : MonoBehaviour
     private static OrderBuilderMenu parentOrderBuilder;
 
     /// <summary>
-    /// Which Ingredient this slot represents.
+    /// Which Ingredient this slot represents. Will be set based on what's available to Player.
     /// </summary>
-    [Tooltip("Which Ingredient this slot represents.")]
-    [SerializeField]//set by Developer
+    [Tooltip("Which Ingredient this slot represents. Will be set based on what's available to Player.")]
+    [SerializeField]
     private IngredientSO ingredient;//used internally
 
     public IngredientSO Ingredient { get { return ingredient; } }//visible externally, readonly
