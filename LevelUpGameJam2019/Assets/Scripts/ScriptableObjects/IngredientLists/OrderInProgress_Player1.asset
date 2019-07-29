@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41545392276aa3241887e32096c6120d, type: 3}
+  m_Name: OrderInProgress_Player1
+  m_EditorClassIdentifier: 
+  developerDescription: The is the Order that the Player is currently adding orders
+    to.
+  ingredients:
+  - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
+  - {fileID: 11400000, guid: 3a63ab2841b96de40a943bdf4ef66991, type: 2}
