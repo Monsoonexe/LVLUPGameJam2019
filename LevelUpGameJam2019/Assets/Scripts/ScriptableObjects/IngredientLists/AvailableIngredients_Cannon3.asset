@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41545392276aa3241887e32096c6120d, type: 3}
+  m_Name: AvailableIngredients_Cannon3
+  m_EditorClassIdentifier: 
+  developerDescription: These are the ingredients this Cannon grants to the Player.
+  ingredients:
+  - {fileID: 11400000, guid: f3895add0b03007488f799e641b6d0a6, type: 2}
+  - {fileID: 11400000, guid: 3a63ab2841b96de40a943bdf4ef66991, type: 2}
+  - {fileID: 11400000, guid: 3e9a783c7eaf22746998cbdffd3e5b93, type: 2}
+  - {fileID: 11400000, guid: 59cc2d9a90bdd644999c8be1e845a82f, type: 2}
+  - {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
