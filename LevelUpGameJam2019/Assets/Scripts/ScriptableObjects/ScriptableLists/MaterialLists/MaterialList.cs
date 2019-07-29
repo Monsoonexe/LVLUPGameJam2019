@@ -1,11 +1,6 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "MaterialList_", menuName = "ScriptableObjects/Scriptable Lists/Material List")]
-public class MaterialList : ScriptableObject
+public class MaterialList : ScriptableListBase<Material>
 {
-    [Header("= Material List =")]
-    [SerializeField]
-    private Material[] materialList;
-
-    public Material[] MatList {  get { return materialList; } }//public readonly
 }

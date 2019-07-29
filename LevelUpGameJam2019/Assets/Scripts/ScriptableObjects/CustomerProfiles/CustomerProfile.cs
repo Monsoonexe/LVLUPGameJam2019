@@ -22,6 +22,6 @@ public class CustomerProfile : RichScriptableObject
 
     public Material GetRandomMaterial()
     {
-        return materialVariations.MatList[Random.Range(0, materialVariations.MatList.Length)];
+        return materialVariations.list[Random.Range(0, materialVariations.list.Count)];
     }
 }

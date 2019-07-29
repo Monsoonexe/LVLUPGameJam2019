@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b48709d9bc26740b77b6ecfde3591c, type: 3}
   m_Name: PolygonCity
   m_EditorClassIdentifier: 
-  materialList:
+  developerDescription: Materials that customers will randomly pull from to allow
+    them to randomly change their clothes and skin color.
+  list:
   - {fileID: 2100000, guid: 62e25ef75a2216f418d06453c9ad15cb, type: 2}
   - {fileID: 2100000, guid: a8e32d2cd442e564aa46c99f0ae7c0c8, type: 2}
   - {fileID: 2100000, guid: c01b7c8cb1175b54aab24b670c2d58dd, type: 2}
