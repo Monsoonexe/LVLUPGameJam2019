@@ -1,104 +1,51 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Possible orders that can be given during a level or time.
+/// Possible orders that can be given during a level or time.  prebuilt by Developer.
 /// </summary>
 [CreateAssetMenu(fileName = "PossibleOrders_", menuName = "ScriptableObjects/Possible Orders")]
 public class PossibleOrders : RichScriptableObject
 {
     [Header("= Possible Orders =")]
     [SerializeField]
+    [Tooltip("Pre-built by Developer.")]
     private Order[] possibleOrders = new Order[0];
-    
-    /// <summary>
-    /// Add up all the weights in this list.
-    /// </summary>
-    /// <param name="orders"></param>
-    /// <returns></returns>
-    private static int SumOrderWeights(Order[] orders)
+
+    public Order[] Orders { get { return possibleOrders; } }
+
+    private void OnEnable()
     {
-        var summedWeight = 0;
-
-        foreach (var order in orders)
-        {
-            summedWeight += order.RandomWeight;
-        }
-
-        return summedWeight;
+        ValidateArray();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public Order GetNewRandomOrder()
+    private void ValidateArray()
     {
-        var randomNumber = Random.Range(0, SumOrderWeights(possibleOrders));
+        var nullCount = 0;
 
-        Order selectedOrder = null;
-
-        foreach (var order in possibleOrders)
+        foreach(var order in possibleOrders)
         {
-            if (randomNumber < order.RandomWeight)
+            if(order == null)
             {
-                selectedOrder = order;
-                break;//DERP
+                ++nullCount;
             }
-
-            else
-            {
-                randomNumber -= order.RandomWeight;
-            }
-
         }
 
-        return selectedOrder;
-    }
-
-    /// <summary>
-    /// Orders should only be given to customers that have ingredients that are available to the Player.  Remove Orders that have Ingredients not available to Player.
-    /// </summary>
-    public void RemoveOrdersWithUnavailableIngredients(IngredientSO[] availableIngredients)
-    {
-        var removedOrderCount = 0;//accumulator
-
-        for (var i = 0; i < possibleOrders.Length; ++i)//for each order,
+        if(nullCount > 0)
         {
-            for (var j = 0; j < possibleOrders[i].Ingredients.Length; ++j)//for each ingredient on each order
+            Debug.Log("Removing null refs from this array.", this);
+            var newArray = new Order[possibleOrders.Length - nullCount];
+            var newArrayIndex = 0;
+
+            for(var i = 0; i < possibleOrders.Length; ++i)
             {
-                var ingredientIsInList = false;
-
-                foreach (var availIngredient in availableIngredients)//is that ingredient in this list?
+                if(possibleOrders[i] != null)
                 {
-                    if (possibleOrders[i].Ingredients[j] == availIngredient)
-                    {
-                        ingredientIsInList = true;
-                    }
-                }
-
-                if (!ingredientIsInList)//
-                {
-                    possibleOrders[i] = null;//remove Order from list
-                    ++removedOrderCount;
-                    break;
+                    newArray[newArrayIndex] = possibleOrders[i];
+                    ++newArrayIndex;
                 }
             }
+
+            possibleOrders = newArray;
         }
-
-        var newOrderArray = new Order[possibleOrders.Length - removedOrderCount];
-
-        //fill array
-        var newOrderIndex = 0;
-
-        foreach (var order in possibleOrders)
-        {
-            if (order != null)
-            {
-                newOrderArray[newOrderIndex] = order;
-                ++newOrderIndex;
-            }
-        }
-
-        possibleOrders = newOrderArray;//assign to new, smaller array
     }
 }

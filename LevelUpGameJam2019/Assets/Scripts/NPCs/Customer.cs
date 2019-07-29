@@ -19,8 +19,17 @@ public class Customer : MonoBehaviour
 
     public Order CustomerOrder { get { return customerOrder; } }//publicly accessable, but readonly
 
+    /// <summary>
+    /// Includes Orders the Player cannot satisfy.
+    /// </summary>
     [SerializeField]
+    [Tooltip("Includes Orders the Player cannot satisfy.")]
     private PossibleOrders possibleOrders;
+
+    /// <summary>
+    /// Actually draw orders from this pool.
+    /// </summary>
+    private Order[] availableOrders;
 
     /// <summary>
     /// Holds visual mesh and material and sound effects.
@@ -82,9 +91,12 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
+        RemoveOrdersWithUnavailableIngredients();
+
         if (!customerOrder)//get an order if don't have one
         {
-            GetNewRandomOrderFromCustomerManager();
+            //cull from list orders that the Player can't satisfy
+            GetNewRandomOrder();
         }
 
         RandomizeVisuals();//look different
@@ -243,6 +255,74 @@ public class Customer : MonoBehaviour
     }
 
     /// <summary>
+    /// Add up all the weights in this list.
+    /// </summary>
+    /// <param name="orders"></param>
+    /// <returns></returns>
+    private static int SumOrderWeights(Order[] orders)
+    {
+        var summedWeight = 0;
+
+        foreach (var order in orders)
+        {
+            summedWeight += order.RandomWeight;
+        }
+
+        return summedWeight;
+    }
+    
+    /// <summary>
+    /// Orders should only be given to customers that have ingredients that are available to the Player.  Remove Orders that have Ingredients not available to Player.
+    /// </summary>
+    [ContextMenu("Remove Orders With Unavailable Ingredients")]
+    public void RemoveOrdersWithUnavailableIngredients()
+    {
+        var workingOrderCollection = new Order[possibleOrders.Orders.Length];
+        possibleOrders.Orders.CopyTo(workingOrderCollection, 0);
+
+        var removedOrderCount = 0;//accumulator
+
+        for (var i = 0; i < workingOrderCollection.Length; ++i)//for each order,
+        {
+            for (var j = 0; j < workingOrderCollection[i].Ingredients.Length; ++j)//for each ingredient on each order
+            {
+                var ingredientIsInList = false;
+
+                foreach (var availIngredient in customerManager.IngredientsAvailableToPlayer.ingredients)//is that ingredient in this list?
+                {
+                    if (workingOrderCollection[i].Ingredients[j] == availIngredient)
+                    {
+                        ingredientIsInList = true;
+                    }
+                }
+
+                if (!ingredientIsInList)//
+                {
+                    workingOrderCollection[i] = null;//remove Order from list
+                    ++removedOrderCount;
+                    break;
+                }
+            }
+        }
+
+        var newOrderArray = new Order[workingOrderCollection.Length - removedOrderCount];
+
+        //fill array
+        var newOrderIndex = 0;
+
+        foreach (var order in workingOrderCollection)
+        {
+            if (order != null)
+            {
+                newOrderArray[newOrderIndex] = order;
+                ++newOrderIndex;
+            }
+        }
+
+        availableOrders = newOrderArray;//assign to new, smaller array
+    }
+
+    /// <summary>
     /// Reject Orders while mad.
     /// </summary>
     /// <returns></returns>
@@ -260,11 +340,26 @@ public class Customer : MonoBehaviour
         skinnedMeshRenderer.material = customerProfile.GetRandomMaterial();
     }
 
-    [ContextMenu("Get New Random Order From Customer Manager")]
-    public void GetNewRandomOrderFromCustomerManager()
+    [ContextMenu("Get New Random Order")]
+    public void GetNewRandomOrder()
     {
-        GatherReferences();
-        customerOrder = possibleOrders.GetNewRandomOrder();
+        var randomNumber = Random.Range(0, SumOrderWeights(availableOrders));
+
+        Order selectedOrder = null;
+
+        foreach (var order in availableOrders)
+        {
+            if (randomNumber < order.RandomWeight)
+            {
+                selectedOrder = order;
+                break;//DERP
+            }
+            else
+            {
+                randomNumber -= order.RandomWeight;
+            }
+        }
+        customerOrder = selectedOrder;
     }
 
     /// <summary>
