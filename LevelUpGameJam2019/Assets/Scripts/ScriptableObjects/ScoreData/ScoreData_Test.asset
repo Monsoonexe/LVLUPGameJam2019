@@ -23,6 +23,8 @@ MonoBehaviour:
   customerReceivedWrongOrderEvent: {fileID: 11400000, guid: 005f73aaf7f7c8a40b1884044867e394,
     type: 2}
   customerHitEvent: {fileID: 11400000, guid: 8733a46e5c0021340935a1148b4768e0, type: 2}
+  customerSatisfiedEvent: {fileID: 11400000, guid: 25501336954061741a7db2a712860de7,
+    type: 2}
   sharkAtePizzaEvent: {fileID: 11400000, guid: 37cbb409f526da64c99fc69869b826bd, type: 2}
   shotFiredEvent: {fileID: 11400000, guid: 5ff337d578e8b0c46a4177532661d923, type: 2}
   shotsFired: 0

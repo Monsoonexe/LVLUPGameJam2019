@@ -34,6 +34,9 @@ public class ScoreData : RichScriptableObject
     private GameEvent customerHitEvent;
 
     [SerializeField]
+    private IntGameEvent customerSatisfiedEvent;
+
+    [SerializeField]
     private GameEvent sharkAtePizzaEvent;
 
     /// <summary>
@@ -135,6 +138,7 @@ public class ScoreData : RichScriptableObject
         sharkAtePizzaEvent.AddListener(OnSharkAtePizza);
         exitPlayModeEvent.AddListener(ResetRoundScores);
         customerHitEvent.AddListener(OnCustomerHit);
+        customerSatisfiedEvent.AddListener(OnCustomerSatisfied);
     }
 
     /// <summary>
@@ -180,6 +184,14 @@ public class ScoreData : RichScriptableObject
 
         scoreChangedEvent.Raise();//update visuals
     }
+    private void OnCustomerSatisfied(int numberOfIngredients)
+    {
+        ++customersSatisfied;
+
+        playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
+
+        scoreChangedEvent.Raise();
+    }
 
     #endregion
 
@@ -201,17 +213,7 @@ public class ScoreData : RichScriptableObject
         }
 
         return satisfiedCount;
-    }
-    
-    public void OnCustomerSatisfied(int numberOfIngredients)
-    {
-        ++customersSatisfied;
-
-        playerScore += (int)(customerSatisfiedPoints + (pointsPerIngredient + pointsPerIngredient * additionalIngredientModifier * (numberOfIngredients - 1)));
-
-        scoreChangedEvent.Raise();
-    }
-    
+    }    
 
     public void OnLevelBegin()
     {

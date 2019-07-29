@@ -32,15 +32,15 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private CustomerManager customerManager;
 
-    [SerializeField]
-    private ScoreData scoreData;
-
     [Header("---Game Events---")]
     [SerializeField]
     private GameEvent wrongOrderReceivedEvent;
 
     [SerializeField]
     private GameEvent customerHitEvent;
+
+    [SerializeField]
+    private IntGameEvent customerSatisfiedEvent;
 
     [Header("---UI---")]
     [SerializeField]
@@ -223,7 +223,7 @@ public class Customer : MonoBehaviour
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
-        scoreData.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
+        customerSatisfiedEvent.Raise(customerOrder.Ingredients.Length);//tally and adjust score
         orderPromptController.OnSuccessfulOrder();//update visuals
         orderHasBeenDelivered = true;//flag to reject all future Orders
         //Debug.Log("Thanks for the Pizza!!!!");
