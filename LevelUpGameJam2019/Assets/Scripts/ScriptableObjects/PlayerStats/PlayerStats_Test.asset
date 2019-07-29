@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2a9f7471ee63a408a19c920cfd2110, type: 3}
   m_Name: PlayerStats_Test
   m_EditorClassIdentifier: 
+  developerDescription: This is the Player's Save File.
   playerName: Joe the Pizza Slinger.
   playerLvel: 1
   pizzaCannonLevel: 1
