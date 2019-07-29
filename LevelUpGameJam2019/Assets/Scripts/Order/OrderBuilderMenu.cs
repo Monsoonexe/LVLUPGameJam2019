@@ -16,7 +16,10 @@ public class OrderBuilderMenu : MonoBehaviour
 
     //ingredients that are on pizza
     [SerializeField]//visualization only! no touchy
-    private List<IngredientSO> selectedIngredients = new List<IngredientSO>();
+    private IngredientList orderInProgress;
+
+    [SerializeField]
+    private IngredientList availableIngredients;
     
     [Header("---Ingredient Slots---")]
     [SerializeField]//set by Developer
@@ -36,7 +39,9 @@ public class OrderBuilderMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetSelectedSlots();
+        orderInProgress.ingredients.Clear();//reset old values
+        ResetSelectedSlots();//reset old values
+        SetAvailableIngredients(availableIngredients.ingredients);//cull orders if ingredients aren't in use.
     }
 
     // Update is called once per frame
@@ -56,10 +61,36 @@ public class OrderBuilderMenu : MonoBehaviour
         }
     }
 
+    private void SetAvailableIngredients(List<IngredientSO> ingredientsAvailableOnCannon)
+    {
+        SetAvailableIngredients(ingredientsAvailableOnCannon.ToArray());
+    }
+
+    /// <summary>
+    /// Remove Ingredients as options that are not in this list.
+    /// </summary>
+    /// <param name="availableIngredients"></param>
+    private void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
+    {
+        for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
+        {
+            if (i < ingredientsAvailableOnCannon.Length)
+            {   //slots in use
+                var keystroke = i + 1;//keystrokes start at 1, indices at 0
+                ingredientSlots[i].ConfigureSlot(ingredientsAvailableOnCannon[i], keystroke);
+                ingredientSlots[i].ToggleVisuals(true);
+
+            }
+            else
+            {   //icons are not in use
+                ingredientSlots[i].ToggleVisuals(false);
+            }
+        }
+    }
+
     public void OnOrderFired()
     {
-        selectedIngredients.Clear();
-
+        orderInProgress.ingredients.Clear();
         ResetSelectedSlots();
     }
 
@@ -69,8 +100,8 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <returns></returns>
     public IngredientSO[] GetIngredients()
     {
-        var ingredients = selectedIngredients.ToArray();
-        selectedIngredients.Clear();//clear list after cannon shot
+        var ingredients = orderInProgress.ingredients.ToArray();
+        orderInProgress.ingredients.Clear();//clear list after cannon shot
 
         return ingredients;
     }
@@ -81,7 +112,7 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <param name="ingredient"></param>
     public void AddIngredient(IngredientSO ingredientToAdd)
     {
-        selectedIngredients.Add(ingredientToAdd);
+        orderInProgress.ingredients.Add(ingredientToAdd);
     }
 
     /// <summary>
@@ -150,26 +181,5 @@ public class OrderBuilderMenu : MonoBehaviour
         this.gameObject.SetActive(false);//disable this whole object.  no taking orders after time is up!
     }
 
-    /// <summary>
-    /// Remove Ingredients as options that are not in this list.
-    /// </summary>
-    /// <param name="availableIngredients"></param>
-    public void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
-    {
-        for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
-        {
-            if(i < ingredientsAvailableOnCannon.Length)
-            {   //slots in use
-                var keystroke = i + 1;//keystrokes start at 1, indices at 0
-                ingredientSlots[i].ConfigureSlot(ingredientsAvailableOnCannon[i], keystroke);
-                ingredientSlots[i].ToggleVisuals(true);
-
-            }
-            else
-            {   //icons are not in use
-                ingredientSlots[i].ToggleVisuals(false);
-            }
-        }
-    }
 }
 
