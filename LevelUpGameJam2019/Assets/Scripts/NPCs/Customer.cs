@@ -18,23 +18,12 @@ public class Customer : MonoBehaviour
     private Order customerOrder;
 
     public Order CustomerOrder { get { return customerOrder; } }//publicly accessable, but readonly
-
-    /// <summary>
-    /// Includes Orders the Player cannot satisfy.
-    /// </summary>
-    [SerializeField]
-    [Tooltip("Includes Orders the Player cannot satisfy.  Will not choose impossible Orders.")]
-    private OrdersScriptableList possibleOrders;
-
-    /// <summary>
-    /// Actually draw orders from this pool.
-    /// </summary>
-    private Order[] availableOrders;
-
+        
     /// <summary>
     /// Holds visual mesh and material and sound effects.
     /// </summary>
     [SerializeField]
+    [Tooltip("Holds visual mesh and material and sound effects.")]
     private CustomerProfile customerProfile;
 
     /// <summary>
@@ -67,7 +56,12 @@ public class Customer : MonoBehaviour
 
     [SerializeField]
     private Animator pizzaBoxAnimator;
-        
+
+    /// <summary>
+    /// Actually draw orders from this pool.
+    /// </summary>
+    private Order[] availableOrders;
+
     //member component references
     private AudioSource audioSource;
     private SkinnedMeshRenderer skinnedMeshRenderer;
@@ -277,8 +271,8 @@ public class Customer : MonoBehaviour
     [ContextMenu("Remove Orders With Unavailable Ingredients")]
     public void RemoveOrdersWithUnavailableIngredients()
     {
-        var workingOrderCollection = new Order[possibleOrders.list.Count];
-        possibleOrders.list.CopyTo(workingOrderCollection, 0);
+        var workingOrderCollection = new Order[customerManager.PossibleOrders.list.Count];
+        customerManager.PossibleOrders.list.CopyTo(workingOrderCollection, 0);
 
         var removedOrderCount = 0;//accumulator
 

@@ -16,5 +16,6 @@ MonoBehaviour:
     all or groups of Customers share.
   ingredientsAvailableToPlayer: {fileID: 11400000, guid: 0eb49cfdcabdae44584de4e0b76dd0b8,
     type: 2}
+  possibleOrders: {fileID: 11400000, guid: aca5889fab2dfb34d88183c4381c8098, type: 2}
   badOrderReactionTime: 1
   customerHitReactionTime: 1.5

@@ -12,6 +12,15 @@ public class CustomerManager : RichScriptableObject
 
     public IngredientList IngredientsAvailableToPlayer { get { return ingredientsAvailableToPlayer; } }
 
+    /// <summary>
+    /// Includes Orders the Player cannot satisfy.
+    /// </summary>
+    [SerializeField]
+    [Tooltip("Includes Orders the Player cannot satisfy.  Will not choose impossible Orders.")]
+    private OrdersScriptableList possibleOrders;
+
+    public OrdersScriptableList PossibleOrders { get { return possibleOrders; } }
+
     [SerializeField]
     private float badOrderReactionTime = 1.0f;
 
