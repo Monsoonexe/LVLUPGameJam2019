@@ -24,7 +24,7 @@ public class Customer : MonoBehaviour
     /// </summary>
     [SerializeField]
     [Tooltip("Includes Orders the Player cannot satisfy.  Will not choose impossible Orders.")]
-    private PossibleOrders possibleOrders;
+    private OrdersScriptableList possibleOrders;
 
     /// <summary>
     /// Actually draw orders from this pool.
@@ -277,8 +277,8 @@ public class Customer : MonoBehaviour
     [ContextMenu("Remove Orders With Unavailable Ingredients")]
     public void RemoveOrdersWithUnavailableIngredients()
     {
-        var workingOrderCollection = new Order[possibleOrders.Orders.Length];
-        possibleOrders.Orders.CopyTo(workingOrderCollection, 0);
+        var workingOrderCollection = new Order[possibleOrders.list.Count];
+        possibleOrders.list.CopyTo(workingOrderCollection, 0);
 
         var removedOrderCount = 0;//accumulator
 

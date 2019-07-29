@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c74c6c9e92fdb3947b1e4653696d2482, type: 3}
-  m_Name: PossibleOrders_Test
+  m_Name: OrdersScriptableList_PossibleOrdersForCustomers
   m_EditorClassIdentifier: 
   developerDescription: Enter a description!
-  possibleOrders:
-  - {fileID: 11400000, guid: a6f39a67b0f722641aea646009ac6fd2, type: 2}
+  list:
   - {fileID: 11400000, guid: a6f39a67b0f722641aea646009ac6fd2, type: 2}
   - {fileID: 11400000, guid: 497dac7b7609f2a4eaf4d401c5209ead, type: 2}
+  - {fileID: 11400000, guid: b3ffeca5fd776e74ea6a2234a1245137, type: 2}
+  - {fileID: 11400000, guid: 4b14fc47f49625f4d84915f4d9724086, type: 2}
+  - {fileID: 11400000, guid: c38314039aa04e3499aad950ff133e9e, type: 2}
