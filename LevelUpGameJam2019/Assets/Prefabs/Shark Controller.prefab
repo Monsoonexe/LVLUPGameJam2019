@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsBetweenSharkAttacks: 10
+  favoriteIngredient: {fileID: 11400000, guid: f9f9718d1f92bb54881a9e0a2e948853, type: 2}
   anchovieCoolDown: 15
   sharkJumpForce: 15
   sphereOfInfluenceCollider: {fileID: 3533558722056595866}
@@ -57,6 +58,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sharkSwimSpeed: 1
+  SharkAtePizzaEvent: {fileID: 11400000, guid: 37cbb409f526da64c99fc69869b826bd, type: 2}
   sharkJumpSound: {fileID: 8300000, guid: 4ed444cad68defa49b9b1057279219b1, type: 3}
   sharkEatPizzaSound: {fileID: 8300000, guid: 024686ead4716324aafb9d075515e533, type: 3}
   sharkDeliciousSound: {fileID: 8300000, guid: 7906b6f0475ff45458918d5672e752e2, type: 3}

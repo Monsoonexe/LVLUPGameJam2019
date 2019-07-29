@@ -10,7 +10,9 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Event that gets called when the level is over.
     /// </summary>
-    public readonly UnityEvent LevelsEndEvent = new UnityEvent();
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent levelBeginEvent;
 
     /// <summary>
     /// Player starts attached to this Transform.
@@ -32,9 +34,6 @@ public class LevelManager : MonoBehaviour
     
     //external mono Component references
     private GameController gameController;//should exist before this is loaded in Scene
-    private ScoreManager scoreManager;//should exist before this is loaded in Scene
-    private CustomerManager customerManager;//should exist before this is loaded in Scene
-    private OrderBuilderMenu orderBuilder;//should exist before this is loaded in Scene
     private Transform mainCameraTransform;//should exist before this is loaded in Scene
 
     private void Awake()
@@ -60,9 +59,6 @@ public class LevelManager : MonoBehaviour
 
         //get external references
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-        customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>();
-        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
@@ -73,7 +69,6 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("ON LEVEL'S END!");
         returnToMainMenuPrompt.SetActive(true);//show button to return to main menu
-        LevelsEndEvent.Invoke();
     }
 
     /// <summary>
@@ -89,22 +84,13 @@ public class LevelManager : MonoBehaviour
 
         var cannonGO = Instantiate(cannonPrefab, shipController.CannonSpawnPoint);//spawn cannon
         var cannonController = cannonGO.GetComponent<StationaryCannon>();//get handle on controller
-
-        //configure cannon
-        cannonController.SetOrderBuilder(orderBuilder);
-        cannonController.SetScoreManager(scoreManager);
-
+        
         //configure camera handle
-        mainCameraTransform.SetParent(cannonController.cameraHandle);//hook camera to handle
+        mainCameraTransform.SetParent(cannonController.CameraHandle);//hook camera to handle
         mainCameraTransform.localPosition = Vector3.zero;//center to handle
-        cannonController.cameraHandle.SetParent(shipGO.transform);//move cannon up a level in hierarchy so doesn't spin around cannon
-
-        //configure orderBuilder
-        orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
-
-        //configure customer manager
-        customerManager.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
-
+        cannonController.CameraHandle.SetParent(shipGO.transform);//move cannon up a level in hierarchy so doesn't spin around cannon
+        
+        levelBeginEvent.Raise();//call everything else
         //maybe call the garbage collector here?
     }
 

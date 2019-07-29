@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Leaderboard_", menuName = "ScriptableObjects/New Leaderboard")]
-public class LeaderboardSO : ScriptableObject
+public class LeaderboardSO : RichScriptableObject
 {
     private const int defaultLeaderboardSize = 5;
 
-    public int highScore { get { return leaderboardScores[0].score; } }
+    public int HighScore { get { return leaderboardScores[0].score; } }//readonly
 
     /// <summary>
-    /// [Alpha]
+    /// 
     /// </summary>
     [Header("***Leaderboard***")]
-    [Tooltip("[Alpha]")]
     [SerializeField]
     private LeaderboardEntry[] leaderboardScores = new LeaderboardEntry[defaultLeaderboardSize];
 
@@ -55,6 +54,11 @@ public class LeaderboardSO : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Is the given score in top?
+    /// </summary>
+    /// <param name="playerScore"></param>
+    /// <returns></returns>
     public bool IsScoreOnLeaderboard(int playerScore)
     {
         //is player score greater than lowest score?

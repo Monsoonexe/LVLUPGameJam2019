@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class StationaryCannon : MonoBehaviour
 {
-    private static LevelManager levelManager;//subscribe to event
-
     /// <summary>
     /// Stop adjusting rotation if target within this angle.
     /// </summary>
@@ -17,13 +15,33 @@ public class StationaryCannon : MonoBehaviour
     /// Object to which Camera will be hooked.
     /// </summary>
     [Tooltip("Object to which Camera will be hooked.  Set this to be camera point.")]
-    public Transform cameraHandle;
+    [SerializeField]
+    private Transform cameraHandle;
+
+    /// <summary>
+    /// Object to which Camera will be hooked.
+    /// </summary>
+    public Transform CameraHandle {  get { return cameraHandle; } }//public readonly
+
+    /// <summary>
+    /// Event called every time the Player pulls the trigger.
+    /// </summary>
+    [Header("---Game Events---")]
+    [SerializeField]
+    [Tooltip("Event called every time the Player pulls the trigger.")]
+    private GameEvent shotFiredEvent;
 
     [Header("---Ingredients---")]
     [SerializeField]
-    private IngredientSO[] availableIngredients;
+    private IngredientList availableIngredients;
 
-    public IngredientSO[] AvailableIngredients { get { return availableIngredients; } }//publicly accessible, but only gets a copy.
+    public IngredientSO[] AvailableIngredients { get { return availableIngredients.list.ToArray(); } }//publicly accessible, but only gets a copy.
+
+    /// <summary>
+    /// This is the SO that holds the Order the Player is working on.
+    /// </summary>
+    [SerializeField]
+    private IngredientList orderInProgress;
     
     [Header("Projectile Stuff")]
     [Tooltip("Allows the cannon to continue tracking but disables trigger.")]
@@ -82,23 +100,11 @@ public class StationaryCannon : MonoBehaviour
     //object pooling stuff
     private const int projectilePoolSize = 15;
     private readonly Queue<GameObject> projectilePool = new Queue<GameObject>(projectilePoolSize);
-    
-    //outside monobehaviors
-    /// <summary>
-    /// Handles the scores and tallies.
-    /// </summary>
-    private ScoreManager scoreManager;
-
-    /// <summary>
-    /// Ask this guy what to put on the pizza when it's fired.
-    /// </summary>
-    private OrderBuilderMenu orderBuilder;
-
-    
+            
     void Awake()
     {
         GatherReferences();
-        availableIngredients = Order.SortIngredientsListAscending(availableIngredients);//sort list
+        availableIngredients.list = new List<IngredientSO>(Order.SortIngredientsListAscending(availableIngredients.list.ToArray()));//sort list
     }
 
     // Start is called before the first frame update
@@ -117,21 +123,7 @@ public class StationaryCannon : MonoBehaviour
 
     private void OnEnable()
     {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
         myAudioSource.clip = cannonFireSound;//load audio
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    /// <summary>
-    /// Procedure to follow when the level is at an end.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        this.enabled = false;//disable controls, but not visuals
     }
 
     /// <summary>
@@ -143,12 +135,6 @@ public class StationaryCannon : MonoBehaviour
         myBaseTransform = this.transform;
         myAudioSource = GetComponent<AudioSource>();
         myRigidbody = GetComponent<Rigidbody>();
-
-        //get handles to external Objects
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        }
     }
 
     /// <summary>
@@ -207,7 +193,6 @@ public class StationaryCannon : MonoBehaviour
         if (projectilePrefab)
         {
             //Debug.Log("Firing a Projectile from Spawn Point No: " + projectileSpawnPointIndex + " / " + projectileSpawnPoints.Length, this.gameObject );
-            scoreManager.OnShotFired();//increment counter
 
             //Get projectile from pool
             var newProjectile = GetNewProjectile();
@@ -218,24 +203,14 @@ public class StationaryCannon : MonoBehaviour
             newProjectile.transform.position = projectileSpawnPoint.position;
             newProjectile.transform.rotation = projectileSpawnPoint.rotation;
 
-            //give proper order
-            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>() as PizzaProjectile;
+            var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>();//give proper order
 
-            //handle physics
-            pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);
+            pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);//handle physics
+            pizzaProjectile.GiveOrderIngredients(orderInProgress.list.ToArray());
 
-            if (orderBuilder)
-            {
-                pizzaProjectile.GiveOrderIngredients(orderBuilder.GetIngredients());
-                orderBuilder.OnOrderFired();
-            }
-            else
-            {
-                Debug.Log("No Order Builder connected to Cannon. Blank pizza.", this);
-            }
-            
-            //audio
-            myAudioSource.Play();
+            shotFiredEvent.Raise();//increment tally counter and reset order
+
+            myAudioSource.Play();//audio
         }
 
         else
@@ -304,20 +279,10 @@ public class StationaryCannon : MonoBehaviour
     }
 
     /// <summary>
-    /// Set hook and initialize Order Builder.
+    /// Procedure to follow when the level is at an end.
     /// </summary>
-    /// <param name="orderBuilder"></param>
-    public void SetOrderBuilder(OrderBuilderMenu orderBuilder)
+    public void OnLevelsEnd()
     {
-        this.orderBuilder = orderBuilder;
-    }
-
-    /// <summary>
-    /// Set Score Manager externally.
-    /// </summary>
-    /// <param name="scoreManager"></param>
-    public void SetScoreManager(ScoreManager scoreManager)
-    {
-        this.scoreManager = scoreManager;
+        this.enabled = false;//disable controls, but not visuals
     }
 }

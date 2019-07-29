@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6288248286277771740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7577711792845625447}
+  - component: {fileID: 6028133399720584587}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &7577711792845625447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288248286277771740}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6028133399720584587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288248286277771740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bc69b9534508747bf2f9eefee6e538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: b3c7f26fffd2f76498d54a01ca9413ed, type: 2}
+  enterPlayModeEvent: {fileID: 11400000, guid: 9900dcb8703fe604caf5af0be3e61645, type: 2}
+  exitPlayModeEvent: {fileID: 11400000, guid: 9720dc1509538c643b2170708aee96db, type: 2}
+  cannonPrefabs:
+  - {fileID: 6118152546697191637, guid: e0061a8ddbcc8e74489afd536a0e12f9, type: 3}
+  cannonPrefabIndex: 0
+  shipPrefabs:
+  - {fileID: 4901266195469884088, guid: a0593ec20901d844c8fabfce0019fd23, type: 3}
+  shipPrefabIndex: 0
+  mainMenuSceneName: MENU

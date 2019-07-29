@@ -46,11 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218fa3bd5a6790a4fa8772d92ed2e9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  _event: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  targetXform: {fileID: 0}
 --- !u!33 &7403924368105705952
 MeshFilter:
   m_ObjectHideFlags: 0

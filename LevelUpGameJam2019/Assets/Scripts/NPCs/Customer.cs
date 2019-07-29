@@ -5,37 +5,47 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SkinnedMeshRenderer))]
+[SelectionBase]
 public class Customer : MonoBehaviour
-{
-    //static object references
-    private static CustomerManager customerManager;
-    private static ScoreManager scoreManager;
-    private static LevelManager levelManager;
-
-    //delays
-    private static float badOrderDelay = 1.0f;
-    private static float customerHitDelay = 1.5f;
-
+{   
     [SerializeField]
     private CustomerStateENUM customerState;
 
-    [Header("---Order Stuff---")]
-    [SerializeField]
-    private OrderPromptController orderPromptController;
+    [Header("---ScriptableObject Data---")]
 
     [SerializeField]//set in Inspector
-    [Tooltip("If this reference is null, Customer will ask CustomerManager for a random Order.")]
+    [Tooltip("If this reference is null, Customer will seek a random Order.")]
     private Order customerOrder;
 
     public Order CustomerOrder { get { return customerOrder; } }//publicly accessable, but readonly
-
+        
     /// <summary>
     /// Holds visual mesh and material and sound effects.
     /// </summary>
-    [Header("---Profile---")]
     [SerializeField]
+    [Tooltip("Holds visual mesh and material and sound effects.")]
     private CustomerProfile customerProfile;
 
+    /// <summary>
+    /// Brain that manages 
+    /// </summary>
+    [SerializeField]
+    private CustomerManager customerManager;
+
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent wrongOrderReceivedEvent;
+
+    [SerializeField]
+    private GameEvent customerHitEvent;
+
+    [SerializeField]
+    private IntGameEvent customerSatisfiedEvent;
+
+    [Header("---UI---")]
+    [SerializeField]
+    private OrderPromptController orderPromptController;
+    
     [Header("---Colliders---")]
     [SerializeField]
     private Collider customerCollider;
@@ -49,13 +59,19 @@ public class Customer : MonoBehaviour
 
     [SerializeField]
     private Animator pizzaBoxAnimator;
-        
+
+    /// <summary>
+    /// Actually draw orders from this pool.
+    /// </summary>
+    private Order[] availableOrders;
+
     //member component references
     private AudioSource audioSource;
     private SkinnedMeshRenderer skinnedMeshRenderer;
 
     //other stuff
     private bool orderHasBeenDelivered = false;
+    public bool IsSatisfied { get {return  orderHasBeenDelivered; } }
 
     /// <summary>
     /// Customer will reject all Orders and hide Ingredients list when mad.
@@ -72,9 +88,12 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
+        RemoveOrdersWithUnavailableIngredients();
+
         if (!customerOrder)//get an order if don't have one
         {
-            GetNewRandomOrderFromCustomerManager();
+            //cull from list orders that the Player can't satisfy
+            GetNewRandomOrder();
         }
 
         RandomizeVisuals();//look different
@@ -83,14 +102,14 @@ public class Customer : MonoBehaviour
         orderPromptController.ToggleVisuals(false);//start with UI hidden until in range of Player
     }
     
-    private void OnValidate()
-    {
-        //get references on this GameObject references
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
+    //private void OnValidate()
+    //{
+    //    //get references on this GameObject references
+    //    audioSource = GetComponent<AudioSource>() as AudioSource;
+    //    skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
 
-        UpdateVisuals();
-    }
+    //    UpdateVisuals();
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -166,56 +185,13 @@ public class Customer : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnLevelsEnd()
-    {
-        orderPromptController.ToggleVisuals(false);//hide visuals
-        canDeliver = false;//stop taking orders
-        //do something else
-    }
-
     /// <summary>
-    /// Init how long delays should be.
+    /// Get references on this GameObject.
     /// </summary>
-    private static void InitDelays()
-    {
-        if (customerManager)//if not, use default values
-        {
-            customerManager.InitReactionDelays(ref badOrderDelay, ref customerHitDelay);
-        }
-    }
-
     private void GatherReferences()
     {
-        //get references on this GameObject references
-        audioSource = GetComponent<AudioSource>() as AudioSource;
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>() as SkinnedMeshRenderer;
-
-        //get references to monos in scene
-        if (!customerManager)
-        {
-            customerManager = GameObject.FindGameObjectWithTag("CustomerManager").GetComponent<CustomerManager>() as CustomerManager;
-            InitDelays();//or use defaults
-        }
-        
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
-        }
+        audioSource = GetComponent<AudioSource>();
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
     }
 
     [ContextMenu("Update Visuals")]
@@ -239,22 +215,16 @@ public class Customer : MonoBehaviour
     private void OnCustomerHit()
     {
         PlayRandomSound(customerProfile.hitWithPizzaSounds);//audio
-
-        scoreManager.OnCustomerHit();//score
-
-        orderPromptController.OnCustomerHit(customerHitDelay);//update visuals
-        
+        customerHitEvent.Raise();//score
+        orderPromptController.OnCustomerHit(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown coroutine
     }
 
     private void CustomerSatisfied()
     {
         PlayRandomSound(customerProfile.customerSatisfiedSounds); //audio
-
-        scoreManager.OnCustomerSatisfied(customerOrder.Ingredients.Length);//tally and adjust score
-        
+        customerSatisfiedEvent.Raise(customerOrder.Ingredients.Length);//tally and adjust score
         orderPromptController.OnSuccessfulOrder();//update visuals
-
         orderHasBeenDelivered = true;//flag to reject all future Orders
         //Debug.Log("Thanks for the Pizza!!!!");
     }
@@ -262,13 +232,9 @@ public class Customer : MonoBehaviour
     private void RejectPizza()
     {
         PlayRandomSound(customerProfile.badOrderSounds);//audio
-        
-        scoreManager.OnIncorrectOrderDelivered();//score
-        
-        orderPromptController.OnFailedOrder(badOrderDelay);//update visuals
-
+        wrongOrderReceivedEvent.Raise();//score
+        orderPromptController.OnFailedOrder(customerManager.CustomerHitReactionTime);//update visuals
         HandleRejectOrderCooldown();//handle cooldown
-
         //Debug.Log("Hello, this is customer, I want to complain about a messed up order.");
     }
 
@@ -286,25 +252,84 @@ public class Customer : MonoBehaviour
     }
 
     /// <summary>
+    /// Add up all the weights in this list.
+    /// </summary>
+    /// <param name="orders"></param>
+    /// <returns></returns>
+    private static int SumOrderWeights(Order[] orders)
+    {
+        var summedWeight = 0;
+
+        foreach (var order in orders)
+        {
+            summedWeight += order.RandomWeight;
+        }
+
+        return summedWeight;
+    }
+    
+    /// <summary>
+    /// Orders should only be given to customers that have ingredients that are available to the Player.  Remove Orders that have Ingredients not available to Player.
+    /// </summary>
+    [ContextMenu("Remove Orders With Unavailable Ingredients")]
+    public void RemoveOrdersWithUnavailableIngredients()
+    {
+        var workingOrderCollection = new Order[customerManager.PossibleOrders.list.Count];
+        customerManager.PossibleOrders.list.CopyTo(workingOrderCollection, 0);
+
+        var removedOrderCount = 0;//accumulator
+
+        for (var i = 0; i < workingOrderCollection.Length; ++i)//for each order,
+        {
+            for (var j = 0; j < workingOrderCollection[i].Ingredients.Length; ++j)//for each ingredient on each order
+            {
+                var ingredientIsInList = false;
+
+                foreach (var availIngredient in customerManager.IngredientsAvailableToPlayer.list)//is that ingredient in this list?
+                {
+                    if (workingOrderCollection[i].Ingredients[j] == availIngredient)
+                    {
+                        ingredientIsInList = true;
+                    }
+                }
+
+                if (!ingredientIsInList)//
+                {
+                    workingOrderCollection[i] = null;//remove Order from list
+                    ++removedOrderCount;
+                    break;
+                }
+            }
+        }
+
+        var newOrderArray = new Order[workingOrderCollection.Length - removedOrderCount];
+
+        //fill array
+        var newOrderIndex = 0;
+
+        foreach (var order in workingOrderCollection)
+        {
+            if (order != null)
+            {
+                newOrderArray[newOrderIndex] = order;
+                ++newOrderIndex;
+            }
+        }
+
+        availableOrders = newOrderArray;//assign to new, smaller array
+    }
+
+    /// <summary>
     /// Reject Orders while mad.
     /// </summary>
     /// <returns></returns>
     private IEnumerator RejectOrdersWhileMad()
     {
         canDeliver = false;
-        yield return new WaitForSeconds(badOrderDelay);
+        yield return new WaitForSeconds(customerManager.BadOrderReactionTime);
         canDeliver = true;
     }
-
-    /// <summary>
-    /// Did this Customer receive an Order that matched the desired Order?
-    /// </summary>
-    /// <returns>True if proper Order was received.</returns>
-    public bool WasCustomersOrderDelivered()
-    {
-        return orderHasBeenDelivered;
-    }
-
+    
     [ContextMenu("Randomize Visuals")]
     public void RandomizeVisuals()
     {
@@ -312,10 +337,36 @@ public class Customer : MonoBehaviour
         skinnedMeshRenderer.material = customerProfile.GetRandomMaterial();
     }
 
-    [ContextMenu("Get New Random Order From Customer Manager")]
-    public void GetNewRandomOrderFromCustomerManager()
+    [ContextMenu("Get New Random Order")]
+    public void GetNewRandomOrder()
     {
-        GatherReferences();
-        customerOrder = customerManager.GetNewRandomOrder();
+        var randomNumber = Random.Range(0, SumOrderWeights(availableOrders));
+
+        Order selectedOrder = null;
+
+        foreach (var order in availableOrders)
+        {
+            if (randomNumber < order.RandomWeight)
+            {
+                selectedOrder = order;
+                break;//DERP
+            }
+            else
+            {
+                randomNumber -= order.RandomWeight;
+            }
+        }
+        customerOrder = selectedOrder;
+    }
+
+    /// <summary>
+    /// Procedure to follow at the end of the level.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        orderPromptController.ToggleVisuals(false);//hide visuals
+        canDeliver = false;//stop taking orders
+        //do something else
+        //tally order received or not.
     }
 }

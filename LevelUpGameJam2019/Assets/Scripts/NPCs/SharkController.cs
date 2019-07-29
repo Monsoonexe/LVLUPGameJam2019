@@ -12,12 +12,16 @@ public enum SharkControllerState
 [RequireComponent(typeof(Rigidbody))]
 public class SharkController : MonoBehaviour
 {
-    private static ScoreManager scoreManager;
-    private static LevelManager levelManager;
-
     [Header("---SharkAttack---")]
     [SerializeField]
     private int secondsBetweenSharkAttacks = 10;
+
+    /// <summary>
+    /// If this ingredient is included on Order, cooldown is increased.
+    /// </summary>
+    [SerializeField]//set by Developer
+    [Tooltip("If this ingredient is included on Order, cooldown is increased.")]
+    private IngredientSO favoriteIngredient;
 
     /// <summary>
     /// Seconds added to shark attack timer if Pizza had anchovies on it.
@@ -46,6 +50,10 @@ public class SharkController : MonoBehaviour
     private int patrolWaypointsIndex = 0;
 
     private const float closeEnoughDistance = 0.1f;
+
+    [Header("---Game Events---")]
+    [SerializeField]
+    private GameEvent SharkAtePizzaEvent;
 
     [Header("---Audio---")]
     [SerializeField]
@@ -116,9 +124,7 @@ public class SharkController : MonoBehaviour
             if (Time.time > nextSharkAttackTime && sharkControllerState == SharkControllerState.patrolling)//it's time to shark!
             {
                 attackTarget = other.transform;
-
                 StartSharkJump();
-
             }
 
             else
@@ -152,10 +158,8 @@ public class SharkController : MonoBehaviour
         if (other.gameObject.transform == attackTarget)//if our target has elluded us,
         {
             attackTarget = null;
-
             //point nose towards water
         }
-
     }
 
     /// <summary>
@@ -169,14 +173,11 @@ public class SharkController : MonoBehaviour
             var pizzaProjectile = collision.gameObject.GetComponent<PizzaProjectile>() as PizzaProjectile;//
 
             collision.gameObject.SetActive(false);//chomp pizza
-
-            scoreManager.OnSharkAtePizza();//tally
-
+            SharkAtePizzaEvent.Raise();//tally
             Debug.Log("CHOMP! Shark ate a pizza.", this);
             myRigidbody.angularVelocity = Vector3.zero;
 
-            //play sound, if one is set
-            if (sharkEatPizzaSound)
+            if (sharkEatPizzaSound)//play sound, if one is set
             {
                 myAudioSource.clip = sharkEatPizzaSound;
                 myAudioSource.Play();
@@ -185,33 +186,14 @@ public class SharkController : MonoBehaviour
             //check for anchvoies on pizza
             foreach (var ingredient in pizzaProjectile.GetIngredientsOnPizza())
             {
-                if(ingredient == IngredientsENUM.Anchovies)
+                if(ingredient == favoriteIngredient)
                 {
                     //Sharks love anchovies
                     OnSharkAteAnchovies();
-
+                    break;
                 }
             }
-            //check if pizza had anchovies
         }
-    }
-    
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    /// <summary>
-    /// Procedure to follow when the level ends.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        //stop patroling or something
     }
 
     /// <summary>
@@ -264,7 +246,6 @@ public class SharkController : MonoBehaviour
     private void OnSharkAteAnchovies()
     {
         StartCoroutine(PlayDeliciousSound());//make yummy sound
-
         nextSharkAttackTime = Time.time + anchovieCoolDown;//increase delay
     }
 
@@ -335,17 +316,6 @@ public class SharkController : MonoBehaviour
     /// </summary>
     private void GatherReferences()
     {
-        //external mono references
-        if (!scoreManager)
-        {
-            scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>() as ScoreManager;
-        }
-
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>() as LevelManager;
-        }
-
         //member stuff
         myTransform = this.transform;
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8e6ba84080cd1459e63938690a63f3, type: 3}
+  m_Name: ScoreData_Test
+  m_EditorClassIdentifier: 
+  developerDescription: This guy tracks all the tallys of events during the game.
+    It tracks scores and handles the logic and math of score.
+  playerScore: 0
+  leaderboard: {fileID: 11400000, guid: 4590f34936942bd4aac5e6339e2a2487, type: 2}
+  levelBeginEvent: {fileID: 11400000, guid: a917927c0dbb2d143b648f4699e2cc15, type: 2}
+  levelEndEvent: {fileID: 11400000, guid: 70ed2dca607536a4db24b4d9d05bc482, type: 2}
+  exitPlayModeEvent: {fileID: 11400000, guid: 9720dc1509538c643b2170708aee96db, type: 2}
+  scoreChangedEvent: {fileID: 11400000, guid: 235e8157a38e3b34f8e6b959e6b639f8, type: 2}
+  customerReceivedWrongOrderEvent: {fileID: 11400000, guid: 005f73aaf7f7c8a40b1884044867e394,
+    type: 2}
+  customerHitEvent: {fileID: 11400000, guid: 8733a46e5c0021340935a1148b4768e0, type: 2}
+  customerSatisfiedEvent: {fileID: 11400000, guid: 25501336954061741a7db2a712860de7,
+    type: 2}
+  sharkAtePizzaEvent: {fileID: 11400000, guid: 37cbb409f526da64c99fc69869b826bd, type: 2}
+  shotFiredEvent: {fileID: 11400000, guid: 5ff337d578e8b0c46a4177532661d923, type: 2}
+  shotsFired: 0
+  customersSatisfied: 0
+  customersHit: 0
+  incorrectOrders: 0
+  missedOrders: 0
+  sharksFed: 0
+  customerSatisfiedPoints: 100
+  pointsPerIngredient: 25
+  additionalIngredientModifier: 1
+  customerHitDeduction: 5
+  incorrectOrderDeduction: 5
+  missedOrderDeduction: 5

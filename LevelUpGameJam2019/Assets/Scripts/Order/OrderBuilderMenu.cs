@@ -16,7 +16,10 @@ public class OrderBuilderMenu : MonoBehaviour
 
     //ingredients that are on pizza
     [SerializeField]//visualization only! no touchy
-    private List<IngredientsENUM> selectedIngredients = new List<IngredientsENUM>();
+    private IngredientList orderInProgress;
+
+    [SerializeField]
+    private IngredientList availableIngredients;
     
     [Header("---Ingredient Slots---")]
     [SerializeField]//set by Developer
@@ -32,19 +35,13 @@ public class OrderBuilderMenu : MonoBehaviour
     private Color normalBackgroundColor;
 
     public Color NormalBackgroundColor { get { return normalBackgroundColor; } }// externally visible, readonly
-
-    //external mono Components
-    private static LevelManager levelManager;
-
-    private void Awake()
-    {
-        GatherReferences();
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        ResetSelectedSlots();
+        orderInProgress.list.Clear();//reset old values
+        ResetSelectedSlots();//reset old values
+        SetAvailableIngredients(availableIngredients.list);//cull orders if ingredients aren't in use.
     }
 
     // Update is called once per frame
@@ -52,25 +49,7 @@ public class OrderBuilderMenu : MonoBehaviour
     {
         GetKeyBoardInput();
     }
-
-    private void OnEnable()
-    {
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void OnDisable()
-    {
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);//subscribe to end level event
-    }
-
-    private void GatherReferences()
-    {
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        }        
-    }
-    
+        
     /// <summary>
     /// Set to default state.
     /// </summary>
@@ -82,10 +61,36 @@ public class OrderBuilderMenu : MonoBehaviour
         }
     }
 
+    private void SetAvailableIngredients(List<IngredientSO> ingredientsAvailableOnCannon)
+    {
+        SetAvailableIngredients(ingredientsAvailableOnCannon.ToArray());
+    }
+
+    /// <summary>
+    /// Remove Ingredients as options that are not in this list.
+    /// </summary>
+    /// <param name="availableIngredients"></param>
+    private void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
+    {
+        for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
+        {
+            if (i < ingredientsAvailableOnCannon.Length)
+            {   //slots in use
+                var keystroke = i + 1;//keystrokes start at 1, indices at 0
+                ingredientSlots[i].ConfigureSlot(ingredientsAvailableOnCannon[i], keystroke);
+                ingredientSlots[i].ToggleVisuals(true);
+
+            }
+            else
+            {   //icons are not in use
+                ingredientSlots[i].ToggleVisuals(false);
+            }
+        }
+    }
+
     public void OnOrderFired()
     {
-        selectedIngredients.Clear();
-
+        orderInProgress.list.Clear();
         ResetSelectedSlots();
     }
 
@@ -93,30 +98,21 @@ public class OrderBuilderMenu : MonoBehaviour
     /// Get Ingredients and clear list.
     /// </summary>
     /// <returns></returns>
-    public IngredientsENUM[] GetIngredients()
+    public IngredientSO[] GetIngredients()
     {
-        var ingredients = selectedIngredients.ToArray();
-        selectedIngredients.Clear();//clear list after cannon shot
+        var ingredients = orderInProgress.list.ToArray();
+        orderInProgress.list.Clear();//clear list after cannon shot
 
         return ingredients;
-    }
-
-    /// <summary>
-    /// Add an Ingredient to the list.
-    /// </summary>
-    /// <param name="ingredient">Int to cast to an ENUM</param>
-    public void AddIngredient(int ingredient)
-    {
-        AddIngredient((IngredientsENUM)ingredient);
     }
     
     /// <summary>
     /// Add an Ingredient to the list.
     /// </summary>
     /// <param name="ingredient"></param>
-    public void AddIngredient(IngredientsENUM ingredientToAdd)
+    public void AddIngredient(IngredientSO ingredientToAdd)
     {
-        selectedIngredients.Add(ingredientToAdd);
+        orderInProgress.list.Add(ingredientToAdd);
     }
 
     /// <summary>
@@ -185,26 +181,5 @@ public class OrderBuilderMenu : MonoBehaviour
         this.gameObject.SetActive(false);//disable this whole object.  no taking orders after time is up!
     }
 
-    /// <summary>
-    /// Remove Ingredients as options that are not in this list.
-    /// </summary>
-    /// <param name="availableIngredients"></param>
-    public void SetAvailableIngredients(IngredientSO[] ingredientsAvailableOnCannon)
-    {
-        for (var i = 0; i < ingredientSlots.Length; ++i)//find slot that covers ingredient
-        {
-            if(i < ingredientsAvailableOnCannon.Length)
-            {   //slots in use
-                var keystroke = i + 1;//keystrokes start at 1, indices at 0
-                ingredientSlots[i].ConfigureSlot(ingredientsAvailableOnCannon[i], keystroke);
-                ingredientSlots[i].ToggleVisuals(true);
-
-            }
-            else
-            {   //icons are not in use
-                ingredientSlots[i].ToggleVisuals(false);
-            }
-        }
-    }
 }
 

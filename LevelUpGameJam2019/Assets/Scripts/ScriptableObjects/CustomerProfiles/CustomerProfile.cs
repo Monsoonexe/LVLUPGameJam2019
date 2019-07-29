@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "CustomerProfile_", menuName = "ScriptableObjects/New Customer Profile")]
-public class CustomerProfile : ScriptableObject
+public class CustomerProfile : RichScriptableObject
 {
+    [Header("= Customer Profile =")]
+    [SerializeField]
+    [Tooltip("Developer-facing name of template.")]
+
+    private string profileName = "Default";
     [Header("---Audio---")]
     public SoundList hitWithPizzaSounds;
 
@@ -17,6 +22,6 @@ public class CustomerProfile : ScriptableObject
 
     public Material GetRandomMaterial()
     {
-        return materialVariations.materialList[Random.Range(0, materialVariations.materialList.Length)];
+        return materialVariations.list[Random.Range(0, materialVariations.list.Count)];
     }
 }

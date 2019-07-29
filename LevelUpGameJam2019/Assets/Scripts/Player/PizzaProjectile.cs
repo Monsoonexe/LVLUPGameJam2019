@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PizzaProjectile : MonoBehaviour
 {
-    private static LevelManager levelManager;
-
     private const int lifeTime = 8;//seconds
 
     [SerializeField]
@@ -27,7 +25,7 @@ public class PizzaProjectile : MonoBehaviour
     private AudioClip flyingSound;
     
     //order
-    private IngredientsENUM[] ingredientsOnThisPizza;
+    private IngredientSO[] ingredientsOnThisPizza = new IngredientSO[0];
 
     //components
     private Rigidbody myRigidbody;
@@ -43,7 +41,6 @@ public class PizzaProjectile : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(ExpireAfterTime());
-        levelManager.LevelsEndEvent.AddListener(OnLevelsEnd);
 
         //play sound
         audioSource.clip = flyingSound;
@@ -53,7 +50,6 @@ public class PizzaProjectile : MonoBehaviour
     private void OnDisable()
     {
         ResetProjectile();
-        levelManager.LevelsEndEvent.RemoveListener(OnLevelsEnd);
     }
     
     private void FixedUpdate()
@@ -68,14 +64,6 @@ public class PizzaProjectile : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-    }
-
-    /// <summary>
-    /// End-of-the-level procedure.
-    /// </summary>
-    private void OnLevelsEnd()
-    {
-        this.gameObject.SetActive(false);//no points allowed after buzzer
     }
 
     /// <summary>
@@ -111,16 +99,9 @@ public class PizzaProjectile : MonoBehaviour
         myTransform = this.transform;
         myRigidbody = GetComponent<Rigidbody>() as Rigidbody;
         audioSource = GetComponent<AudioSource>() as AudioSource;
-
-        //gather external references
-        if (!levelManager)
-        {
-            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        }
-
     }
 
-    public IngredientsENUM[] GetIngredientsOnPizza()
+    public IngredientSO[] GetIngredientsOnPizza()
     {
         return ingredientsOnThisPizza;
     }
@@ -129,7 +110,7 @@ public class PizzaProjectile : MonoBehaviour
     /// Base.
     /// </summary>
     /// <param name="order"></param>
-    public void GiveOrderIngredients(IngredientsENUM[] order)
+    public void GiveOrderIngredients(IngredientSO[] order)
     {
         ingredientsOnThisPizza = order;
     }
@@ -138,7 +119,7 @@ public class PizzaProjectile : MonoBehaviour
     /// Put these Ingredients on the order.
     /// </summary>
     /// <param name="order"></param>
-    public void GiveOrderIngredients(System.Collections.Generic.List<IngredientsENUM> order)
+    public void GiveOrderIngredients(System.Collections.Generic.List<IngredientSO> order)
     {
         //call base function
         GiveOrderIngredients(order.ToArray());
@@ -153,4 +134,11 @@ public class PizzaProjectile : MonoBehaviour
         myRigidbody.AddForce(force, ForceMode.Impulse);
     }
 
+    /// <summary>
+    /// End-of-the-level procedure.
+    /// </summary>
+    public void OnLevelsEnd()
+    {
+        this.gameObject.SetActive(false);//no points allowed after buzzer
+    }
 }

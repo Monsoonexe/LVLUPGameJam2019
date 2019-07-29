@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Invokes Event when Player enters Trigger Volume.
@@ -12,13 +11,12 @@ public class TriggerVolume : MonoBehaviour
     /// </summary>
     [Header("---Events---")]
     [SerializeField]//set in Inspector
-    [Tooltip("Event that triggers when the Player enters this volume.")]
-    private UnityEvent triggerEvent = new UnityEvent();
-
-    public UnityEvent Event { get { return triggerEvent; } }//publicly accessible, readonly.
+    [Tooltip("Event that triggers when the target enters this volume.")]
+    private GameEvent _event;
 
     //external refs
-    private static GameObject player;
+    [SerializeField]
+    private Transform targetXform;
 
     // Start is called before the first frame update
     void Start()
@@ -28,18 +26,18 @@ public class TriggerVolume : MonoBehaviour
 
     private void FindPlayer()
     {
-        if (!player)
+        if (!targetXform)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            targetXform = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == player)
+        if(other.transform == targetXform)
         {
-            Debug.Log("Player hit ending volume.  ending the level.", this);
-            Event.Invoke();
+            Debug.Log("Player hit ending volume.  Throwing Event.", this);
+            _event.Raise();
         }
     }
 }

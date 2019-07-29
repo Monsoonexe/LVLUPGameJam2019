@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats_", menuName = "ScriptableObjects/PlayerStats")]
-public class PlayerStats : ScriptableObject
+public class PlayerStats : RichScriptableObject
 {
-    [Header("---Player Info---")]
+    [Header("= Player Stats =")]
     public string playerName = "Joe the Pizza Slinger.";
 
     [Header("---Upgrade Levels---")]
