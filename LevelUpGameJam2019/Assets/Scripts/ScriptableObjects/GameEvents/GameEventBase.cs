@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameEventBase<T> : GameEventBase, IGameEvent<T>
+public abstract class GameEventBase<T> : RichScriptableObject, IGameEvent<T>
 {
     private readonly List<IGameEventListener<T>> typedListeners = new List<IGameEventListener<T>>();
     private readonly List<System.Action<T>> typedActions = new List<System.Action<T>>();
@@ -32,9 +32,8 @@ public abstract class GameEventBase<T> : GameEventBase, IGameEvent<T>
             typedActions[i](value);
     }
 
-    override public void RemoveAll()
+    public void RemoveAll()
     {
-        base.RemoveAll();
         typedListeners.RemoveRange(0, typedListeners.Count);
         typedActions.RemoveRange(0, typedActions.Count);
     }
