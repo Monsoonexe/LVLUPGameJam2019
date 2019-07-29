@@ -34,8 +34,6 @@ public class LevelManager : MonoBehaviour
     
     //external mono Component references
     private GameController gameController;//should exist before this is loaded in Scene
-    //private ScoreManager scoreManager;//should exist before this is loaded in Scene
-    private OrderBuilderMenu orderBuilder;//should exist before this is loaded in Scene
     private Transform mainCameraTransform;//should exist before this is loaded in Scene
 
     private void Awake()
@@ -61,7 +59,6 @@ public class LevelManager : MonoBehaviour
 
         //get external references
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        orderBuilder = GameObject.FindGameObjectWithTag("OrderBuilder").GetComponent<OrderBuilderMenu>();
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
@@ -87,23 +84,12 @@ public class LevelManager : MonoBehaviour
 
         var cannonGO = Instantiate(cannonPrefab, shipController.CannonSpawnPoint);//spawn cannon
         var cannonController = cannonGO.GetComponent<StationaryCannon>();//get handle on controller
-
-        //configure cannon
-        cannonController.SetOrderBuilder(orderBuilder);
-
+        
         //configure camera handle
         mainCameraTransform.SetParent(cannonController.CameraHandle);//hook camera to handle
         mainCameraTransform.localPosition = Vector3.zero;//center to handle
         cannonController.CameraHandle.SetParent(shipGO.transform);//move cannon up a level in hierarchy so doesn't spin around cannon
-
-        //configure orderBuilder
-        orderBuilder.SetAvailableIngredients(cannonController.AvailableIngredients);
-
-        //configure Remove Orders With Ingredients Unavailable to player
-        //var customers = GameObject.FindGameObjectsWithTag("Customer");
-        //var customersObj = 
-        //possibleOrders.RemoveOrdersWithUnavailableIngredients(cannonController.AvailableIngredients);
-
+        
         levelBeginEvent.Raise();//call everything else
         //maybe call the garbage collector here?
     }
