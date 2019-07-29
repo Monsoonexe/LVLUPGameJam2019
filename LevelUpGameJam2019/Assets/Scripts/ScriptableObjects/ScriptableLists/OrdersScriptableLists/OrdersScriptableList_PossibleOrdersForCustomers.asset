@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74c6c9e92fdb3947b1e4653696d2482, type: 3}
   m_Name: OrdersScriptableList_PossibleOrdersForCustomers
   m_EditorClassIdentifier: 
-  developerDescription: Enter a description!
+  developerDescription: This is a list of Orders this customer will select from.  It
+    can have Ingredients that the Player does not have access to, as the list gets
+    culled in-game.
   list:
   - {fileID: 11400000, guid: a6f39a67b0f722641aea646009ac6fd2, type: 2}
   - {fileID: 11400000, guid: 497dac7b7609f2a4eaf4d401c5209ead, type: 2}
