@@ -23,7 +23,7 @@ public class Customer : MonoBehaviour
     /// Includes Orders the Player cannot satisfy.
     /// </summary>
     [SerializeField]
-    [Tooltip("Includes Orders the Player cannot satisfy.")]
+    [Tooltip("Includes Orders the Player cannot satisfy.  Will not choose impossible Orders.")]
     private PossibleOrders possibleOrders;
 
     /// <summary>
