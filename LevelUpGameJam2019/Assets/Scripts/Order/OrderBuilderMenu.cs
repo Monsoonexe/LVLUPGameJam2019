@@ -39,9 +39,9 @@ public class OrderBuilderMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        orderInProgress.ingredients.Clear();//reset old values
+        orderInProgress.list.Clear();//reset old values
         ResetSelectedSlots();//reset old values
-        SetAvailableIngredients(availableIngredients.ingredients);//cull orders if ingredients aren't in use.
+        SetAvailableIngredients(availableIngredients.list);//cull orders if ingredients aren't in use.
     }
 
     // Update is called once per frame
@@ -90,7 +90,7 @@ public class OrderBuilderMenu : MonoBehaviour
 
     public void OnOrderFired()
     {
-        orderInProgress.ingredients.Clear();
+        orderInProgress.list.Clear();
         ResetSelectedSlots();
     }
 
@@ -100,8 +100,8 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <returns></returns>
     public IngredientSO[] GetIngredients()
     {
-        var ingredients = orderInProgress.ingredients.ToArray();
-        orderInProgress.ingredients.Clear();//clear list after cannon shot
+        var ingredients = orderInProgress.list.ToArray();
+        orderInProgress.list.Clear();//clear list after cannon shot
 
         return ingredients;
     }
@@ -112,7 +112,7 @@ public class OrderBuilderMenu : MonoBehaviour
     /// <param name="ingredient"></param>
     public void AddIngredient(IngredientSO ingredientToAdd)
     {
-        orderInProgress.ingredients.Add(ingredientToAdd);
+        orderInProgress.list.Add(ingredientToAdd);
     }
 
     /// <summary>

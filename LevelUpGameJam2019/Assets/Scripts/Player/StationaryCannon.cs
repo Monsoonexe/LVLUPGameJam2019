@@ -35,7 +35,7 @@ public class StationaryCannon : MonoBehaviour
     [SerializeField]
     private IngredientList availableIngredients;
 
-    public IngredientSO[] AvailableIngredients { get { return availableIngredients.ingredients.ToArray(); } }//publicly accessible, but only gets a copy.
+    public IngredientSO[] AvailableIngredients { get { return availableIngredients.list.ToArray(); } }//publicly accessible, but only gets a copy.
 
     /// <summary>
     /// This is the SO that holds the Order the Player is working on.
@@ -104,7 +104,7 @@ public class StationaryCannon : MonoBehaviour
     void Awake()
     {
         GatherReferences();
-        availableIngredients.ingredients = new List<IngredientSO>(Order.SortIngredientsListAscending(availableIngredients.ingredients.ToArray()));//sort list
+        availableIngredients.list = new List<IngredientSO>(Order.SortIngredientsListAscending(availableIngredients.list.ToArray()));//sort list
     }
 
     // Start is called before the first frame update
@@ -206,7 +206,7 @@ public class StationaryCannon : MonoBehaviour
             var pizzaProjectile = newProjectile.GetComponent<PizzaProjectile>();//give proper order
 
             pizzaProjectile.GiveProjectileForce(turretTransform.forward * projectileForce);//handle physics
-            pizzaProjectile.GiveOrderIngredients(orderInProgress.ingredients.ToArray());
+            pizzaProjectile.GiveOrderIngredients(orderInProgress.list.ToArray());
 
             shotFiredEvent.Raise();//increment tally counter and reset order
 

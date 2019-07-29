@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "IngredientList_", menuName = "ScriptableObjects/Orders/Ingredient List")]
-public class IngredientList : RichScriptableObject
+[CreateAssetMenu(fileName = "IngredientList_", menuName = "ScriptableObjects/Scriptable Lists/Ingredient List")]
+public class IngredientList : ScriptableListBase<IngredientSO>
 {
-    public List<IngredientSO> ingredients = new List<IngredientSO>();
-
 }

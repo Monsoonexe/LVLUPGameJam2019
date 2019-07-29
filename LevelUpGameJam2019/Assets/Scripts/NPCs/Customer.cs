@@ -288,7 +288,7 @@ public class Customer : MonoBehaviour
             {
                 var ingredientIsInList = false;
 
-                foreach (var availIngredient in customerManager.IngredientsAvailableToPlayer.ingredients)//is that ingredient in this list?
+                foreach (var availIngredient in customerManager.IngredientsAvailableToPlayer.list)//is that ingredient in this list?
                 {
                     if (workingOrderCollection[i].Ingredients[j] == availIngredient)
                     {
