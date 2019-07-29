@@ -5,12 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - PizzaProjectile
-  - ScoreManager
   - Water
   - Customer
   - Shark
   - LevelManager
-  - OrderBuilder
   layers:
   - Default
   - TransparentFX
