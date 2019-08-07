@@ -72,7 +72,7 @@ public class ScoreUIManager : MonoBehaviour
         //check if Player got a new high score
         if (leaderboard.IsScoreOnLeaderboard(scoreData.PlayerScore))
         {
-            newHighScoreWindow.gameObject.SetActive(true);
+            newHighScoreWindow.gameObject.SetActive(true);//prompt the Player to enter their name
             scoreText.text = scoreData.PlayerScore.ToString();
         }
 
@@ -91,10 +91,11 @@ public class ScoreUIManager : MonoBehaviour
     public void ConfirmNewHighScoreName()
     {
         var newName = nameInputText.text;//read name from UI element
-        leaderboard.SubmitNewScore(new LeaderboardEntry(newName, scoreData.PlayerScore));
-        levelEndReadoutController.gameObject.SetActive(true);
-        levelEndReadoutController.LoadTallyData(scoreData);
-        levelEndReadoutController.ReadLeaderboardData(leaderboard);
-        UpdateHighScoreText();
+        leaderboard.SubmitNewScore(new LeaderboardEntry(newName, scoreData.PlayerScore));//save score
+        levelEndReadoutController.gameObject.SetActive(true);//show the data to Player
+        levelEndReadoutController.LoadTallyData(scoreData);//load the tally data
+        levelEndReadoutController.ReadLeaderboardData(leaderboard);//load the leaderboard data
+        newHighScoreWindow.SetActive(false);//close prompt
+        UpdateHighScoreText();//
     }
 }
